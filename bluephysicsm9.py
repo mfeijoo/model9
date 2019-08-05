@@ -1004,18 +1004,18 @@ class Measure(QMainWindow):
         #first put in a dataframe
         df = pd.DataFrame({'time': self.times, 'temp':self.tempmeas,
                            'ch0': self.ch0meas, 'ch1':self.ch1meas,
-                           'ch2': self.ch0meas, 'ch3':self.ch1meas,
-                           'ch4': self.ch0meas, 'ch5':self.ch1meas,
-                           'ch6': self.ch0meas, 'ch7':self.ch1meas,
+                           'ch2': self.ch2meas, 'ch3':self.ch3meas,
+                           'ch4': self.ch4meas, 'ch5':self.ch5meas,
+                           'ch6': self.ch6meas, 'ch7':self.ch7meas,
                            '5V': self.v5Vmeas, '10.58V':self.v1058Vmeas,
                            '-12V':self.minus12Vmeas, 'PS':self.PSmeas})
               
         #Calculate start and end of radiation
         #Assuming ch1 is where the sensor is and it has the largest differences
-        df['ch1diff'] = df.ch1.diff()
-        ts = df.loc[df.ch1diff == df.ch1diff.max(), 'time'].item()
-        tf = df.loc[df.ch1diff == df.ch1diff.min(), 'time'].item()
-        print ('Start time: %.2f Finish time: %.2f' %(ts, tf))
+        #df['ch1diff'] = df.ch1.diff()
+        #ts = df.loc[df.ch1diff == df.ch1diff.max(), 'time'].item()
+        #tf = df.loc[df.ch1diff == df.ch1diff.min(), 'time'].item()
+        #print ('Start time: %.2f Finish time: %.2f' %(ts, tf))
         
         #calculate correction to temperature
         df['ch0tc'] = df.ch0
@@ -1038,25 +1038,25 @@ class Measure(QMainWindow):
         
         
         #calculate the zeros
-        print ('mean zero ch0: %.3f' %(df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch0tc'].mean()))
-        df['ch0z'] = df.ch0tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch0tc'].mean()
-        df['ch1z'] = df.ch1tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch1tc'].mean()
-        df['ch2z'] = df.ch2tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch2tc'].mean()
-        df['ch3z'] = df.ch3tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch3tc'].mean()
-        df['ch4z'] = df.ch4tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch4tc'].mean()
-        df['ch5z'] = df.ch5tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch5tc'].mean()
-        df['ch6z'] = df.ch6tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch6tc'].mean()
-        df['ch7z'] = df.ch7tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch7tc'].mean()
+        #print ('mean zero ch0: %.3f' %(df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch0tc'].mean()))
+        #df['ch0z'] = df.ch0tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch0tc'].mean()
+        #df['ch1z'] = df.ch1tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch1tc'].mean()
+        #df['ch2z'] = df.ch2tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch2tc'].mean()
+        #df['ch3z'] = df.ch3tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch3tc'].mean()
+        #df['ch4z'] = df.ch4tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch4tc'].mean()
+        #df['ch5z'] = df.ch5tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch5tc'].mean()
+        #df['ch6z'] = df.ch6tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch6tc'].mean()
+        #df['ch7z'] = df.ch7tc - df.loc[(df.time<(ts-2))|(df.time>(tf+2)), 'ch7tc'].mean()
         
         #calculate integrals not corrected
-        intch0 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch0z'].sum()
-        intch1 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch1z'].sum()
-        intch2 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch2z'].sum()
-        intch3 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch3z'].sum()
-        intch4 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch4z'].sum()
-        intch5 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch5z'].sum()
-        intch6 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch6z'].sum()
-        intch7 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch7z'].sum()
+        #intch0 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch0z'].sum()
+        #intch1 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch1z'].sum()
+        #intch2 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch2z'].sum()
+        #intch3 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch3z'].sum()
+        #intch4 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch4z'].sum()
+        #intch5 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch5z'].sum()
+        #intch6 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch6z'].sum()
+        #intch7 = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch7z'].sum()
         
         #Calculate ch0 corrected
         ch1corrf = 1
@@ -1066,62 +1066,63 @@ class Measure(QMainWindow):
         ch5corrf = 1
         ch6corrf = 1
         ch7corrf = 1
-        df['ch0zc'] = df.ch0z
-        df['ch1zc'] = df.ch1z * ch1corrf
-        df['ch2zc'] = df.ch2z * ch2corrf
-        df['ch3zc'] = df.ch3z * ch3corrf
-        df['ch4zc'] = df.ch4z * ch4corrf
-        df['ch5zc'] = df.ch5z * ch5corrf
-        df['ch6zc'] = df.ch6z * ch6corrf
-        df['ch7zc'] = df.ch7z * ch7corrf
+        df['ch0'] = df.ch0
+        df['ch1'] = df.ch1 * ch1corrf
+        df['ch2'] = df.ch2 * ch2corrf
+        df['ch3'] = df.ch3 * ch3corrf
+        df['ch4'] = df.ch4 * ch4corrf
+        df['ch5'] = df.ch5 * ch5corrf
+        df['ch6'] = df.ch6 * ch6corrf
+        df['ch7'] = df.ch7 * ch7corrf
         
         #Calculate integrals corrected
-        intch0c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch0zc'].sum()
-        intch1c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch1zc'].sum()
-        intch2c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch2zc'].sum()
-        intch3c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch3zc'].sum()
-        intch4c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch4zc'].sum()
-        intch5c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch5zc'].sum()
-        intch6c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch6zc'].sum()
-        intch7c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch7zc'].sum()
+        #intch0c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch0zc'].sum()
+        #intch1c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch1zc'].sum()
+        #intch2c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch2zc'].sum()
+        #intch3c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch3zc'].sum()
+        #intch4c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch4zc'].sum()
+        #intch5c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch5zc'].sum()
+        #intch6c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch6zc'].sum()
+        #intch7c = df.loc[(df.time>(ts-2))&(df.time<(tf+2)), 'ch7zc'].sum()
         
         #calculate absolute dose
-        absdose1 = intch1c - intch0c
-        absdose3 = intch3c - intch2c
-        absdose5 = intch5c - intch4c
-        absdose7 = intch7c - intch6c
+        #absdose1 = intch1c - intch0c
+        #absdose3 = intch3c - intch2c
+        #absdose5 = intch5c - intch4c
+        #absdose7 = intch7c - intch6c
         
         #calculate relative dose
-        reldose1 = (absdose1 / float(dmetadata['Reference diff Voltage'])) * 100
-        reldose3 = (absdose3 / float(dmetadata['Reference diff Voltage'])) * 100
-        reldose5 = (absdose5 / float(dmetadata['Reference diff Voltage'])) * 100
-        reldose7 = (absdose7 / float(dmetadata['Reference diff Voltage'])) * 100
+        #reldose1 = (absdose1 / float(dmetadata['Reference diff Voltage'])) * 100
+        #reldose3 = (absdose3 / float(dmetadata['Reference diff Voltage'])) * 100
+        #reldose5 = (absdose5 / float(dmetadata['Reference diff Voltage'])) * 100
+        #reldose7 = (absdose7 / float(dmetadata['Reference diff Voltage'])) * 100
         
         self.plotitemchs.clear()
         #draw the new plots with zeros corrected
-        self.curvech0.setData(df.time, df.ch0zc)
-        self.curvech1.setData(df.time, df.ch1zc)
-        self.curvech2.setData(df.time, df.ch2zc)
-        self.curvech3.setData(df.time, df.ch3zc)
-        self.curvech4.setData(df.time, df.ch4zc)
-        self.curvech5.setData(df.time, df.ch5zc)
-        self.curvech6.setData(df.time, df.ch6zc)
-        self.curvech7.setData(df.time, df.ch7zc)
+        self.curvech0.setData(df.time, df.ch0)
+        self.curvech1.setData(df.time, df.ch1)
+        self.curvech2.setData(df.time, df.ch2)
+        self.curvech3.setData(df.time, df.ch3)
+        self.curvech4.setData(df.time, df.ch4)
+        self.curvech5.setData(df.time, df.ch5)
+        self.curvech6.setData(df.time, df.ch6)
+        self.curvech7.setData(df.time, df.ch7)
         self.legend.scene().removeItem(self.legend)
         self.legend = self.plotitemchs.addLegend()
-        self.plotitemchs.addItem(self.curvech0)
-        self.plotitemchs.addItem(self.curvech1)
-        print ('zero ch0zc: %.3f' %(df.loc[(df.time<ts)|(df.time>tf), 'ch0zc'].mean()))
+        self.viewplots()
+        #self.plotitemchs.addItem(self.curvech0)
+        #self.plotitemchs.addItem(self.curvech1)
+        #print ('zero ch0zc: %.3f' %(df.loc[(df.time<ts)|(df.time>tf), 'ch0zc'].mean()))
         
         
         #Put integrals in the graph
-        ch0text = pg.TextItem('Int %s: %.2fV' %('ch0', intch0), color = '#C0392B')
-        ch0text.setPos((tf+ts)/2 - 2, df.ch0z.max()+ 0.5)
-        self.plotitemchs.addItem(ch0text)
+        #ch0text = pg.TextItem('Int %s: %.2fV' %('ch0', intch0), color = '#C0392B')
+        #ch0text.setPos((tf+ts)/2 - 2, df.ch0z.max()+ 0.5)
+        #self.plotitemchs.addItem(ch0text)
         
-        ch1text = pg.TextItem('Int %s: %.2f, Abs. Dose: %.2f, Rel. Dose: %.2f' %('ch1', intch1, absdose1, reldose1), color = '#3498DB')
-        ch1text.setPos((tf+ts)/2 - 5, df.ch1z.max()+ 0.5)
-        self.plotitemchs.addItem(ch1text)
+        #ch1text = pg.TextItem('Int %s: %.2f, Abs. Dose: %.2f, Rel. Dose: %.2f' %('ch1', intch1, absdose1, reldose1), color = '#3498DB')
+        #ch1text.setPos((tf+ts)/2 - 5, df.ch1z.max()+ 0.5)
+        #self.plotitemchs.addItem(ch1text)
         
         
         
