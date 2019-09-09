@@ -649,7 +649,25 @@ class Metadata (QMainWindow):
         self.cbdefault.clicked.connect(self.saveasfilename)
         self.cbdatetime.clicked.connect(self.saveasfilename)
         self.cbcustom.clicked.connect(self.saveasfilename)
-        self.cbsaveoncurrentmeasurements.clicked.connect(self.saveoncurrent)    
+        self.cbsaveoncurrentmeasurements.clicked.connect(self.saveoncurrent)
+        self.cbsymetric.clicked.connect(self.symetry)
+        self.y1coord.valueChanged.connect(self.symy1ch)
+        
+    def symy1ch(self, value):
+        if self.cbsymetric.isChecked():
+            self.x1coord.setValue(value)
+            self.x2coord.setValue(value)
+            self.y2coord.setValue(value)
+
+    def symetry(self):
+        if self.cbsymetric.isChecked():
+            self.x1coord.setEnabled(False)
+            self.x2coord.setEnabled(False)
+            self.y2coord.setEnabled(False)
+        else:
+            self.x1coord.setEnabled(True)
+            self.x2coord.setEnabled(True)
+            self.y2coord.setEnabled(True)   
 
 
     def saveoncurrent(self):
