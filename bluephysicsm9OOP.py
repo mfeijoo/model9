@@ -52,11 +52,11 @@ class CH():
     def calcintegral(self):
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
         #Calculate start and end of radiation
-        self.df['measdiff'] = self.df.meas.diff()
+        #self.df['measdiff'] = self.df.meas.diff()
         #self.ts = self.df.loc[self.df.measdiff == self.df.measdiff.max(), 'time'].item()
         #self.tf = self.df.loc[self.df.measdiff == self.df.measdiff.min(), 'time'].item()
         #subtract zero
-        #self.df['measz'] = self.df.meas - self.df.loc[(self.df.time<(ts-2))|(self.df.time>(tf+2)), 'meas'].mean()
+        #self.df['measz'] = self.df.meas - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'meas'].mean()
         self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
         #calculate integral
         #self.integral = self.df.loc[(self.df.time>(ts-2))&(self.df.time<(tf+2)), 'measz'].sum()
@@ -137,8 +137,8 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
-        self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -149,22 +149,24 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        reading1 = self.ser.readline().decode().strip().split(',')
-        tstart = int(reading1[0])
+        #reading1 = self.ser.readline().decode().strip().split(',')
+        #tstart = int(reading1[0])
         
         while True:
             
             if self.stop:
                 break
-        
             try:
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
-                listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
+                #comment if not emulator
+                listatosend = [float(i) for i in reading]
+                #listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
-            except:
+            except ValueError:
                 pass
+
  
 
             
@@ -893,8 +895,8 @@ class Measure(QMainWindow):
             dmetadata['File Name'] = time.strftime ('%d %b %Y %H:%M:%S')
 
         #only if emulator
-        #self.emulator = EmulatorThread()
-        #self.emulator.start()
+        self.emulator = EmulatorThread()
+        self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -905,6 +907,7 @@ class Measure(QMainWindow):
 
       
     def update(self, measurements):
+        #print (measurements)
         for ch in dchs.values():
             ch.time.append(measurements[0])
             ch.temp.append(measurements[1])
@@ -927,7 +930,7 @@ class Measure(QMainWindow):
 
     def stopmeasurement(self):
         #emulator
-        #self.emulator.stopping()
+        self.emulator.stopping()
         self.measurethread.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
