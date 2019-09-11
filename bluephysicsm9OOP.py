@@ -1004,10 +1004,10 @@ if __name__ == '__main__':
     app.setStyle(QStyleFactory.create('Fusion'))
     mymainmenu = MainMenu()
     number_of_ch = 8
-    colors = ['#ffc8c8', '#ff0000',
-              '#c8ffc8', '#00ff00',
-              '#c8c8ff', '#0000ff',
-              '#c8c8c8', '#000000']
+    colors = ['#ff8000', '#ff0000',
+              '#01dfa5', '#a5df00',
+              '#01dfd7', '#0000ff',
+              '#848484', '#000000']
     dchs = {'Ch%s' %i : CH(i) for i in range(number_of_ch)}
     atexit.register(goodbye)
     mymainmenu.show()
