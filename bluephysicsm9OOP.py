@@ -69,7 +69,7 @@ class CH():
 
 
 #Read Metadata file and load data in a dictionary
-metadatakeylist = ['Save File As', 'File Name',
+metadatakeylist = ['Date Time','Save File As', 'File Name',
                    'Calibration Factor', 'Reference diff Voltage',
                    'Facility', 'Investigator', 'Source','Brand',
                    'Particles', 'Energy', 'Dose Rate', 'Gantry',
@@ -105,7 +105,7 @@ class EmulatorThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self.stop = False
-        self.ser2 = serial.Serial ('/dev/pts/3', 115200, timeout=1)
+        self.ser2 = serial.Serial ('/dev/pts/1', 115200, timeout=1)
         file = open('./rawdata/emulatormeasurements.csv', 'r')
         self.lines =  file.readlines()
         file.close()
@@ -137,7 +137,7 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/pts/2', 115200, timeout=1)
         #self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
 
     def __del__(self):
@@ -911,6 +911,8 @@ class Measure(QMainWindow):
         
         if dmetadata['Save File As'] == 'Date/Time':
             dmetadata['File Name'] = time.strftime ('%d %b %Y %H:%M:%S')
+            
+        dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
 
         #only if emulator
         self.emulator = EmulatorThread()
