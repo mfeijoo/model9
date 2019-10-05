@@ -41,17 +41,17 @@ float setvolt = 57.03;
 //float avgvolt = 0.0000;
 float temp = 27;
 
-//dark currents
 //5 volts = 65535 counts
+int16_t dcvch0 = 10000;
+int16_t dcvch1 = 10000;
+int16_t dcvch2 = 10000;
+int16_t dcvch3 = 10000;
+int16_t dcvch4 = 10000;
+int16_t dcvch5 = 10000;
+int16_t dcvch6 = 10000;
+int16_t dcvch7 = 10000;
 
-int16_t dcvch0 = 30000;
-int16_t dcvch1 = 30800;
-int16_t dcvch2 = 38500;
-int16_t dcvch3 = 20500;
-int16_t dcvch4 = 25000;
-int16_t dcvch5 = 27500;
-int16_t dcvch6 = 26500;
-int16_t dcvch7 = 22000;
+
 
 void setup() {
 
@@ -108,47 +108,7 @@ void setup() {
   Wire.write(0b00001000);
   Wire.endTransmission();
 
-  //Setting voltages to eliminate darkcurrents
-  Wire.beginTransmission(0xf);
-  Wire.write(0x10);
-  Wire.write(dcvch0>>8);
-  Wire.write(dcvch0&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x11);
-  Wire.write(dcvch1>>8);
-  Wire.write(dcvch1&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x12);
-  Wire.write(dcvch2>>8);
-  Wire.write(dcvch2&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x13);
-  Wire.write(dcvch3>>8);
-  Wire.write(dcvch3&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x14);
-  Wire.write(dcvch4>>8);
-  Wire.write(dcvch4&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x15);
-  Wire.write(dcvch5>>8);
-  Wire.write(dcvch5&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x16);
-  Wire.write(dcvch6>>8);
-  Wire.write(dcvch6&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x17);
-  Wire.write(dcvch7>>8);
-  Wire.write(dcvch7&0xFF);
-  Wire.endTransmission();
+ 
   
   tempsensor.begin(0x18); //this line on
   tempsensor.setResolution(3); //this line on
@@ -220,72 +180,21 @@ void setup() {
 
 void loop() {
 
-  
   unsigned long currentMillis = millis();
-
+  
   if (currentMillis - previousMillis >= integral){
 
-      digitalWrite(7, HIGH);
+      //digitalWrite(7, HIGH);
       
       //hold starts
       digitalWrite(A3, HIGH);
 
-      SPI.beginTransaction(SPISettings(17000000, MSBFIRST, SPI_MODE1));
-      //initiate ch0 manual transfer
-      //and read previous set ch7
-      digitalWrite(A1, LOW);
-      SPI.transfer16(0xC000);
-      ch7b = SPI.transfer16(0x0000);
-      digitalWrite(A1, HIGH);
-      //initiate ch1 manual transfer
-      //and read previous set ch0
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xC400);
-      ch0b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-      //initiate ch2 manual transfer
-      //and read previous set ch1
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xC800);
-      ch1b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-      //initiate ch3 manual transfer
-      //and read previous set ch2
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xCC00);
-      ch2b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-      //initiate ch4 manual transfer
-      //and read previous set ch3
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xD000);
-      ch3b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-      //initiate ch5 manual transfer
-      //and read previous set ch4
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xD400);
-      ch4b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-      //initiate ch6 manual transfer
-      //and read previous set ch5
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xD800);
-      ch5b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-      //initiate ch7 manual transfer
-      //and read previous set ch6
-      digitalWrite (A1, LOW);
-      SPI.transfer16 (0xDC00);
-      ch6b = SPI.transfer16 (0x0000);
-      digitalWrite (A1, HIGH);
-
-      SPI.endTransaction();
+      ReadChannels();
       
       //Hold ends
       digitalWrite (A3, LOW);
 
-      digitalWrite (7, LOW);
+      //digitalWrite (7, LOW);
 
       //reset the integration and a new integration process starts
       digitalWrite (A2, LOW);
@@ -293,7 +202,7 @@ void loop() {
       digitalWrite (A2, HIGH);
       previousMillis = millis();
 
-      digitalWrite (7, HIGH);
+      //digitalWrite (7, HIGH);
 
       //while integration is happening
       //we collect the rest of the CDA power values
@@ -359,14 +268,6 @@ void loop() {
       temp = tempsensor.readTempC(); //onlythis line
       //tempsensor.shutdown_wake(1);
 
-      ch0v = -(ch0b * 20.48/65535) + 10.24;
-      ch1v = -(ch1b * 20.48/65535) + 10.24;
-      ch2v = -(ch2b * 20.48/65535) + 10.24;
-      ch3v = -(ch3b * 20.48/65535) + 10.24;
-      ch4v = -(ch4b * 20.48/65535) + 10.24;
-      ch5v = -(ch5b * 20.48/65535) + 10.24;
-      ch6v = -(ch6b * 20.48/65535) + 10.24;
-      ch7v = -(ch7b * 20.48/65535) + 10.24;
   
       PSV = adc0 * 0.187 / 1000 * 12.961;
       minus12V = adc1 * 0.187 / 1000 * 2.519;
@@ -406,7 +307,7 @@ void loop() {
       Serial1.print(",");
       Serial1.print(ch7v, 4);
       Serial1.print(",");
-      Serial1.print(PSV);
+      Serial1.print(PSV, 4);
       Serial1.print(",");
       Serial1.print(minus12V, 4);
       Serial1.print(",");
@@ -414,7 +315,7 @@ void loop() {
       Serial1.print(",");
       Serial1.println(V1058, 4);
 
-      digitalWrite(7, LOW);
+      //digitalWrite(7, LOW);
   }
 
   /*if (currentMillis - previousregMillis >= regtime){
@@ -442,4 +343,241 @@ void loop() {
         previousregMillis = millis();
     
   }*/
+
+  if (Serial1.available()>0){
+    char inChar = (char)Serial1.read();
+    if (inChar == 's'){
+        Serial1.println("hola,1");
+        //dark currents
+        //5 volts = 65535 counts
+        dcvch0 = 15000;
+        dcvch1 = 15000;
+        dcvch2 = 15000;
+        dcvch3 = 15000;
+        dcvch4 = 15000;
+        dcvch5 = 15000;
+        dcvch6 = 15000;
+        dcvch7 = 15000;
+        
+        setvoltdcch0();
+        setvoltdcch1();
+        setvoltdcch2();
+        setvoltdcch3();
+        setvoltdcch4();
+        setvoltdcch5();
+        setvoltdcch6();
+        setvoltdcch7();
+        delay(10);
+        
+          while (ch0v > 0.05 or
+                 ch1v > 0.05 or
+                 ch2v > 0.05 or
+                 ch3v > 0.05 or
+                 ch4v > 0.05 or
+                 ch5v > 0.05 or
+                 ch6v > 0.05 or
+                 ch7v > 0.05){
+            if (millis() - previousMillis >= integral){
+            ReadChannelsOnce();
+              if (ch0v > 0.05){
+                dcvch0 = dcvch0 + 100;
+                Serial1.print("dcvch0,");
+                Serial1.println(dcvch0);
+                setvoltdcch0();
+                } 
+               if (ch1v > 0.05){
+                dcvch1 = dcvch1 + 100;
+                Serial1.print("dcvch1,");
+                Serial1.println(dcvch1);
+                setvoltdcch1();
+                }
+               if (ch2v > 0.05){
+                dcvch2 = dcvch2 + 100;
+                Serial1.print("dcvch2,");
+                Serial1.println(dcvch2);
+                setvoltdcch2();
+                }
+               if (ch3v > 0.05){
+                dcvch3 = dcvch3 + 100;
+                Serial1.print("dcvch3,");
+                Serial1.println(dcvch3);
+                setvoltdcch3();
+                }
+               if (ch4v > 0.05){
+                dcvch4 = dcvch4 + 100;
+                Serial1.print("dcvch4,");
+                Serial1.println(dcvch4);
+                setvoltdcch4();
+                }
+               if (ch5v > 0.05){
+                dcvch5 = dcvch5 + 100;
+                Serial1.print("dcvch5,");
+                Serial1.println(dcvch5);
+                setvoltdcch5();
+                }
+               if (ch6v > 0.05){
+                dcvch6 = dcvch6 + 100;
+                Serial1.print("dcvch6,");
+                Serial1.println(dcvch6);
+                setvoltdcch6();
+                }
+               if (ch7v > 0.05){
+                dcvch7 = dcvch7 + 100;
+                Serial1.print("dcvch7,");
+                Serial1.println(dcvch7);
+                setvoltdcch7();
+                }
+            }
+           }
+          
+          }
+      }
+    }
+
+void ReadChannels(){
+  
+        SPI.beginTransaction(SPISettings(17000000, MSBFIRST, SPI_MODE1));
+        //initiate ch0 manual transfer
+        //and read previous set ch7
+        digitalWrite(A1, LOW);
+        SPI.transfer16(0xC000);
+        ch7b = SPI.transfer16(0x0000);
+        digitalWrite(A1, HIGH);
+        //initiate ch1 manual transfer
+        //and read previous set ch0
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xC400);
+        ch0b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+        //initiate ch2 manual transfer
+        //and read previous set ch1
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xC800);
+        ch1b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+        //initiate ch3 manual transfer
+        //and read previous set ch2
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xCC00);
+        ch2b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+        //initiate ch4 manual transfer
+        //and read previous set ch3
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xD000);
+        ch3b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+        //initiate ch5 manual transfer
+        //and read previous set ch4
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xD400);
+        ch4b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+        //initiate ch6 manual transfer
+        //and read previous set ch5
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xD800);
+        ch5b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+        //initiate ch7 manual transfer
+        //and read previous set ch6
+        digitalWrite (A1, LOW);
+        SPI.transfer16 (0xDC00);
+        ch6b = SPI.transfer16 (0x0000);
+        digitalWrite (A1, HIGH);
+
+        SPI.endTransaction();
+
+        
+        ch0v = -(ch0b * 20.48/65535) + 10.24;
+        ch1v = -(ch1b * 20.48/65535) + 10.24;
+        ch2v = -(ch2b * 20.48/65535) + 10.24;
+        ch3v = -(ch3b * 20.48/65535) + 10.24;
+        ch4v = -(ch4b * 20.48/65535) + 10.24;
+        ch5v = -(ch5b * 20.48/65535) + 10.24;
+        ch6v = -(ch6b * 20.48/65535) + 10.24;
+        ch7v = -(ch7b * 20.48/65535) + 10.24;
 }
+
+void ReadChannelsOnce(){
+  //digitalWrite(7, HIGH);
+  //hold starts
+  digitalWrite(A3, HIGH);
+  ReadChannels();
+  //Hold ends
+  digitalWrite (A3, LOW);
+  //digitalWrite (7, LOW);
+  //reset the integration and a new integration process starts
+  digitalWrite (A2, LOW);
+  delayMicroseconds (resettime);
+  digitalWrite (A2, HIGH);
+  previousMillis = millis();
+  //digitalWrite (7, HIGH);
+}
+
+void setvoltdcch0(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x10);
+  Wire.write(dcvch0>>8);
+  Wire.write(dcvch0&0xFF);
+  Wire.endTransmission();
+}
+
+void setvoltdcch1(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x11);
+  Wire.write(dcvch1>>8);
+  Wire.write(dcvch1&0xFF);
+  Wire.endTransmission();
+}
+
+void setvoltdcch2(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x12);
+  Wire.write(dcvch2>>8);
+  Wire.write(dcvch2&0xFF);
+  Wire.endTransmission();
+}
+
+void setvoltdcch3(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x13);
+  Wire.write(dcvch3>>8);
+  Wire.write(dcvch3&0xFF);
+  Wire.endTransmission();
+}
+
+void setvoltdcch4(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x14);
+  Wire.write(dcvch4>>8);
+  Wire.write(dcvch4&0xFF);
+  Wire.endTransmission();
+}
+
+void setvoltdcch5(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x15);
+  Wire.write(dcvch5>>8);
+  Wire.write(dcvch5&0xFF);
+  Wire.endTransmission();
+}
+
+void setvoltdcch6(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x16);
+  Wire.write(dcvch6>>8);
+  Wire.write(dcvch6&0xFF);
+  Wire.endTransmission();
+}
+  
+void setvoltdcch7(){
+  Wire.beginTransmission(0xf);
+  Wire.write(0x17);
+  Wire.write(dcvch7>>8);
+  Wire.write(dcvch7&0xFF);
+  Wire.endTransmission(); 
+}
+  
+  
+  

@@ -52,15 +52,18 @@ class CH():
     def calcintegral(self):
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
         #Calculate start and end of radiation
-        #self.df['measdiff'] = self.df.meas.diff()
-        #self.ts = self.df.loc[self.df.measdiff == self.df.measdiff.max(), 'time'].item()
-        #self.tf = self.df.loc[self.df.measdiff == self.df.measdiff.min(), 'time'].item()
+        self.df['measdiff'] = self.df.meas.diff()
+        self.ts = self.df.loc[self.df.measdiff == self.df.measdiff.max(), 'time'].values[0]
+        self.tf = self.df.loc[self.df.measdiff == self.df.measdiff.min(), 'time'].values[0]
+        #correct temperature
+        #self.df['meastc'] = self.df.loc[self.df.meas<1, 'meas'] - 0.2318 * (self.df.loc[self.df.meas<1, 'temp'] - 27)
+        #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
         #subtract zero
-        #self.df['measz'] = self.df.meas - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'meas'].mean()
-        self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
+        self.df['measz'] = self.df.meas - self.df.loc[(self.df.time<(self.ts-1))|(self.df.time>(self.tf+1)), 'meas'].mean()
+        #self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
         #calculate integral
-        #self.integral = self.df.loc[(self.df.time>(ts-2))&(self.df.time<(tf+2)), 'measz'].sum()
-        self.integral = self.df.loc[:, 'measz'].sum()
+        self.integral = self.df.loc[(self.df.time>(self.ts-1))&(self.df.time<(self.tf+1)), 'measz'].sum()
+        #self.integral = self.df.loc[:, 'measz'].sum()
         #put the full plot
         self.text = pg.TextItem('Int: %.2f' %self.integral, color = self.color)
         self.text.setPos((self.df.time.max())/2 - 5, self.df.meas.max()+ 0.5)
@@ -137,8 +140,8 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        self.ser = serial.Serial ('/dev/pts/2', 115200, timeout=1)
-        #self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/pts/2', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -149,8 +152,8 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        #reading1 = self.ser.readline().decode().strip().split(',')
-        #tstart = int(reading1[0])
+        reading1 = self.ser.readline().decode().strip().split(',')
+        tstart = int(reading1[0])
         
         while True:
             
@@ -160,11 +163,11 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                listatosend = [float(i) for i in reading]
-                #listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
+                #listatosend = [float(i) for i in reading]
+                listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
-            except ValueError:
+            except:
                 pass
 
  
@@ -838,6 +841,21 @@ class Measure(QMainWindow):
         self.tbstartmeasure.clicked.connect(self.startmeasuring)
         self.cbsecondplot.currentIndexChanged.connect(self.secondplot)
         self.tbstopmeasure.clicked.connect(self.stopmeasurement)
+        self.tbdarkcurrent.clicked.connect(self.rmdarkcurrent)
+
+    def rmdarkcurrent(self):
+        self.tbstartmeasure.setEnabled(False)
+        self.ser = serial.Serial('/dev/ttyS0', 115200, timeout=1)
+        self.ser.write('s'.encode())
+        for i in range(20):
+            line = self.ser.readline().decode().strip().split(',')
+            print (line)
+        while len(line) == 2:
+            print(line)
+            line = self.ser.readline().decode().strip().split(',')
+        self.ser.close()
+        self.tbstartmeasure.setEnabled(True)
+        
 
 
     def secondplot(self, index):
@@ -908,6 +926,7 @@ class Measure(QMainWindow):
 
         self.tbstopmeasure.setEnabled(True)
         self.tbstartmeasure.setEnabled(False)
+        self.tbdarkcurrent.setEnabled(False)
         
         if dmetadata['Save File As'] == 'Date/Time':
             dmetadata['File Name'] = time.strftime ('%d %b %Y %H:%M:%S')
@@ -915,8 +934,8 @@ class Measure(QMainWindow):
         dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
 
         #only if emulator
-        self.emulator = EmulatorThread()
-        self.emulator.start()
+        #self.emulator = EmulatorThread()
+        #self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -950,10 +969,11 @@ class Measure(QMainWindow):
 
     def stopmeasurement(self):
         #emulator
-        self.emulator.stopping()
+        #self.emulator.stopping()
         self.measurethread.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
+        self.tbdarkcurrent.setEnabled(True)
         
         #Global flag idicating measurements are done
         global measurements_done
