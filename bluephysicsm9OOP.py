@@ -33,6 +33,7 @@ class CH():
         self.button.clicked.connect(self.viewplot)
 
 
+
     def update(self):
         self.curve.setData(self.time[::1], self.meas[::1])
 
@@ -65,9 +66,9 @@ class CH():
         self.integral = self.df.loc[(self.df.time>(self.ts-1))&(self.df.time<(self.tf+1)), 'measz'].sum()
         #self.integral = self.df.loc[:, 'measz'].sum()
         #put the full plot
-        self.text = pg.TextItem('Int: %.2f' %self.integral, color = self.color)
+        self.text = pg.TextItem('Int: %.2f' %(self.integral), color = self.color)
         self.text.setPos((self.df.time.max())/2 - 5, self.df.meas.max()+ 0.5)
-        self.viewplot()
+        #self.viewplot()
         
 
 
@@ -1000,9 +1001,15 @@ class Measure(QMainWindow):
         self.legend = self.plotitemchs.addLegend()
         for ch in dchs.values():
             ch.calcintegral()
+        dchs['Ch3'].dose = dchs['Ch3'].integral - dchs['Ch4'].integral * float(dmetadata['Calibration Factor'])
+        dchs['Ch3'].dosep = dchs['Ch3'].dose/float(dmetadata['Reference diff Voltage']) * 100
+        dchs['Ch3'].text.setText('Int: %.2f Dose: %.2f DoseP: %.2f%%' %(dchs['Ch3'].integral,
+                                                                        dchs['Ch3'].dose,
+                                                                        dchs['Ch3'].dosep))
+        for ch in dchs.values():
+            ch.viewplot()
 
 
-        
     def backmainmenu(self):
         self.close()
         mymainmenu.show()
@@ -1028,6 +1035,7 @@ if __name__ == '__main__':
               '#01dfa5', '#a5df00',
               '#01dfd7', '#0000ff',
               '#848484', '#000000']
+
     dchs = {'Ch%s' %i : CH(i) for i in range(number_of_ch)}
     atexit.register(goodbye)
     mymainmenu.show()
