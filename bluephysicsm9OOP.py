@@ -849,6 +849,15 @@ class Measure(QMainWindow):
         self.sbicmeas.valueChanged.connect(self.updatemetadata)
         self.sbictemp.valueChanged.connect(self.updatemetadata)
         self.sbicpress.valueChanged.connect(self.updatemetadata)
+        self.PowerSupply.cliked.connect(self.powersupply)
+        
+    def powersupply(Self):
+        self.ser = serial.Serial('/dev/ttyS0', 115200, timeout=1)
+        if self.PowerSupply.isChecked():
+            self.ser.write('w1'.encode())
+        else:
+            self.ser.write('w0'.encode())
+        self.ser.close()
         
     def updatemetadata(self):
         #first update dictionary

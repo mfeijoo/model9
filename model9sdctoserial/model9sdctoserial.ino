@@ -431,7 +431,7 @@ void loop() {
                  }
             case 'c':
                 String intts = Serial.readStringUntil(',');
-                char pulsint = Serial.read();
+                char pulsint = (char)Serial.read();
                 Serial.println(intts.toInt());
                 Serial.println(pulsint);
                 /*integral = intts.toInt();
@@ -442,8 +442,26 @@ void loop() {
                     case 'P':
                         //LOW for pulses
                         digittalWrite(A4, LOW); 
-                }*/              
-  }
+                }*/
+            case 'w':
+               char ps = (char)Serial.read();
+               switch (ps){
+                case '1':
+                    //Activate PS using ch0 of TCA
+                    Wire.beginTransmission(0x38);
+                    Wire.write(0x01);
+                    Wire.write(0x01); //toactivate
+                    //Wire.write(0x00); //to deactivate
+                    Wire.endTransmission();
+                  case '0':
+                    //Activate PS using ch0 of TCA
+                    Wire.beginTransmission(0x38);
+                    Wire.write(0x01);
+                    //Wire.write(0x01); //to activate
+                    Wire.write(0x00); //to deactivate
+                    Wire.endTransmission();             
+                   }
+        }
  }
 }
 
