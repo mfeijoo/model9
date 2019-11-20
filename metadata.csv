@@ -1,11 +1,14 @@
-Date Time,13 Oct 2019 16:17:28
-Save File As,Custom
-File Name,antesnickc-13
+Date Time,20 Nov 2019 16:45:50
+Save File As,Default
+File Name,default
+Adjacent Channels Ratio,1.0
+Reference Charge,100.0
 Calibration Factor,1.0
-Reference diff Voltage,505.52
 Facility,Blue Physics
-Investigator,Marcos
-Source,Light
+Investigator,hola3
+Integration Time,300
+Operational Mode,Integartor
+Source,Gamma Knife
 Brand,Varian
 Particles,Photons
 Energy,6FFF
@@ -17,19 +20,20 @@ Field Size X1,1.0
 Field Size X2,1.0
 Field Size Y1,1.0
 Field Size Y2,1.0
-Ion Chamber,199.5
+IC Measure,0.015000000000000003
+IC Temperature,0.0
+IC Pressure,0.0
 Setup,SSD
 Distance,100
 MU,200
-PS,57000
 Transducer Type,MPPC S13360-1325CS
 Sensor Type,Fiber
-Sensor Size,3
+Sensor Size,2
 Fiber Diameter,0.25
-Fiber Length,99
+Fiber Length,2000
 Sensor Position X,0.0
 Sensor Position Y,0.0
 Sensor Position Z,20.0
 Reference Fiber Diameter,0.25
-Reference Fiber Length,99
-Comments,ch 6 ch 7 jirafilla steps
+Reference Fiber Length,2000
+Comments,Test

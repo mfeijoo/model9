@@ -1,38 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AnalyzeMainWindow</class>
- <widget class="QMainWindow" name="AnalyzeMainWindow">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
+ <class>MeasureWindow</class>
+ <widget class="QMainWindow" name="MeasureWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>523</height>
+    <width>1100</width>
+    <height>698</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1024</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
-    <height>523</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Blue Physics Analyze</string>
+   <string>Blue Physics Measure</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>iconspd/onlysphere.png</normaloff>iconspd/onlysphere.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="maximumSize">
-    <size>
-     <width>800</width>
-     <height>16777215</height>
-    </size>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame#frame{
+
+background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(250, 250, 250, 90), stop:0.9 rgba(255, 255, 255, 255));
+
+}</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="GraphicsLayoutWidget" name="graphicsView">
+      <property name="backgroundBrush">
+       <brush brushstyle="NoBrush">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QFrame" name="frame">
       <property name="maximumSize">
@@ -75,7 +99,7 @@ background-color:rgb(193,210,238);
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QToolButton" name="tbmainmenuanalyze">
+        <widget class="QToolButton" name="tbmainmenu">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -85,7 +109,7 @@ background-color:rgb(193,210,238);
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>102</height>
+           <height>85</height>
           </size>
          </property>
          <property name="toolTip">
@@ -105,12 +129,12 @@ background-color:rgb(193,210,238);
           </size>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonIconOnly</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="tbreffile">
+        <widget class="QToolButton" name="tbdarkcurrent">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -123,49 +147,81 @@ background-color:rgb(193,210,238);
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>47</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>50</height>
+           <height>35</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <pointsize>8</pointsize>
+           <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="toolTip">
+          <string>Subtract Dark Current</string>
+         </property>
          <property name="text">
-          <string>Reference File</string>
+          <string>Dark Current</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>iconspd/generalmetadata.png</normaloff>iconspd/generalmetadata.png</iconset>
+           <normaloff>iconspd/Play-100.png</normaloff>iconspd/Play-100.png</iconset>
          </property>
          <property name="iconSize">
           <size>
-           <width>20</width>
-           <height>20</height>
+           <width>75</width>
+           <height>75</height>
           </size>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
-         </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonTextOnly</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="tbrelfile">
+        <widget class="QToolButton" name="tbstartmeasure">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>47</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Start measuring</string>
+         </property>
+         <property name="text">
+          <string>Start</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>iconspd/Play-100.png</normaloff>iconspd/Play-100.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>75</width>
+           <height>75</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonIconOnly</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbstopmeasure">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -178,44 +234,30 @@ background-color:rgb(193,210,238);
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>47</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-          </font>
+         <property name="toolTip">
+          <string>Stop measuring</string>
          </property>
          <property name="text">
-          <string>Relative File</string>
+          <string>Stop</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>iconspd/generalmetadata.png</normaloff>iconspd/generalmetadata.png</iconset>
+           <normaloff>iconspd/Stop-100.png</normaloff>iconspd/Stop-100.png</iconset>
          </property>
          <property name="iconSize">
           <size>
-           <width>20</width>
-           <height>20</height>
+           <width>75</width>
+           <height>75</height>
           </size>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
-         </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonIconOnly</enum>
+         </property>
+         <property name="toolTipDuration" stdset="0">
+          <number>-1</number>
          </property>
         </widget>
        </item>
@@ -224,61 +266,17 @@ background-color:rgb(193,210,238);
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>170</height>
+           <height>160</height>
           </size>
          </property>
          <property name="title">
           <string>Plot1</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QToolButton" name="tbviewch1">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>View Ch0</string>
-            </property>
-            <property name="text">
-             <string>ch1</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>iconspd/measure.png</normaloff>iconspd/measure.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>75</width>
-              <height>75</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextOnly</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
+         <layout class="QGridLayout" name="Layoutbuttons">
+          <item row="0" column="0">
            <widget class="QToolButton" name="tbviewch0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -319,60 +317,10 @@ background-color:rgb(193,210,238);
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QToolButton" name="tbviewraw">
+          <item row="0" column="1">
+           <widget class="QToolButton" name="tbviewch1">
             <property name="enabled">
              <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>View raw data</string>
-            </property>
-            <property name="text">
-             <string>raw</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>iconspd/measure.png</normaloff>iconspd/measure.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>75</width>
-              <height>75</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextOnly</enum>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroup</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QToolButton" name="tbintegral">
-            <property name="enabled">
-             <bool>false</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -390,7 +338,7 @@ background-color:rgb(193,210,238);
              <string>View Ch0</string>
             </property>
             <property name="text">
-             <string>Integral</string>
+             <string>ch1</string>
             </property>
             <property name="icon">
              <iconset>
@@ -406,20 +354,17 @@ background-color:rgb(193,210,238);
              <bool>true</bool>
             </property>
             <property name="checked">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="toolButtonStyle">
              <enum>Qt::ToolButtonTextOnly</enum>
             </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroup</string>
-            </attribute>
            </widget>
           </item>
-          <item>
-           <widget class="QToolButton" name="tbtempcorrec">
+          <item row="1" column="0">
+           <widget class="QToolButton" name="tbviewch2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -437,7 +382,7 @@ background-color:rgb(193,210,238);
              <string>View Ch0</string>
             </property>
             <property name="text">
-             <string>Temp. C.</string>
+             <string>ch2</string>
             </property>
             <property name="icon">
              <iconset>
@@ -460,10 +405,10 @@ background-color:rgb(193,210,238);
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QToolButton" name="tbcalibration">
+          <item row="1" column="1">
+           <widget class="QToolButton" name="tbviewch3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -481,7 +426,183 @@ background-color:rgb(193,210,238);
              <string>View Ch0</string>
             </property>
             <property name="text">
-             <string>Calib.</string>
+             <string>ch3</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>iconspd/measure.png</normaloff>iconspd/measure.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>75</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextOnly</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QToolButton" name="tbviewch4">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>View Ch0</string>
+            </property>
+            <property name="text">
+             <string>ch4</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>iconspd/measure.png</normaloff>iconspd/measure.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>75</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextOnly</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QToolButton" name="tbviewch5">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>View Ch0</string>
+            </property>
+            <property name="text">
+             <string>ch5</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>iconspd/measure.png</normaloff>iconspd/measure.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>75</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextOnly</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QToolButton" name="tbviewch6">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>View Ch0</string>
+            </property>
+            <property name="text">
+             <string>ch6</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>iconspd/measure.png</normaloff>iconspd/measure.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>75</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextOnly</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QToolButton" name="tbviewch7">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>View Ch0</string>
+            </property>
+            <property name="text">
+             <string>ch7</string>
             </property>
             <property name="icon">
              <iconset>
@@ -522,7 +643,7 @@ background-color:rgb(193,210,238);
           <item>
            <widget class="QComboBox" name="cbsecondplot">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="minimumSize">
              <size>
@@ -534,6 +655,9 @@ background-color:rgb(193,210,238);
              <font>
               <pointsize>12</pointsize>
              </font>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
             </property>
             <item>
              <property name="text">
@@ -560,28 +684,19 @@ background-color:rgb(193,210,238);
          </layout>
         </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
       </layout>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsLayoutWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
 </ui>
