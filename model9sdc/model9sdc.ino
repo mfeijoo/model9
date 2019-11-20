@@ -369,59 +369,59 @@ void loop() {
         setvoltdcch7();
         delay(10);
         
-          while (ch0v > 0.05 or
-                 ch1v > 0.05 or
-                 ch2v > 0.05 or
-                 ch3v > 0.05 or
-                 ch4v > 0.05 or
-                 ch5v > 0.05 or
-                 ch6v > 0.05 or
-                 ch7v > 0.05){
+          while (ch0v > 0.1 or
+                 ch1v > 0.1 or
+                 ch2v > 0.1 or
+                 ch3v > 0.1 or
+                 ch4v > 0.1 or
+                 ch5v > 0.1 or
+                 ch6v > 0.1 or
+                 ch7v > 0.1){
             if (millis() - previousMillis >= integral){
             ReadChannelsOnce();
-              if (ch0v > 0.05){
+              if (ch0v > 0.1){
                 dcvch0 = dcvch0 + 100;
                 Serial1.print("dcvch0,");
                 Serial1.println(dcvch0);
                 setvoltdcch0();
                 } 
-               if (ch1v > 0.05){
+               if (ch1v > 0.1){
                 dcvch1 = dcvch1 + 100;
                 Serial1.print("dcvch1,");
                 Serial1.println(dcvch1);
                 setvoltdcch1();
                 }
-               if (ch2v > 0.05){
+               if (ch2v > 0.1){
                 dcvch2 = dcvch2 + 100;
                 Serial1.print("dcvch2,");
                 Serial1.println(dcvch2);
                 setvoltdcch2();
                 }
-               if (ch3v > 0.05){
+               if (ch3v > 0.1){
                 dcvch3 = dcvch3 + 100;
                 Serial1.print("dcvch3,");
                 Serial1.println(dcvch3);
                 setvoltdcch3();
                 }
-               if (ch4v > 0.05){
+               if (ch4v > 0.1){
                 dcvch4 = dcvch4 + 100;
                 Serial1.print("dcvch4,");
                 Serial1.println(dcvch4);
                 setvoltdcch4();
                 }
-               if (ch5v > 0.05){
+               if (ch5v > 0.1){
                 dcvch5 = dcvch5 + 100;
                 Serial1.print("dcvch5,");
                 Serial1.println(dcvch5);
                 setvoltdcch5();
                 }
-               if (ch6v > 0.05){
+               if (ch6v > 0.1){
                 dcvch6 = dcvch6 + 100;
                 Serial1.print("dcvch6,");
                 Serial1.println(dcvch6);
                 setvoltdcch6();
                 }
-               if (ch7v > 0.05){
+               if (ch7v > 0.1){
                 dcvch7 = dcvch7 + 100;
                 Serial1.print("dcvch7,");
                 Serial1.println(dcvch7);

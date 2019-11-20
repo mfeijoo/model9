@@ -656,8 +656,8 @@ class Metadata (QMainWindow):
         
     def sendtocontroller(self):
         self.ser = serial.Serial('/dev/ttyS0', 115200, timeout=1)
-        self.ser.write('i%s,%s\n' %(self.sbintegrationtime.value(),
-                                   self.cbopmode.currentText()).encode())
+        self.ser.write('c%s,%s' %(self.sbintegrationtime.value(),
+                                   self.cbopmode.currentText()[0]).encode())
         self.ser.close()
         
     def symy1ch(self, value):
