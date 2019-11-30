@@ -284,6 +284,11 @@ background-color:rgb(193,210,238);
           </item>
           <item row="0" column="0">
            <widget class="QToolButton" name="PowerSupply">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="toolTip">
              <string>Power Supply</string>
             </property>
@@ -291,6 +296,9 @@ background-color:rgb(193,210,238);
              <string>PS</string>
             </property>
             <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
              <bool>true</bool>
             </property>
             <property name="toolButtonStyle">

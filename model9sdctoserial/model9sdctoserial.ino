@@ -27,7 +27,7 @@ float PSV;
 float minus12V;
 float V5;
 float V1058;
-int integral = 150;
+int integral = 300;
 int regtime = 233;
 unsigned long previousMillis = 0;
 unsigned long previousregMillis = 0;
@@ -42,14 +42,23 @@ float setvolt = 57.03;
 float temp = 27;
 
 //5 volts = 65535 counts
-int16_t dcvch0 = 24600;
-int16_t dcvch1 = 25000;
-int16_t dcvch2 = 30000;
-int16_t dcvch3 = 23500;
-int16_t dcvch4 = 25000;
-int16_t dcvch5 = 22700;
-int16_t dcvch6 = 21000;
+int16_t dcvch0 = 22000;
+int16_t dcvch1 = 22000;
+int16_t dcvch2 = 27000;
+int16_t dcvch3 = 22000;
+int16_t dcvch4 = 22000;
+int16_t dcvch5 = 22000;
+int16_t dcvch6 = 20000;
 int16_t dcvch7 = 17500;
+
+//int16_t dcvch0 = 0;
+//int16_t dcvch1 = 0;
+//int16_t dcvch2 = 0;
+//int16_t dcvch3 = 0;
+//int16_t dcvch4 = 0;
+//int16_t dcvch5 = 0;
+//int16_t dcvch6 = 0;
+//int16_t dcvch7 = 0;
 
 
 
@@ -106,6 +115,48 @@ void setup(){
   //Put i2cMutex pointing to ch3
   Wire.beginTransmission(0x74);
   Wire.write(0b00001000);
+  Wire.endTransmission();
+
+  //Setting voltages to eliminate darkcurrents
+  Wire.beginTransmission(0xf);
+  Wire.write(0x10);
+  Wire.write(dcvch0>>8);
+  Wire.write(dcvch0&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x11);
+  Wire.write(dcvch1>>8);
+  Wire.write(dcvch1&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x12);
+  Wire.write(dcvch2>>8);
+  Wire.write(dcvch2&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x13);
+  Wire.write(dcvch3>>8);
+  Wire.write(dcvch3&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x14);
+  Wire.write(dcvch4>>8);
+  Wire.write(dcvch4&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x15);
+  Wire.write(dcvch5>>8);
+  Wire.write(dcvch5&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x16);
+  Wire.write(dcvch6>>8);
+  Wire.write(dcvch6&0xFF);
+  Wire.endTransmission();
+  Wire.beginTransmission(0xf);
+  Wire.write(0x17);
+  Wire.write(dcvch7>>8);
+  Wire.write(dcvch7&0xFF);
   Wire.endTransmission();
 
  
@@ -179,6 +230,7 @@ void setup(){
 }
 
 void loop() {
+
 
   unsigned long currentMillis = millis();
   
@@ -345,17 +397,16 @@ void loop() {
   }*/
     if (Serial.available()>0){
         char inChar = (char)Serial.read();
-        switch (inChar){
-            case 's':
+        if (inChar == 's') {
                 Serial.println("hola,1");
                 //dark currents
                 //5 volts = 65535 counts
-                dcvch0 = 15000;
-                dcvch1 = 15000;
-                dcvch2 = 15000;
-                dcvch3 = 15000;
-                dcvch4 = 15000;
-                dcvch5 = 15000;
+                dcvch0 = 20000;
+                dcvch1 = 20000;
+                dcvch2 = 26000;
+                dcvch3 = 20000;
+                dcvch4 = 20000;
+                dcvch5 = 20000;
                 dcvch6 = 15000;
                 dcvch7 = 15000;
         
@@ -376,7 +427,8 @@ void loop() {
                        ch4v > 0.1 or
                        ch5v > 0.1 or
                        ch6v > 0.1 or
-                       ch7v > 0.1){
+                       ch7v > 0.1)
+                       {
                            if (millis() - previousMillis >= integral){
                                 ReadChannelsOnce();
                                 if (ch0v > 0.1){
@@ -428,42 +480,45 @@ void loop() {
                                        setvoltdcch7();
                                        }
                       }
-                 }
-            case 'c':
+                       }
+        }
+            if (inChar == 'c'){
                 String intts = Serial.readStringUntil(',');
                 char pulsint = (char)Serial.read();
-                Serial.println(intts.toInt());
-                Serial.println(pulsint);
-                /*integral = intts.toInt();
-                switch (pulsint){
-                    case 'I':
+                //Serial.println(intts.toInt());
+                //Serial.println(pulsint);
+                integral = intts.toInt();
+                if (pulsint == 'I'){
                        //HIGH for integrator
                        digitalWrite (A4, HIGH);
-                    case 'P':
+                        }
+                 if (pulsint == 'P'){
                         //LOW for pulses
-                        digittalWrite(A4, LOW); 
-                }*/
-            case 'w':
+                        digitalWrite (A4, LOW); 
+                        }
+            }
+            if (inChar == 'w'){
                char ps = (char)Serial.read();
-               switch (ps){
-                case '1':
+               if (ps == '1'){
                     //Activate PS using ch0 of TCA
                     Wire.beginTransmission(0x38);
                     Wire.write(0x01);
                     Wire.write(0x01); //toactivate
                     //Wire.write(0x00); //to deactivate
                     Wire.endTransmission();
-                  case '0':
+                    }
+                if (ps == '0'){
                     //Activate PS using ch0 of TCA
                     Wire.beginTransmission(0x38);
                     Wire.write(0x01);
                     //Wire.write(0x01); //to activate
                     Wire.write(0x00); //to deactivate
-                    Wire.endTransmission();             
-                   }
-        }
+                    Wire.endTransmission();
+                    }             
+               }               
+  }      
  }
-}
+
 
 void ReadChannels(){
   

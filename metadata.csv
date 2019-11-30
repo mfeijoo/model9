@@ -1,31 +1,31 @@
-Date Time,20 Nov 2019 16:45:50
-Save File As,Default
-File Name,default
+Date Time,21 Nov 2019 22:51:26
+Save File As,Custom
+File Name,nickwater15cmdepth
 Adjacent Channels Ratio,1.0
 Reference Charge,100.0
 Calibration Factor,1.0
-Facility,Blue Physics
-Investigator,hola3
-Integration Time,300
+Facility,TBO
+Investigator,Nick Manson
+Integration Time,500
 Operational Mode,Integartor
-Source,Gamma Knife
+Source,LINAC
 Brand,Varian
 Particles,Photons
-Energy,6FFF
-Dose Rate,1400
+Energy,6
+Dose Rate,500
 Gantry,0
 Collimator,0
 Couch,0
-Field Size X1,1.0
-Field Size X2,1.0
-Field Size Y1,1.0
-Field Size Y2,1.0
-IC Measure,0.015000000000000003
+Field Size X1,5.0
+Field Size X2,5.0
+Field Size Y1,5.0
+Field Size Y2,5.0
+IC Measure,0.015
 IC Temperature,0.0
 IC Pressure,0.0
 Setup,SSD
 Distance,100
-MU,200
+MU,100
 Transducer Type,MPPC S13360-1325CS
 Sensor Type,Fiber
 Sensor Size,2
@@ -33,7 +33,7 @@ Fiber Diameter,0.25
 Fiber Length,2000
 Sensor Position X,0.0
 Sensor Position Y,0.0
-Sensor Position Z,20.0
+Sensor Position Z,15.0
 Reference Fiber Diameter,0.25
 Reference Fiber Length,2000
-Comments,Test
+Comments,Several beams 10x10 100 MU 500 MU per min in water 15 cm depth no loop all fields 3 5 10 15 20 30

@@ -54,8 +54,12 @@ class CH():
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
         #Calculate start and end of radiation
         self.df['measdiff'] = self.df.meas.diff()
-        self.ts = starttimes.values[0]
-        self.tf = finishtimes.values[-1]
+        try:
+            self.ts = starttimes.values[0]
+            self.tf = finishtimes.values[-1]
+        except IndexError:
+            self.ts = self.time[0]
+            self.tf = self.time[-1]
         #correct temperature
         #self.df['meastc'] = self.df.loc[self.df.meas<1, 'meas'] - 0.2318 * (self.df.loc[self.df.meas<1, 'temp'] - 27)
         #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
@@ -136,8 +140,8 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
-        #self.ser = serial.Serial ('/dev/ttyACM0', 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -148,8 +152,8 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        #reading1 = self.ser.readline().decode().strip().split(',')
-        #tstart = int(reading1[0])
+        reading1 = self.ser.readline().decode().strip().split(',')
+        tstart = int(reading1[0])
         
         while True:
             
@@ -159,8 +163,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                listatosend = [float(i) for i in reading]
-                #listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
+                #listatosend = [float(i) for i in reading]
+                listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
             except:
@@ -655,10 +659,11 @@ class Metadata (QMainWindow):
         
         
     def sendtocontroller(self):
-        self.ser = serial.Serial('/dev/ttyS0', 115200, timeout=1)
-        self.ser.write('c%s,%s' %(self.sbintegrationtime.value(),
-                                   self.cbopmode.currentText()[0]).encode())
-        self.ser.close()
+        self.serc = serial.Serial('/dev/ttyS0', 115200, timeout=1)
+        texttosend = 'c%s,%s' %(self.sbintegrationtime.value(), self.cbopmode.currentText()[0])
+        print (texttosend.encode())
+        self.serc.write(texttosend.encode())
+        self.serc.close()
         
     def symy1ch(self, value):
         if self.cbsymetric.isChecked():
@@ -849,15 +854,19 @@ class Measure(QMainWindow):
         self.sbicmeas.valueChanged.connect(self.updatemetadata)
         self.sbictemp.valueChanged.connect(self.updatemetadata)
         self.sbicpress.valueChanged.connect(self.updatemetadata)
-        self.PowerSupply.cliked.connect(self.powersupply)
+        self.PowerSupply.clicked.connect(self.powersupply)
         
-    def powersupply(Self):
-        self.ser = serial.Serial('/dev/ttyS0', 115200, timeout=1)
+    def powersupply(self):
+        self.serp = serial.Serial('/dev/ttyS0', 115200, timeout=1)
         if self.PowerSupply.isChecked():
-            self.ser.write('w1'.encode())
+            texttosend = 'w1'
+            self.serp.write(textosend.encode())
+            print (texttosend.encode())
         else:
-            self.ser.write('w0'.encode())
-        self.ser.close()
+            textosend = 'w0'
+            self.serp.write(textosend.encode())
+            print (textosend.encode())
+        self.serp.close()
         
     def updatemetadata(self):
         #first update dictionary
@@ -962,6 +971,7 @@ class Measure(QMainWindow):
         self.tbstopmeasure.setEnabled(True)
         self.tbstartmeasure.setEnabled(False)
         self.tbdarkcurrent.setEnabled(False)
+        self.PowerSupply.setEnabled(False)
         
         if dmetadata['Save File As'] == 'Date/Time':
             dmetadata['File Name'] = time.strftime ('%d %b %Y %H:%M:%S')
@@ -969,8 +979,8 @@ class Measure(QMainWindow):
         dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
 
         #only if emulator
-        self.emulator = EmulatorThread()
-        self.emulator.start()
+        #self.emulator = EmulatorThread()
+        #self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -985,7 +995,7 @@ class Measure(QMainWindow):
         for ch in dchs.values():
             ch.time.append(measurements[0])
             ch.temp.append(measurements[1])
-            ch.meas.append(measurements[ch.num + 2])
+            ch.meas.append(measurements[ch.num + 2] * 1.8)
         self.time.append(measurements[0])
         self.PSmeas.append(measurements[len(dchs) + 2])
         self.minus12Vmeas.append(measurements[len(dchs) + 3])
@@ -1005,10 +1015,11 @@ class Measure(QMainWindow):
     def stopmeasurement(self):
         self.measurethread.stopping()
         #emulator
-        self.emulator.stopping()
+        #self.emulator.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
         self.tbdarkcurrent.setEnabled(True)
+        self.PowerSupply.setEnabled(True)
         
         #Global flag idicating measurements are done
         global measurements_done
@@ -1036,9 +1047,9 @@ class Measure(QMainWindow):
         
         
         #monitor channel
-        self.mch = 'Ch6'
+        self.mch = 'Ch3'
         #reference channel Cerenkov
-        self.rch = 'Ch7'
+        self.rch = 'Ch4'
         
         #lets find the start and stop of all beams
         df = pd.DataFrame({'time':dchs[self.mch].time, self.mch:dchs[self.mch].meas})
@@ -1100,7 +1111,7 @@ class Measure(QMainWindow):
         else:
             dchs[self.rch].text.setText('Charge: %.2f nC'%(dchs[self.rch].integral))
             dchs[self.mch].text.setText('Charge: %.2f nC Charge~dose: %.2f nC\n'
-                                        'Rel.dose: %.2f %% Abs.dose: %.2f nC'%(dchs[self.mch].integral,
+                                        'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].integral,
                                                                              dchs[self.mch].chargedose,
                                                                              dchs[self.mch].reldose,
                                                                              dchs[self.mch].dose))
