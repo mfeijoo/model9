@@ -31,7 +31,7 @@ class EmulatorThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self.stop = False
-        self.ser2 = serial.Serial ('/dev/pts/2', 115200, timeout=1)
+        self.ser2 = serial.Serial ('/dev/pts/3', 115200, timeout=1)
         file = open('./rawdata/emulatormeasurementsosciloscope.csv', 'r')
         self.lines =  file.readlines()
         file.close()
@@ -63,8 +63,8 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
-        #self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/ttyACM0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -75,8 +75,8 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        #reading1 = self.ser.readline().decode().strip().split(',')
-        #tstart = int(reading1[0])
+        reading1 = self.ser.readline().decode().strip().split(',')
+        tstart = int(reading1[0])
         
         while True:
             
@@ -87,8 +87,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                listatosend = [float(i) for i in reading]
-                #listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
+                #listatosend = [float(i) for i in reading]
+                listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
             except (ValueError):
@@ -161,7 +161,7 @@ class Measure(QMainWindow):
         self.curve1 = self.plotitem1.plot(pen=pg.mkPen(color='#990000', width=1))
         self.curve2 = self.plotitem2.plot(pen=pg.mkPen(color='#009900', width=1))
         self.curve3 = self.plotitem3.plot(pen=pg.mkPen(color='#990099', width=1))
-        self.curve4 = self.plotitem4.plot(pen=pg.mkPen(color='#990099', width=1))
+        self.curve4 = self.plotitem4.plot(pen=pg.mkPen(color='#999999', width=1))
         self.curve5 = self.plotitem5.plot(pen=pg.mkPen(color='#000099', width=1))
 
         
@@ -189,12 +189,17 @@ class Measure(QMainWindow):
         self.ch4 = []
         self.ch5 = []
 
+        self.ch1tp = []
+        self.ch2tp = []
+        self.ch3tp = []
+        self.ch4tp = []
+
         self.tbstopmeasure.setEnabled(True)
         self.tbstartmeasure.setEnabled(False)
 
         #only if emulator
-        self.emulator = EmulatorThread()
-        self.emulator.start()
+        #self.emulator = EmulatorThread()
+        #self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -211,20 +216,30 @@ class Measure(QMainWindow):
         self.ch3.append(measurements[3])
         self.ch4.append(measurements[4])
         self.ch5.append(measurements[5])
+
+        ch1value = measurements[1] * self.ch1_gain.value() * self.ch1_amp.value()
+        ch2value = measurements[2] * self.ch2_gain.value() * self.ch2_amp.value()
+        ch3value = measurements[3] * self.ch3_gain.value() * self.ch3_amp.value()
+        ch4value = measurements[4] * self.ch4_gain.value() * self.ch4_amp.value()
+
+        self.ch1tp.append(ch1value)
+        self.ch2tp.append(ch2value)
+        self.ch3tp.append(ch3value)
+        self.ch4tp.append(ch4value)
   
         
         DS = 1 #Downsampling
-        self.curve1.setData(self.time[::DS], self.ch1[::DS])
-        self.curve2.setData(self.time[::DS], self.ch2[::DS])
-        self.curve3.setData(self.time[::DS], self.ch3[::DS])
-        self.curve4.setData(self.time[::DS], self.ch4[::DS])
-        self.curve5.setData(self.time[::DS], self.ch5[::DS])
+        self.curve1.setData(self.time[::DS], self.ch1tp[::DS])
+        self.curve2.setData(self.time[::DS], self.ch2tp[::DS])
+        self.curve3.setData(self.time[::DS], self.ch3tp[::DS])
+        self.curve4.setData(self.time[::DS], self.ch4tp[::DS])
+        self.curve5.setData(self.time[::DS], self.ch5tp[::DS])
 
 
     def stopmeasurement(self):
         self.measurethread.stopping()
         #emulator
-        self.emulator.stopping()
+        #self.emulator.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
 
@@ -237,7 +252,7 @@ class Measure(QMainWindow):
         self.filemeas.write('time,ch1,ch2,ch3,ch4,ch5\n')
         
         for i in range(len(self.time)):
-            self.filemeas.write('%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,\n' %(self.time[i],
+            self.filemeas.write('%.1f,%.4f,%.7f,%.7f,%.7f,%.7f,\n' %(self.time[i],
                                                                      self.ch1[i],
                                                                      self.ch2[i],
                                                                      self.ch3[1],
@@ -259,8 +274,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle(QStyleFactory.create('Fusion'))
     mymainmenu = MainMenu()
-    colors = ['#ff8000', '#ff0000',
-              '#01dfa5', '#a5df00',
-              '#01dfd7']
     mymainmenu.show()
     sys.exit(app.exec_())
