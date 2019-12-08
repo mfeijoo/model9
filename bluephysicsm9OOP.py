@@ -27,6 +27,7 @@ class CH():
         self.time = []
         self.temp = []
         self.meas = []
+        self.meastp = []
         self.curve = mymainmenu.mymeasure.plotitemchs.plot(pen=pg.mkPen(color=self.color, width=2),
                                               autoDownsample = False)
         self.button = mymainmenu.mymeasure.Layoutbuttons.itemAt(num).widget()
@@ -35,7 +36,7 @@ class CH():
 
 
     def update(self):
-        self.curve.setData(self.time[::1], self.meas[::1])
+        self.curve.setData(self.time[::1], self.meastp[::1])
 
     def viewplot(self):
         if self.button.isChecked():
@@ -52,6 +53,7 @@ class CH():
 
     def calcintegral(self, starttimes, finishtimes):
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
+        self.df['measC'] = (-(self.meas * 20.48/65535) + 10.24) * 1.8
         #Calculate start and end of radiation
         self.df['measdiff'] = self.df.meas.diff()
         try:
@@ -64,14 +66,14 @@ class CH():
         #self.df['meastc'] = self.df.loc[self.df.meas<1, 'meas'] - 0.2318 * (self.df.loc[self.df.meas<1, 'temp'] - 27)
         #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
         #subtract zero
-        self.df['measz'] = self.df.meas - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'meas'].mean()
+        self.df['measz'] = self.df.measC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measC'].mean()
         #self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
         #calculate integral
         self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measz'].sum()
         #self.integral = self.df.loc[:, 'measz'].sum()
         #put the full plot
-        self.text = pg.TextItem('Int: %.2f' %(self.integral), color = self.color)
-        self.text.setPos((self.df.time.max())/2 - 5, self.df.meas.max()+ 0.5)
+        self.text = pg.TextItem('Int: %.2f nC' %(self.integral), color = self.color)
+        self.text.setPos((self.df.time.max())/2 - 5, self.df.measC.max()+ 0.5)
         #self.viewplot()
         
         #Now we calculate the integrals of each beam and put it in a list
@@ -108,7 +110,7 @@ class EmulatorThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self.stop = False
-        self.ser2 = serial.Serial ('/dev/pts/2', 115200, timeout=1)
+        self.ser2 = serial.Serial ('/dev/pts/1', 115200, timeout=1)
         file = open('./rawdata/emulatormeasurements.csv', 'r')
         self.lines =  file.readlines()
         file.close()
@@ -140,8 +142,8 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        #self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
-        self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/pts/2', 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -152,8 +154,8 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        reading1 = self.ser.readline().decode().strip().split(',')
-        tstart = int(reading1[0])
+        #reading1 = self.ser.readline().decode().strip().split(',')
+        #tstart = int(reading1[0])
         
         while True:
             
@@ -163,8 +165,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                #listatosend = [float(i) for i in reading]
-                listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
+                listatosend = [int(i) for i in reading]
+                #listatosend = [(int(reading[0])-tstart)/1000] + [int(i) for i  in reading[1:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
             except:
@@ -803,7 +805,7 @@ class Measure(QMainWindow):
         self.plotitemchs = pg.PlotItem()
         self.plotitemchs.showGrid(x = True, y = True, alpha = 0.5)
         self.plotitemchs.setLabel('bottom', 'Time', units='s')
-        self.plotitemchs.setLabel('left', 'Charge accumulated every %sms' %dmetadata['Integration Time'], units='nC')
+        self.plotitemchs.setLabel('left', 'Current', units='A')
         self.legend = self.plotitemchs.addLegend()
         self.plotitemPS = pg.PlotItem(title= '<span style="color: #000099">PS</span>')
         self.plotitemPS.showGrid(x = True, y = True, alpha = 0.5)
@@ -831,7 +833,7 @@ class Measure(QMainWindow):
         self.curveminus12V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990099',
                                                                  width=2),
                                                   autoDownsample = False)
-        self.curve1058V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990000',
+        self.curverefV = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990000',
                                                                         width=2),
                                                    autoDownsample = False)
 
@@ -961,11 +963,16 @@ class Measure(QMainWindow):
             ch.time = []
             ch.temp = []
             ch.meas = []
+            ch.meastp = []
         self.time = []
         self.PSmeas = []
+        self.PSmeastp = []
         self.minus12Vmeas = []
+        self.minus12Vmeastp = []
         self.v5Vmeas = []
-        self.v1058Vmeas = []
+        self.v5Vmeastp = []
+        self.vrefVmeas = []
+        self.vrefVmeastp = []
 
 
         self.tbstopmeasure.setEnabled(True)
@@ -979,8 +986,8 @@ class Measure(QMainWindow):
         dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
 
         #only if emulator
-        #self.emulator = EmulatorThread()
-        #self.emulator.start()
+        self.emulator = EmulatorThread()
+        self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -990,32 +997,37 @@ class Measure(QMainWindow):
         
 
       
-    def update(self, measurements):
+    def update(self, meas):
         #print (measurements)
         for ch in dchs.values():
-            ch.time.append(measurements[0])
-            ch.temp.append(measurements[1])
-            ch.meas.append(measurements[ch.num + 2] * 1.8)
-        self.time.append(measurements[0])
-        self.PSmeas.append(measurements[len(dchs) + 2])
-        self.minus12Vmeas.append(measurements[len(dchs) + 3])
-        self.v5Vmeas.append(measurements[len(dchs) + 4])
-        self.v1058Vmeas.append(measurements[len(dchs) + 5])   
+            ch.time.append(meas[0])
+            ch.temp.append(meas[1])
+            ch.meas.append(meas[ch.num+2])
+            ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8/(150*1e-3)*1e-9)
+        self.time.append(meas[0])
+        self.PSmeas.append(measu[len(dchs)+2])
+        self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.061/1000
+        self.minus12Vmeas.append(meas[len(dchs)+3])
+        self.minus12Vmeastp.append(meas[len(dchs)+3]*0.187*2.519/1000
+        self.v5Vmeas.append(meas[len(dchs)+4])
+        self.v5Vmeastp.append(meas[len(dchs)+4]*0.187/1000
+        self.vrefVmeas.append(meas[len(dchs)+5])
+        self.vrefVmeas.append(meas[len(dchs)+5]*0.187*2.203/1000   
         
         DS = 1 #Downsampling
         self.curvetemp.setData(self.time[::DS], dchs['Ch0'].temp[::DS])
         for ch in dchs.values():
             ch.update()
-        self.curve5V.setData(self.time[::DS], self.v5Vmeas[::DS])
-        self.curve1058V.setData(self.time[::DS], self.v1058Vmeas[::DS])
-        self.curveminus12V.setData(self.time[::DS], self.minus12Vmeas[::DS])
-        self.curvePS.setData(self.time[::DS], self.PSmeas[::DS])
+        self.curve5V.setData(self.time[::DS], self.v5Vmeastp[::DS])
+        self.curverefV.setData(self.time[::DS], self.vrefVmeastp[::DS])
+        self.curveminus12V.setData(self.time[::DS], self.minus12Vmeastp[::DS])
+        self.curvePS.setData(self.time[::DS], self.PSmeastp[::DS])
 
 
     def stopmeasurement(self):
         self.measurethread.stopping()
         #emulator
-        #self.emulator.stopping()
+        self.emulator.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
         self.tbdarkcurrent.setEnabled(True)
