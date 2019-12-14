@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>537</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>480</height>
+    <width>1200</width>
+    <height>800</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -147,55 +147,8 @@ background-color:rgb(193,210,238);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="2" column="1">
-           <widget class="QToolButton" name="tbstopmeasure">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Stop measuring</string>
-            </property>
-            <property name="toolTipDuration">
-             <number>-1</number>
-            </property>
-            <property name="text">
-             <string>Stop</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>iconspd/Stop-100.png</normaloff>iconspd/Stop-100.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonIconOnly</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
            <widget class="QToolButton" name="tbdarkcurrent">
             <property name="enabled">
              <bool>true</bool>
@@ -208,8 +161,8 @@ background-color:rgb(193,210,238);
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>30</height>
+              <width>88</width>
+              <height>40</height>
              </size>
             </property>
             <property name="font">
@@ -238,7 +191,37 @@ background-color:rgb(193,210,238);
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item>
+           <widget class="QToolButton" name="PowerSupply">
+            <property name="minimumSize">
+             <size>
+              <width>88</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Power Supply</string>
+            </property>
+            <property name="text">
+             <string>PS</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextOnly</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QToolButton" name="tbstartmeasure">
             <property name="enabled">
              <bool>true</bool>
@@ -252,13 +235,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>40</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>32</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="toolTip">
@@ -282,27 +265,50 @@ background-color:rgb(193,210,238);
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QToolButton" name="PowerSupply">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
+          <item>
+           <widget class="QToolButton" name="tbstopmeasure">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
             </property>
             <property name="toolTip">
-             <string>Power Supply</string>
+             <string>Stop measuring</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>-1</number>
             </property>
             <property name="text">
-             <string>PS</string>
+             <string>Stop</string>
             </property>
-            <property name="checkable">
-             <bool>true</bool>
+            <property name="icon">
+             <iconset>
+              <normaloff>iconspd/Stop-100.png</normaloff>iconspd/Stop-100.png</iconset>
             </property>
-            <property name="checked">
-             <bool>true</bool>
+            <property name="iconSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
             </property>
             <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextOnly</enum>
+             <enum>Qt::ToolButtonIconOnly</enum>
             </property>
            </widget>
           </item>
@@ -335,13 +341,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -390,13 +396,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -445,13 +451,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -500,13 +506,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -555,13 +561,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>23</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -610,7 +616,7 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -665,13 +671,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -720,13 +726,13 @@ background-color:rgb(193,210,238);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>20</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>20</height>
+              <height>16777215</height>
              </size>
             </property>
             <property name="font">
@@ -772,7 +778,7 @@ background-color:rgb(193,210,238);
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="font">
@@ -839,9 +845,15 @@ background-color:rgb(193,210,238);
           </item>
           <item>
            <widget class="QDoubleSpinBox" name="sbicmeas">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="toolTip">
@@ -863,9 +875,15 @@ background-color:rgb(193,210,238);
           </item>
           <item>
            <widget class="QDoubleSpinBox" name="sbictemp">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="toolTip">
@@ -884,9 +902,15 @@ background-color:rgb(193,210,238);
           </item>
           <item>
            <widget class="QDoubleSpinBox" name="sbicpress">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <pointsize>12</pointsize>
              </font>
             </property>
             <property name="toolTip">
