@@ -53,9 +53,9 @@ class CH():
 
     def calcintegral(self, starttimes, finishtimes):
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
-        self.df['measC'] = (-(self.meas * 20.48/65535) + 10.24) * 1.8
+        self.df['measnC'] = (-(self.df.meas * 20.48/65535) + 10.24) * 1.8
         #Calculate start and end of radiation
-        self.df['measdiff'] = self.df.meas.diff()
+        #self.df['measdiff'] = self.df.meas.diff()
         try:
             self.ts = starttimes.values[0]
             self.tf = finishtimes.values[-1]
@@ -66,14 +66,14 @@ class CH():
         #self.df['meastc'] = self.df.loc[self.df.meas<1, 'meas'] - 0.2318 * (self.df.loc[self.df.meas<1, 'temp'] - 27)
         #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
         #subtract zero
-        self.df['measz'] = self.df.measC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measC'].mean()
+        self.df['measz'] = self.df.measnC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measnC'].mean()
         #self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
         #calculate integral
         self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measz'].sum()
         #self.integral = self.df.loc[:, 'measz'].sum()
         #put the full plot
         self.text = pg.TextItem('Int: %.2f nC' %(self.integral), color = self.color)
-        self.text.setPos((self.df.time.max())/2 - 5, self.df.measC.max()+ 0.5)
+        self.text.setPos((self.df.time.max())/2 - 5, self.df.measnC.max()-2)
         #self.viewplot()
         
         #Now we calculate the integrals of each beam and put it in a list
@@ -110,7 +110,7 @@ class EmulatorThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self.stop = False
-        self.ser2 = serial.Serial ('/dev/pts/1', 115200, timeout=1)
+        self.ser2 = serial.Serial ('/dev/pts/2', 115200, timeout=1)
         file = open('./rawdata/emulatormeasurements.csv', 'r')
         self.lines =  file.readlines()
         file.close()
@@ -142,8 +142,8 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        self.ser = serial.Serial ('/dev/pts/2', 115200, timeout=1)
-        #self.ser = serial.Serial ('/dev/ttyS0', 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/ttyACM0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -154,22 +154,23 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        #reading1 = self.ser.readline().decode().strip().split(',')
-        #tstart = int(reading1[0])
+        reading1 = self.ser.readline().decode().strip().split(',')
+        tstart = int(reading1[0])
         
         while True:
             
             if self.stop:
                 break
+            
             try:
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                listatosend = [int(i) for i in reading]
-                #listatosend = [(int(reading[0])-tstart)/1000] + [int(i) for i  in reading[1:]]
-                #print (listatosend)
+                #listatosend = [int(i) for i in reading]
+                listatosend = [(int(reading[0])-tstart)/1000] + [float(reading[1])] + [int(i) for i  in reading[2:]]
+                #print (listatosend) 
                 self.info.emit(listatosend)
-            except:
+            except(ValueError, TypeError):
                 pass
 
  
@@ -180,7 +181,49 @@ class MeasureThread(QThread):
         self.ser.close()
         self.wait()
         self.quit()
-                   
+        
+class IonChamber(QDialog):
+    def __init__(self):
+        QDialog.__init__(self)
+        loadUi("ionchamber.ui", self)
+        self.icmeas.setValue(float(dmetadata['IC Measure']))
+        self.ictemp.setValue(float(dmetadata['IC Temperature']))
+        self.icpressure.setValue(float(dmetadata['IC Pressure']))
+        self.icmeasslider.setValue(int(self.icmeas.value()*1000))
+        self.ictempslider.setValue(int(self.ictemp.value()*100))
+        self.icpressureslider.setValue(int(self.icpressure.value()*10))
+        self.icmeas.valueChanged.connect(lambda e: self.icmeasslider.setValue(int(e*1000)))
+        self.icmeasslider.valueChanged.connect(lambda e: self.icmeas.setValue(e/1000))
+        self.ictemp.valueChanged.connect(lambda e: self.ictempslider.setValue(int(e*100)))
+        self.ictempslider.valueChanged.connect(lambda e: self.ictemp.setValue(e/100))
+        self.icpressure.valueChanged.connect(lambda e: self.icpressureslider.setValue(int(e*10)))
+        self.icpressureslider.valueChanged.connect(lambda e: self.icpressure.setValue(e/10))        
+        self.savenext.clicked.connect(self.savenextaction)
+        self.cancel.clicked.connect(self.close)
+        self.savecurrent.clicked.connect(self.savecurrentaction)
+        
+    def savecurrentaction(self):
+        currentfile = open('rawdata/%s.csv' %dmetadata['File Name'], 'r+')
+        currentlines = currentfile.readlines()
+        currentlines[22] = 'IC Measure,%s\n' %(self.icmeas.value())
+        currentlines[23] = 'IC Temperature,%s\n' %(self.ictemp.value())
+        currentlines[24] = 'IC Pressure,%s\n' %(self.icpressure.value())
+        currentfile.seek(0)
+        currentfile.truncate()
+        for line in currentlines:
+            currentfile.write(line)
+        currentfile.close()
+        self.savenextaction()
+        
+        
+        
+    def savenextaction(self):
+        dmetadata['IC Measure'] = str(self.icmeas.value())
+        dmetadata['IC Temperature'] = str(self.ictemp.value())
+        dmetadata['IC Pressure'] = str(self.icpressure.value())
+        self.close()
+        
+        
        
 class MainMenu (QMainWindow):
 
@@ -208,8 +251,8 @@ class MainMenu (QMainWindow):
             self.mymetadata.lefilename.setText(dmetadata['File Name'])
         
         self.mymetadata.sbacr.setValue(float(dmetadata['Adjacent Channels Ratio']))
-        self.mymetadata.sbreferenceV.setValue(float(dmetadata['Reference Charge']))
-        self.mymetadata.sbcalibrationfactor.setValue(float(dmetadata['Calibration Factor']))
+        self.mymetadata.sbrefcharge.setValue(float(dmetadata['Reference Charge']))
+        self.mymetadata.sbcf.setValue(float(dmetadata['Calibration Factor']))
         self.mymetadata.lefacility.setText(dmetadata['Facility'])
         self.mymetadata.leinvestigator.setText(dmetadata['Investigator'])
         self.mymetadata.sbintegrationtime.setValue(int(dmetadata['Integration Time']))
@@ -218,30 +261,20 @@ class MainMenu (QMainWindow):
         self.mymetadata.linacbrand.setCurrentText(dmetadata['Brand'])
         self.mymetadata.linacparticles.setCurrentText(dmetadata['Particles'])
         self.mymetadata.linacenergy.setCurrentText(dmetadata['Energy'])
-        self.mymetadata.linacdoserate.setValue(int(dmetadata['Dose Rate']))
-        self.mymetadata.linacgantry.setValue(int(dmetadata['Gantry']))
-        self.mymetadata.linaccollimator.setValue(int(dmetadata['Collimator']))
-        self.mymetadata.linaccouch.setValue(int(dmetadata['Couch']))
+        self.mymetadata.doserate.setValue(int(dmetadata['Dose Rate']))
+        self.mymetadata.gantry.setValue(int(dmetadata['Gantry']))
+        self.mymetadata.collimator.setValue(int(dmetadata['Collimator']))
+        self.mymetadata.couch.setValue(int(dmetadata['Couch']))
         self.mymetadata.x1coord.setValue(float(dmetadata['Field Size X1']))
         self.mymetadata.x2coord.setValue(float(dmetadata['Field Size X2']))
         self.mymetadata.y1coord.setValue(float(dmetadata['Field Size Y1']))
         self.mymetadata.y2coord.setValue(float(dmetadata['Field Size Y2']))
-        self.mymeasure.sbicmeas.setValue(float(dmetadata['IC Measure']))
-        self.mymeasure.sbictemp.setValue(float(dmetadata['IC Temperature']))
-        self.mymeasure.sbicpress.setValue(float(dmetadata['IC Pressure']))
-        self.mymetadata.linacssdsad.setCurrentText(dmetadata['Setup'])
-        self.mymetadata.linacssdsaddist.setValue(int(dmetadata['Distance']))
-        self.mymetadata.linacmus.setValue(int(dmetadata['MU']))
-        self.mymetadata.transducertype.setCurrentText(dmetadata['Transducer Type'])
-        self.mymetadata.sensortype.setCurrentText(dmetadata['Sensor Type'])
-        self.mymetadata.sensorsize.setCurrentText(dmetadata['Sensor Size'])
-        self.mymetadata.sensorfiberdiam.setCurrentText(dmetadata['Fiber Diameter'])
-        self.mymetadata.sensorfiberlength.setValue(int(dmetadata['Fiber Length']))
+        self.mymetadata.ssdsad.setCurrentText(dmetadata['Setup'])
+        self.mymetadata.ssd.setValue(int(dmetadata['Distance']))
+        self.mymetadata.mu.setValue(int(dmetadata['MU']))
         self.mymetadata.sensorpositionx.setValue(float(dmetadata['Sensor Position X']))
         self.mymetadata.sensorpositiony.setValue(float(dmetadata['Sensor Position Y']))
         self.mymetadata.sensorpositionz.setValue(float(dmetadata['Sensor Position Z']))
-        self.mymetadata.referencefiberdiam.setCurrentText(dmetadata['Reference Fiber Diameter'])
-        self.mymetadata.referencefiberlength.setValue(int(dmetadata['Reference Fiber Length']))
         self.mymetadata.comments.setText(dmetadata['Comments'])
 
 
@@ -257,7 +290,7 @@ class MainMenu (QMainWindow):
         self.tbmeasure.clicked.connect(self.showmeasure)
         self.tboff.clicked.connect(app.quit)
         self.tbsettings.clicked.connect(self.showmetadata)
-        self.tbanalyze.clicked.connect(self.showanalyze)
+        #self.tbanalyze.clicked.connect(self.showanalyze)
         
     def showanalyze(self):
         self.close()
@@ -649,14 +682,47 @@ class Metadata (QMainWindow):
     def signals(self):
         self.tbgeneral.clicked.connect(self.showgeneralpage)
         self.tblinac.clicked.connect(self.showlinacpage)
-        self.tbsensor.clicked.connect(self.showsensorpage)
-        self.tbcomments.clicked.connect(self.showcommentspage)
+        #self.tbsensor.clicked.connect(self.showsensorpage)
+        #self.tbcomments.clicked.connect(self.showcommentspage)
         self.tbmainmenumetadata.clicked.connect(self.backtomainmenu)
         self.cbdefault.clicked.connect(self.saveasfilename)
         self.cbcustom.clicked.connect(self.saveasfilename)
         self.cbsaveoncurrentmeasurements.clicked.connect(self.saveoncurrent)
         self.cbsymetric.clicked.connect(self.symetry)
-        self.y1coord.valueChanged.connect(self.symy1ch)
+        self.x1coord.valueChanged.connect(self.symx1ch)
+        self.x1slider.valueChanged.connect(lambda e: self.x1coord.setValue(e/10))
+        self.x2coord.valueChanged.connect(lambda e: self.x2slider.setValue(int(e*10)))
+        self.x2slider.valueChanged.connect(lambda e: self.x2coord.setValue(e/10))
+        self.y1coord.valueChanged.connect(lambda e: self.y1slider.setValue(int(e*10)))
+        self.y1slider.valueChanged.connect(lambda e: self.y1coord.setValue(e/10))
+        self.y2coord.valueChanged.connect(lambda e: self.y2slider.setValue(int(e*10)))
+        self.y2slider.valueChanged.connect(lambda e: self.y2coord.setValue(e/10))
+        self.sbintegrationtime.valueChanged.connect(self.inttimeslider.setValue)
+        self.inttimeslider.valueChanged.connect(self.sbintegrationtime.setValue)
+        self.sbacr.valueChanged.connect(lambda e: self.acrslider.setValue(int(e*1000)))
+        self.acrslider.valueChanged.connect(lambda e: self.sbacr.setValue(e/1000))
+        self.sbrefcharge.valueChanged.connect(lambda e: self.refchargeslider.setValue(int(e*1000)))
+        self.refchargeslider.valueChanged.connect(lambda e: self.sbrefcharge.setValue(e/1000))
+        self.sbcf.valueChanged.connect(lambda e: self.cfslider.setValue(int(e*10000)))
+        self.cfslider.valueChanged.connect(lambda e: self.sbcf.setValue(e/10000))
+        self.doserate.valueChanged.connect(self.doserateslider.setValue)
+        self.doserateslider.valueChanged.connect(self.doserate.setValue)
+        self.ssd.valueChanged.connect(self.ssdslider.setValue)
+        self.ssdslider.valueChanged.connect(self.ssd.setValue)
+        self.mu.valueChanged.connect(self.ssdslider.setValue)
+        self.muslider.valueChanged.connect(self.mu.setValue)
+        self.sensorpositionx.valueChanged.connect(lambda e: self.sensorpositionxslider.setValue(int(e*100)))
+        self.sensorpositionxslider.valueChanged.connect(lambda e: self.sensorpositionx.setValue(e/100))
+        self.sensorpositiony.valueChanged.connect(lambda e: self.sensorpositionyslider.setValue(int(e*100)))
+        self.sensorpositionyslider.valueChanged.connect(lambda e: self.sensorpositiony.setValue(e/100))
+        self.sensorpositionz.valueChanged.connect(lambda e: self.sensorpositionzslider.setValue(int(e*100)))
+        self.sensorpositionzslider.valueChanged.connect(lambda e: self.sensorpositionz.setValue(e/100))
+        self.gantry.valueChanged.connect(self.gantrydial.setValue)
+        self.gantrydial.valueChanged.connect(self.gantry.setValue)
+        self.collimator.valueChanged.connect(self.collimatordial.setValue)
+        self.collimatordial.valueChanged.connect(self.collimator.setValue)
+        self.couch.valueChanged.connect(self.couchdial.setValue)
+        self.couchdial.valueChanged.connect(self.couch.setValue)
         self.pbsendtocontroller.clicked.connect(self.sendtocontroller)
         
         
@@ -667,21 +733,31 @@ class Metadata (QMainWindow):
         self.serc.write(texttosend.encode())
         self.serc.close()
         
-    def symy1ch(self, value):
+    def symx1ch(self, value):
+        self.x1slider.setValue(int(value*10))
         if self.cbsymetric.isChecked():
-            self.x1coord.setValue(value)
-            self.x2coord.setValue(value)
-            self.y2coord.setValue(value)
+            self.x2coord.setValue(-value)
+            self.x2slider.setValue(int(-value)*10)
+            self.y1coord.setValue(value)
+            self.y1slider.setValue(int(value)*10)
+            self.y2coord.setValue(-value)
+            self.y2slider.setValue(int(-value)*10)
 
     def symetry(self):
         if self.cbsymetric.isChecked():
-            self.x1coord.setEnabled(False)
+            self.y1coord.setEnabled(False)
+            self.y1slider.setEnabled(False)
             self.x2coord.setEnabled(False)
+            self.x2slider.setValue(False)
             self.y2coord.setEnabled(False)
+            self.y2slider.setEnabled(False)
         else:
-            self.x1coord.setEnabled(True)
+            self.y1coord.setEnabled(True)
+            self.y1slider.setEnabled(True)
             self.x2coord.setEnabled(True)
-            self.y2coord.setEnabled(True)   
+            self.x2slider.setValue(True)
+            self.y2coord.setEnabled(True)
+            self.y2slider.setEnabled(True)  
 
 
     def saveoncurrent(self):
@@ -706,8 +782,8 @@ class Metadata (QMainWindow):
             dmetadata['Save File As'] = 'Custom'
         dmetadata['File Name'] = self.lefilename.text()
         dmetadata['Adjacent Channels Ratio'] = str(self.sbacr.value())
-        dmetadata['Reference Charge'] = str(self.sbreferenceV.value())
-        dmetadata['Calibration Factor'] = str(self.sbcalibrationfactor.value())
+        dmetadata['Reference Charge'] = str(self.sbrefcharge.value())
+        dmetadata['Calibration Factor'] = str(self.sbcf.value())
         dmetadata['Facility'] = self.lefacility.text()
         dmetadata['Investigator'] = self.leinvestigator.text()
         dmetadata['Integration Time'] = str(self.sbintegrationtime.value())
@@ -716,30 +792,20 @@ class Metadata (QMainWindow):
         dmetadata['Brand'] = self.linacbrand.currentText()
         dmetadata['Particles'] = self.linacparticles.currentText()
         dmetadata['Energy'] = self.linacenergy.currentText()
-        dmetadata['Dose Rate'] = str(self.linacdoserate.value())
-        dmetadata['Gantry'] = str(self.linacgantry.value())
-        dmetadata['Collimator'] = str(self.linaccollimator.value())
-        dmetadata['Couch'] = str(self.linaccouch.value())
+        dmetadata['Dose Rate'] = str(self.doserate.value())
+        dmetadata['Gantry'] = str(self.gantry.value())
+        dmetadata['Collimator'] = str(self.collimator.value())
+        dmetadata['Couch'] = str(self.couch.value())
         dmetadata['Field Size X1'] =  str(self.x1coord.value())
         dmetadata['Field Size X2'] =  str(self.x2coord.value())
         dmetadata['Field Size Y1'] =  str(self.y1coord.value())
         dmetadata['Field Size Y2'] =  str(self.y2coord.value())
-        dmetadata['IC Measure'] = str(mymainmenu.mymeasure.sbicmeas.value())
-        dmetadata['IC Temperature'] = str(mymainmenu.mymeasure.sbictemp.value())
-        dmetadata['IC Pressure'] = str(mymainmenu.mymeasure.sbicpress.value())
-        dmetadata['Setup'] = self.linacssdsad.currentText()
-        dmetadata['Distance'] =  str(self.linacssdsaddist.value())
-        dmetadata['MU'] = str(self.linacmus.value())
-        dmetadata['Transducer Type'] =  self.transducertype.currentText()
-        dmetadata['Sensor Type'] = self.sensortype.currentText()
-        dmetadata['Sensor Size'] = self.sensorsize.currentText()
-        dmetadata['Fiber Diameter'] =  self.sensorfiberdiam.currentText()
-        dmetadata['Fiber Length'] =  str(self.sensorfiberlength.value())
+        dmetadata['Setup'] = self.ssdsad.currentText()
+        dmetadata['Distance'] =  str(self.ssd.value())
+        dmetadata['MU'] = str(self.mu.value())
         dmetadata['Sensor Position X'] = str(self.sensorpositionx.value())
         dmetadata['Sensor Position Y'] = str(self.sensorpositiony.value())
         dmetadata['Sensor Position Z'] = str(self.sensorpositionz.value())
-        dmetadata['Reference Fiber Diameter'] = self.referencefiberdiam.currentText()
-        dmetadata['Reference Fiber Length'] = str(self.referencefiberlength.value())
         dmetadata['Comments'] =  self.comments.toPlainText()
         
     def backtomainmenu(self):
@@ -853,10 +919,12 @@ class Measure(QMainWindow):
         self.cbsecondplot.currentIndexChanged.connect(self.secondplot)
         self.tbstopmeasure.clicked.connect(self.stopmeasurement)
         self.tbdarkcurrent.clicked.connect(self.rmdarkcurrent)
-        self.sbicmeas.valueChanged.connect(self.updatemetadata)
-        self.sbictemp.valueChanged.connect(self.updatemetadata)
-        self.sbicpress.valueChanged.connect(self.updatemetadata)
         self.PowerSupply.clicked.connect(self.powersupply)
+        self.ionchamber.clicked.connect(self.ionchamberaction)
+        
+    def ionchamberaction(self):
+        self.ionchamberwindow = IonChamber()
+        self.ionchamberwindow.show()
         
     def powersupply(self):
         self.serp = serial.Serial('/dev/ttyS0', 115200, timeout=1)
@@ -869,25 +937,7 @@ class Measure(QMainWindow):
             self.serp.write(textosend.encode())
             print (textosend.encode())
         self.serp.close()
-        
-    def updatemetadata(self):
-        #first update dictionary
-        dmetadata['IC Measure'] = str(self.sbicmeas.value())
-        dmetadata['IC Temperature'] = str(self.sbictemp.value())
-        dmetadata['IC Pressure'] = str(self.sbicpress.value())
-        #secondly if measurements have been done and the save on current file
-        #checbox is checked, update the current file
-        if (self.cbsaveincurrent.isChecked() and measurements_done):
-            currentfile = open('rawdata/%s.csv' %dmetadata['File Name'], 'r+')
-            currentlines = currentfile.readlines()
-            currentlines[22] = 'IC Measure,%s\n' %(self.sbicmeas.value())
-            currentlines[23] = 'IC Temperature,%s\n' %(self.sbictemp.value())
-            currentlines[24] = 'IC Pressure,%s\n' %(self.sbicpress.value())
-            currentfile.seek(0)
-            currentfile.truncate()
-            for line in currentlines:
-                currentfile.write(line)
-            currentfile.close()
+
 
     def rmdarkcurrent(self):
         self.tbstartmeasure.setEnabled(False)
@@ -986,8 +1036,8 @@ class Measure(QMainWindow):
         dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
 
         #only if emulator
-        self.emulator = EmulatorThread()
-        self.emulator.start()
+        #self.emulator = EmulatorThread()
+        #self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -1003,16 +1053,17 @@ class Measure(QMainWindow):
             ch.time.append(meas[0])
             ch.temp.append(meas[1])
             ch.meas.append(meas[ch.num+2])
-            ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8/(150*1e-3)*1e-9)
+            inttime = int(dmetadata['Integration Time']) * 1e-3
+            ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8e-9/inttime)
         self.time.append(meas[0])
-        self.PSmeas.append(measu[len(dchs)+2])
-        self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.061/1000
+        self.PSmeas.append(meas[len(dchs)+2])
+        self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.061/1000)
         self.minus12Vmeas.append(meas[len(dchs)+3])
-        self.minus12Vmeastp.append(meas[len(dchs)+3]*0.187*2.519/1000
+        self.minus12Vmeastp.append(meas[len(dchs)+3]*0.187*2.519/1000)
         self.v5Vmeas.append(meas[len(dchs)+4])
-        self.v5Vmeastp.append(meas[len(dchs)+4]*0.187/1000
+        self.v5Vmeastp.append(meas[len(dchs)+4]*0.187/1000)
         self.vrefVmeas.append(meas[len(dchs)+5])
-        self.vrefVmeas.append(meas[len(dchs)+5]*0.187*2.203/1000   
+        self.vrefVmeastp.append(meas[len(dchs)+5]*0.187*2.203/1000)  
         
         DS = 1 #Downsampling
         self.curvetemp.setData(self.time[::DS], dchs['Ch0'].temp[::DS])
@@ -1027,7 +1078,7 @@ class Measure(QMainWindow):
     def stopmeasurement(self):
         self.measurethread.stopping()
         #emulator
-        self.emulator.stopping()
+        #self.emulator.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
         self.tbdarkcurrent.setEnabled(True)
@@ -1044,12 +1095,12 @@ class Measure(QMainWindow):
         for key in metadatakeylist:
             self.filemeas.write('%s,%s\n' %(key,dmetadata[key]))
 
-        self.filemeas.write('time,temp,%s,PS,-12V,5V,10.58V\n' %','.join([ch for ch in sorted(dchs)]))
+        self.filemeas.write('time,temp,%s,PS,-12V,5V,refV\n' %','.join([ch for ch in sorted(dchs)]))
         
         for i in range(len(self.time)):
             line1 = '%.4f,%.4f' %(self.time[i], dchs['Ch0'].temp[i])
             line2 = ','.join(['%.4f' %dchs[ch].meas[i] for ch in sorted(dchs)])
-            line3 = '%.4f,%.4f,%.4f,%.4f' %(self.PSmeas[i], self.minus12Vmeas[i], self.v5Vmeas[i], self.v1058Vmeas[i])
+            line3 = '%.4f,%.4f,%.4f,%.4f' %(self.PSmeas[i], self.minus12Vmeas[i], self.v5Vmeas[i], self.vrefVmeas[i])
             self.filemeas.write('%s,%s,%s\n' %(line1, line2, line3))
 
         self.filemeas.close()
@@ -1064,18 +1115,19 @@ class Measure(QMainWindow):
         self.rch = 'Ch4'
         
         #lets find the start and stop of all beams
-        df = pd.DataFrame({'time':dchs[self.mch].time, self.mch:dchs[self.mch].meas})
-        #print(df.head())
-        #print (df.dtypes)
-        df['chdiff'] = df[self.mch].diff()
-        dfchanges =  df.loc[df.chdiff.abs() > 1, :].copy()
-        dfchanges['timediff'] = dfchanges.time.diff()
-        dfchanges.fillna(2, inplace=True)
-        dftimes =  dfchanges[dfchanges.timediff > 0.5].copy()
-        print (dftimes.head())
-        starttimes = dftimes.loc[dftimes.chdiff > 0, 'time']
+        dff = pd.DataFrame({'time':dchs[self.mch].time, self.mch:dchs[self.mch].meas})
+        #print(dff.head())
+        #print (dff.dtypes)
+        #print (dff.describe())
+        dff['chdiff'] = dff[self.mch].diff()
+        dffchanges =  dff.loc[dff.chdiff.abs() > 3000, :].copy()
+        dffchanges['timediff'] = dffchanges.time.diff()
+        dffchanges.fillna(3000, inplace=True)
+        dfftimes =  dffchanges[dffchanges.timediff > 0.5].copy()
+        print (dfftimes.head())
+        starttimes = dfftimes.loc[dfftimes.chdiff < 0, 'time']
         #print (self.starttimes)
-        finishtimes = dftimes.loc[dftimes.chdiff < 0, 'time']
+        finishtimes = dfftimes.loc[dfftimes.chdiff > 0, 'time']
         #print (self.finishtimes)
         
         self.linearregions = []
@@ -1151,10 +1203,9 @@ if __name__ == '__main__':
     mymainmenu = MainMenu()
     number_of_ch = 8
     colors = ['#ff8000', '#ff0000',
-              '#01dfa5', '#a5df00',
-              '#01dfd7', '#0000ff',
+              '#01dfa5', '#cb4335',
+              '#884EA0', '#0000ff',
               '#848484', '#000000']
-
     dchs = {'Ch%s' %i : CH(i) for i in range(number_of_ch)}
     atexit.register(goodbye)
     mymainmenu.show()

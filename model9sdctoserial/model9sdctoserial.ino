@@ -7,14 +7,14 @@
 Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
 //Adafruit_ADS1115 ads;
 
-int16_t ch0b = 0;
-int16_t ch1b = 0;
-int16_t ch2b = 0;
-int16_t ch3b = 0;
-int16_t ch4b = 0;
-int16_t ch5b = 0;
-int16_t ch6b = 0;
-int16_t ch7b = 0;
+unsigned int ch0b = 0;
+unsigned int ch1b = 0;
+unsigned int ch2b = 0;
+unsigned int ch3b = 0;
+unsigned int ch4b = 0;
+unsigned int ch5b = 0;
+unsigned int ch6b = 0;
+unsigned int ch7b = 0;
 //float ch0v;
 //float ch1v;
 //float ch2v;
@@ -31,7 +31,7 @@ int integral = 300;
 int regtime = 233;
 unsigned long previousMillis = 0;
 unsigned long previousregMillis = 0;
-int resettime = 500;
+int resettime = 70;
 int potcount; //pot value in counts from 0 to 1023
 float setvolt = 57.03;
 //unsigned char i=0;
@@ -236,7 +236,8 @@ void loop() {
   
   if (currentMillis - previousMillis >= integral){
 
-      //digitalWrite(7, HIGH);
+     //digitalWrite (7, LOW);
+     //digitalWrite(7, HIGH);
       
       //hold starts
       digitalWrite(A3, HIGH);
@@ -247,13 +248,16 @@ void loop() {
       digitalWrite (A3, LOW);
 
       //digitalWrite (7, LOW);
+      digitalWrite (7, HIGH);
 
       //reset the integration and a new integration process starts
       digitalWrite (A2, LOW);
       delayMicroseconds (resettime);
       digitalWrite (A2, HIGH);
+      digitalWrite (7, LOW);
       previousMillis = millis();
 
+      //digitalWrite (7, LOW);
       //digitalWrite (7, HIGH);
 
       //while integration is happening
@@ -270,7 +274,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(4);
+      delay(2);
       Wire.requestFrom(0x48, 2);
       adc0 = (Wire.read()<<8|Wire.read());
       
@@ -282,7 +286,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(3);
+      delay(2);
       Wire.requestFrom(0x48, 2);
       adc1 = (Wire.read()<<8|Wire.read());
       
@@ -294,7 +298,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(3);
+      delay(2);
       Wire.requestFrom(0x48, 2);
       adc2 = (Wire.read()<<8|Wire.read());
       
@@ -306,7 +310,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(3);
+      delay(2);
       Wire.requestFrom(0x48, 2);
       adc3 = (Wire.read()<<8|Wire.read());
 
@@ -315,6 +319,9 @@ void loop() {
       adc1 = ads.readADC_SingleEnded(1);
       adc2 = ads.readADC_SingleEnded(2);
       adc3 = ads.readADC_SingleEnded(3);*/
+
+      //digitalWrite (7, LOW);
+      //digitalWrite (7, HIGH);
 
       //tempsensor.wake();
       temp = tempsensor.readTempC(); //onlythis line
@@ -338,6 +345,10 @@ void loop() {
      // }
 
       //avgvolt = sumvolts/10;*/
+      
+
+      //digitalWrite (7, LOW);
+      //digitalWrite (7, HIGH);
       
       Serial.print(previousMillis);
       Serial.print(",");
@@ -420,60 +431,60 @@ void loop() {
                 setvoltdcch7();
                 delay(2);
         
-                while (ch0b > 32447 or
-                       ch1b > 32447 or
-                       ch2b > 32447 or
-                       ch3b > 32447 or
-                       ch4b > 32447 or
-                       ch5b > 32447 or
-                       ch6b > 32447 or
-                       ch7b > 32447)
+                while (ch0b < 32447 or
+                       ch1b < 32447 or
+                       ch2b < 32447 or
+                       ch3b < 32447 or
+                       ch4b < 32447 or
+                       ch5b < 32447 or
+                       ch6b < 32447 or
+                       ch7b < 32447)
                        {
                            if (millis() - previousMillis >= integral){
                                 ReadChannelsOnce();
-                                if (ch0b > 32447){
+                                if (ch0b < 32447){
                                      dcvch0 = dcvch0 + 10;
                                      Serial.print("dcvch0,");
                                      Serial.println(dcvch0);
                                      setvoltdcch0();
                                      } 
-                                if (ch1b > 32447){
+                                if (ch1b < 32447){
                                      dcvch1 = dcvch1 + 10;
                                      Serial.print("dcvch1,");
                                      Serial.println(dcvch1);
                                      setvoltdcch1();
                                      }
-                                if (ch2b > 32447){
+                                if (ch2b < 32447){
                                      dcvch2 = dcvch2 + 10;
                                      Serial.print("dcvch2,");
                                      Serial.println(dcvch2);
                                      setvoltdcch2();
                                      }
-                                 if (ch3b > 32447){
+                                 if (ch3b < 32447){
                                      dcvch3 = dcvch3 + 10;
                                      Serial.print("dcvch3,");
                                      Serial.println(dcvch3);
                                      setvoltdcch3();
                                      }
-                                  if (ch4b > 32447){
+                                  if (ch4b < 32447){
                                       dcvch4 = dcvch4 + 10;
                                       Serial.print("dcvch4,");
                                       Serial.println(dcvch4);
                                       setvoltdcch4();
                                       }
-                                  if (ch5b > 32447){
+                                  if (ch5b < 32447){
                                        dcvch5 = dcvch5 + 10;
                                        Serial.print("dcvch5,");
                                        Serial.println(dcvch5);
                                        setvoltdcch5();
                                        }
-                                  if (ch6b > 32447){
+                                  if (ch6b < 32447){
                                         dcvch6 = dcvch6 + 10;
                                         Serial.print("dcvch6,");
                                         Serial.println(dcvch6);
                                         setvoltdcch6();
                                         }
-                                   if (ch7v > 32447){
+                                   if (ch7b < 32447){
                                        dcvch7 = dcvch7 + 10;
                                        Serial.print("dcvch7,");
                                        Serial.println(dcvch7);
@@ -533,7 +544,7 @@ void ReadChannels(){
         //and read previous set ch0
         digitalWrite (A1, LOW);
         SPI.transfer16 (0xC400);
-        ch0b = SPI.transfer16 (0x0000);
+        ch0b = SPI.transfer16(0x0000);
         digitalWrite (A1, HIGH);
         //initiate ch2 manual transfer
         //and read previous set ch1

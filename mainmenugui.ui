@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1920</width>
+    <height>1012</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -151,8 +151,8 @@ background-color:rgb(193,210,238);
          </property>
          <property name="maximumSize">
           <size>
-           <width>102</width>
-           <height>102</height>
+           <width>125</width>
+           <height>125</height>
           </size>
          </property>
          <property name="palette">
@@ -248,7 +248,7 @@ background-color:rgb(193,210,238);
          </property>
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="toolTip">
@@ -263,8 +263,8 @@ background-color:rgb(193,210,238);
          </property>
          <property name="iconSize">
           <size>
-           <width>75</width>
-           <height>75</height>
+           <width>175</width>
+           <height>175</height>
           </size>
          </property>
          <property name="toolButtonStyle">
@@ -272,109 +272,29 @@ background-color:rgb(193,210,238);
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QToolButton" name="tbanalyze">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>102</width>
-           <height>102</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>102</width>
-           <height>102</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>Analyze</string>
-         </property>
-         <property name="text">
-          <string>Analyze</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>iconspd/analyze.png</normaloff>iconspd/analyze.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>75</width>
-           <height>75</height>
-          </size>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QFrame" name="frame_3">
-      <property name="styleSheet">
-       <string notr="true">
-
-QToolButton{
-background-color:transparent;
-border:none;
-
-}
-
-QToolButton:checked, QToolButton:pressed{
-background-color:rgb(200,200,255);
-border:1px solid rgb(60, 127, 177)
-}
-
-QToolButton:hover{
-background-color:rgb(240,240,255)
-}
-
-QToolButton:checked:hover{
-background-color:rgb(193,210,238);
-}</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QToolButton" name="tbsettings">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>102</width>
-           <height>102</height>
+           <width>125</width>
+           <height>119</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>102</width>
-           <height>102</height>
+           <width>125</width>
+           <height>125</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="toolTip">
@@ -389,8 +309,8 @@ background-color:rgb(193,210,238);
          </property>
          <property name="iconSize">
           <size>
-           <width>75</width>
-           <height>75</height>
+           <width>94</width>
+           <height>94</height>
           </size>
          </property>
          <property name="toolButtonStyle">
@@ -408,8 +328,8 @@ background-color:rgb(193,210,238);
          </property>
          <property name="minimumSize">
           <size>
-           <width>102</width>
-           <height>102</height>
+           <width>125</width>
+           <height>125</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -420,7 +340,7 @@ background-color:rgb(193,210,238);
          </property>
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="toolTip">
