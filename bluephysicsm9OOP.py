@@ -3,6 +3,9 @@
 from PyQt5 import QtCore
 import sys
 import os
+#os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
+#os.environ["QT_VIRTUALKEYBOARD_STYLE"] = "retro"
+#print (os.environ)
 import time
 import pyqtgraph as pg
 import pandas as pd
@@ -12,11 +15,24 @@ from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT,
                                                 FigureCanvas)
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
-from PyQt5.QtCore import QTimer, QThread, pyqtSignal
+from PyQt5.QtCore import QTimer, QThread, pyqtSignal, QObject
+#from PyQt5.QtQuick import QQuickView
+from PyQt5.QtQml import QQmlApplicationEngine
 
 import atexit
 
 import serial
+import serial.tools.list_ports
+
+class keyboardapp(object):
+    def __init__(self):
+        self.view = QQuickView()
+        self.view.setObjectName("View")
+        self.view.setSource(QUrl("main.qml"))
+        self.view.setResizeMode(QQuickView.SizeRootObjectToView)
+        self.view.show()
+
+
 
 class CH():
 
@@ -28,9 +44,11 @@ class CH():
         self.temp = []
         self.meas = []
         self.meastp = []
+        self.inttime = int(dmetadata['Integration Time']) * 1e-3
         self.curve = mymainmenu.mymeasure.plotitemchs.plot(pen=pg.mkPen(color=self.color, width=2),
                                               autoDownsample = False)
         self.button = mymainmenu.mymeasure.Layoutbuttons.itemAt(num).widget()
+        print (self.name, self.button.text(), self.button)
         self.button.clicked.connect(self.viewplot)
 
 
@@ -43,7 +61,7 @@ class CH():
             mymainmenu.mymeasure.plotitemchs.addItem(self.curve)
             mymainmenu.mymeasure.legend.addItem(self.curve, self.name)
             if measurements_done:
-                self.curve.setData(self.df.time, self.df.measz)
+                self.curve.setData(self.df.time, self.df.measAz)
                 mymainmenu.mymeasure.plotitemchs.addItem(self.text)
         else:
             mymainmenu.mymeasure.plotitemchs.removeItem(self.curve)
@@ -53,6 +71,7 @@ class CH():
 
     def calcintegral(self, starttimes, finishtimes):
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
+        self.df['measA'] = (-(self.df.meas * 20.48/65535) + 10.24) * 1.8e-9 / self.inttime
         self.df['measnC'] = (-(self.df.meas * 20.48/65535) + 10.24) * 1.8
         #Calculate start and end of radiation
         #self.df['measdiff'] = self.df.meas.diff()
@@ -66,20 +85,21 @@ class CH():
         #self.df['meastc'] = self.df.loc[self.df.meas<1, 'meas'] - 0.2318 * (self.df.loc[self.df.meas<1, 'temp'] - 27)
         #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
         #subtract zero
-        self.df['measz'] = self.df.measnC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measnC'].mean()
+        self.df['measnCz'] = self.df.measnC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measnC'].mean()
+        self.df['measAz'] = self.df.measA - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measA'].mean()
         #self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
         #calculate integral
-        self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measz'].sum()
+        self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measnCz'].sum()
         #self.integral = self.df.loc[:, 'measz'].sum()
         #put the full plot
         self.text = pg.TextItem('Int: %.2f nC' %(self.integral), color = self.color)
-        self.text.setPos((self.df.time.max())/2 - 5, self.df.measnC.max()-2)
+        self.text.setPos((self.df.time.max())/2 - 5, self.df.measAz.max()-2e-9)
         #self.viewplot()
         
         #Now we calculate the integrals of each beam and put it in a list
         self.listaint = []
         for (st, ft) in zip(starttimes, finishtimes):
-                intbeamn = self.df.loc[(self.df.time>(st-2))&(self.df.time<(ft+2)), 'measz'].sum()
+                intbeamn = self.df.loc[(self.df.time>(st-2))&(self.df.time<(ft+2)), 'measnCz'].sum()
                 self.listaint.append(intbeamn)
         
 
@@ -143,7 +163,8 @@ class MeasureThread(QThread):
         self.stop = False
         #emulator
         #self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
-        self.ser = serial.Serial ('/dev/ttyACM0', 115200, timeout=1)
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.ser = serial.Serial (device, 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -167,10 +188,10 @@ class MeasureThread(QThread):
                 #print (reading)
                 #comment if not emulator
                 #listatosend = [int(i) for i in reading]
-                listatosend = [(int(reading[0])-tstart)/1000] + [float(reading[1])] + [int(i) for i  in reading[2:]]
+                listatosend = [(int(reading[0]) - tstart)/1000] + [float(reading[1])] + [int(i) for i  in reading[2:]]
                 #print (listatosend) 
                 self.info.emit(listatosend)
-            except(ValueError, TypeError):
+            except:
                 pass
 
  
@@ -236,6 +257,7 @@ class MainMenu (QMainWindow):
         #self.myanalyze = Analyze()
         self.signals()
         self.setwindowstitle()
+        #self.test = keyboardapp()
         
     def metadatadictogui(self):
         
@@ -299,6 +321,8 @@ class MainMenu (QMainWindow):
     def showmetadata(self):
         self.close()
         self.mymetadata.show()
+        #winmetadata.show()
+
         
     def showtemp(self):
         self.close()
@@ -670,13 +694,20 @@ class Analyze (QMainWindow):
         mymainmenu.show()
 
 
+
 class Metadata (QMainWindow):
     
     def __init__(self):
         QMainWindow.__init__(self)
         loadUi("metadatagui2.ui", self)
         self.signals()
+        #self.view = QQuickView()
+        #self.view.setObjectName('View')
+        #self.view.setSource(QUrl('main.qml'))
+        #self.view.setResizeMode(QQuickView.SizeRootObjectToView)
+        #teclado.setParent(self.widgetteclado)
         #self.cbsaveoncurrentmeasurements.setChecked(True)
+        #self.verticalLayoutgeneral.addItem(itemteclado)
         
         
     def signals(self):
@@ -727,7 +758,8 @@ class Metadata (QMainWindow):
         
         
     def sendtocontroller(self):
-        self.serc = serial.Serial('/dev/ttyS0', 115200, timeout=1)
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.serc = serial.Serial(device, 115200, timeout=1)
         texttosend = 'c%s,%s' %(self.sbintegrationtime.value(), self.cbopmode.currentText()[0])
         print (texttosend.encode())
         self.serc.write(texttosend.encode())
@@ -865,6 +897,8 @@ class Measure(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         loadUi("measureguim92sdc.ui", self)
+        for num in range(8):
+            print(self.Layoutbuttons.itemAt(num).widget())
         
         #Creat the plot for measuring
         #Source https://htmlcolorcodes.com
@@ -911,6 +945,7 @@ class Measure(QMainWindow):
         
         self.graphicsView.addItem(self.plotitemchs)
         #self.viewplots()
+        self.inttime = int(dmetadata['Integration Time']) * 1e-3
 
        
     def signals(self):
@@ -927,26 +962,28 @@ class Measure(QMainWindow):
         self.ionchamberwindow.show()
         
     def powersupply(self):
-        self.serp = serial.Serial('/dev/ttyS0', 115200, timeout=1)
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.serp = serial.Serial(device, 115200, timeout=1)
         if self.PowerSupply.isChecked():
             texttosend = 'w1'
-            self.serp.write(textosend.encode())
+            self.serp.write(texttosend.encode())
             print (texttosend.encode())
         else:
-            textosend = 'w0'
-            self.serp.write(textosend.encode())
-            print (textosend.encode())
+            texttosend = 'w0'
+            self.serp.write(texttosend.encode())
+            print (texttosend.encode())
         self.serp.close()
 
 
     def rmdarkcurrent(self):
         self.tbstartmeasure.setEnabled(False)
-        self.ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.ser = serial.Serial(device, 115200, timeout=1)
         self.ser.write('s'.encode())
         for i in range(20):
             line = self.ser.readline().decode().strip().split(',')
             print (line)
-        while len(line) == 2:
+        while len(line) == 4:
             print(line)
             line = self.ser.readline().decode().strip().split(',')
         self.ser.close()
@@ -1053,8 +1090,7 @@ class Measure(QMainWindow):
             ch.time.append(meas[0])
             ch.temp.append(meas[1])
             ch.meas.append(meas[ch.num+2])
-            inttime = int(dmetadata['Integration Time']) * 1e-3
-            ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8e-9/inttime)
+            ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8e-9/self.inttime)
         self.time.append(meas[0])
         self.PSmeas.append(meas[len(dchs)+2])
         self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.061/1000)
@@ -1096,11 +1132,10 @@ class Measure(QMainWindow):
             self.filemeas.write('%s,%s\n' %(key,dmetadata[key]))
 
         self.filemeas.write('time,temp,%s,PS,-12V,5V,refV\n' %','.join([ch for ch in sorted(dchs)]))
-        
         for i in range(len(self.time)):
-            line1 = '%.4f,%.4f' %(self.time[i], dchs['Ch0'].temp[i])
-            line2 = ','.join(['%.4f' %dchs[ch].meas[i] for ch in sorted(dchs)])
-            line3 = '%.4f,%.4f,%.4f,%.4f' %(self.PSmeas[i], self.minus12Vmeas[i], self.v5Vmeas[i], self.vrefVmeas[i])
+            line1 = '%s,%.4f' %(self.time[i], dchs['Ch0'].temp[i])
+            line2 = ','.join(['%s' %dchs[ch].meas[i] for ch in sorted(dchs)])
+            line3 = '%s,%s,%s,%s' %(self.PSmeas[i], self.minus12Vmeas[i], self.v5Vmeas[i], self.vrefVmeas[i])
             self.filemeas.write('%s,%s,%s\n' %(line1, line2, line3))
 
         self.filemeas.close()
@@ -1199,7 +1234,16 @@ def goodbye():
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create('Fusion'))
+    #test = keyboardapp()
+    #engine = QQmlApplicationEngine()
+    #engine.load('main.qml')
+    #engine = QQmlApplicationEngine()
+    #engine.load('metadataqml.qml')
+    #winmetadata = engine.rootObjects()[0]
+    #print (type(itemteclado))
+    #teclado = winteclado.findChild(QObject, 'virtualkeyword')
+    #winteclado.show()
+    #app.setStyle(QStyleFactory.create('Fusion'))
     mymainmenu = MainMenu()
     number_of_ch = 8
     colors = ['#ff8000', '#ff0000',
