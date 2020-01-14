@@ -17,7 +17,7 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal, QObject
 #from PyQt5.QtQuick import QQuickView
-from PyQt5.QtQml import QQmlApplicationEngine
+#from PyQt5.QtQml import QQmlApplicationEngine
 
 import atexit
 
@@ -699,6 +699,8 @@ class Metadata (QMainWindow):
     
     def __init__(self):
         QMainWindow.__init__(self)
+        #engine = QQmlApplicationEngine()
+        #engine.load('metadataqml.qml')
         loadUi("metadatagui2.ui", self)
         self.signals()
         #self.view = QQuickView()
