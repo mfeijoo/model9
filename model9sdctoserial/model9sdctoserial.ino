@@ -431,65 +431,29 @@ void loop() {
                 setvoltdcch7();
                 delay(2);
         
-                while (ch0b < 32447 or
-                       ch1b < 32447 or
-                       ch2b < 32447 or
-                       ch3b < 32447 or
-                       ch4b < 32447 or
-                       ch5b < 32447 or
-                       ch6b < 32447 or
-                       ch7b < 32447)
+                while (ch3b < 32700 or ch4b < 32700)
                        {
                            if (millis() - previousMillis >= integral){
                                 ReadChannelsOnce();
-                                if (ch0b < 32447){
-                                     dcvch0 = dcvch0 + 10;
-                                     Serial.print("dcvch0,");
-                                     Serial.println(dcvch0);
-                                     setvoltdcch0();
-                                     } 
-                                if (ch1b < 32447){
-                                     dcvch1 = dcvch1 + 10;
-                                     Serial.print("dcvch1,");
-                                     Serial.println(dcvch1);
-                                     setvoltdcch1();
-                                     }
-                                if (ch2b < 32447){
-                                     dcvch2 = dcvch2 + 10;
-                                     Serial.print("dcvch2,");
-                                     Serial.println(dcvch2);
-                                     setvoltdcch2();
-                                     }
-                                 if (ch3b < 32447){
-                                     dcvch3 = dcvch3 + 10;
+                                
+                                 if (ch3b < 32700){
+                                     dcvch3 = dcvch3 + 20;
                                      Serial.print("dcvch3,");
-                                     Serial.println(dcvch3);
+                                     Serial.print(dcvch3);
+                                     Serial.print(",");
+                                     Serial.print("ch3b,");
+                                     Serial.println(ch3b);
                                      setvoltdcch3();
                                      }
-                                  if (ch4b < 32447){
-                                      dcvch4 = dcvch4 + 10;
+                                  if (ch4b < 32700){
+                                      dcvch4 = dcvch4 + 20;
                                       Serial.print("dcvch4,");
-                                      Serial.println(dcvch4);
+                                      Serial.print(dcvch4);
+                                      Serial.print(",");
+                                      Serial.print("ch4b,");
+                                      Serial.println(ch4b);
                                       setvoltdcch4();
-                                      }
-                                  if (ch5b < 32447){
-                                       dcvch5 = dcvch5 + 10;
-                                       Serial.print("dcvch5,");
-                                       Serial.println(dcvch5);
-                                       setvoltdcch5();
-                                       }
-                                  if (ch6b < 32447){
-                                        dcvch6 = dcvch6 + 10;
-                                        Serial.print("dcvch6,");
-                                        Serial.println(dcvch6);
-                                        setvoltdcch6();
-                                        }
-                                   if (ch7b < 32447){
-                                       dcvch7 = dcvch7 + 10;
-                                       Serial.print("dcvch7,");
-                                       Serial.println(dcvch7);
-                                       setvoltdcch7();
-                                       }
+                                  }
                       }
                        }
         }
