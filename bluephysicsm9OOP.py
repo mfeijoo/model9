@@ -1096,7 +1096,7 @@ class Measure(QMainWindow):
             ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8e-9/self.inttime)
         self.time.append(meas[0])
         self.PSmeas.append(meas[len(dchs)+2])
-        self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.061/1000)
+        self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.8958/1000)
         self.minus12Vmeas.append(meas[len(dchs)+3])
         self.minus12Vmeastp.append(meas[len(dchs)+3]*0.187*2.519/1000)
         self.v5Vmeas.append(meas[len(dchs)+4])
