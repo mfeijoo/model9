@@ -25,15 +25,6 @@ import atexit
 import serial
 import serial.tools.list_ports
 
-class keyboardapp(object):
-    def __init__(self):
-        self.view = QQuickView()
-        self.view.setObjectName("View")
-        self.view.setSource(QUrl("main.qml"))
-        self.view.setResizeMode(QQuickView.SizeRootObjectToView)
-        self.view.show()
-
-
 
 class CH():
 
@@ -916,7 +907,7 @@ class Measure(QMainWindow):
         self.plotitemPS.setLabel('left', 'Voltage', units = 'V')
         self.plotitemvoltages = pg.PlotItem(title ='<span style="color: #990099">-12V</span> '
                                                     '& <span style="color: #009999">5V</span> '
-                                                    '& <span style="color: #990000">10.58V</span>')
+                                                    '& <span style="color: #990000">Vref</span>')
         self.plotitemvoltages.showGrid(x = True, y = True, alpha = 0.5)
         self.plotitemvoltages.setLabel('bottom', 'Time', units = 's')
         self.plotitemvoltages.setLabel('left', 'Voltage', units = 'V')
@@ -930,12 +921,12 @@ class Measure(QMainWindow):
         self.curvePS = self.plotitemPS.plot(pen=pg.mkPen(color='#000099', width=2),
                                                    autoDownsample = False)
 
-        self.curve5V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#009999',
-                                                                          width=2),
-                                                   autoDownsample = False)
-        self.curveminus12V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990099',
-                                                                 width=2),
-                                                  autoDownsample = False)
+        #self.curve5V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#009999',
+         #                                                                 width=2),
+         #                                         autoDownsample = False)
+        #self.curveminus12V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990099',
+         #                                                        width=2),
+          #                                        autoDownsample = False)
         self.curverefV = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990000',
                                                                         width=2),
                                                    autoDownsample = False)
@@ -1095,22 +1086,24 @@ class Measure(QMainWindow):
             ch.meas.append(meas[ch.num+2])
             ch.meastp.append((-(meas[ch.num+2]*20.48/65535)+10.24)*1.8e-9/self.inttime)
         self.time.append(meas[0])
-        self.PSmeas.append(meas[len(dchs)+2])
-        self.PSmeastp.append(meas[len(dchs)+2]*0.187*12.8958/1000)
-        self.minus12Vmeas.append(meas[len(dchs)+3])
-        self.minus12Vmeastp.append(meas[len(dchs)+3]*0.187*2.519/1000)
-        self.v5Vmeas.append(meas[len(dchs)+4])
-        self.v5Vmeastp.append(meas[len(dchs)+4]*0.187/1000)
-        self.vrefVmeas.append(meas[len(dchs)+5])
-        self.vrefVmeastp.append(meas[len(dchs)+5]*0.187*2.203/1000)  
+        self.PSmeas.append(meas[len(dchs)+3])
+        #self.PSmeastp.append(meas[len(dchs)+3]*0.187*12.8958/1000)
+        self.PSmeastp.append(meas[len(dchs)+3]*0.1875/1000*16.2985)
+        self.minus12Vmeas.append(meas[len(dchs)+2])
+        self.minus12Vmeastp.append(meas[len(dchs)+2]*0.1875*2.519/1000)
+        self.v5Vmeas.append(meas[len(dchs)+5])
+        self.v5Vmeastp.append(meas[len(dchs)+5]*0.1875/1000)
+        self.vrefVmeas.append(meas[len(dchs)+4])
+        #self.vrefVmeastp.append(meas[len(dchs)+4]*0.187*2.203/1000)
+        self.vrefVmeastp.append(meas[len(dchs)+4]*0.0625/1000)   
         
         DS = 1 #Downsampling
         self.curvetemp.setData(self.time[::DS], dchs['Ch0'].temp[::DS])
         for ch in dchs.values():
             ch.update()
-        self.curve5V.setData(self.time[::DS], self.v5Vmeastp[::DS])
+        #self.curve5V.setData(self.time[::DS], self.v5Vmeastp[::DS])
         self.curverefV.setData(self.time[::DS], self.vrefVmeastp[::DS])
-        self.curveminus12V.setData(self.time[::DS], self.minus12Vmeastp[::DS])
+        #self.curveminus12V.setData(self.time[::DS], self.minus12Vmeastp[::DS])
         self.curvePS.setData(self.time[::DS], self.PSmeastp[::DS])
 
 
