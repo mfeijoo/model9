@@ -64,7 +64,7 @@ class MeasureThread(QThread):
         self.stop = False
         #emulator
         #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
-        self.ser = serial.Serial ('/dev/ttyACM0', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/ttyACM1', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -88,10 +88,10 @@ class MeasureThread(QThread):
                 #print (reading)
                 #comment if not emulator
                 #listatosend = [float(i) for i in reading]
-                listatosend = [(int(reading[0])-tstart)/1000] + [float(i) for i  in reading[1:]]
+                listatosend = [(int(reading[0])-tstart)/1000] + [float(reading[1])] + [int(i) for i in reading[2:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
-            except (ValueError):
+            except:
                 pass
   
     def stopping(self):
@@ -193,6 +193,7 @@ class Measure(QMainWindow):
         self.ch2tp = []
         self.ch3tp = []
         self.ch4tp = []
+        self.ch5tp = []
 
         self.tbstopmeasure.setEnabled(True)
         self.tbstartmeasure.setEnabled(False)
@@ -211,21 +212,23 @@ class Measure(QMainWindow):
     def update(self, measurements):
         
         self.time.append(measurements[0])
-        self.ch1.append(measurements[1])
-        self.ch2.append(measurements[2])
-        self.ch3.append(measurements[3])
-        self.ch4.append(measurements[4])
-        self.ch5.append(measurements[5])
+        self.ch1.append(measurements[10])
+        self.ch2.append(measurements[11])
+        self.ch3.append(measurements[12])
+        self.ch4.append(measurements[13])
+        self.ch5.append(measurements[1])
 
-        ch1value = measurements[1] * self.ch1_gain.value() * self.ch1_amp.value()
-        ch2value = measurements[2] * self.ch2_gain.value() * self.ch2_amp.value()
-        ch3value = measurements[3] * self.ch3_gain.value() * self.ch3_amp.value()
-        ch4value = measurements[4] * self.ch4_gain.value() * self.ch4_amp.value()
+        ch1value = measurements[10] * self.ch1_gain.value() * self.ch1_amp.value()
+        ch2value = measurements[11] * self.ch2_gain.value() * self.ch2_amp.value()
+        ch3value = measurements[12] * self.ch3_gain.value() * self.ch3_amp.value()
+        ch4value = measurements[13] * self.ch4_gain.value() * self.ch4_amp.value()
+        ch5value = measurements[1]
 
         self.ch1tp.append(ch1value)
         self.ch2tp.append(ch2value)
         self.ch3tp.append(ch3value)
         self.ch4tp.append(ch4value)
+        self.ch5tp.append(ch5value)
   
         
         DS = 1 #Downsampling
@@ -255,7 +258,7 @@ class Measure(QMainWindow):
             self.filemeas.write('%.1f,%.4f,%.7f,%.7f,%.7f,%.7f,\n' %(self.time[i],
                                                                      self.ch1[i],
                                                                      self.ch2[i],
-                                                                     self.ch3[1],
+                                                                     self.ch3[i],
                                                                      self.ch4[i],
                                                                      self.ch5[i]))
 

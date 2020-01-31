@@ -322,7 +322,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(50);
+      delay(5);
       Wire.requestFrom(0x48, 2);
       adc0 = (Wire.read()<<8|Wire.read());
       
@@ -334,7 +334,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(50);
+      delay(5);
       Wire.requestFrom(0x48, 2);
       adc1 = (Wire.read()<<8|Wire.read());
       
@@ -346,7 +346,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(50);
+      delay(5);
       Wire.requestFrom(0x48, 2);
       adc2 = (Wire.read()<<8|Wire.read());
       
@@ -358,7 +358,7 @@ void loop() {
       Wire.beginTransmission(0x48);
       Wire.write(0b00000000);
       Wire.endTransmission();
-      delay(50);
+      delay(5);
       Wire.requestFrom(0x48, 2);
       adc3 = (Wire.read()<<8|Wire.read());
 

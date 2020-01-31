@@ -33,7 +33,7 @@ unsigned long previousMillis = 0;
 unsigned long previousregMillis = 0;
 int resettime = 70;
 int potcount; //pot value in counts from 0 to 1023
-float setvolt = 57.03;
+float setvolt = 50;
 //unsigned char i=0;
 //unsigned char j;
 //float arrayvolts[]={57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128};
@@ -42,23 +42,23 @@ float setvolt = 57.03;
 float temp = 27;
 
 //5 volts = 65535 counts
-//int16_t dcvch0 = 22000;
-//int16_t dcvch1 = 22000;
-//int16_t dcvch2 = 27000;
-//int16_t dcvch3 = 18000;
-//int16_t dcvch4 = 18000;
-//int16_t dcvch5 = 22000;
-//int16_t dcvch6 = 20000;
-//int16_t dcvch7 = 17500;
+int16_t dcvch0 = 22000;
+int16_t dcvch1 = 22000;
+int16_t dcvch2 = 27000;
+int16_t dcvch3 = 22000;
+int16_t dcvch4 = 22000;
+int16_t dcvch5 = 22000;
+int16_t dcvch6 = 20000;
+int16_t dcvch7 = 17500;
 
-int16_t dcvch0 = 0;
-int16_t dcvch1 = 0;
-int16_t dcvch2 = 0;
-int16_t dcvch3 = 0;
-int16_t dcvch4 = 0;
-int16_t dcvch5 = 0;
-int16_t dcvch6 = 0;
-int16_t dcvch7 = 0;
+//int16_t dcvch0 = 0;
+//int16_t dcvch1 = 0;
+//int16_t dcvch2 = 0;
+//int16_t dcvch3 = 0;
+//int16_t dcvch4 = 0;
+//int16_t dcvch5 = 0;
+//int16_t dcvch6 = 0;
+//int16_t dcvch7 = 0;
 
 
 
@@ -96,12 +96,12 @@ void setup(){
   digitalWrite (2, HIGH);
   
   //test pin
-  pinMode (7, OUTPUT);
-  digitalWrite (7, LOW);
+  //pinMode (7, OUTPUT);
+  //digitalWrite (7, LOW);
 
   //DOGWATCHER
   pinMode (13, OUTPUT);
-  digitalWrite(13, HIGH);
+  //digitalWrite(13, HIGH);
 
   //Put all TCA's ports as output
   Wire.beginTransmission(0x38);
@@ -121,7 +121,7 @@ void setup(){
   Wire.write(0b00001000);
   Wire.endTransmission();
 
-  //Setting voltages to eliminate darkcurrents
+ //Setting voltages to eliminate darkcurrents
   Wire.beginTransmission(0xf);
   Wire.write(0x10);
   Wire.write(dcvch0>>8);
@@ -175,8 +175,8 @@ void setup(){
   tempsensor.wake(); //this line on
   
   //Setting the POT for the first time
-  potcount = (int)(((4020/(setvolt - 10)) - 80)*102.3);
-  //potcount = 1023;
+  //potcount = (int)(((4020/(setvolt - 10)) - 80)*102.3);
+  potcount = 512;
   SPI.beginTransaction(SPISettings(50000000, MSBFIRST, SPI_MODE1));
   //Remove protection from the potentiometer
   digitalWrite(2, LOW);
@@ -244,7 +244,7 @@ void loop() {
      //digitalWrite(7, HIGH);
 
      //dogwathcer
-     digitalWrite(13, LOW);
+     digitalWrite(13, HIGH);
       
       //hold starts
       digitalWrite(A3, HIGH);
@@ -255,13 +255,13 @@ void loop() {
       digitalWrite (A3, LOW);
 
       //digitalWrite (7, LOW);
-      digitalWrite (7, HIGH);
+      //digitalWrite (7, HIGH);
 
       //reset the integration and a new integration process starts
       digitalWrite (A2, LOW);
       delayMicroseconds (resettime);
       digitalWrite (A2, HIGH);
-      digitalWrite (7, LOW);
+      //digitalWrite (7, LOW);
       previousMillis = millis();
 
       //digitalWrite (7, LOW);
@@ -386,7 +386,7 @@ void loop() {
       Serial.println(adc3);
 
       //digitalWrite(7, LOW);
-       digitalWrite (13, HIGH);
+       digitalWrite (13, LOW);
   }
 
   /*if (currentMillis - previousregMillis >= regtime){
