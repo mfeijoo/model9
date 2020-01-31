@@ -429,6 +429,9 @@ void loop() {
   }*/
     if (Serial.available()>0){
         char inChar = (char)Serial.read();
+        if (inChar == 'r'){
+          regulatePS();
+        }
         if (inChar == 's') {
                 Serial.println("hola,1");
                 //dark currents
@@ -665,6 +668,7 @@ void regulatePS(){
   //measure PS once
   potlow = 0;
   pothigh = 1023;
+  potnow = 512;
   setpot(potnow);
   readPS();
   
@@ -681,7 +685,7 @@ void regulatePS(){
       readPS();
       Serial.print("pothigh: ");
       Serial.println(pothigh);    
-      Serial.print("Potnow: ");
+      Serial.print("potnow: ");
       Serial.print(potnow);
       Serial.print(", PS: ");
       Serial.println(PSV, 4);
