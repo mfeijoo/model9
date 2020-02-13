@@ -249,6 +249,7 @@ class MainMenu (QMainWindow):
         #self.myanalyze = Analyze()
         self.signals()
         self.setwindowstitle()
+        #self.showanalyze()
         #self.test = keyboardapp()
         
     def metadatadictogui(self):
@@ -953,14 +954,17 @@ class Measure(QMainWindow):
         self.tbregulate.clicked.connect(self.regulate)
         
     def regulate(self):
+        self.tbstartmeasure.setEnabled(False)
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
         self.serreg = serial.Serial(device, 115200, timeout=1)
         self.serreg.write('r'.encode())
-        print ('r'.encode())
-        for i in range(30):
+        #print ('r'.encode())
+        line = self.serreg.readline().decode().strip()
+        while line[:3] == 'pot':
             line = self.serreg.readline().decode().strip()
-            print (line)
+            print (line[:3])
         self.serreg.close()
+        self.tbstartmeasure.setEnabled(True)
         
     def ionchamberaction(self):
         self.ionchamberwindow = IonChamber()
