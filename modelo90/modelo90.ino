@@ -51,20 +51,27 @@ int16_t ch7b = 0;
 //float ch5v;
 //float ch6v;
 //float ch7v;
+int16_t adc0;
+int16_t adc1;
+int16_t adc2;
+int16_t adc3;
 float PSV;
 //float minus12V;
 //float V5;
 //float VDAC;
 int CSnp = 7;
-int newpotcount = 0;
+//int newpotcount = 512;
 //float V1058;
 int integral = 300;
 //int regtime = 233;
 unsigned long previousMillis = 0;
 //unsigned long previousregMillis = 0;
 int resettime = 70;
-int potcount; //pot value in counts from 0 to 1023
-float setvolt = 55;
+//int potcount; //pot value in counts from 0 to 1023
+int potlow;
+int pothigh;
+int potnow = 512;
+float setvolt = 56;
 //unsigned char i=0;
 //unsigned char j;
 //float arrayvolts[]={57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128, 57.128};
@@ -74,7 +81,7 @@ float temp = 27;
 
 //setting voltage for Power Supply
 //2.5 Volts = 65535 counts
-int16_t dacPS = 10000; 
+int16_t dacPS = 26738; 
 
 //5 volts = 65535 counts
 //int16_t dcvch0 = 30000;
@@ -86,6 +93,22 @@ int16_t dacPS = 10000;
 //int16_t dcvch6 = 40000;
 //int16_t dcvch7 = 30000;
 
+int16_t dcvch0high = 65535;
+int16_t dcvch0low = 0;
+int16_t dcvch1high = 65535;
+int16_t dcvch1low = 0;
+int16_t dcvch2high = 65535;
+int16_t dcvch2low = 0;
+int16_t dcvch3high = 65535;
+int16_t dcvch3low = 0;
+int16_t dcvch4high = 65535;
+int16_t dcvch4low = 0;
+int16_t dcvch5high = 65535;
+int16_t dcvch5low = 0;
+int16_t dcvch6high = 65535;
+int16_t dcvch6low = 0;
+int16_t dcvch7high = 65535;
+int16_t dcvch7low = 0;
 int16_t dcvch0 = 0;
 int16_t dcvch1 = 0;
 int16_t dcvch2 = 0;
@@ -100,9 +123,10 @@ int16_t dcvch7 = 0;
 void setup(){
 
   //fan
-  pinMode (12, OUTPUT);
+  //pinMode (12, OUTPUT);
   
   Serial.begin (115200);
+  //Serial.println("Hola");
   Wire.begin();
   SPI.begin();
   //ads.begin();
@@ -115,7 +139,7 @@ void setup(){
   delay(2000);
   digitalWrite (A5, HIGH);
 
-  //CS
+  //CStarjeta
   pinMode (A4, OUTPUT);
   digitalWrite (A4, HIGH);
   
@@ -153,14 +177,14 @@ void setup(){
   //when in ground I2C Address is 0b1001100
   //then a bit 0 to write
   //0b1001100 = 0x4c
-  Wire.beginTransmission(0x4c);
+  //Wire.beginTransmission(0x4c);
   //write DAC and input register 0b00110000 = 0x30
-  Wire.write(0x30);
+  //Wire.write(0x30);
   //send the two bytes of data
-  Wire.write(dacPS>>8);
-  Wire.write(dacPS&0xFF);
+  //Wire.write(dacPS>>8);
+  //Wire.write(dacPS&0xFF);
   //end transmission
-  Wire.endTransmission();
+  //Wire.endTransmission();
   
   //Setting voltages to eliminate darkcurrents
   Wire.beginTransmission(0xf);
@@ -217,17 +241,14 @@ void setup(){
   
   //Settting the newPOT for the first time
   //newpotcount = (int)(((4020/(setvolt - 10)) - 80)*102.3);
-  newpotcount = 400;
+  //newpotcount = 400;
   SPI.beginTransaction(SPISettings(50000000, MSBFIRST, SPI_MODE1));
   //Remove protection from the new potentiometer
   digitalWrite(CSnp, LOW);
   SPI.transfer16(0x1c02);
   digitalWrite(CSnp, HIGH);
-  //Set the new pot for the first time
-  digitalWrite(CSnp, LOW);
-  SPI.transfer16(0x400 | newpotcount);
-  digitalWrite(CSnp, HIGH);
-  SPI.endTransaction();
+  regulatePS();
+
 
 
   //Set range of all channels to +-2.5 * Vref
@@ -280,7 +301,8 @@ void loop() {
 
   //fan
   //min 200 0 is maximum
-  analogWrite(12, 150);
+  //analogWrite(12, 150);
+  //Serial.println("Hola2");
   
   unsigned long currentMillis = millis();
   
@@ -311,8 +333,6 @@ void loop() {
       //while integration is happening
       //we collect the rest of the CDA power values
       //collect the temperature and send everything via serial
-
-      int16_t adc0, adc1, adc2, adc3;
 
       Wire.beginTransmission(0x48);
       Wire.write(0b00000001);
@@ -434,118 +454,140 @@ void loop() {
       digitalWrite(13, LOW);
 
   }
- 
- 
 
-  /*if (currentMillis - previousregMillis >= regtime){
-
-    //Regulate
-      //voltage is too high
-      if ((PSV > (setvolt + 0.01)) and (potcount < 1023)){
-          potcount = potcount + 1;
-          SPI.beginTransaction(SPISettings(50000000, MSBFIRST, SPI_MODE1));
-          digitalWrite (pinpot, LOW);
-          SPI.transfer16( 0x400 | potcount);
-          digitalWrite (pinpot, HIGH);
-          SPI.endTransaction();
-          }
-      //voltage is too low
-      else if ((PSV < (setvolt - 0.01)) and (potcount > 0)){
-          potcount = potcount - 1;
-          SPI.beginTransaction(SPISettings(50000000, MSBFIRST, SPI_MODE1));
-          digitalWrite (pinpot, LOW);
-          SPI.transfer16( 0x400 | potcount);
-          digitalWrite (pinpot, HIGH);
-          SPI.endTransaction();
-          }
-
-        previousregMillis = millis();
-    
-  }*/
     if (Serial.available()>0){
         char inChar = (char)Serial.read();
+        if (inChar == 'r'){
+          regulatePS();
+          
+        }
         if (inChar == 's') {
-                Serial.println("hola,1");
-                //dark currents
-                //5 volts = 65535 counts
-                dcvch0 = 20000;
-                dcvch1 = 20000;
-                dcvch2 = 26000;
-                dcvch3 = 20000;
-                dcvch4 = 20000;
-                dcvch5 = 20000;
-                dcvch6 = 15000;
-                dcvch7 = 15000;
-        
-                setvoltdcch0();
-                setvoltdcch1();
-                setvoltdcch2();
-                setvoltdcch3();
-                setvoltdcch4();
-                setvoltdcch5();
-                setvoltdcch6();
-                setvoltdcch7();
-                delay(2);
+                
         
                 while (ch0b < 32700 or
+                       ch0b > 32838 or
                        ch1b < 32700 or
+                       ch1b > 32838 or
                        ch2b < 32700 or
+                       ch2b > 32838 or
                        ch3b < 32700 or
+                       ch3b > 32838 or
                        ch4b < 32700 or
+                       ch4b > 32838 or
                        ch5b < 32700 or
+                       ch5b > 32838 or
                        ch6b < 32700 or
-                       ch7b < 32700)
+                       ch6b > 32838 or
+                       ch7b < 32700 or
+                       ch7b > 32838)
                        {
                            if (millis() - previousMillis >= integral){
                                 ReadChannelsOnce();
                                 if (ch0b < 32700){
-                                     dcvch0 = dcvch0 + 10;
-                                     Serial.print("dcvch0,");
-                                     Serial.println(dcvch0);
-                                     setvoltdcch0();
-                                     } 
-                                if (ch1b < 32700){
-                                     dcvch1 = dcvch1 + 10;
-                                     Serial.print("dcvch1,");
-                                     Serial.println(dcvch1);
-                                     setvoltdcch1();
+                                     dcvch0low = dcvch0;
                                      }
-                                if (ch2b < 32700){
-                                     dcvch2 = dcvch2 + 10;
-                                     Serial.print("dcvch2,");
-                                     Serial.println(dcvch2);
-                                     setvoltdcch2();
+                                 if (ch0b > 32838){
+                                     dcvch0high = dcvch0;
                                      }
-                                 if (ch3b < 32700){
-                                     dcvch3 = dcvch3 + 10;
-                                     Serial.print("dcvch3,");
-                                     Serial.println(dcvch3);
-                                     setvoltdcch3();
-                                     }
-                                  if (ch4b < 32700){
-                                      dcvch4 = dcvch4 + 10;
-                                      Serial.print("dcvch4,");
-                                      Serial.println(dcvch4);
-                                      setvoltdcch4();
+                                  if (ch1b < 32700){
+                                      dcvch1low = dcvch1;
                                       }
-                                  if (ch5b < 32700){
-                                       dcvch5 = dcvch5 + 10;
-                                       Serial.print("dcvch5,");
-                                       Serial.println(dcvch5);
-                                       setvoltdcch5();
+                                  if (ch1b > 32838){
+                                      dcvch1high = dcvch1;
                                        }
-                                  if (ch6b < 32700){
-                                        dcvch6 = dcvch6 + 10;
-                                        Serial.print("dcvch6,");
-                                        Serial.println(dcvch6);
-                                        setvoltdcch6();
-                                        }
-                                   if (ch7b < 32700){
-                                       dcvch7 = dcvch7 + 10;
-                                       Serial.print("dcvch7,");
-                                       Serial.println(dcvch7);
-                                       setvoltdcch7();
-                                       }
+                                   if (ch2b < 32700){
+                                     dcvch2low = dcvch2;
+                                     }
+                                   if (ch2b > 32838){
+                                     dcvch2high = dcvch2;
+                                     }
+                                   if (ch3b < 32700){
+                                     dcvch3low = dcvch3;
+                                     }
+                                 if (ch3b > 32838){
+                                     dcvch3high = dcvch3;
+                                     }
+                                    if (ch4b < 32700){
+                                     dcvch4low = dcvch4;
+                                     }
+                                 if (ch4b > 32838){
+                                     dcvch4high = dcvch4;
+                                     }
+                                    if (ch5b < 32700){
+                                     dcvch5low = dcvch5;
+                                     }
+                                 if (ch5b > 32838){
+                                     dcvch5high = dcvch5;
+                                     }
+                                    if (ch6b < 32700){
+                                     dcvch6low = dcvch6;
+                                     }
+                                 if (ch6b > 32838){
+                                     dcvch6high = dcvch6;
+                                     }
+                                    if (ch7b < 32700){
+                                     dcvch7low = dcvch7;
+                                     }
+                                 if (ch7b > 32838){
+                                     dcvch7high = dcvch7;
+                                     }
+                                   dcvch0 = (dcvch0high + dcvch0low)/2;
+                                   dcvch1 = (dcvch1high + dcvch1low)/2;
+                                   dcvch2 = (dcvch2high + dcvch2low)/2;
+                                   dcvch3 = (dcvch3high + dcvch3low)/2;
+                                   dcvch4 = (dcvch4high + dcvch4low)/2;
+                                   dcvch5 = (dcvch5high + dcvch5low)/2;
+                                   dcvch6 = (dcvch6high + dcvch6low)/2;
+                                   dcvch7 = (dcvch7high + dcvch7low)/2;
+                                   setvoltdcch0();
+                                   setvoltdcch1();
+                                   setvoltdcch2();
+                                   setvoltdcch3();
+                                   setvoltdcch4();
+                                   setvoltdcch5();
+                                   setvoltdcch6();
+                                   setvoltdcch7();
+                                   Serial.print("dcvch0,");
+                                   Serial.print(dcvch0);
+                                   Serial.print(",");
+                                   Serial.print("ch0b,");
+                                   Serial.println(ch0b);
+                                   Serial.print("dcvch1,");
+                                   Serial.print(dcvch1);
+                                   Serial.print(",");
+                                   Serial.print("ch1b,");
+                                   Serial.println(ch1b);
+                                   Serial.print("dcvch2,");
+                                   Serial.print(dcvch2);
+                                   Serial.print(",");
+                                   Serial.print("ch2b,");
+                                   Serial.println(ch2b);
+                                   Serial.print("dcvch3,");
+                                   Serial.print(dcvch3);
+                                   Serial.print(",");
+                                   Serial.print("ch3b,");
+                                   Serial.println(ch3b);
+                                   Serial.print("dcvch4,");
+                                   Serial.print(dcvch4);
+                                   Serial.print(",");
+                                   Serial.print("ch4b,");
+                                   Serial.println(ch4b);
+                                   Serial.print("dcvch5,");
+                                   Serial.print(dcvch5);
+                                   Serial.print(",");
+                                   Serial.print("ch5b,");
+                                   Serial.println(ch5b);
+                                   Serial.print("dcvch6,");
+                                   Serial.print(dcvch6);
+                                   Serial.print(",");
+                                   Serial.print("ch6b,");
+                                   Serial.println(ch6b);
+                                   Serial.print("dcvch7,");
+                                   Serial.print(dcvch7);
+                                   Serial.print(",");
+                                   Serial.print("ch7b,");
+                                   Serial.println(ch7b);
+                                
                       }
                        }
         }
@@ -731,6 +773,60 @@ void setvoltdcch7(){
   Wire.write(dcvch7&0xFF);
   Wire.endTransmission(); 
 }
+
+void regulatePS(){
+  //measure PS once
+  potlow = 0;
+  pothigh = 1023;
+  potnow = 512;
+  setpot(potnow);
+  readPS();
   
-  
+
+  while (PSV > (setvolt + 0.005) or PSV < (setvolt - 0.005)){  
+      //strip.setPixelColor(0, 0, 127, 255);
+      //strip.show();
+      //voltage is too high
+      if (PSV > (setvolt + 0.005)){pothigh = potnow;}
+      //voltage is too low
+      else if (PSV < (setvolt - 0.005)){potlow = potnow;}
+      potnow = int((potlow + pothigh)/2);
+      setpot(potnow);
+      readPS();
+      Serial.print("pothigh: ");
+      Serial.println(pothigh);    
+      Serial.print("potnow: ");
+      Serial.print(potnow);
+      Serial.print(", PS: ");
+      Serial.println(PSV, 4);
+      Serial.print("potlow: ");
+      Serial.println(potlow);
+      //digitalWrite (13, HIGH);
+  }
+}
+
+void readPS(){
+  Wire.beginTransmission(0x48);
+  Wire.write(0b00000001);
+  Wire.write(0b01010000);
+  Wire.write(0b11100010);
+  Wire.endTransmission();
+  Wire.beginTransmission(0x48);
+  Wire.write(0b00000000);
+  Wire.endTransmission();
+  delay(5);
+  Wire.requestFrom(0x48, 2);
+  adc1 = (Wire.read()<<8|Wire.read());
+  PSV = adc1 * 0.1875 / 1000 * 16.482;
+}
+
+void setpot(int x){
+ SPI.beginTransaction(SPISettings(50000000, MSBFIRST, SPI_MODE1));
+ //set the pot
+ digitalWrite(CSnp, LOW);
+ SPI.transfer16(0x400 | x);
+ digitalWrite(CSnp, HIGH);
+ SPI.endTransaction();
+ delay(300);
+}
   

@@ -141,7 +141,7 @@ background-color:rgb(193,210,238);
           </font>
          </property>
          <property name="title">
-          <string>ch1</string>
+          <string>ch0</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
@@ -203,7 +203,7 @@ background-color:rgb(193,210,238);
           </font>
          </property>
          <property name="title">
-          <string>ch2</string>
+          <string>ch1</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -265,7 +265,7 @@ background-color:rgb(193,210,238);
           </font>
          </property>
          <property name="title">
-          <string>ch3</string>
+          <string>ch2</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
@@ -327,7 +327,7 @@ background-color:rgb(193,210,238);
           </font>
          </property>
          <property name="title">
-          <string>ch4</string>
+          <string>ch3</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>

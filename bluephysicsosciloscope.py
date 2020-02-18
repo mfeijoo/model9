@@ -64,7 +64,7 @@ class MeasureThread(QThread):
         self.stop = False
         #emulator
         #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
-        self.ser = serial.Serial ('/dev/ttyACM1', 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/ttyACM0', 115200, timeout=1)
 
     def __del__(self):
         self.wait()
