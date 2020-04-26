@@ -890,7 +890,7 @@ class Measure(QMainWindow):
     
     def __init__(self):
         QMainWindow.__init__(self)
-        loadUi("measureguim9reg.ui", self)
+        loadUi("measuregui.ui", self)
         for num in range(8):
             print(self.Layoutbuttons.itemAt(num).widget())
         
@@ -905,12 +905,18 @@ class Measure(QMainWindow):
         self.plotitemPS.showGrid(x = True, y = True, alpha = 0.5)
         self.plotitemPS.setLabel('bottom', 'Time', units ='s')
         self.plotitemPS.setLabel('left', 'Voltage', units = 'V')
-        self.plotitemvoltages = pg.PlotItem(title ='<span style="color: #990099">-12V</span> '
-                                                    '& <span style="color: #009999">5V</span> '
-                                                    '& <span style="color: #990000">Vref</span>')
-        self.plotitemvoltages.showGrid(x = True, y = True, alpha = 0.5)
-        self.plotitemvoltages.setLabel('bottom', 'Time', units = 's')
-        self.plotitemvoltages.setLabel('left', 'Voltage', units = 'V')
+        self.plotitem5v = pg.PlotItem(title ='<span style="color: #009999">5V</span>')
+        self.plotitem5v.showGrid(x = True, y = True, alpha = 0.5)
+        self.plotitem5v.setLabel('bottom', 'Time', units = 's')
+        self.plotitem5v.setLabel('left', 'Voltage', units = 'V')
+        self.plotitemvref = pg.PlotItem(title ='<span style="color: #990000">Vref</span>')
+        self.plotitemvref.showGrid(x = True, y = True, alpha = 0.5)
+        self.plotitemvref.setLabel('bottom', 'Time', units = 's')
+        self.plotitemvref.setLabel('left', 'Voltage', units = 'V')
+        self.plotitemminus12v = pg.PlotItem(title ='<span style="color: #990099">-12V</span>')
+        self.plotitemminus12v.showGrid(x = True, y = True, alpha = 0.5)
+        self.plotitemminus12v.setLabel('bottom', 'Time', units = 's')
+        self.plotitemminus12v.setLabel('left', 'Voltage', units = 'V')
         self.plotitemtemp = pg.PlotItem(title = '<span style="color: #002525">Temp C')
         self.plotitemtemp.showGrid(x = True, y = True, alpha = 0.5)
         self.plotitemtemp.setLabel('bottom', 'Time', units = 's')
@@ -921,13 +927,13 @@ class Measure(QMainWindow):
         self.curvePS = self.plotitemPS.plot(pen=pg.mkPen(color='#000099', width=2),
                                                    autoDownsample = False)
 
-        #self.curve5V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#009999',
-         #                                                                 width=2),
-         #                                         autoDownsample = False)
-        #self.curveminus12V = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990099',
-         #                                                        width=2),
-          #                                        autoDownsample = False)
-        self.curverefV = self.plotitemvoltages.plot(pen=pg.mkPen(color='#990000',
+        self.curve5V = self.plotitem5v.plot(pen=pg.mkPen(color='#009999',
+                                                                          width=2),
+                                                  autoDownsample = False)
+        self.curveminus12V = self.plotitemminus12v.plot(pen=pg.mkPen(color='#990099',
+                                                                 width=2),
+                                                  autoDownsample = False)
+        self.curverefV = self.plotitemvref.plot(pen=pg.mkPen(color='#990000',
                                                                         width=2),
                                                    autoDownsample = False)
 
@@ -1007,7 +1013,11 @@ class Measure(QMainWindow):
         elif index == 2:
             self.graphicsView.addItem(self.plotitemPS, row=1, col=0)
         elif index == 3:
-            self.graphicsView.addItem(self.plotitemvoltages, row=1, col=0)
+            self.graphicsView.addItem(self.plotitem5v, row=1, col=0)
+        elif index == 4:
+            self.graphicsView.addItem(self.plotitemvref, row=1, col=0)
+        elif index == 5:
+            self.graphicsView.addItem(self.plotitemminus12v, row=1, col=0)
 
 
     def startmeasuring(self):
@@ -1100,22 +1110,22 @@ class Measure(QMainWindow):
         self.time.append(meas[0])
         self.PSmeas.append(meas[len(dchs)+3])
         #self.PSmeastp.append(meas[len(dchs)+3]*0.187*12.8958/1000)
-        self.PSmeastp.append(meas[len(dchs)+3]*0.1875/1000*16.482)
-        self.minus12Vmeas.append(meas[len(dchs)+2])
-        self.minus12Vmeastp.append(meas[len(dchs)+2]*0.1875*2.519/1000)
-        self.v5Vmeas.append(meas[len(dchs)+5])
-        self.v5Vmeastp.append(meas[len(dchs)+5]*0.1875/1000)
-        self.vrefVmeas.append(meas[len(dchs)+4])
+        self.PSmeastp.append(meas[len(dchs)+3]*0.1875/1000*16.2702)
+        self.minus12Vmeas.append(meas[len(dchs)+4])
+        self.minus12Vmeastp.append(meas[len(dchs)+4]*0.1875*-2.6470/1000)
+        self.v5Vmeas.append(meas[len(dchs)+2])
+        self.v5Vmeastp.append(meas[len(dchs)+2]*0.1875/1000)
+        self.vrefVmeas.append(meas[len(dchs)+5])
         #self.vrefVmeastp.append(meas[len(dchs)+4]*0.187*2.203/1000)
-        self.vrefVmeastp.append(meas[len(dchs)+4]*0.0625/1000)   
+        self.vrefVmeastp.append(meas[len(dchs)+5]*0.0625/1000)   
         
         DS = 1 #Downsampling
         self.curvetemp.setData(self.time[::DS], dchs['ch0'].temp[::DS])
         for ch in dchs.values():
             ch.update()
-        #self.curve5V.setData(self.time[::DS], self.v5Vmeastp[::DS])
+        self.curve5V.setData(self.time[::DS], self.v5Vmeastp[::DS])
         self.curverefV.setData(self.time[::DS], self.vrefVmeastp[::DS])
-        #self.curveminus12V.setData(self.time[::DS], self.minus12Vmeastp[::DS])
+        self.curveminus12V.setData(self.time[::DS], self.minus12Vmeastp[::DS])
         self.curvePS.setData(self.time[::DS], self.PSmeastp[::DS])
 
 
@@ -1195,11 +1205,11 @@ class Measure(QMainWindow):
         dchs[self.mch].listareldoses = [i/float(dmetadata['Reference Charge'])*100 for i in dchs[self.mch].listachargedoses]
         dchs[self.mch].listadoses = [i * float(dmetadata['Calibration Factor']) for i in dchs[self.mch].listachargedoses]
         dchs[self.rch].text.setText('Total Volt.: %.2f V'%(dchs[self.rch].integral))
-        dchs[self.mch].text.setText('Total Volt.: %.2f V Charge~dose: %.2f V\n'
-                                    'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].integral,
-                                                                          dchs[self.mch].chargedose,
-                                                                          dchs[self.mch].reldose,
-                                                                          dchs[self.mch].dose))
+        #dchs[self.mch].text.setText('Total Volt.: %.2f V Charge~dose: %.2f V\n'
+         #                           'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].integral,
+          #                                                                dchs[self.mch].chargedose,
+           #                                                               dchs[self.mch].reldose,
+            #                                                              dchs[self.mch].dose))
         
         
         
@@ -1212,19 +1222,19 @@ class Measure(QMainWindow):
             #find the index where the True value is
             gi = listaindex.index(True)
             dchs[self.rch].text.setText('Charge: %.2f nC'%(dchs[self.rch].listaint[gi]))
-            dchs[self.mch].text.setText('Charge: %.2f nC Charge~dose: %.2f nC\n'
-                                        'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].listaint[gi],
-                                                                              dchs[self.mch].listachargedoses[gi],
-                                                                              dchs[self.mch].listareldoses[gi],
-                                                                              dchs[self.mch].listadoses[gi]))
+            #dchs[self.mch].text.setText('Charge: %.2f nC Charge~dose: %.2f nC\n'
+             #                           'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].listaint[gi],
+              #                                                                dchs[self.mch].listachargedoses[gi],
+               #                                                               dchs[self.mch].listareldoses[gi],
+                #                                                              dchs[self.mch].listadoses[gi]))
                 
         else:
             dchs[self.rch].text.setText('Charge: %.2f nC'%(dchs[self.rch].integral))
-            dchs[self.mch].text.setText('Charge: %.2f nC Charge~dose: %.2f nC\n'
-                                        'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].integral,
-                                                                             dchs[self.mch].chargedose,
-                                                                             dchs[self.mch].reldose,
-                                                                             dchs[self.mch].dose))
+            #dchs[self.mch].text.setText('Charge: %.2f nC Charge~dose: %.2f nC\n'
+             #                           'Rel.dose: %.2f %% Abs.dose: %.2f cGy'%(dchs[self.mch].integral,
+              #                                                               dchs[self.mch].chargedose,
+               #                                                              dchs[self.mch].reldose,
+                #                                                             dchs[self.mch].dose))
 
 
     def backmainmenu(self):

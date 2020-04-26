@@ -83,16 +83,16 @@ class MeasureThread(QThread):
             if self.stop:
                 break
 
-            try:
-                reading = self.ser.readline().decode().strip().split(',')
-                #print (reading)
-                #comment if not emulator
-                #listatosend = [float(i) for i in reading]
-                listatosend = [(int(reading[0])-tstart)/1000] + [float(reading[1])] + [int(i) for i in reading[2:]]
-                #print (listatosend)
-                self.info.emit(listatosend)
-            except:
-                pass
+            
+            reading = self.ser.readline().decode().strip().split(',')
+            #print (reading)
+            #comment if not emulator
+            #listatosend = [float(i) for i in reading]
+            listatosend = [(int(reading[0])-tstart)/1000] + [float(reading[1])] + [float(i) for i in reading[2:]]
+            #print (listatosend)
+            self.info.emit(listatosend)
+            #except:
+                #pass
   
     def stopping(self):
         self.stop = True

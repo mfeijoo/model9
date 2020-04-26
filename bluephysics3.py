@@ -959,18 +959,20 @@ class Measure(QMainWindow):
         self.tbregulate.clicked.connect(self.regulate)
         
     def regulate(self):
+        self.tbstartmeasure.setEnabled(False)
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
         self.serreg = serial.Serial(device, 115200, timeout=1)
         self.serreg.write(('r%.2f,' %self.sbvoltage.value()).encode())
         print (('r%.2f,' %self.sbvoltage.value()).encode())
-        line = self.serreg.readline().decode().strip() 
-        while len(line) <  30:
-            line = self.serreg.readline().decode().strip()
+        line = self.serreg.readline().decode().strip().split(',')
+        for i in range(20):
+            line = self.serreg.readline().decode().strip().split(',')
             print (line)
-        for i in range(4):
-            line = self.serreg.readline().decode().strip()
+        while len(line) == 10:
+            line = self.serreg.readline().decode().strip().split(',')
             print (line)
         self.serreg.close()
+        self.tbstartmeasure.setEnabled(True)
         
     def ionchamberaction(self):
         self.ionchamberwindow = IonChamber()
@@ -1113,14 +1115,12 @@ class Measure(QMainWindow):
             ch.meastp.append(-meas[ch.num+2] * 20.48 / 65535 + 10.24)
         self.time.append(meas[0])
         self.PSmeas.append(meas[len(dchs)+3])
-        #self.PSmeastp.append(meas[len(dchs)+3]*0.187*12.8958/1000)
-        #self.PSmeastp.append(meas[len(dchs)+3])
+        self.PSmeastp.append(meas[len(dchs)+3]*0.1875*16.341/1000)
         self.minus12Vmeas.append(meas[len(dchs)+4])
         self.minus12Vmeastp.append(meas[len(dchs)+4]*0.1875*-2.6470/1000)
         self.v5Vmeas.append(meas[len(dchs)+2])
         self.v5Vmeastp.append(meas[len(dchs)+2]*0.1875/1000)
         self.vrefVmeas.append(meas[len(dchs)+5])
-        #self.vrefVmeastp.append(meas[len(dchs)+4]*0.187*2.203/1000)
         self.vrefVmeastp.append(meas[len(dchs)+5]*0.0625/1000)   
         
         DS = 1 #Downsampling
@@ -1130,7 +1130,7 @@ class Measure(QMainWindow):
         self.curve5V.setData(self.time[::DS], self.v5Vmeastp[::DS])
         self.curverefV.setData(self.time[::DS], self.vrefVmeastp[::DS])
         self.curveminus12V.setData(self.time[::DS], self.minus12Vmeastp[::DS])
-        self.curvePS.setData(self.time[::DS], self.PSmeas[::DS])
+        self.curvePS.setData(self.time[::DS], self.PSmeastp[::DS])
 
 
     def stopmeasurement(self):

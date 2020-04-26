@@ -16,10 +16,10 @@ Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
 #define holdpin A5
 #define intpulsospin A3
 #define CSpotpin 10
+#define testpin 7
 #define coeftempin A0
 #define ledpin 13
 #define PSFC 16.341
-#define testpin 12
 
 Adafruit_DotStar led(dsnumpixels, dsdatapin, dsclockpin, DOTSTAR_BRG);
 
@@ -31,8 +31,7 @@ uint32_t colorcyan = led.Color(0, 255, 255);
 uint32_t colorred = led.Color(0, 255, 0);
 uint32_t colorblue = led.Color(255, 0, 0);
 
-unsigned int chb[] = {0, 0, 0, 0, 0, 0, 0, 0};
-float chv[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+unsigned int chb[] = {1, 0, 0, 0, 0, 0, 0, 0};
 
 int16_t adc0;
 int16_t adc1;
@@ -40,6 +39,7 @@ int16_t adc2;
 int16_t adc3;
 
 int integral = 300;
+//int regtime = 233;
 int resettime = 70;
 
 unsigned long previousMillis = 0;
@@ -49,7 +49,7 @@ int potlow;
 int pothigh;
 int potnow = 1;
 
-float setvolt = 56;
+float setvolt = 57.39;
 float PSV;
 
 float temp = 27;
@@ -141,8 +141,8 @@ void setup() {
   digitalWrite(CSpotpin, HIGH);
 
   //test pin
-  pinMode (testpin, OUTPUT);
-  digitalWrite (testpin, LOW);
+  //pinMode (testpin, OUTPUT);
+  //digitalWrite (testpin, LOW);
 
   //dogwatcher
   pinMode(ledpin, OUTPUT);
@@ -212,7 +212,7 @@ void setup() {
   SPI.endTransaction();
   
 
-  //regulatePS(); //at the begining regulate PS
+  regulatePS(); //at the begining regulate PS
   //sdc(); //at the begining subtract dark current
   //setpot(1023);
 }
@@ -229,13 +229,10 @@ void loop() {
     //dogwatcher
     digitalWrite(ledpin, HIGH);
     led.setPixelColor(0, colorblue); //Dot star blue blinking 
-    led.show();//indicates integrating
-
-    //digitalWrite(testpin, HIGH);
+    led.show();                       //indicates integrating
 
     ReadChannelsOnce();
 
-    //digitalWrite (testpin, LOW);
     //digitalWrite (testpin, HIGH);
 
     //while integration is happening
@@ -290,13 +287,7 @@ void loop() {
     Wire.requestFrom(0x48, 2);
     adc3 = (Wire.read() << 8 | Wire.read());
 
-    //digitalWrite(testpin, LOW);
-    //digitalWrite(testpin, HIGH);
-
     temp = tempsensor.readTempC();
-
-    //digitalWrite(testpin, LOW);
-    //digitalWrite(testpin, HIGH);
 
     Serial.print(currentMillis);
     Serial.print(",");
@@ -324,9 +315,9 @@ void loop() {
     Serial.print(adc0);
     Serial.print(",");
     //adc1 PS
-    //to test with Arduino
-    //Serial.print(adc1 * 0.1875 / 1000 * PSFC, 4);
-    Serial.print(adc1); //never use this option 1 file per box
+    //for all cases
+    Serial.print(adc1 * 0.1875 / 1000 * PSFC, 4);
+    //Serial.print(adc1); //never use this option 1 file per box
     Serial.print(",");
     //adc2 -12V
     //para probar en Arduino
@@ -455,14 +446,14 @@ void ReadChannels() {
 
   SPI.endTransaction();
 
-  chv[0] = -(chb[0] * 20.48/65535) + 10.24;
-  chv[1] = -(chb[1] * 20.48/65535) + 10.24;
-  chv[2] = -(chb[2] * 20.48/65535) + 10.24;
-  chv[3] = -(chb[3] * 20.48/65535) + 10.24;
-  chv[4] = -(chb[4] * 20.48/65535) + 10.24;
-  chv[5] = -(chb[5] * 20.48/65535) + 10.24;
-  chv[6] = -(chb[6] * 20.48/65535) + 10.24;
-  chv[7] = -(chb[7] * 20.48/65535) + 10.24;
+  //ch0v = -(chb[0] * 20.48/65535) + 10.24;
+  //ch1v = -(chb[1] * 20.48/65535) + 10.24;
+  //ch2v = -(chb[2] * 20.48/65535) + 10.24;
+  //ch3v = -(chb[3] * 20.48/65535) + 10.24;
+  //ch4v = -(chb[4] * 20.48/65535) + 10.24;
+  //ch5v = -(chb[5] * 20.48/65535) + 10.24;
+  //ch6v = -(chb[6] * 20.48/65535) + 10.24;
+  //ch7v = -(chb[7] * 20.48/65535) + 10.24;
 }
 
 void ReadChannelsOnce() {
@@ -514,16 +505,16 @@ void regulatePS(){
     readPS();
     led.setPixelColor(0, coloroff);
     led.show();
-    Serial.print("setvolt,");
-    Serial.print(setvolt, 2);
-    Serial.print(",pothigh,");
-    Serial.print(pothigh);
-    Serial.print(",potnow,");
+    Serial.print("setvolt: ");
+    Serial.println(setvolt, 2);
+    Serial.print("pothigh: ");
+    Serial.println(pothigh);
+    Serial.print("potnow: ");
     Serial.print(potnow);
-    Serial.print(",potlow,");
-    Serial.print(potlow);
-    Serial.print(",PS,");
+    Serial.print(", PS: ");
     Serial.println(PSV, 4);
+    Serial.print("potlow: ");
+    Serial.println(potlow);
     //digitalWrite (ledpin, HIGH);
 
   }
@@ -572,20 +563,20 @@ void sdc(){
   Serial.print(dcvch[i]);
   Serial.print(",dcvchmax,");
   Serial.print(dcvchmax[i]);
-  Serial.print(",chv,");
-  Serial.println(chv[i], 4);
+  Serial.print(",chb,");
+  Serial.println(chb[i]);
   while (millis() - previousMillis < integral){ 
   }
   ReadChannelsOnce();
   
-  while (chv[i] < 0 or chv[i] > 0.01){
+  while (chb[i] < 32742 or chb[i] > 32792){
    led.setPixelColor(0, colormagenta);//Dot star magenta blinking indicates
    led.show();//                        substractin dark current
-   if (chv[i] < 0){ 
-    dcvchmax[i] = dcvch[i];
-   }
-   if (chv[i] > 0.01){
+   if (chb[i] < 32742){ //32717
     dcvchmin[i] = dcvch[i];
+   }
+   if (chb[i] > 32792){ //32817
+    dcvchmax[i] = dcvch[i];
    }
    dcvch[i] = int((dcvchmin[i] + dcvchmax[i])/2);
    setvoltdc(i+16, dcvch[i]);
@@ -601,8 +592,8 @@ void sdc(){
    Serial.print(dcvch[i]);
    Serial.print(",dcvchmax,");
    Serial.print(dcvchmax[i]);
-   Serial.print(",chv,");
-   Serial.println(chv[i], 4);
+   Serial.print(",chb,");
+   Serial.println(chb[i]);
    while (millis() - previousMillis < integral){ 
    }
    ReadChannelsOnce(); 

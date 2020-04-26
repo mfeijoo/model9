@@ -2,66 +2,24 @@
 #include <SPI.h>
 #include <Wire.h>
 #include "Adafruit_MCP9808.h"
-//#include <Adafruit_ADS1015.h>
 
 Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
-//Adafruit_ADS1115 ads;
-
-//Ads 1115
-//I2C
-//A0 -12 Voltios
-//A1  PSO
-//A2 voltaje del DAC hamamatsu para leer lo que sale del DAC
-//A3 5 V
-//Direccion en ground
-
-//new adqusition board
-//A1 input analogo
-//CS conversor analogo digital A4
-
-//Itsibitsy
-//A1 hold tarjeta de adquisicion
-//A2 switch integrador operaciona
-//A3 Reset
-//A2 CS SPI
-//A5 Shutdown power supply 1 encendido
-
-//empollar AD5693R
-//I2C
-//conversor de un solo canal
-//DAC
-//Parecido al de restar corriente
-//Ganancia max 2.5 Voltios
-//Direccion esta en ground
 
 
-int16_t ch0b = 0;
-int16_t ch1b = 0;
-int16_t ch2b = 0;
-int16_t ch3b = 0;
-int16_t ch4b = 0;
-int16_t ch5b = 0;
-int16_t ch6b = 0;
-int16_t ch7b = 0;
-//float ch0v;
-//float ch1v;
-//float ch2v;
-//float ch3v;
-//float ch4v;
-//float ch5v;
-//float ch6v;
-//float ch7v;
+unsigned int ch0b = 0;
+unsigned int ch1b = 0;
+unsigned int ch2b = 0;
+unsigned int ch3b = 0;
+unsigned int ch4b = 0;
+unsigned int ch5b = 0;
+unsigned int ch6b = 0;
+unsigned int ch7b = 0;
 int16_t adc0;
 int16_t adc1;
 int16_t adc2;
 int16_t adc3;
 float PSV;
-//float minus12V;
-//float V5;
-//float VDAC;
 int CSnp = 7;
-//int newpotcount = 512;
-//float V1058;
 int integral = 300;
 //int regtime = 233;
 unsigned long previousMillis = 0;
@@ -83,40 +41,17 @@ float temp = 27;
 //2.5 Volts = 65535 counts
 int16_t dacPS = 26738; 
 
-//5 volts = 65535 counts
-//int16_t dcvch0 = 30000;
-//int16_t dcvch1 = 20000;
-//int16_t dcvch2 = 60000;
-//int16_t dcvch3 = 30000;
-//int16_t dcvch4 = 50000;
-//int16_t dcvch5 = 30000;
-//int16_t dcvch6 = 40000;
-//int16_t dcvch7 = 30000;
 
-int16_t dcvch0high = 65535;
-int16_t dcvch0low = 0;
-int16_t dcvch1high = 65535;
-int16_t dcvch1low = 0;
-int16_t dcvch2high = 65535;
-int16_t dcvch2low = 0;
-int16_t dcvch3high = 65535;
-int16_t dcvch3low = 0;
-int16_t dcvch4high = 65535;
-int16_t dcvch4low = 0;
-int16_t dcvch5high = 65535;
-int16_t dcvch5low = 0;
-int16_t dcvch6high = 65535;
-int16_t dcvch6low = 0;
-int16_t dcvch7high = 65535;
-int16_t dcvch7low = 0;
-int16_t dcvch0 = 0;
-int16_t dcvch1 = 0;
-int16_t dcvch2 = 0;
-int16_t dcvch3 = 0;
-int16_t dcvch4 = 0;
-int16_t dcvch5 = 0;
-int16_t dcvch6 = 0;
-int16_t dcvch7 = 0;
+//test darkcurrents
+unsigned int dcvch0 = 5000;
+unsigned int dcvch1 = 3000;
+unsigned int dcvch2 = 7000;
+unsigned int dcvch3 = 5000;
+unsigned int dcvch4 = 7000;
+unsigned int dcvch5 = 5000;
+unsigned int dcvch6 = 5000;
+unsigned int dcvch7 = 5000;
+
 
 
 
@@ -186,49 +121,6 @@ void setup(){
   //end transmission
   //Wire.endTransmission();
   
-  //Setting voltages to eliminate darkcurrents
-  Wire.beginTransmission(0xf);
-  Wire.write(0x10);
-  Wire.write(dcvch0>>8);
-  Wire.write(dcvch0&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x11);
-  Wire.write(dcvch1>>8);
-  Wire.write(dcvch1&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x12);
-  Wire.write(dcvch2>>8);
-  Wire.write(dcvch2&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x13);
-  Wire.write(dcvch3>>8);
-  Wire.write(dcvch3&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x14);
-  Wire.write(dcvch4>>8);
-  Wire.write(dcvch4&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x15);
-  Wire.write(dcvch5>>8);
-  Wire.write(dcvch5&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x16);
-  Wire.write(dcvch6>>8);
-  Wire.write(dcvch6&0xFF);
-  Wire.endTransmission();
-  Wire.beginTransmission(0xf);
-  Wire.write(0x17);
-  Wire.write(dcvch7>>8);
-  Wire.write(dcvch7&0xFF);
-  Wire.endTransmission();
-
- 
   
   tempsensor.begin(0x18); //this line on
   tempsensor.setResolution(3); //this line on
@@ -247,10 +139,7 @@ void setup(){
   digitalWrite(CSnp, LOW);
   SPI.transfer16(0x1c02);
   digitalWrite(CSnp, HIGH);
-  regulatePS();
-
-
-
+  
   //Set range of all channels to +-2.5 * Vref
   SPI.beginTransaction(SPISettings(17000000, MSBFIRST, SPI_MODE1));
   //ch0
@@ -293,6 +182,11 @@ void setup(){
   SPI.transfer(0x0C<<1|1);
   SPI.transfer16(0x0000);
   digitalWrite(A4, HIGH);
+
+  SPI.endTransaction();
+
+  regulatePS();
+  sdk();
   
 }
 
@@ -461,135 +355,9 @@ void loop() {
           regulatePS();
           
         }
-        if (inChar == 's') {
-                
+        if (inChar == 's') {                
         
-                while (ch0b < 32700 or
-                       ch0b > 32838 or
-                       ch1b < 32700 or
-                       ch1b > 32838 or
-                       ch2b < 32700 or
-                       ch2b > 32838 or
-                       ch3b < 32700 or
-                       ch3b > 32838 or
-                       ch4b < 32700 or
-                       ch4b > 32838 or
-                       ch5b < 32700 or
-                       ch5b > 32838 or
-                       ch6b < 32700 or
-                       ch6b > 32838 or
-                       ch7b < 32700 or
-                       ch7b > 32838)
-                       {
-                           if (millis() - previousMillis >= integral){
-                                ReadChannelsOnce();
-                                if (ch0b < 32700){
-                                     dcvch0low = dcvch0;
-                                     }
-                                 if (ch0b > 32838){
-                                     dcvch0high = dcvch0;
-                                     }
-                                  if (ch1b < 32700){
-                                      dcvch1low = dcvch1;
-                                      }
-                                  if (ch1b > 32838){
-                                      dcvch1high = dcvch1;
-                                       }
-                                   if (ch2b < 32700){
-                                     dcvch2low = dcvch2;
-                                     }
-                                   if (ch2b > 32838){
-                                     dcvch2high = dcvch2;
-                                     }
-                                   if (ch3b < 32700){
-                                     dcvch3low = dcvch3;
-                                     }
-                                 if (ch3b > 32838){
-                                     dcvch3high = dcvch3;
-                                     }
-                                    if (ch4b < 32700){
-                                     dcvch4low = dcvch4;
-                                     }
-                                 if (ch4b > 32838){
-                                     dcvch4high = dcvch4;
-                                     }
-                                    if (ch5b < 32700){
-                                     dcvch5low = dcvch5;
-                                     }
-                                 if (ch5b > 32838){
-                                     dcvch5high = dcvch5;
-                                     }
-                                    if (ch6b < 32700){
-                                     dcvch6low = dcvch6;
-                                     }
-                                 if (ch6b > 32838){
-                                     dcvch6high = dcvch6;
-                                     }
-                                    if (ch7b < 32700){
-                                     dcvch7low = dcvch7;
-                                     }
-                                 if (ch7b > 32838){
-                                     dcvch7high = dcvch7;
-                                     }
-                                   dcvch0 = (dcvch0high + dcvch0low)/2;
-                                   dcvch1 = (dcvch1high + dcvch1low)/2;
-                                   dcvch2 = (dcvch2high + dcvch2low)/2;
-                                   dcvch3 = (dcvch3high + dcvch3low)/2;
-                                   dcvch4 = (dcvch4high + dcvch4low)/2;
-                                   dcvch5 = (dcvch5high + dcvch5low)/2;
-                                   dcvch6 = (dcvch6high + dcvch6low)/2;
-                                   dcvch7 = (dcvch7high + dcvch7low)/2;
-                                   setvoltdcch0();
-                                   setvoltdcch1();
-                                   setvoltdcch2();
-                                   setvoltdcch3();
-                                   setvoltdcch4();
-                                   setvoltdcch5();
-                                   setvoltdcch6();
-                                   setvoltdcch7();
-                                   Serial.print("dcvch0,");
-                                   Serial.print(dcvch0);
-                                   Serial.print(",");
-                                   Serial.print("ch0b,");
-                                   Serial.println(ch0b);
-                                   Serial.print("dcvch1,");
-                                   Serial.print(dcvch1);
-                                   Serial.print(",");
-                                   Serial.print("ch1b,");
-                                   Serial.println(ch1b);
-                                   Serial.print("dcvch2,");
-                                   Serial.print(dcvch2);
-                                   Serial.print(",");
-                                   Serial.print("ch2b,");
-                                   Serial.println(ch2b);
-                                   Serial.print("dcvch3,");
-                                   Serial.print(dcvch3);
-                                   Serial.print(",");
-                                   Serial.print("ch3b,");
-                                   Serial.println(ch3b);
-                                   Serial.print("dcvch4,");
-                                   Serial.print(dcvch4);
-                                   Serial.print(",");
-                                   Serial.print("ch4b,");
-                                   Serial.println(ch4b);
-                                   Serial.print("dcvch5,");
-                                   Serial.print(dcvch5);
-                                   Serial.print(",");
-                                   Serial.print("ch5b,");
-                                   Serial.println(ch5b);
-                                   Serial.print("dcvch6,");
-                                   Serial.print(dcvch6);
-                                   Serial.print(",");
-                                   Serial.print("ch6b,");
-                                   Serial.println(ch6b);
-                                   Serial.print("dcvch7,");
-                                   Serial.print(dcvch7);
-                                   Serial.print(",");
-                                   Serial.print("ch7b,");
-                                   Serial.println(ch7b);
-                                
-                      }
-                       }
+                sdk();
         }
             if (inChar == 'c'){
                 String intts = Serial.readStringUntil(',');
@@ -697,15 +465,15 @@ void ReadChannels(){
 void ReadChannelsOnce(){
   //digitalWrite(7, HIGH);
   //hold starts
-  digitalWrite(A3, HIGH);
+  digitalWrite(9, HIGH);
   ReadChannels();
   //Hold ends
-  digitalWrite (A3, LOW);
+  digitalWrite (9, LOW);
   //digitalWrite (7, LOW);
   //reset the integration and a new integration process starts
-  digitalWrite (A2, LOW);
+  digitalWrite (10, LOW);
   delayMicroseconds (resettime);
-  digitalWrite (A2, HIGH);
+  digitalWrite (10, HIGH);
   previousMillis = millis();
   //digitalWrite (7, HIGH);
 }
@@ -783,7 +551,7 @@ void regulatePS(){
   readPS();
   
 
-  while (PSV > (setvolt + 0.005) or PSV < (setvolt - 0.005)){  
+  while (PSV > (setvolt + 0.007) or PSV < (setvolt - 0.007)){  
       //strip.setPixelColor(0, 0, 127, 255);
       //strip.show();
       //voltage is too high
@@ -828,5 +596,152 @@ void setpot(int x){
  digitalWrite(CSnp, HIGH);
  SPI.endTransaction();
  delay(300);
+}
+
+void sdk(){
+                dcvch0 = 10000;
+                setvoltdcch0();
+                dcvch1 = 10000;
+                setvoltdcch1();
+                dcvch2 = 10000;
+                setvoltdcch2();
+                dcvch3 = 10000;
+                setvoltdcch3();
+                dcvch4 = 10000;
+                setvoltdcch4();
+                dcvch5 = 10000;
+                setvoltdcch5();
+                dcvch6 = 10000;
+                setvoltdcch6();
+                dcvch7 = 10000;
+                setvoltdcch7();
+                //31647 for 300 mV
+                //32127 200 mV
+                //33407 -200 mV
+                while (ch0b < 32767 or
+                       
+                       ch1b < 32767 or
+                       
+                       ch2b < 32767 or
+                       
+                       ch3b < 32767 or
+                       
+                       ch4b < 32767 or
+                       
+                       ch5b < 32767 or
+                       
+                       ch6b < 32767 or
+                       
+                       ch7b < 32767 )
+                       {
+                           if (millis() - previousMillis >= integral){
+                                ReadChannelsOnce();
+                                
+                                 if (ch0b < 32767){
+                                     dcvch0 = dcvch0 + 50;
+  
+                                     setvoltdcch0();
+                                     Serial.print("dcvch0,");
+                                     Serial.print(dcvch0);
+                                     Serial.print(",");
+                                     Serial.print("ch0b,");
+                                     Serial.println(ch0b);
+                                     }
+
+                                  
+                                  
+                                  if (ch1b < 32767){
+                                      dcvch1 = dcvch1 + 50;
+                                      
+                                      setvoltdcch1();
+                                      Serial.print("dcvch1,");
+                                      Serial.print(dcvch1);
+                                      Serial.print(",");
+                                      Serial.print("ch1b,");
+                                      Serial.println(ch1b);
+                                       }
+
+                                    
+                                      
+                                   
+                                   if (ch2b < 32767){
+                                     dcvch2 = dcvch2 + 50;
+                                      
+                                     setvoltdcch2();
+                                     Serial.print("dcvch2,");
+                                     Serial.print(dcvch2);
+                                     Serial.print(",");
+                                     Serial.print("ch2b,");
+                                     Serial.println(ch2b);
+                                     }
+
+                                   
+                                 if (ch3b < 32767){
+                                     dcvch3 = dcvch3 + 50;
+                                     
+                                     setvoltdcch3();
+                                     Serial.print("dcvch3,");
+                                     Serial.print(dcvch3);
+                                     Serial.print(",");
+                                     Serial.print("ch3b,");
+                                     Serial.println(ch3b);
+                                     }
+
+                                 
+                                    
+                                 if (ch4b < 32767){
+                                     dcvch4 = dcvch4 + 50;
+                                     
+                                     setvoltdcch4();
+                                     Serial.print("dcvch4,");
+                                     Serial.print(dcvch4);
+                                     Serial.print(",");
+                                     Serial.print("ch4b,");
+                                     Serial.println(ch4b);
+                                     }
+
+                                 
+                                    
+                                 if (ch5b < 32767){
+                                     dcvch5 = dcvch5 + 50;
+                                     
+                                     setvoltdcch5();
+                                     Serial.print("dcvch5,");
+                                     Serial.print(dcvch5);
+                                     Serial.print(",");
+                                     Serial.print("ch5b,");
+                                     Serial.println(ch5b);
+                                     }
+
+                                  
+                                   
+                                 if (ch6b < 32767){
+                                     dcvch6 = dcvch6 + 50;
+                                     
+                                     setvoltdcch6();
+                                     Serial.print("dcvch6,");
+                                     Serial.print(dcvch6);
+                                     Serial.print(",");
+                                     Serial.print("ch6b,");
+                                     Serial.println(ch6b);
+                                     }
+
+                                
+                                    
+                                 if (ch7b < 32767){
+                                     dcvch7 = dcvch7 + 50;
+                                     
+                                     setvoltdcch7();
+                                     Serial.print("dcvch7,");
+                                     Serial.print(dcvch7);
+                                     Serial.print(",");
+                                     Serial.print("ch7b,");
+                                     Serial.println(ch7b);
+                                     }
+
+                                 
+                      }
+                       }
+  
 }
   
