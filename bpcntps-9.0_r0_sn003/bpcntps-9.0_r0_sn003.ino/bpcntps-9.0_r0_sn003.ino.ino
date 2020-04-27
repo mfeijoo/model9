@@ -498,15 +498,15 @@ void regulatePS(){
   readPS();
 
 
-  while (PSV > (setvolt + 0.008) or PSV < (setvolt - 0.008)){
+  while (PSV > (setvolt + 0.01) or PSV < (setvolt)){
     led.setPixelColor(0, colorred); //Dot star orange blinking 
     led.show();                        //indicates regulating PS
     //voltage is too high
-    if (PSV > (setvolt + 0.008)){
+    if (PSV > (setvolt + 0.01)){
       pothigh = potnow;
     }
     //voltage is too low
-    else if (PSV < (setvolt - 0.008)){
+    else if (PSV < (setvolt)){
       potlow = potnow;
     }
     potnow = int((potlow + pothigh) / 2);
@@ -551,7 +551,7 @@ void setpot(int x) {
   SPI.transfer16(0x400 | x);
   digitalWrite(CSpotpin, HIGH);
   SPI.endTransaction();
-  delay(300);
+  delay(500);
 }
 
 //function to substract dark current
@@ -578,13 +578,13 @@ void sdc(){
   }
   ReadChannelsOnce();
   
-  while (chv[i] < 0 or chv[i] > 0.01){
+  while (chv[i] < -0.005 or chv[i] > 0.005){
    led.setPixelColor(0, colormagenta);//Dot star magenta blinking indicates
    led.show();//                        substractin dark current
-   if (chv[i] < 0){ 
+   if (chv[i] < -0.005){ 
     dcvchmax[i] = dcvch[i];
    }
-   if (chv[i] > 0.01){
+   if (chv[i] > 0.010){
     dcvchmin[i] = dcvch[i];
    }
    dcvch[i] = int((dcvchmin[i] + dcvchmax[i])/2);

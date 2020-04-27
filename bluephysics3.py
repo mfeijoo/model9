@@ -251,6 +251,7 @@ class MainMenu (QMainWindow):
         self.setwindowstitle()
         #self.test = keyboardapp()
         
+        
     def metadatadictogui(self):
         
         if dmetadata['Save File As'] == 'Default':
