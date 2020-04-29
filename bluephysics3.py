@@ -694,7 +694,7 @@ class Metadata (QMainWindow):
         QMainWindow.__init__(self)
         #engine = QQmlApplicationEngine()
         #engine.load('metadataqml.qml')
-        loadUi("metadatagui2.ui", self)
+        loadUi("metadatagui.ui", self)
         self.signals()
         #self.view = QQuickView()
         #self.view.setObjectName('View')

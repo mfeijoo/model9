@@ -498,15 +498,15 @@ void regulatePS(){
   readPS();
 
 
-  while (PSV > (setvolt + 0.01) or PSV < (setvolt)){
+  while (PSV > (setvolt + 0.005) or PSV < (setvolt - 0.005)){
     led.setPixelColor(0, colorred); //Dot star orange blinking 
     led.show();                        //indicates regulating PS
     //voltage is too high
-    if (PSV > (setvolt + 0.01)){
+    if (PSV > (setvolt + 0.005)){
       pothigh = potnow;
     }
     //voltage is too low
-    else if (PSV < (setvolt)){
+    else if (PSV < (setvolt - 0.005)){
       potlow = potnow;
     }
     potnow = int((potlow + pothigh) / 2);
