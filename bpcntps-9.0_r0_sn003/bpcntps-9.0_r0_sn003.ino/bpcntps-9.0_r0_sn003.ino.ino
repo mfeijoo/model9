@@ -498,7 +498,10 @@ void regulatePS(){
   readPS();
 
 
-  while (PSV > (setvolt + 0.005) or PSV < (setvolt - 0.005)){
+  while (!((PSV <= (setvolt + 0.005)) && (PSV >= (setvolt - 0.005)))){
+    if (pothigh - potlow == 1){
+      break;
+    }
     led.setPixelColor(0, colorred); //Dot star orange blinking 
     led.show();                        //indicates regulating PS
     //voltage is too high
@@ -578,13 +581,16 @@ void sdc(){
   }
   ReadChannelsOnce();
   
-  while (chv[i] < -0.005 or chv[i] > 0.005){
+  while (!((chv[i] >= -0.005) && (chv[i] <= 0.005))){
+   if (dcvchmax[i] - dcvchmin[i] == 1){
+    break;
+   }
    led.setPixelColor(0, colormagenta);//Dot star magenta blinking indicates
    led.show();//                        substractin dark current
    if (chv[i] < -0.005){ 
     dcvchmax[i] = dcvch[i];
    }
-   if (chv[i] > 0.010){
+   if (chv[i] > 0.005){
     dcvchmin[i] = dcvch[i];
    }
    dcvch[i] = int((dcvchmin[i] + dcvchmax[i])/2);
