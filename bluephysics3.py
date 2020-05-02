@@ -971,15 +971,15 @@ class Measure(QMainWindow):
             line = self.serreg.readline().decode().strip().split(',')
             print (line)
         pnow = float(line[-1])
-        self.regulateprogressBar.setMinimum((abs(setvolt - pnow)/setvolt * 100))
+        self.regulateprogressBar.setMinimum(setvolt - abs(setvolt - pnow))
+        self.regulateprogressBar.setMaximum(setvolt)
         while len(line) == 10:
             line = self.serreg.readline().decode().strip().split(',')
             print (line)
             pnow = float(line[-1])
-            perc_tocomplete = (1 - abs(setvolt - pnow)/setvolt) * 100 
-            self.regulateprogressBar.setValue(perc_tocomplete)
+            self.regulateprogressBar.setValue(pnow)
         self.serreg.close()
-        self.regulateprogressBar.setValue(100)
+        self.regulateprogressBar.setValue(setvolt)
         self.tbstartmeasure.setEnabled(True)
         
     def ionchamberaction(self):
