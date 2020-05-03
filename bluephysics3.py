@@ -17,8 +17,8 @@ from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT,
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal, QObject
-#from PyQt5.QtQuick import QQuickView
-#from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt5.QtQuick import QQuickView
+from PyQt5.QtQml import QQmlApplicationEngine
 
 import atexit
 

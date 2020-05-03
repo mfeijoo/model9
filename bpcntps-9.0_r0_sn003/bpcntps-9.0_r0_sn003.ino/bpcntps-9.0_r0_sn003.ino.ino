@@ -1,4 +1,5 @@
 
+
 #include <SPI.h>
 #include <Wire.h>
 #include "Adafruit_MCP9808.h"
@@ -111,12 +112,6 @@ void setup() {
   led.setBrightness(80);
   led.show(); //put Dot Star off
 
-  //Connect the Power Supply
-  //HIGH is connected
-  pinMode (psonoffpin, OUTPUT);
-  digitalWrite (psonoffpin, LOW);
-  delay(2000);
-  digitalWrite (psonoffpin, HIGH);
 
   //CStarjeta
   pinMode (CStarj, OUTPUT);
@@ -164,6 +159,20 @@ void setup() {
   digitalWrite(CSpotpin, LOW);
   SPI.transfer16(0x1c02);
   digitalWrite(CSpotpin, HIGH);
+  SPI.endTransaction();
+
+  
+  //Connect the Power Supply
+  //HIGH is connected
+  pinMode (psonoffpin, OUTPUT);
+  digitalWrite (psonoffpin, LOW);
+
+  //Setpot for the first time
+  //setpot(700);
+  
+  //Then wait 2 seconds and turn on the Power Suplly
+  delay(2000);
+  digitalWrite (psonoffpin, HIGH);
 
   
   //Set range of all channels to +-2.5 * Vref
@@ -214,7 +223,7 @@ void setup() {
 
   //regulatePS(); //at the begining regulate PS
   //sdc(); //at the begining subtract dark current
-  //setpot(1023);
+  //setpot(700);
 }
 
 void loop() {
