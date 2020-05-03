@@ -390,20 +390,14 @@ void loop() {
      if (inChar == 'w'){
       char ps = (char)Serial.read();
       if (ps == '1'){
-        //Activate PS using ch0 of TCA
-        Wire.beginTransmission(0x38);
-        Wire.write(0x01);
-        Wire.write(0x01); //toactivate
-        //Wire.write(0x00); //to deactivate
-        Wire.endTransmission();
+        //Activate Power Supply
+        Serial.println("PS ON");
+        digitalWrite (psonoffpin, HIGH);
        }
       if (ps == '0'){
-        //Activate PS using ch0 of TCA
-        Wire.beginTransmission(0x38);
-        Wire.write(0x01);
-        //Wire.write(0x01); //to activate
-        Wire.write(0x00); //to deactivate
-        Wire.endTransmission();
+        //Dectivate Power Supply
+        Serial.println("PS OFF");
+        digitalWrite (psonoffpin, LOW);
       }
     }
   }
