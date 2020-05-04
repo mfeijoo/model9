@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#master branch file
+#guitoqml2 branch file
 
 from PyQt5 import QtCore
 import sys
@@ -970,16 +970,20 @@ class Measure(QMainWindow):
         for i in range(2):
             line = self.serreg.readline().decode().strip().split(',')
             print (line)
+        print ('2 lines read')
         pnow = float(line[-1])
-        self.regulateprogressBar.setMinimum(setvolt - abs(setvolt - pnow))
-        self.regulateprogressBar.setMaximum(setvolt)
+        self.regulateprogressBar.setMinimum(int((setvolt - abs(setvolt - pnow)) * 10000))
+        self.regulateprogressBar.setMaximum(int(setvolt * 10000))
+        self.regulateprogressBar.setValue(int((setvolt - abs(setvolt - pnow)) * 10000))
         while len(line) == 10:
             line = self.serreg.readline().decode().strip().split(',')
+            if len(line) != 10:
+                break
             print (line)
             pnow = float(line[-1])
-            self.regulateprogressBar.setValue(pnow)
+            self.regulateprogressBar.setValue(int((setvolt - abs(setvolt - pnow)) * 10000))
         self.serreg.close()
-        self.regulateprogressBar.setValue(setvolt)
+        self.regulateprogressBar.setValue(int(setvolt * 10000))
         self.tbstartmeasure.setEnabled(True)
         
     def ionchamberaction(self):
@@ -1002,6 +1006,7 @@ class Measure(QMainWindow):
 
     def rmdarkcurrent(self):
         self.tbstartmeasure.setEnabled(False)
+        self.sdcprogressBar.setValue(0)
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
         self.ser = serial.Serial(device, 115200, timeout=1)
         self.ser.write('s'.encode())
