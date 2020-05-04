@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#master branch file
+#guitoqml2 branch file
 
 from PyQt5 import QtCore
 import sys
