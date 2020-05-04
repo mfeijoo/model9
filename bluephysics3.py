@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#branch master
+#master branch file
 
 from PyQt5 import QtCore
 import sys
