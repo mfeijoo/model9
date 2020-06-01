@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#merge branch file
+#master branch file
 
 from PyQt5 import QtCore
 import sys

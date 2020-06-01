@@ -1,4 +1,5 @@
-//merge branch file
+
+//master branch file
 
 #include <SPI.h>
 #include <Wire.h>
@@ -50,7 +51,7 @@ int potlow;
 int pothigh;
 int potnow = 1;
 
-float setvolt = 56;
+float setvolt = 57.10;
 float PSV;
 
 float temp = 27;
@@ -168,7 +169,7 @@ void setup() {
   digitalWrite (psonoffpin, LOW);
 
   //Setpot for the first time
-  //setpot(700);
+  setpot(500);
   
   //Then wait 2 seconds and turn on the Power Suplly
   delay(2000);
