@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#branch master
+#master branch file
 
 from PyQt5 import QtCore
 import sys
@@ -17,8 +17,8 @@ from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT,
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal, QObject
-#from PyQt5.QtQuick import QQuickView
-#from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt5.QtQuick import QQuickView
+from PyQt5.QtQml import QQmlApplicationEngine
 
 import atexit
 
@@ -955,24 +955,35 @@ class Measure(QMainWindow):
         self.cbsecondplot.currentIndexChanged.connect(self.secondplot)
         self.tbstopmeasure.clicked.connect(self.stopmeasurement)
         self.tbdarkcurrent.clicked.connect(self.rmdarkcurrent)
-        self.PowerSupply.clicked.connect(self.powersupply)
-        self.ionchamber.clicked.connect(self.ionchamberaction)
+        #self.PowerSupply.clicked.connect(self.powersupply)
+        #self.ionchamber.clicked.connect(self.ionchamberaction)
         self.tbregulate.clicked.connect(self.regulate)
         
     def regulate(self):
         self.tbstartmeasure.setEnabled(False)
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
         self.serreg = serial.Serial(device, 115200, timeout=1)
+        setvolt = self.sbvoltage.value()
         self.serreg.write(('r%.2f,' %self.sbvoltage.value()).encode())
-        print (('r%.2f,' %self.sbvoltage.value()).encode())
+        print (('r%.2f,' %setvolt).encode())
         line = self.serreg.readline().decode().strip().split(',')
-        for i in range(20):
+        for i in range(2):
             line = self.serreg.readline().decode().strip().split(',')
             print (line)
+        print ('2 lines read')
+        pnow = float(line[-1])
+        self.regulateprogressBar.setMinimum(int((setvolt - abs(setvolt - pnow)) * 10000))
+        self.regulateprogressBar.setMaximum(int(setvolt * 10000))
+        self.regulateprogressBar.setValue(int((setvolt - abs(setvolt - pnow)) * 10000))
         while len(line) == 10:
             line = self.serreg.readline().decode().strip().split(',')
+            if len(line) != 10:
+                break
             print (line)
+            pnow = float(line[-1])
+            self.regulateprogressBar.setValue(int((setvolt - abs(setvolt - pnow)) * 10000))
         self.serreg.close()
+        self.regulateprogressBar.setValue(int(setvolt * 10000))
         self.tbstartmeasure.setEnabled(True)
         
     def ionchamberaction(self):
@@ -995,16 +1006,19 @@ class Measure(QMainWindow):
 
     def rmdarkcurrent(self):
         self.tbstartmeasure.setEnabled(False)
+        self.sdcprogressBar.setValue(0)
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
         self.ser = serial.Serial(device, 115200, timeout=1)
         self.ser.write('s'.encode())
-        for i in range(20):
+        for i in range(3):
             line = self.ser.readline().decode().strip().split(',')
             print (line)
         while len(line) == 9:
             print(line)
             line = self.ser.readline().decode().strip().split(',')
+            self.sdcprogressBar.setValue(int(line[0]) + 1)
         self.ser.close()
+        self.sdcprogressBar.setValue(9)
         self.tbstartmeasure.setEnabled(True)
         
 
@@ -1087,7 +1101,7 @@ class Measure(QMainWindow):
         self.tbstopmeasure.setEnabled(True)
         self.tbstartmeasure.setEnabled(False)
         self.tbdarkcurrent.setEnabled(False)
-        self.PowerSupply.setEnabled(False)
+        #self.PowerSupply.setEnabled(False)
         self.tbregulate.setEnabled(False)
         
         if dmetadata['Save File As'] == 'Date/Time':
@@ -1141,7 +1155,7 @@ class Measure(QMainWindow):
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
         self.tbdarkcurrent.setEnabled(True)
-        self.PowerSupply.setEnabled(True)
+        #self.PowerSupply.setEnabled(True)
         self.tbregulate.setEnabled(True)
         
         #Global flag idicating measurements are done

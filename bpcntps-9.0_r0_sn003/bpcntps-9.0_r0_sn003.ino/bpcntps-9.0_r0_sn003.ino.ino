@@ -1,4 +1,6 @@
 
+//master branch file
+
 #include <SPI.h>
 #include <Wire.h>
 #include "Adafruit_MCP9808.h"
@@ -49,7 +51,7 @@ int potlow;
 int pothigh;
 int potnow = 1;
 
-float setvolt = 56;
+float setvolt = 57.10;
 float PSV;
 
 float temp = 27;
@@ -111,12 +113,6 @@ void setup() {
   led.setBrightness(80);
   led.show(); //put Dot Star off
 
-  //Connect the Power Supply
-  //HIGH is connected
-  pinMode (psonoffpin, OUTPUT);
-  digitalWrite (psonoffpin, LOW);
-  delay(2000);
-  digitalWrite (psonoffpin, HIGH);
 
   //CStarjeta
   pinMode (CStarj, OUTPUT);
@@ -164,6 +160,20 @@ void setup() {
   digitalWrite(CSpotpin, LOW);
   SPI.transfer16(0x1c02);
   digitalWrite(CSpotpin, HIGH);
+  SPI.endTransaction();
+
+  
+  //Connect the Power Supply
+  //HIGH is connected
+  pinMode (psonoffpin, OUTPUT);
+  digitalWrite (psonoffpin, LOW);
+
+  //Setpot for the first time
+  setpot(500);
+  
+  //Then wait 2 seconds and turn on the Power Suplly
+  delay(2000);
+  digitalWrite (psonoffpin, HIGH);
 
   
   //Set range of all channels to +-2.5 * Vref
@@ -214,7 +224,7 @@ void setup() {
 
   //regulatePS(); //at the begining regulate PS
   //sdc(); //at the begining subtract dark current
-  //setpot(1023);
+  //setpot(700);
 }
 
 void loop() {
@@ -381,20 +391,14 @@ void loop() {
      if (inChar == 'w'){
       char ps = (char)Serial.read();
       if (ps == '1'){
-        //Activate PS using ch0 of TCA
-        Wire.beginTransmission(0x38);
-        Wire.write(0x01);
-        Wire.write(0x01); //toactivate
-        //Wire.write(0x00); //to deactivate
-        Wire.endTransmission();
+        //Activate Power Supply
+        Serial.println("PS ON");
+        digitalWrite (psonoffpin, HIGH);
        }
       if (ps == '0'){
-        //Activate PS using ch0 of TCA
-        Wire.beginTransmission(0x38);
-        Wire.write(0x01);
-        //Wire.write(0x01); //to activate
-        Wire.write(0x00); //to deactivate
-        Wire.endTransmission();
+        //Dectivate Power Supply
+        Serial.println("PS OFF");
+        digitalWrite (psonoffpin, LOW);
       }
     }
   }
@@ -498,15 +502,18 @@ void regulatePS(){
   readPS();
 
 
-  while (PSV > (setvolt + 0.005) or PSV < (setvolt - 0.005)){
+  while (!((PSV <= (setvolt + 0.006)) && (PSV >= (setvolt - 0.006)))){
+    if (pothigh - potlow == 1){
+      break;
+    }
     led.setPixelColor(0, colorred); //Dot star orange blinking 
     led.show();                        //indicates regulating PS
     //voltage is too high
-    if (PSV > (setvolt + 0.005)){
+    if (PSV > (setvolt + 0.006)){
       pothigh = potnow;
     }
     //voltage is too low
-    else if (PSV < (setvolt - 0.005)){
+    else if (PSV < (setvolt - 0.006)){
       potlow = potnow;
     }
     potnow = int((potlow + pothigh) / 2);
@@ -578,13 +585,16 @@ void sdc(){
   }
   ReadChannelsOnce();
   
-  while (chv[i] < -0.005 or chv[i] > 0.005){
+  while (!((chv[i] >= -0.005) && (chv[i] <= 0.005))){
+   if (dcvchmax[i] - dcvchmin[i] == 1){
+    break;
+   }
    led.setPixelColor(0, colormagenta);//Dot star magenta blinking indicates
    led.show();//                        substractin dark current
    if (chv[i] < -0.005){ 
     dcvchmax[i] = dcvch[i];
    }
-   if (chv[i] > 0.010){
+   if (chv[i] > 0.005){
     dcvchmin[i] = dcvch[i];
    }
    dcvch[i] = int((dcvchmin[i] + dcvchmax[i])/2);

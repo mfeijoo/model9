@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 rawdata/*
+=======
+*.csv
+*.ipynb
+rawdata/*
+metadata.csv
+>>>>>>> 6a26d5766b555d0b8fbceb5973cac6a44d40ecca
