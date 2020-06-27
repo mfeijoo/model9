@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#branch master
+#branch guitoqml
 
 from PyQt5 import QtCore
 import sys
@@ -11,14 +11,14 @@ import time
 import pyqtgraph as pg
 import pandas as pd
 from PyQt5.QtWidgets import *
-from PyQt5.uic import loadUi
+#from PyQt5.uic import loadUi
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT,
                                                 FigureCanvas)
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal, QObject
 #from PyQt5.QtQuick import QQuickView
-#from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt5.QtQml import QQmlApplicationEngine
 
 import atexit
 
@@ -122,7 +122,7 @@ class EmulatorThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self.stop = False
-        self.ser2 = serial.Serial ('/dev/pts/2', 115200, timeout=1)
+        self.ser2 = serial.Serial ('/dev/pts/3', 115200, timeout=1)
         file = open('./rawdata/emulatormeasurements.csv', 'r')
         self.lines =  file.readlines()
         file.close()
@@ -154,9 +154,9 @@ class MeasureThread(QThread):
         QThread.__init__(self)
         self.stop = False
         #emulator
-        #self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.ser = serial.Serial (device, 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.ser = serial.Serial (device, 115200, timeout=1)
 
     def __del__(self):
         self.wait()
@@ -167,8 +167,8 @@ class MeasureThread(QThread):
 
         #second reading to check starting time
         #comment if emulator
-        reading1 = self.ser.readline().decode().strip().split(',')
-        tstart = int(reading1[0])
+        #reading1 = self.ser.readline().decode().strip().split(',')
+        #tstart = int(reading1[0])
         
         while True:
             
@@ -179,8 +179,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                #listatosend = [int(i) for i in reading]
-                listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
+                listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
+                #listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
                 #print (listatosend) 
                 self.info.emit(listatosend)
             except:
@@ -1096,8 +1096,8 @@ class Measure(QMainWindow):
         dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
 
         #only if emulator
-        #self.emulator = EmulatorThread()
-        #self.emulator.start()
+        self.emulator = EmulatorThread()
+        self.emulator.start()
         
         self.measurethread = MeasureThread()
         self.measurethread.start()
@@ -1137,7 +1137,7 @@ class Measure(QMainWindow):
     def stopmeasurement(self):
         self.measurethread.stopping()
         #emulator
-        #self.emulator.stopping()
+        self.emulator.stopping()
         self.tbstopmeasure.setEnabled(False)
         self.tbstartmeasure.setEnabled(True)
         self.tbdarkcurrent.setEnabled(True)
@@ -1260,23 +1260,34 @@ def goodbye():
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
-    #test = keyboardapp()
-    #engine = QQmlApplicationEngine()
-    #engine.load('main.qml')
-    #engine = QQmlApplicationEngine()
-    #engine.load('metadataqml.qml')
+    engine = QQmlApplicationEngine()
+    engine.load('main.qml')
+
+    def update(lista):
+        print (lista)
+
+    def qmlstart():
+        emulator = EmulatorThread()
+        emulator.start()
+        measure = MeasureThread()
+        measure.start()
+        measure.info.connect(update)
+
+    pb = engine.rootObjects()[0].findChild(QObject, 'startbutton')
+    pb.clicked.connect(qmlstart)
     #winmetadata = engine.rootObjects()[0]
     #print (type(itemteclado))
     #teclado = winteclado.findChild(QObject, 'virtualkeyword')
     #winteclado.show()
     #app.setStyle(QStyleFactory.create('Fusion'))
-    mymainmenu = MainMenu()
+    #mymainmenu = MainMenu()
     number_of_ch = 8
     colors = ['#ff8000', '#ff0000',
               '#01dfa5', '#cb4335',
               '#884EA0', '#0000ff',
               '#848484', '#000000']
-    dchs = {'ch%s' %i : CH(i) for i in range(number_of_ch)}
+    #dchs = {'ch%s' %i : CH(i) for i in range(number_of_ch)}
     atexit.register(goodbye)
-    mymainmenu.show()
+    #mymainmenu.show()
+    engine.quit.connect(app.quit)
     sys.exit(app.exec_())
