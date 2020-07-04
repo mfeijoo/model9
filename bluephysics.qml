@@ -5,7 +5,7 @@ import QtCharts 2.2
 import QtQuick.Layouts 1.3
 
 
-Window {
+ApplicationWindow {
     id: mainwindow
     objectName: 'mainapplication'
     width: 1920
@@ -35,7 +35,7 @@ Window {
             id: image
             width: 850
             height: 300
-            anchors.top: parent.top
+            anchors.top : parent.top
             anchors.topMargin: 200
             anchors.horizontalCenter: parent.horizontalCenter
             source: "iconspd/bluephysicslogofrompdf.jpg"
@@ -47,8 +47,8 @@ Window {
             width: 125
             height: 125
             hoverEnabled: true
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 253
+            anchors.top: image.bottom
+            anchors.topMargin: 80
             anchors.horizontalCenter: parent.horizontalCenter
             icon.source: "iconspd/settings.png"
             icon.color: 'transparent'
@@ -69,12 +69,12 @@ Window {
             hoverEnabled: true
             text: "Measure"
             font.pointSize: 12
-            anchors.left: parent.left
-            anchors.leftMargin: 500
+            anchors.right: metadatabutton.left
+            anchors.rightMargin: 80
             icon.source: "iconspd/measure.png"
             icon.height: 100
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 253
+            anchors.top: image.bottom
+            anchors.topMargin: 80
             display: AbstractButton.TextUnderIcon
             icon.width: 100
             icon.color: 'transparent'
@@ -92,14 +92,14 @@ Window {
             width: 125
             height: 125
             text: "Turn Off"
-            anchors.right: parent.right
+            anchors.left: metadatabutton.right
             hoverEnabled: true
-            anchors.rightMargin: 500
+            anchors.leftMargin: 80
             icon.source: "iconspd/turnoff.png"
             icon.height: 100
-            anchors.bottom: parent.bottom
+            anchors.top: image.bottom
             font.pointSize: 12
-            anchors.bottomMargin: 253
+            anchors.topMargin: 80
             display: AbstractButton.TextUnderIcon
             icon.width: 100
             icon.color: "#00000000"
@@ -129,7 +129,7 @@ Window {
             anchors.right: parent.right
             anchors.rightMargin: 0
 
-            Button{
+            Button {
                 id: backtomainmenubutton
                 width: 125
                 height: 100
@@ -153,147 +153,308 @@ Window {
                 }
             }
 
-                Button{
-                    id: startbutton
-                    objectName: "startbutton"
-                    width: 125
-                    height: 100
-                    anchors.top: backtomainmenubutton.bottom
-                    anchors.topMargin: 6
-                    hoverEnabled: true
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    icon.source: "iconspd/Play-100.png"
-                    display: AbstractButton.IconOnly
-                    icon.height: 90
-                    font.pointSize: 12
-                    icon.width: 100
-                    icon.color: "#00000000"
-                    background: Rectangle {
-                        color: startbutton.hovered ? "aliceblue" : 'transparent'
-                    }
-                    onClicked: {
-                        linech0.clear()
-                        linech1.clear()
-                        linech2.clear()
-                        linech3.clear()
-                        linech4.clear()
-                        linech5.clear()
-                        linech6.clear()
-                        linech7.clear()
-                        linetemp.clear()
-                        startbutton.enabled = false
-                        stopbutton.enabled = true
-                    }
-                }
+            GroupBox {
+                id: groupboxpowersupply
+                title: 'PS'
+                anchors.top: backtomainmenubutton.bottom
+                anchors.topMargin: 12
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                height: 210
 
-                Button{
-                    id: stopbutton
-                    enabled: false
-                    objectName: "stopbutton"
-                    width: 125
-                    height: 100
-                    anchors.top: startbutton.bottom
-                    anchors.topMargin: 6
-                    hoverEnabled: true
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    icon.source: "iconspd/Stop-100.png"
-                    display: AbstractButton.IconOnly
-                    icon.height: 90
-                    font.pointSize: 12
-                    icon.width: 100
-                    icon.color: "#00000000"
-                    background: Rectangle {
-                        color: stopbutton.hovered ? "aliceblue" : 'transparent'
-                    }
-                    onClicked: {
-                        startbutton.enabled = true
-                        stopbutton.enabled = false
-                    }
-                }
-
-                GroupBox {
-                    id: groupboxplot1
-                    title: 'Plot1'
-                    anchors.top: stopbutton.bottom
-                    anchors.topMargin: 6
-                    anchors.right: parent.right
-                    anchors.rightMargin: 6
-                    anchors.left: parent.left
-                    height: 250
-
-                    GridLayout {
-                        rows: 4
-                        columns: 2
-                        anchors.fill: parent
-
-                        ToolButton {
-                            id: ch0view
-                            text: 'ch0'
-                            checkable: true
-                            checked: true
-                        }
-
-                        ToolButton {
-                            id: ch1view
-                            text: 'ch1'
-                            checkable: true
-                            checked: true
-                        }
-
-                        ToolButton {
-                            id: ch2view
-                            text: 'ch2'
-                            checkable: true
-                        }
-
-                        ToolButton {
-                            id: ch3view
-                            text: 'ch3'
-                            checkable: true
-                        }
-
-                        ToolButton {
-                            id: ch4view
-                            text: 'ch4'
-                            checkable: true
-                        }
-
-                        ToolButton {
-                            id: ch5view
-                            text: 'ch5'
-                            checkable: true
-                        }
-
-                        ToolButton {
-                            id: ch6view
-                            text: 'ch6'
-                            checkable: true
-                        }
-
-                        ToolButton {
-                            id: ch7view
-                            text: 'ch7'
-                            checkable: true
-                        }
-                    }
-                }
-
-                GroupBox {
-                    id: groupboxplot2iew
-                    title: 'Plot2'
-                    anchors.top: groupboxplot1.bottom
-                    anchors.topMargin: 6
+                ToolButton {
+                    id: psonoff
+                    text: psonoff.checked ? 'on' : 'off'
+                    anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    anchors.rightMargin: 6
-                    height: 100
-
-                    ComboBox {
-                        id: plot2combobox
-                        anchors.fill: parent
-                        model: ['None', 'Temp', '5V', 'PS', '-12V', 'Vref']
+                    checkable: true
+                    checked: true
+                    height: 50
+                    hoverEnabled: true
+                    background: Rectangle {
+                        color: (psonoff.hovered & !psonoff.checked) ? 'aliceblue'
+                               : (psonoff.checked) ? 'lightskyblue' : 'transparent'
                     }
                 }
+
+                SpinBox {
+                    id: psspinbox
+                    from: 5600
+                    value: 5759
+                    to: 6000
+                    objectName: 'psspinbox'
+                    stepSize: 1
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: psonoff.bottom
+                    anchors.topMargin: 6
+                    font.pointSize: 10
+                    editable: true
+
+                    property int decimals: 2
+                    property real realValue: value / 100
+
+                    validator: DoubleValidator {
+                        bottom: Math.min(psspinbox.from, psspinbox.to)
+                        top: Math.max(psspinbox.from, psspinbox.to)
+                    }
+
+                    textFromValue: function(value, locale) {
+                        return Number(value / 100).toLocaleString(locale, 'f', psspinbox.decimals)
+                    }
+
+                    valueFromText: function(text, locale) {
+                        return Number.fromLocaleString(locale, txt) * 100
+                    }
+                 }
+
+                ToolButton {
+                    id: regulatebutton
+                    objectName: 'regulatebutton'
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: psspinbox.bottom
+                    anchors.topMargin: 6
+                    height: 50
+                    text: 'Regulate'
+                    hoverEnabled: true
+                    background: Rectangle {
+                        color: (regulatebutton.hovered & !regulatebutton.checked) ? 'aliceblue'
+                               : (regulatebutton.cliked) ? 'lightskyblue' : 'transparent'
+                    }
+
+                }
+
+                ProgressBar {
+                    id: regulateprogress
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: regulatebutton.bottom
+                    anchors.topMargin: 6
+
+                }
+            }
+
+            GroupBox {
+                id: groupboxdarkcurrent
+                title: 'Dark Current'
+                anchors.top: groupboxpowersupply.bottom
+                anchors.topMargin: 12
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                height: 110
+
+                Button {
+                    id: subtractdc
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    hoverEnabled: true
+                    text: 'Subtract'
+                    height: 50
+                    background: Rectangle {
+                        color: subtractdc.hovered ? "aliceblue" : 'transparent'
+                    }
+                }
+
+                ProgressBar {
+                    id: adcprogress
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: subtractdc.bottom
+                    anchors.topMargin: 6
+                }
+
+
+            }
+
+
+
+            Button{
+                id: startbutton
+                objectName: "startbutton"
+                width: 125
+                height: 50
+                anchors.top: groupboxdarkcurrent.bottom
+                anchors.topMargin: 6
+                hoverEnabled: true
+                checkable: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                icon.source: "iconspd/Play-100.png"
+                display: AbstractButton.IconOnly
+                icon.height: 45
+                icon.width: 45
+                icon.color: "#00000000"
+                background: Rectangle {
+                    color: startbutton.hovered ? 'aliceblue'
+                           : startbutton.checked ? 'lightskyblue' :  'transparent'
+                }
+                onClicked: {
+                    linech0.clear()
+                    linech1.clear()
+                    linech2.clear()
+                    linech3.clear()
+                    linech4.clear()
+                    linech5.clear()
+                    linech6.clear()
+                    linech7.clear()
+                    linetemp.clear()
+                    startbutton.enabled = false
+                    stopbutton.enabled = true
+                }
+            }
+
+            Button {
+                id: stopbutton
+                enabled: false
+                objectName: "stopbutton"
+                width: 125
+                height: 50
+                anchors.top: startbutton.bottom
+                anchors.topMargin: 6
+                hoverEnabled: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                icon.source: "iconspd/Stop-100.png"
+                display: AbstractButton.IconOnly
+                icon.height: 45
+                icon.width: 45
+                icon.color: "#00000000"
+                background: Rectangle {
+                    color: stopbutton.hovered ? 'aliceblue' : 'transparent'
+                }
+                onClicked: {
+                    startbutton.enabled = true
+                    startbutton.checked = false
+                    stopbutton.enabled = false
+                }
+            }
+
+            GroupBox {
+                id: groupboxplot1
+                title: 'Plot1'
+                anchors.top: stopbutton.bottom
+                anchors.topMargin: 12
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                anchors.left: parent.left
+                height: 250
+
+                GridLayout {
+                    rows: 4
+                    columns: 2
+                    anchors.fill: parent
+
+                    ToolButton {
+                        id: ch0view
+                        text: 'ch0'
+                        checkable: true
+                        hoverEnabled: true
+                        checked: true
+                        background: Rectangle {
+                            color: (ch0view.hovered & !ch0view.checked) ? 'aliceblue'
+                                   : (ch0view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+
+                   ToolButton {
+                        id: ch1view
+                        text: 'ch1'
+                        checkable: true
+                        checked: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch1view.hovered & !ch1view.checked) ? 'aliceblue'
+                                   : (ch1view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                   }
+
+                    ToolButton {
+                        id: ch2view
+                        text: 'ch2'
+                        checkable: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch2view.hovered & !ch2view.checked) ? 'aliceblue'
+                                   : (ch2view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+
+                    ToolButton {
+                        id: ch3view
+                        text: 'ch3'
+                        checkable: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch3view.hovered & !ch3view.checked) ? 'aliceblue'
+                                   : (ch3view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+
+                    ToolButton {
+                        id: ch4view
+                        text: 'ch4'
+                        checkable: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch4view.hovered & !ch4view.checked) ? 'aliceblue'
+                                   : (ch4view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+
+                    ToolButton {
+                        id: ch5view
+                        text: 'ch5'
+                        checkable: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch5view.hovered & !ch5view.checked) ? 'aliceblue'
+                                   : (ch5view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+
+                    ToolButton {
+                        id: ch6view
+                        text: 'ch6'
+                        checkable: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch6view.hovered & !ch6view.checked) ? 'aliceblue'
+                                   : (ch6view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+
+                    ToolButton {
+                        id: ch7view
+                        text: 'ch7'
+                        checkable: true
+                        hoverEnabled: true
+                        background: Rectangle {
+                            color: (ch7view.hovered & !ch7view.checked) ? 'aliceblue'
+                                   : (ch7view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                    }
+                }
+            }
+
+            GroupBox {
+                id: groupboxplot2iew
+                title: 'Plot2'
+                anchors.top: groupboxplot1.bottom
+                anchors.topMargin: 12
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                height: 100
+
+                ComboBox {
+                    id: plot2combobox
+                    anchors.fill: parent
+                    model: ['None', 'Temp', '5V', 'PS', '-12V', 'Vref']
+                }
+            }
         }
 
         ChartView {
@@ -578,8 +739,8 @@ Window {
 
                 ValueAxis {
                     id: axisYminus12V
-                    min: -13
-                    max: -11
+                    min: -14
+                    max: -12
                     titleText:"Voltage (V)"
                 }
 
