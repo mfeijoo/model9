@@ -8,24 +8,10 @@ import QtQuick.Layouts 1.3
 ApplicationWindow {
     id: mainwindow
     objectName: 'mainapplication'
-    width: 1920
-    height: 1012
+    width: Screen.width
+    height: Screen.height
     title: " Blue Physics v. 9.0.1"
     visible: true
-    property real time
-    property real temp
-    property real ch0v
-    property real ch1v
-    property real ch2v
-    property real ch3v
-    property real ch4v
-    property real ch5v
-    property real ch6v
-    property real ch7v
-    property real ps
-    property real v5
-    property real minus12V
-    property real vref
 
     Item {
         id: mainmenu
@@ -220,19 +206,22 @@ ApplicationWindow {
                     height: 50
                     text: 'Regulate'
                     hoverEnabled: true
+                    checkable: true
                     background: Rectangle {
                         color: (regulatebutton.hovered & !regulatebutton.checked) ? 'aliceblue'
-                               : (regulatebutton.cliked) ? 'lightskyblue' : 'transparent'
+                               : (regulatebutton.checked) ? 'lightskyblue' : 'transparent'
                     }
 
                 }
 
                 ProgressBar {
                     id: regulateprogress
+                    objectName: 'regulateprogressbar'
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: regulatebutton.bottom
                     anchors.topMargin: 6
+                    to: 0
 
                 }
             }
@@ -789,6 +778,21 @@ ApplicationWindow {
 
     Connections {
         target: listain
+        property real time
+        property real temp
+        property real ch0v
+        property real ch1v
+        property real ch2v
+        property real ch3v
+        property real ch4v
+        property real ch5v
+        property real ch6v
+        property real ch7v
+        property real ps
+        property real v5
+        property real minus12V
+        property real vref
+
 
 
         onSignaldatain: {
