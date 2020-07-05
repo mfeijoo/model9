@@ -1,0 +1,39 @@
+Date Time,05 Jul 2020 17:05:38
+Save File As,Default
+File Name,default
+Adjacent Channels Ratio,1.0
+Reference Charge,142.0
+Calibration Factor,1.0
+Facility,BluePhysics
+Investigator,Marcos
+Integration Time,300
+Operational Mode,Integartor
+Source,LINAC
+Brand,Varian
+Particles,Photons
+Energy,6
+Dose Rate,500
+Gantry,0
+Collimator,0
+Couch,270
+Field Size X1,1.5
+Field Size X2,20.0
+Field Size Y1,1.5
+Field Size Y2,1.5
+IC Measure,0.015
+IC Temperature,0.0
+IC Pressure,0.0
+Setup,SAD
+Distance,100
+MU,100
+Transducer Type,MPPC S13360-1325CS
+Sensor Type,Fiber
+Sensor Size,2
+Fiber Diameter,0.25
+Fiber Length,2000
+Sensor Position X,0.0
+Sensor Position Y,0.0
+Sensor Position Z,0.0
+Reference Fiber Diameter,0.25
+Reference Fiber Length,2000
+Comments,Testing new test
