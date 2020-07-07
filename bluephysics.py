@@ -115,6 +115,55 @@ class EmulatorThread(QThread):
         print ('emulator stopped')
 
 
+class Regulateqml(QObject):
+    signalpowerin = pyqtSignal(float, arguments=['powernow'])
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+    @pyqtSlot(float)
+    def powernow(self, power):
+        self.signalpowerin.emit(power)
+
+
+class RegulateThread(QThread):
+
+    signalvoltagenow = pyqtSignal(float)
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        self.stop = False
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.serreg = serial.Serial(device, 115200, timeout=1)
+        self.serreg.write(('r%.2f,' %self.sbvoltage.value()).encode())
+        print (('r%.2f,' %self.sbvoltage.value()).encode())
+        line = self.serreg.readline().decode().strip().split(',')
+        for i in range(2):
+            line = self.serreg.readline().decode().strip().split(',')
+            print (line)
+        while len(line) == 10:
+            line = self.serreg.readline().decode().strip().split(',')
+            print (line)
+            self.signalvoltagenow.emit(float(line[-1]))
+
+        self.stopping()
+
+
+
+    def stopping(self):
+        self.stop = True
+        self.serreg.close()
+        self.wait()
+        self.quit()
+        print('measure stopoped')
+
+
+
 class MeasureThread(QThread):
 
     info = pyqtSignal (list)
@@ -170,6 +219,13 @@ app = QApplication(sys.argv)
 
 #Create a qml object to update qml with teh list of measurements
 listain = Listain()
+
+myregulateqml = Regulateqml()
+
+engine.rootContext().setContextProperty('myregulateqml', myregulateqml)
+
+myregulatethread = RegulateThread()
+myregulatethread.signalvoltagenow.connect(myregulateqml.powernow)
 
 #create the qml engine
 engine = QQmlApplicationEngine()
@@ -278,6 +334,9 @@ stopb = engine.rootObjects()[0].findChild(QObject, 'stopbutton')
 #Connect the signal click from the stop button in qml
 #to the python funcition called qmlstop
 stopb.clicked.connect(qmlstop)
+
+startregulate = engine.rootObjects()[0].findChild(QObject, 'regulatebutton')
+startregulate.clicked.connect(myregulatethread.start)
 
 #Close qml engine if the app is closed
 engine.quit.connect(app.quit)
