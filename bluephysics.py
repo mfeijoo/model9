@@ -176,6 +176,49 @@ class RegulatePSThread(QThread):
         print('Regulate PS stopoped')
 
 
+class SubtractDcThread(QThread):
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        #comment next 3 if emulator
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.ser = serial.Serial(device, 115200, timeout=1)
+        #self.ser.write('s'.encode())
+
+        value = 0
+        for i in range(8):
+            #comment next 2 if emulator
+            #line = self.ser.readline().decode().strip().split(',')
+            #print (line)
+
+            #change this part for not emulator
+            sdcprogressbar.setProperty('value', value)
+            value = value + 1
+            time.sleep(0.5)
+
+        sdcprogressbar.setProperty('value', 8)
+        subtractdcb.setProperty('checked', False)
+
+        #comment the whole while loop if emulator
+        '''while len(line) == 9:
+            print(line)
+            line = self.ser.readline().decode().strip().split(',')
+        self.ser.close()'''
+
+    def stopping(self):
+        self.stop = True
+        #comment if emulator
+        #self.ser.close()
+        self.wait()
+        self.quit()
+        print('measure stopoped')
+
+
 class MeasureThread(QThread):
 
     info = pyqtSignal (list)
@@ -233,6 +276,8 @@ app = QApplication(sys.argv)
 listain = Listain()
 
 regulateps = RegulatePSThread()
+
+mysubtractdc = SubtractDcThread()
 
 #create the qml engine
 engine = QQmlApplicationEngine()
@@ -353,6 +398,11 @@ regulateb.clicked.connect(regulateps.start)
 psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
 
 regulateprogressbar = engine.rootObjects()[0].findChild(QObject, 'regulateprogressbar')
+
+subtractdcb = engine.rootObjects()[0].findChild(QObject, 'subtractdcb')
+subtractdcb.clicked.connect(mysubtractdc.start)
+
+sdcprogressbar = engine.rootObjects()[0].findChild(QObject, 'sdcprogressbar')
 
 #Close qml engine if the app is closed
 engine.quit.connect(app.quit)
