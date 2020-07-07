@@ -8,8 +8,8 @@ import QtQuick.Layouts 1.3
 ApplicationWindow {
     id: mainwindow
     objectName: 'mainapplication'
-    width: Screen.width
-    height: Screen.height
+    width: Screen.width/2
+    height: Screen.height/2
     title: " Blue Physics v. 9.0.1"
     visible: true
 
@@ -221,8 +221,8 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.top: regulatebutton.bottom
                     anchors.topMargin: 6
-                    to: 0
-
+                    from: 0
+                    to: 13
                 }
             }
 
@@ -868,4 +868,5 @@ ApplicationWindow {
         }
 
     }
+
 }

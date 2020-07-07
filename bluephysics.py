@@ -115,6 +115,55 @@ class EmulatorThread(QThread):
         print ('emulator stopped')
 
 
+class RegulatePSThread(QThread):
+
+    signalpsmeas = pyqtSignal(int)
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        self.stop = False
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.serreg = serial.Serial(device, 115200, timeout=1)
+        psset = psspinbox.property('realValue')
+        self.serreg.write(('r%.2f,' %psset).encode())
+        regulateprogressbar.setProperty('value', 0)
+        print (('r%.2f,' %psset).encode())
+        line = self.serreg.readline().decode().strip().split(',')
+        value = 0
+        for i in range(5):
+            line = self.serreg.readline().decode().strip().split(',')
+            regulateprogressbar.setProperty('value', value)
+            value = value + 1
+            print (line)
+
+        while len(line) == 10:
+
+            if self.stop:
+                break
+
+            line = self.serreg.readline().decode().strip().split(',')
+            regulateprogressbar.setProperty('value', value)
+            value = value + 1
+            print (line)
+
+        regulateprogressbar.setProperty('value', 13)
+        regulateb.setProperty('checked', False)
+        self.serreg.close()
+
+    def stopping(self):
+        self.stop = True
+        self.serreg.close()
+        self.wait()
+        self.quit()
+        print('Regulate PS stopoped')
+
+
+
 class MeasureThread(QThread):
 
     info = pyqtSignal (list)
@@ -170,6 +219,8 @@ app = QApplication(sys.argv)
 
 #Create a qml object to update qml with teh list of measurements
 listain = Listain()
+
+regulateps = RegulatePSThread()
 
 #create the qml engine
 engine = QQmlApplicationEngine()
@@ -243,8 +294,13 @@ def qmlstop():
     #comment if not emulator
     #emulator.stopping()
 
+    #stop the regulate ps
+    if regulateps.isRunning():
+        regulateps.stopping()
+
     #stop the measure thread
-    measure.stopping()
+    if measure.isRunning():
+        measure.stopping()
 
     #Right after stopping
     #dump all the data in a .cvs file
@@ -268,29 +324,6 @@ def qmlstop():
     #close the file
     filemeas.close()
 
-def regulate():
-    startb.setProperty ('enabled', False)
-    regulateb.setProperty ('checked', True)
-    device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-    serreg = serial.Serial(device, 115200, timeout=1)
-    serreg.write(('r%.2f,' %psspinbox.property('realValue')).encode())
-    print (('r%.2f,' %psspinbox.property('realValue')).encode())
-    line = serreg.readline().decode().strip().split(',')
-    for i in range(2):
-        line = serreg.readline().decode().strip().split(',')
-        print (line)
-    #regulateprogressbar.setProperty('from', abs(float(line[-1]) - psspinbox.property('realValue')))
-    #regulateprogressbar.setProperty('value', abs(float(line[-1]) - psspinbox.property('realValue')))
-    print (abs(float(line[-1]) - psspinbox.property('realValue')))
-    while len(line) == 10:
-        line = serreg.readline().decode().strip().split(',')
-        print (line)
-        #regulateprogressbar.setProperty('value', abs(float(line[-1]) - psspinbox.property('realValue')))
-        print (abs(float(line[-1]) - psspinbox.property('realValue')))
-    serreg.close()
-    startb.setProperty('enabled', True)
-    regulateb.setProperty('checked', False)
-
 #Create an object from qml linked to the start button
 startb = engine.rootObjects()[0].findChild(QObject, 'startbutton')
 #Now link the start button signal with the qmlstart function in python
@@ -303,7 +336,7 @@ stopb = engine.rootObjects()[0].findChild(QObject, 'stopbutton')
 stopb.clicked.connect(qmlstop)
 
 regulateb = engine.rootObjects()[0].findChild(QObject, 'regulatebutton')
-regulateb.clicked.connect(regulate)
+regulateb.clicked.connect(regulateps.start)
 
 psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
 
