@@ -869,10 +869,4 @@ ApplicationWindow {
 
     }
 
-<<<<<<< HEAD
-    Connections: {
-        target:
-    }
-=======
->>>>>>> 81834e023ab22e7ebe08554a1a4894c8559d9f9e
 }
