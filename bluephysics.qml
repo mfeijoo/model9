@@ -223,6 +223,23 @@ ApplicationWindow {
                     anchors.topMargin: 6
                     from: 0
                     to: 13
+                    background: Rectangle {
+                        anchors.left: regulateprogress.left
+                        anchors.verticalCenter: regulateprogress.verticalCenter
+                        implicitWidth: 50
+                        implicitHeight: 6
+                        radius: 3
+                        color: "lavender"
+                    }
+
+                    contentItem: Rectangle {
+                        anchors.left: regulateprogress.left
+                        anchors.verticalCenter: regulateprogress.verticalCenter
+                        width: regulateprogress.visualPosition  * regulateprogress.width
+                        radius: 2
+                        color: "lightskyblue"
+
+                    }
                 }
             }
 
@@ -262,11 +279,24 @@ ApplicationWindow {
                     anchors.topMargin: 6
                     from: 0
                     to: 8
+                    background: Rectangle {
+                        anchors.left: sdcprogressbar.left
+                        anchors.verticalCenter: sdcprogressbar.verticalCenter
+                        implicitWidth: 50
+                        implicitHeight: 6
+                        radius: 3
+                        color: "lavender"
+                    }
+
+                    contentItem: Rectangle {
+                        anchors.left: sdcprogressbar.left
+                        anchors.verticalCenter: sdcprogressbar.verticalCenter
+                        width: sdcprogressbar.visualPosition  * sdcprogressbar.width
+                        radius: 2
+                        color: "lightskyblue"
+                    }
                 }
-
-
             }
-
 
 
             Button{
