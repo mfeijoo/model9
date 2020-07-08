@@ -383,6 +383,36 @@ def qmlstop():
     #close the file
     filemeas.close()
 
+    #Now let's calculate the limit times of each shot
+    #monitor channel
+    mch = 'ch0'
+    #reference channel Cerenkov
+    rch = 'ch1'
+
+    #lets find the start and stop of all beams
+    dff = pd.DataFrame({'time':dchs[mch].time, mch:dchs[mch].meas})
+    #print(dff.head())
+    #print (dff.dtypes)
+    #print (dff.describe())
+    dff['chdiff'] = dff[mch].diff()
+    #print(dff.head())
+    dffchanges =  dff.loc[dff.chdiff.abs() > 1000, :].copy()
+    #print (dffchanges.head())
+    dffchanges['timediff'] = dffchanges.time.diff()
+    dffchanges.fillna(1, inplace=True)
+    dfftimes =  dffchanges[dffchanges.timediff > 0.5].copy()
+    #print (dfftimes.head())
+    starttimes = dfftimes.loc[dfftimes.chdiff < 0, 'time']
+    print (starttimes)
+    finishtimes = dfftimes.loc[dfftimes.chdiff > 0, 'time']
+    print (finishtimes)
+
+    #Calculate the linear regions and draw them in the graph
+
+    #Calculate the integrals in each region
+    for ch in dchs.values():
+        ch.calcintegral(starttimes, finishtimes)
+
 #Create an object from qml linked to the start button
 startb = engine.rootObjects()[0].findChild(QObject, 'startbutton')
 #Now link the start button signal with the qmlstart function in python
