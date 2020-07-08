@@ -33,6 +33,7 @@ def update(lista):
     v5Vmeas.append(lista[len(dchs)+2])
     vrefVmeas.append(lista[len(dchs)+5])
 
+
 class CH():
 
     def __init__(self, num):
@@ -127,21 +128,30 @@ class RegulatePSThread(QThread):
 
     def run(self):
         self.stop = False
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.serreg = serial.Serial(device, 115200, timeout=1)
-        psset = psspinbox.property('realValue')
-        self.serreg.write(('r%.2f,' %psset).encode())
+
+        #comment next 6 if emulator
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.serreg = serial.Serial(device, 115200, timeout=1)
+        #psset = psspinbox.property('realValue')
+        #self.serreg.write(('r%.2f,' %psset).encode())
+        #print (('r%.2f,' %psset).encode())
+        #line = self.serreg.readline().decode().strip().split(',')
+
         regulateprogressbar.setProperty('value', 0)
-        print (('r%.2f,' %psset).encode())
-        line = self.serreg.readline().decode().strip().split(',')
+
         value = 0
-        for i in range(5):
-            line = self.serreg.readline().decode().strip().split(',')
+        #emulator 13 no emulator 5
+        for i in range(13):
+            #comment next 2 if emulator
+            #line = self.serreg.readline().decode().strip().split(',')
+            #print (line)
             regulateprogressbar.setProperty('value', value)
             value = value + 1
-            print (line)
+            #comment if not emulator
+            time.sleep(0.5)
 
-        while len(line) == 10:
+        #comment the whole while loop if emulator
+        '''while len(line) == 10:
 
             if self.stop:
                 break
@@ -149,19 +159,64 @@ class RegulatePSThread(QThread):
             line = self.serreg.readline().decode().strip().split(',')
             regulateprogressbar.setProperty('value', value)
             value = value + 1
-            print (line)
+            print (line)'''
 
         regulateprogressbar.setProperty('value', 13)
         regulateb.setProperty('checked', False)
-        self.serreg.close()
+        #comment if emulator
+        #self.serreg.close()
+
 
     def stopping(self):
         self.stop = True
-        self.serreg.close()
+        #comment if emulator
+        #self.serreg.close()
         self.wait()
         self.quit()
         print('Regulate PS stopoped')
 
+
+class SubtractDcThread(QThread):
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        #comment next 3 if emulator
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.ser = serial.Serial(device, 115200, timeout=1)
+        #self.ser.write('s'.encode())
+
+        value = 0
+        for i in range(8):
+            #comment next 2 if emulator
+            #line = self.ser.readline().decode().strip().split(',')
+            #print (line)
+
+            #change this part for not emulator
+            sdcprogressbar.setProperty('value', value)
+            value = value + 1
+            time.sleep(0.5)
+
+        sdcprogressbar.setProperty('value', 8)
+        subtractdcb.setProperty('checked', False)
+
+        #comment the whole while loop if emulator
+        '''while len(line) == 9:
+            print(line)
+            line = self.ser.readline().decode().strip().split(',')
+        self.ser.close()'''
+
+    def stopping(self):
+        self.stop = True
+        #comment if emulator
+        #self.ser.close()
+        self.wait()
+        self.quit()
+        print('measure stopoped')
 
 
 class MeasureThread(QThread):
@@ -177,16 +232,16 @@ class MeasureThread(QThread):
     def run(self):
         self.stop = False
         #emulator
-        #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.ser = serial.Serial (device, 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.ser = serial.Serial (device, 115200, timeout=1)
         #One reading to discard garbge
         reading0 = self.ser.readline().decode().strip().split(',')
 
         #second reading to check starting time
         #comment if emulator
-        reading1 = self.ser.readline().decode().strip().split(',')
-        tstart = int(reading1[0])
+        #reading1 = self.ser.readline().decode().strip().split(',')
+        #tstart = int(reading1[0])
         
         while True:
             
@@ -198,8 +253,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                #listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
-                listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
+                listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
+                #listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
             except:
@@ -222,6 +277,8 @@ listain = Listain()
 
 regulateps = RegulatePSThread()
 
+mysubtractdc = SubtractDcThread()
+
 #create the qml engine
 engine = QQmlApplicationEngine()
 
@@ -233,7 +290,7 @@ engine.load('bluephysics.qml')
 
 #Create the emulator thread
 #Comment if not emulator
-#emulator = EmulatorThread()
+emulator = EmulatorThread()
 
 #Create the measure thread
 measure = MeasureThread()
@@ -280,7 +337,7 @@ def qmlstart():
 
     #Start the emulator thread
     #Comment if not emulator
-    #emulator.start()
+    emulator.start()
 
     #Start the measurements thread
     measure.start()
@@ -292,7 +349,7 @@ def qmlstop():
 
     #stop the emulator thread
     #comment if not emulator
-    #emulator.stopping()
+    emulator.stopping()
 
     #stop the regulate ps
     if regulateps.isRunning():
@@ -341,6 +398,11 @@ regulateb.clicked.connect(regulateps.start)
 psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
 
 regulateprogressbar = engine.rootObjects()[0].findChild(QObject, 'regulateprogressbar')
+
+subtractdcb = engine.rootObjects()[0].findChild(QObject, 'subtractdcb')
+subtractdcb.clicked.connect(mysubtractdc.start)
+
+sdcprogressbar = engine.rootObjects()[0].findChild(QObject, 'sdcprogressbar')
 
 #Close qml engine if the app is closed
 engine.quit.connect(app.quit)

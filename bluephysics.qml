@@ -8,8 +8,8 @@ import QtQuick.Layouts 1.3
 ApplicationWindow {
     id: mainwindow
     objectName: 'mainapplication'
-    width: Screen.width/2
-    height: Screen.height/2
+    width: Screen.width
+    height: Screen.height
     title: " Blue Physics v. 9.0.1"
     visible: true
 
@@ -28,7 +28,7 @@ ApplicationWindow {
             fillMode: Image.PreserveAspectFit
         }
 
-        Button {
+        ToolButton {
             id: metadatabutton
             width: 125
             height: 125
@@ -44,11 +44,11 @@ ApplicationWindow {
             font.pointSize: 12
             display: AbstractButton.TextUnderIcon
             background: Rectangle {
-                color:  metadatabutton.hovered ? "aliceblue" : "transparent"
+                color:  metadatabutton.hovered ? "lavender" : "transparent"
             }
         }
 
-        Button {
+        ToolButton {
             id: measurebutton
             width: 125
             height: 125
@@ -65,7 +65,7 @@ ApplicationWindow {
             icon.width: 100
             icon.color: 'transparent'
             background: Rectangle {
-                color: measurebutton.hovered ? "aliceblue" : 'transparent'
+                color: measurebutton.hovered ? "lavender" : 'transparent'
             }
             onClicked: {
                 measureview.visible = true
@@ -73,7 +73,7 @@ ApplicationWindow {
             }
         }
 
-        Button {
+        ToolButton {
             id: turnoffbutton
             width: 125
             height: 125
@@ -90,7 +90,7 @@ ApplicationWindow {
             icon.width: 100
             icon.color: "#00000000"
             background: Rectangle {
-                color: turnoffbutton.hovered ? "aliceblue" : 'transparent'
+                color: turnoffbutton.hovered ? "lavender" : 'transparent'
             }
             onClicked: Qt.quit()
         }
@@ -131,7 +131,7 @@ ApplicationWindow {
                 icon.width: 90
                 icon.color: "#00000000"
                 background: Rectangle {
-                    color: backtomainmenubutton.hovered ? "aliceblue" : 'transparent'
+                    color: backtomainmenubutton.hovered ? "lavender" : 'transparent'
                 }
                 onClicked: {
                     measureview.visible = false
@@ -160,7 +160,7 @@ ApplicationWindow {
                     height: 50
                     hoverEnabled: true
                     background: Rectangle {
-                        color: (psonoff.hovered & !psonoff.checked) ? 'aliceblue'
+                        color: (psonoff.hovered & !psonoff.checked) ? 'lavender'
                                : (psonoff.checked) ? 'lightskyblue' : 'transparent'
                     }
                 }
@@ -204,11 +204,11 @@ ApplicationWindow {
                     anchors.top: psspinbox.bottom
                     anchors.topMargin: 6
                     height: 50
-                    text: 'Regulate'
+                    text: regulatebutton.checked ? 'Regulating' : 'Regulate'
                     hoverEnabled: true
                     checkable: true
                     background: Rectangle {
-                        color: (regulatebutton.hovered & !regulatebutton.checked) ? 'aliceblue'
+                        color: (regulatebutton.hovered & !regulatebutton.checked) ? 'lavender'
                                : (regulatebutton.checked) ? 'lightskyblue' : 'transparent'
                     }
 
@@ -223,6 +223,23 @@ ApplicationWindow {
                     anchors.topMargin: 6
                     from: 0
                     to: 13
+                    background: Rectangle {
+                        anchors.left: regulateprogress.left
+                        anchors.verticalCenter: regulateprogress.verticalCenter
+                        implicitWidth: 50
+                        implicitHeight: 6
+                        radius: 3
+                        color: "lavender"
+                    }
+
+                    contentItem: Rectangle {
+                        anchors.left: regulateprogress.left
+                        anchors.verticalCenter: regulateprogress.verticalCenter
+                        width: regulateprogress.visualPosition  * regulateprogress.width
+                        radius: 2
+                        color: "lightskyblue"
+
+                    }
                 }
             }
 
@@ -236,30 +253,50 @@ ApplicationWindow {
                 anchors.rightMargin: 6
                 height: 110
 
-                Button {
+                ToolButton {
                     id: subtractdc
+                    objectName: 'subtractdcb'
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
                     hoverEnabled: true
-                    text: 'Subtract'
+                    text: subtractdc.checked ? 'Subtracting' : 'Subtract'
                     height: 50
+                    checkable: true
+                    enabled: (startbutton.checked | regulatebutton.checked) ? false : true
                     background: Rectangle {
-                        color: subtractdc.hovered ? "aliceblue" : 'transparent'
+                        color: (subtractdc.hovered & !subtractdc.checked) ? 'lavender'
+                               : (subtractdc.checked) ? 'lightskyblue' : 'transparent'
                     }
                 }
 
                 ProgressBar {
-                    id: adcprogress
+                    id: sdcprogressbar
+                    objectName: 'sdcprogressbar'
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: subtractdc.bottom
                     anchors.topMargin: 6
+                    from: 0
+                    to: 8
+                    background: Rectangle {
+                        anchors.left: sdcprogressbar.left
+                        anchors.verticalCenter: sdcprogressbar.verticalCenter
+                        implicitWidth: 50
+                        implicitHeight: 6
+                        radius: 3
+                        color: "lavender"
+                    }
+
+                    contentItem: Rectangle {
+                        anchors.left: sdcprogressbar.left
+                        anchors.verticalCenter: sdcprogressbar.verticalCenter
+                        width: sdcprogressbar.visualPosition  * sdcprogressbar.width
+                        radius: 2
+                        color: "lightskyblue"
+                    }
                 }
-
-
             }
-
 
 
             Button{
@@ -277,8 +314,9 @@ ApplicationWindow {
                 icon.height: 45
                 icon.width: 45
                 icon.color: "#00000000"
+                enabled: (subtractdc.checked | regulatebutton.checked) ? false : true
                 background: Rectangle {
-                    color: startbutton.hovered ? 'aliceblue'
+                    color: startbutton.hovered ? 'lavender'
                            : startbutton.checked ? 'lightskyblue' :  'transparent'
                 }
                 onClicked: {
@@ -291,7 +329,6 @@ ApplicationWindow {
                     linech6.clear()
                     linech7.clear()
                     linetemp.clear()
-                    startbutton.enabled = false
                     stopbutton.enabled = true
                 }
             }
@@ -312,7 +349,7 @@ ApplicationWindow {
                 icon.width: 45
                 icon.color: "#00000000"
                 background: Rectangle {
-                    color: stopbutton.hovered ? 'aliceblue' : 'transparent'
+                    color: stopbutton.hovered ? 'lavender' : 'transparent'
                 }
                 onClicked: {
                     startbutton.enabled = true
@@ -343,7 +380,7 @@ ApplicationWindow {
                         hoverEnabled: true
                         checked: true
                         background: Rectangle {
-                            color: (ch0view.hovered & !ch0view.checked) ? 'aliceblue'
+                            color: (ch0view.hovered & !ch0view.checked) ? 'lavender'
                                    : (ch0view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
@@ -355,7 +392,7 @@ ApplicationWindow {
                         checked: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch1view.hovered & !ch1view.checked) ? 'aliceblue'
+                            color: (ch1view.hovered & !ch1view.checked) ? 'lavender'
                                    : (ch1view.checked) ? 'lightskyblue' : 'transparent'
                         }
                    }
@@ -366,7 +403,7 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch2view.hovered & !ch2view.checked) ? 'aliceblue'
+                            color: (ch2view.hovered & !ch2view.checked) ? 'lavender'
                                    : (ch2view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
@@ -377,7 +414,7 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch3view.hovered & !ch3view.checked) ? 'aliceblue'
+                            color: (ch3view.hovered & !ch3view.checked) ? 'lavender'
                                    : (ch3view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
@@ -388,7 +425,7 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch4view.hovered & !ch4view.checked) ? 'aliceblue'
+                            color: (ch4view.hovered & !ch4view.checked) ? 'lavender'
                                    : (ch4view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
@@ -399,7 +436,7 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch5view.hovered & !ch5view.checked) ? 'aliceblue'
+                            color: (ch5view.hovered & !ch5view.checked) ? 'lavender'
                                    : (ch5view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
@@ -410,7 +447,7 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch6view.hovered & !ch6view.checked) ? 'aliceblue'
+                            color: (ch6view.hovered & !ch6view.checked) ? 'lavender'
                                    : (ch6view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
@@ -421,7 +458,7 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         background: Rectangle {
-                            color: (ch7view.hovered & !ch7view.checked) ? 'aliceblue'
+                            color: (ch7view.hovered & !ch7view.checked) ? 'lavender'
                                    : (ch7view.checked) ? 'lightskyblue' : 'transparent'
                         }
                     }
