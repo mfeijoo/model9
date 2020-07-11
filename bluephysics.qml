@@ -351,6 +351,7 @@ ApplicationWindow {
                     ma.starttimes = []
                     ma.finishtimes = []
                     stopbutton.enabled = true
+                    intbeamslabel.visible = false
                 }
             }
 
@@ -620,7 +621,15 @@ ApplicationWindow {
                                 intbeamslabel.visible = true
                                 intbeamslabel.x = mouseX
                                 intbeamslabel.y = mouseY
-                                intbeamslabel.text = 'zone: ' + i
+                                intbeamslabel.text = 'ch0: ' + qmlch0.listaint[i].toFixed(2) + '\n' +
+                                        'ch1: ' + qmlch1.listaint[i].toFixed(2) + '\n' +
+                                        'ch2: ' + qmlch2.listaint[i].toFixed(2) + '\n' +
+                                        'ch3: ' + qmlch3.listaint[i].toFixed(2) + '\n' +
+                                        'ch4: ' + qmlch4.listaint[i].toFixed(2) + '\n' +
+                                        'ch5: ' + qmlch5.listaint[i].toFixed(2) + '\n' +
+                                        'ch6: ' + qmlch6.listaint[i].toFixed(2) + '\n' +
+                                        'ch7: ' + qmlch7.listaint[i].toFixed(2)
+
                             }
                     }
                     coordinatestext.text = 'x: ' + valuex + '  y: ' + valuey
