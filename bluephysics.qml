@@ -321,32 +321,35 @@ ApplicationWindow {
                 }
 
                 onClicked: {
+                    axisXtemp.min = 0
+                    axisXtemp.max = 60
+                    axisYtemp.min = 23
+                    axisYtemp.max = 23.1
                     linetemp.clear()
+                    axisXPS.min = 0
+                    axisXPS.max = 60
+                    axisYPS.min = 57.5
+                    axisYPS.max = 57.6
                     linePS.clear()
                     line5V.clear()
                     linevref.clear()
                     lineminus12V.clear()
-                    linech0.clear()
-                    linech1.clear()
-                    linech2.clear()
-                    linech3.clear()
-                    linech4.clear()
-                    linech5.clear()
-                    linech6.clear()
-                    linech7.clear()
-                    if (ma.starttimes[0] !== 0){
-                        for (var i = 0; i < ma.starttimes.length; i++){
-                            chartviewchs.removeSeries(chartviewchs.series('start' + i))
-                        }
-                    }
-                    if (ma.finishtimes[0] !== 0){
-                        for (var j = 0; j < ma.finishtimes.length; j++){
-                            chartviewchs.removeSeries(chartviewchs.series('finish' + j))
-                        }
+                    chartviewchs.removeAllSeries()
+                    axisXch.min = 0
+                    axisXch.max = 60
+                    axisYch.min = -0.5
+                    axisYch.max = 0.5
+                    var colors = ['red', 'lightblue', 'lightgreen', 'yellow', 'cyan', 'fuchsia', 'orange', 'lightgrey']
+
+                    for (var i = 0; i < 8; i++){
+                        var serienow = chartviewchs.createSeries(ChartView.SeriesTypeLine, 'ch' + i, axisXch, axisYch)
+                        serienow.color = colors[i]
+                        serienow.useOpenGL = true
                     }
 
-                    ma.starttimes = [0]
-                    ma.finishtimes = [0]
+
+                    ma.starttimes = []
+                    ma.finishtimes = []
                     stopbutton.enabled = true
                 }
             }
@@ -416,6 +419,9 @@ ApplicationWindow {
                             color: (ch1view.hovered & !ch1view.checked) ? 'lavender'
                                    : (ch1view.checked) ? 'lightskyblue' : 'transparent'
                         }
+                        onClicked: {
+                            chartviewchs.series('ch1').visible = ch1view.checked
+                        }
 
                    }
 
@@ -424,9 +430,13 @@ ApplicationWindow {
                         text: 'ch2'
                         checkable: true
                         hoverEnabled: true
+                        checked: true
                         background: Rectangle {
                             color: (ch2view.hovered & !ch2view.checked) ? 'lavender'
                                    : (ch2view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                        onClicked: {
+                            chartviewchs.series('ch2').visible = ch2view.checked
                         }
 
                     }
@@ -436,9 +446,13 @@ ApplicationWindow {
                         text: 'ch3'
                         checkable: true
                         hoverEnabled: true
+                        checked: true
                         background: Rectangle {
                             color: (ch3view.hovered & !ch3view.checked) ? 'lavender'
                                    : (ch3view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                        onClicked: {
+                            chartviewchs.series('ch3').visible = ch3view.checked
                         }
 
                     }
@@ -448,6 +462,7 @@ ApplicationWindow {
                         text: 'ch4'
                         checkable: true
                         hoverEnabled: true
+                        checked: true
                         background: Rectangle {
                             color: (ch4view.hovered & !ch4view.checked) ? 'lavender'
                                    : (ch4view.checked) ? 'lightskyblue' : 'transparent'
@@ -462,9 +477,13 @@ ApplicationWindow {
                         text: 'ch5'
                         checkable: true
                         hoverEnabled: true
+                        checked: true
                         background: Rectangle {
                             color: (ch5view.hovered & !ch5view.checked) ? 'lavender'
                                    : (ch5view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                        onClicked: {
+                            chartviewchs.series('ch5').visible = ch5view.checked
                         }
 
                     }
@@ -474,9 +493,13 @@ ApplicationWindow {
                         text: 'ch6'
                         checkable: true
                         hoverEnabled: true
+                        checked: true
                         background: Rectangle {
                             color: (ch6view.hovered & !ch6view.checked) ? 'lavender'
                                    : (ch6view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                        onClicked: {
+                            chartviewchs.series('ch6').visible = ch6view.checked
                         }
 
                     }
@@ -486,9 +509,13 @@ ApplicationWindow {
                         text: 'ch7'
                         checkable: true
                         hoverEnabled: true
+                        checked: true
                         background: Rectangle {
                             color: (ch7view.hovered & !ch7view.checked) ? 'lavender'
                                    : (ch7view.checked) ? 'lightskyblue' : 'transparent'
+                        }
+                        onClicked: {
+                            chartviewchs.series('ch7').visible = ch7view.checked
                         }
 
                     }
@@ -531,111 +558,11 @@ ApplicationWindow {
 
             ValueAxis {
                 id: axisYch
-                min: -0.05
+                min: 0
                 max: 1
                 titleText: 'Voltage (V)'
             }
 
-            LineSeries {
-                id: linech0
-                name: 'ch0'
-                color: 'red'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch0view.checked
-                onHovered: {
-                    function (point, state){
-                        if (state){
-                            console.log('ch0 hovered')
-                        }
-                    }
-                }
-
-            }
-
-            LineSeries {
-                id: linech1
-                name: 'ch1'
-                color: 'lightblue'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch1view.checked
-
-            }
-
-            LineSeries {
-                id: linech2
-                name: 'ch2'
-                color: 'lightgreen'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch2view.checked
-                onHovered: ma.lineserieshovered = 2
-
-            }
-
-            LineSeries {
-                id: linech3
-                name: 'ch3'
-                color: 'yellow'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch3view.checked
-                onHovered: ma.lineserieshovered = 3
-
-            }
-
-            LineSeries {
-                id: linech4
-                name: 'ch4'
-                color: 'cyan'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch4view.checked
-                onHovered: ma.lineserieshovered = 4
-
-            }
-
-            LineSeries {
-                id: linech5
-                name: 'ch5'
-                color: 'fuchsia'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch5view.checked
-                onHovered: ma.lineserieshovered = 5
-
-            }
-
-            LineSeries {
-                id: linech6
-                name: 'ch6'
-                color: 'orange'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch6view.checked
-                onHovered: ma.lineserieshovered = 6
-
-            }
-
-            LineSeries {
-                id: linech7
-                name: 'ch7'
-                color: 'lightgrey'
-                axisX: axisXch
-                axisY: axisYch
-                useOpenGL: true
-                visible: ch7view.checked
-                onHovered: ma.lineserieshovered = 7
-
-            }
 
             Rectangle {
                 id: zoomarea
@@ -663,8 +590,8 @@ ApplicationWindow {
                 acceptedButtons: { Qt.RightButton | Qt.LeftButton }
                 property real xstart
                 property real ystart
-                property var starttimes: [0]
-                property var finishtimes: [0]
+                property var starttimes: []
+                property var finishtimes: []
                 property int lineserieshovered: -1
                 hoverEnabled: true
 
@@ -675,22 +602,29 @@ ApplicationWindow {
                     }
                 }
 
+                Label {
+                    id: intbeamslabel
+                    visible: false
+                    color: 'white'
 
+                }
 
                 onPositionChanged: {
                     var p = Qt.point(mouseX, mouseY)
                     var cp = chartviewchs.mapToValue(p, chartviewchs.series('ch0'))
-                    var valuex = Math.round(cp.x * 1000) / 1000
-                    var valuey = Math.round(cp.y * 1000) / 1000
-                    var mouseinzone = -1
-                    if (ma.starttimes[0] !== 0 & ma.finishtimes[0] !== 0){
+                    var valuex = cp.x.toFixed(2)
+                    var valuey = cp.y.toFixed(2)
+                    if (starttimes.length > 0 & finishtimes.length == starttimes.length){
                         for (var i = 0; i < starttimes.length; i++)
-                            if ( valuex > ma.starttimes[i] & valuex < ma.finishtimes[i]){
-                                console.log('zone ' + i + ' line ' + ma.lineserieshovered)
+                            if ( valuex > starttimes[i] & valuex < finishtimes[i]){
+                                intbeamslabel.visible = true
+                                intbeamslabel.x = mouseX
+                                intbeamslabel.y = mouseY
+                                intbeamslabel.text = 'zone: ' + i
                             }
                     }
-
                     coordinatestext.text = 'x: ' + valuex + '  y: ' + valuey
+
                     if (xstart) {
                         zoomarea.visible = true
                         zoomarea.x = xstart
@@ -744,7 +678,7 @@ ApplicationWindow {
                 ValueAxis {
                     id: axisYtemp
                     min: 22
-                    max: 30
+                    max: 23
                     titleText:"Temp. (C)"
                 }
 
@@ -960,14 +894,14 @@ ApplicationWindow {
             if (vref > axisYvref.max) {axisYvref.max = vref * 1.05}
             if (vref < axisYvref.min) {axisYvref.min = vref * 0.95}
             linetemp.append(time, temp)
-            linech0.append(time, ch0v)
-            linech1.append(time, ch1v)
-            linech2.append(time, ch2v)
-            linech3.append(time, ch3v)
-            linech4.append(time, ch4v)
-            linech5.append(time, ch5v)
-            linech6.append(time, ch6v)
-            linech7.append(time, ch7v)
+            chartviewchs.series('ch0').append(time, ch0v)
+            chartviewchs.series('ch1').append(time, ch1v)
+            chartviewchs.series('ch2').append(time, ch2v)
+            chartviewchs.series('ch3').append(time, ch3v)
+            chartviewchs.series('ch4').append(time, ch4v)
+            chartviewchs.series('ch5').append(time, ch5v)
+            chartviewchs.series('ch6').append(time, ch6v)
+            chartviewchs.series('ch7').append(time, ch7v)
             line5V.append(time, v5)
             linePS.append(time, ps)
             lineminus12V.append(time, minus12V)
@@ -980,7 +914,15 @@ ApplicationWindow {
     Connections {
         target: limitslines
         onSignallimitsin: {
-            //console.log(starttimes)
+            console.log('start times 0: ' + starttimes[0])
+            console.log('finish times 0: ' + finishtimes[0])
+            var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
+            for (var m = 0; m < 8; m++){
+                for (var k=0; k < chartviewchs.series('ch'+m).count; k++){
+                    chartviewchs.series('ch'+m).replace(chartviewchs.series('ch'+m).at(k).x, chartviewchs.series('ch'+m).at(k).y, chartviewchs.series('ch'+m).at(k).x, chartviewchs.series('ch' + m).at(k).y - lqmlchs[m].zero)
+                }
+            }
+
             for (var i = 0; i < starttimes.length; i++){
                 var starlimit = chartviewchs.createSeries(ChartView.SeriesTypeLine, 'start' + i, axisXch, axisYch)
                 starlimit.color = 'lightgreen'
@@ -996,16 +938,7 @@ ApplicationWindow {
                 finishlimit.append (finishtimes[j] + 2, axisYch.min)
                 finishlimit.append (finishtimes[j] + 2 , axisYch.max)
             }
-            for (var k=0; k < chartviewchs.series('ch0').count; k++){
-                linech0.replace(linech0.at(k).x, linech0.at(k).y, linech0.at(k).x, linech0.at(k).y - zeros[0])
-                linech1.replace(linech1.at(k).x, linech1.at(k).y, linech1.at(k).x, linech1.at(k).y - zeros[1])
-                linech2.replace(linech2.at(k).x, linech2.at(k).y, linech2.at(k).x, linech2.at(k).y - zeros[2])
-                linech3.replace(linech3.at(k).x, linech3.at(k).y, linech3.at(k).x, linech3.at(k).y - zeros[3])
-                linech4.replace(linech4.at(k).x, linech4.at(k).y, linech4.at(k).x, linech4.at(k).y - zeros[4])
-                linech5.replace(linech5.at(k).x, linech5.at(k).y, linech5.at(k).x, linech5.at(k).y - zeros[5])
-                linech6.replace(linech6.at(k).x, linech6.at(k).y, linech6.at(k).x, linech6.at(k).y - zeros[6])
-                linech7.replace(linech7.at(k).x, linech7.at(k).y, linech7.at(k).x, linech7.at(k).y - zeros[7])
-            }
+
             axisYch.min = 0
             ma.starttimes = starttimes
             ma.finishtimes = finishtimes
