@@ -151,8 +151,22 @@ ApplicationWindow {
             anchors.leftMargin: 12
             anchors.top: parent.top
             anchors.topMargin: 12
-            width: 100
+            width: 200
             height: 100
+            Row {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                Text {
+                    text: 'Save as: '
+                    color: 'lightgrey'
+                }
+                TextInput {
+                    id: filename
+                    width: 100
+                    color: 'lightgrey'
+                }
+                Text {text: '.csv'; color: 'lightgrey'}
+           }
         }
     }
 
@@ -262,6 +276,7 @@ ApplicationWindow {
                     text: regulatebutton.checked ? 'Regulating' : 'Regulate'
                     hoverEnabled: true
                     checkable: true
+                    enabled: startbutton.checked ? false : true
 
                 }
 
@@ -456,8 +471,9 @@ ApplicationWindow {
             Item {
                 id: mylegend
                 anchors.left: coordinatestext.right
-                anchors.leftMargin: 200
-                anchors.top: parent.top
+                anchors.leftMargin: 400
+                //anchors.horizontalCenter: mainwindow.horizontalCenter
+                //anchors.top: parent.top
                 anchors.topMargin: 10
                 Row {
                     spacing: 5
@@ -654,15 +670,18 @@ ApplicationWindow {
                     var valuey = cp.y.toFixed(2)
 
                     if (starttimes.length > 0 & finishtimes.length == starttimes.length){
-                        for (var i = 0; i < starttimes.length; i++)
+                        for (var i = 0; i < starttimes.length; i++) {
+
                             if ( valuex > starttimes[i] & valuex < finishtimes[i]){
                                 intbeamsitem.visible = true
                                 intbeamsitem.x = mouseX
                                 intbeamsitem.y = mouseY
                                 for (var j = 0; j < 8; j++){
-                                    integralsmodel.setProperty(j, 'intvalue', lqmlchs[j].listaint[i].toFixed(2))
+                                   //console.log('ch' + j + ' object name at ' + i + ' is ' + typeof (lqmlchs[j].listaint[i]))
+                                   integralsmodel.setProperty(j, 'intvalue', lqmlchs[j].listaint[i].toFixed(2))
                                 }
                             }
+                        }
 
                     }
                     coordinatestext.text = 'x: ' + valuex + '  y: ' + valuey
