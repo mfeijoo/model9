@@ -3,6 +3,8 @@ import QtQuick.Controls 2.3
 import QtQuick.Window 2.10
 import QtCharts 2.2
 import QtQuick.Layouts 1.3
+import QtQuick.Controls.Material 2.0
+
 
 ApplicationWindow {
     id: mainwindow
@@ -11,6 +13,9 @@ ApplicationWindow {
     height: Screen.height
     title: " Blue Physics v. 9.0.1"
     visible: true
+
+    Material.theme: Material.Dark
+    Material.accent: Material.LightBlue
 
 
     Item {
@@ -24,7 +29,7 @@ ApplicationWindow {
             anchors.top : parent.top
             anchors.topMargin: 200
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "iconspd/bluephysicslogofrompdf.jpg"
+            source: "iconspd/logo-bluephysics-transparent.svg"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -43,9 +48,12 @@ ApplicationWindow {
             text: "Metadata"
             font.pointSize: 12
             display: AbstractButton.TextUnderIcon
-            background: Rectangle {
-                color:  metadatabutton.hovered ? "lavender" : "transparent"
+
+            onClicked: {
+                mainmenu.visible = false
+                metadataview.visible = true
             }
+
         }
 
         ToolButton {
@@ -64,9 +72,7 @@ ApplicationWindow {
             display: AbstractButton.TextUnderIcon
             icon.width: 100
             icon.color: 'transparent'
-            background: Rectangle {
-                color: measurebutton.hovered ? "lavender" : 'transparent'
-            }
+
             onClicked: {
                 measureview.visible = true
                 mainmenu.visible = false
@@ -89,10 +95,62 @@ ApplicationWindow {
             display: AbstractButton.TextUnderIcon
             icon.width: 100
             icon.color: "#00000000"
-            background: Rectangle {
-                color: turnoffbutton.hovered ? "lavender" : 'transparent'
-            }
+
             onClicked: Qt.quit()
+        }
+    }
+
+    Item {
+        id: metadataview
+        anchors.fill: parent
+        visible: false
+
+        Rectangle {
+            id: metadatatoolbar
+            x: 1136
+            width: 150
+            color: "transparent"
+            z: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+
+
+            ToolButton {
+                id: metadatabacktomainmenubutton
+                width: 125
+                height: 100
+                anchors.top: parent.top
+                anchors.topMargin: 6
+                hoverEnabled: true
+                text: 'Main Menu'
+                anchors.horizontalCenter: parent.horizontalCenter
+                icon.source: "iconspd/home.png"
+                icon.height: 90
+                font.pointSize: 12
+                display: AbstractButton.TextUnderIcon
+                icon.width: 90
+                icon.color: "#00000000"
+
+                onClicked: {
+                    metadataview.visible = false
+                    mainmenu.visible = true
+                }
+            }
+        }
+
+        GroupBox {
+            id: savefilegroupbox
+            title: 'File'
+            anchors.left: parent.left
+            anchors.leftMargin: 12
+            anchors.top: parent.top
+            anchors.topMargin: 12
+            width: 100
+            height: 100
         }
     }
 
@@ -115,7 +173,7 @@ ApplicationWindow {
             anchors.right: parent.right
             anchors.rightMargin: 0
 
-            Button {
+            ToolButton {
                 id: backtomainmenubutton
                 width: 125
                 height: 100
@@ -130,9 +188,7 @@ ApplicationWindow {
                 display: AbstractButton.TextUnderIcon
                 icon.width: 90
                 icon.color: "#00000000"
-                background: Rectangle {
-                    color: backtomainmenubutton.hovered ? "lavender" : 'transparent'
-                }
+
                 onClicked: {
                     measureview.visible = false
                     mainmenu.visible = true
@@ -147,7 +203,7 @@ ApplicationWindow {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.rightMargin: 6
-                height: 210
+                height: 220
 
                 ToolButton {
                     id: psonoff
@@ -159,10 +215,7 @@ ApplicationWindow {
                     checked: true
                     height: 50
                     hoverEnabled: true
-                    background: Rectangle {
-                        color: (psonoff.hovered & !psonoff.checked) ? 'lavender'
-                               : (psonoff.checked) ? 'lightskyblue' : 'transparent'
-                    }
+
                 }
 
                 SpinBox {
@@ -207,10 +260,6 @@ ApplicationWindow {
                     text: regulatebutton.checked ? 'Regulating' : 'Regulate'
                     hoverEnabled: true
                     checkable: true
-                    background: Rectangle {
-                        color: (regulatebutton.hovered & !regulatebutton.checked) ? 'lavender'
-                               : (regulatebutton.checked) ? 'lightskyblue' : 'transparent'
-                    }
 
                 }
 
@@ -223,23 +272,6 @@ ApplicationWindow {
                     anchors.topMargin: 6
                     from: 0
                     to: 13
-                    background: Rectangle {
-                        anchors.left: regulateprogress.left
-                        anchors.verticalCenter: regulateprogress.verticalCenter
-                        implicitWidth: 50
-                        implicitHeight: 6
-                        radius: 3
-                        color: "lavender"
-                    }
-
-                    contentItem: Rectangle {
-                        anchors.left: regulateprogress.left
-                        anchors.verticalCenter: regulateprogress.verticalCenter
-                        width: regulateprogress.visualPosition  * regulateprogress.width
-                        radius: 2
-                        color: "lightskyblue"
-
-                    }
                 }
             }
 
@@ -264,10 +296,7 @@ ApplicationWindow {
                     height: 50
                     checkable: true
                     enabled: (startbutton.checked | regulatebutton.checked) ? false : true
-                    background: Rectangle {
-                        color: (subtractdc.hovered & !subtractdc.checked) ? 'lavender'
-                               : (subtractdc.checked) ? 'lightskyblue' : 'transparent'
-                    }
+
                 }
 
                 ProgressBar {
@@ -279,22 +308,6 @@ ApplicationWindow {
                     anchors.topMargin: 6
                     from: 0
                     to: 8
-                    background: Rectangle {
-                        anchors.left: sdcprogressbar.left
-                        anchors.verticalCenter: sdcprogressbar.verticalCenter
-                        implicitWidth: 50
-                        implicitHeight: 6
-                        radius: 3
-                        color: "lavender"
-                    }
-
-                    contentItem: Rectangle {
-                        anchors.left: sdcprogressbar.left
-                        anchors.verticalCenter: sdcprogressbar.verticalCenter
-                        width: sdcprogressbar.visualPosition  * sdcprogressbar.width
-                        radius: 2
-                        color: "lightskyblue"
-                    }
                 }
             }
 
@@ -315,10 +328,7 @@ ApplicationWindow {
                 icon.width: 45
                 icon.color: "#00000000"
                 enabled: (subtractdc.checked | regulatebutton.checked) ? false : true
-                background: Rectangle {
-                    color: startbutton.hovered ? 'lavender'
-                           : startbutton.checked ? 'lightskyblue' :  'transparent'
-                }
+
 
                 onClicked: {
                     axisXtemp.min = 0
@@ -370,9 +380,7 @@ ApplicationWindow {
                 icon.height: 45
                 icon.width: 45
                 icon.color: "#00000000"
-                background: Rectangle {
-                    color: stopbutton.hovered ? 'lavender' : 'transparent'
-                }
+
                 onClicked: {
                     startbutton.enabled = true
                     startbutton.checked = false
@@ -401,12 +409,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch0view.hovered & !ch0view.checked) ? 'lavender'
-                                   : (ch0view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch0').visible = ch0view.checked
+                            legendlist.itemAt(0).visible = checked
                         }
                     }
 
@@ -416,12 +422,10 @@ ApplicationWindow {
                         checkable: true
                         checked: true
                         hoverEnabled: true
-                        background: Rectangle {
-                            color: (ch1view.hovered & !ch1view.checked) ? 'lavender'
-                                   : (ch1view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch1').visible = ch1view.checked
+                            legendlist.itemAt(1).visible = checked
                         }
 
                    }
@@ -432,12 +436,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch2view.hovered & !ch2view.checked) ? 'lavender'
-                                   : (ch2view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch2').visible = ch2view.checked
+                            legendlist.itemAt(2).visible = checked
                         }
 
                     }
@@ -448,12 +450,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch3view.hovered & !ch3view.checked) ? 'lavender'
-                                   : (ch3view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch3').visible = ch3view.checked
+                            legendlist.itemAt(3).visible = checked
                         }
 
                     }
@@ -464,12 +464,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch4view.hovered & !ch4view.checked) ? 'lavender'
-                                   : (ch4view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch4').visible = ch4view.checked
+                            legendlist.itemAt(4).visible = checked
                         }
                     }
 
@@ -479,12 +477,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch5view.hovered & !ch5view.checked) ? 'lavender'
-                                   : (ch5view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch5').visible = ch5view.checked
+                            legendlist.itemAt(5).visible = checked
                         }
 
                     }
@@ -495,12 +491,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch6view.hovered & !ch6view.checked) ? 'lavender'
-                                   : (ch6view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
                             chartviewchs.series('ch6').visible = ch6view.checked
+                            legendlist.itemAt(6).visible = checked
                         }
 
                     }
@@ -511,12 +505,10 @@ ApplicationWindow {
                         checkable: true
                         hoverEnabled: true
                         checked: true
-                        background: Rectangle {
-                            color: (ch7view.hovered & !ch7view.checked) ? 'lavender'
-                                   : (ch7view.checked) ? 'lightskyblue' : 'transparent'
-                        }
+
                         onClicked: {
-                            chartviewchs.series('ch7').visible = ch7view.checked
+                            chartviewchs.series('ch7').visible = checked
+                            legendlist.itemAt(7).visible = checked
                         }
 
                     }
@@ -549,6 +541,44 @@ ApplicationWindow {
             anchors.right: rectangle.left
             antialiasing: false
             theme: ChartView.ChartThemeDark
+            legend.visible: false
+
+            Item {
+                id: mylegend
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 10
+                Row {
+                    spacing: 5
+                    Repeater {
+                        id: legendlist
+                        model: ['red', 'lightblue', 'lightgreen', 'yellow', 'cyan', 'fuchsia', 'orange', 'lightgrey']
+                        Item {
+                            width: 40
+                            height: 20
+                            visible: true
+                            Row {
+                                spacing: 3
+                                Rectangle {
+                                   width: 10
+                                    height: 10
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    color: modelData
+                                    border.width: 1
+                                }
+
+                                Text {
+                                    text: 'ch' + index
+                                    color: 'lightgrey'
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }
 
             ValueAxis {
                 id: axisXch
@@ -578,7 +608,7 @@ ApplicationWindow {
                 width: 10
                 height: 5
                 anchors.top: parent.top
-                anchors.topMargin: 20
+                anchors.topMargin: 10
                 anchors.left: parent.left
                 anchors.leftMargin: 20
                 color: 'white'

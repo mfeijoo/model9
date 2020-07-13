@@ -2,8 +2,10 @@
 
 #from PyQt5 import QtCore
 import sys
+import os
 #os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
 #os.environ["QT_VIRTUALKEYBOARD_STYLE"] = "retro"
+os.environ["QT_QUICK_CONTROLS_STYLE"] = "Material"
 #print (os.environ)
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, pyqtSlot, pyqtProperty
