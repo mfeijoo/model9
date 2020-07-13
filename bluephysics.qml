@@ -17,6 +17,8 @@ ApplicationWindow {
     Material.theme: Material.Dark
     Material.accent: Material.LightBlue
 
+    property var lqmlchs: [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
+
 
     Item {
         id: mainmenu
@@ -361,7 +363,8 @@ ApplicationWindow {
                     ma.starttimes = []
                     ma.finishtimes = []
                     stopbutton.enabled = true
-                    intbeamslabel.visible = false
+                    for (var j = 0; j < 8; j++){listmodelfullintegrals.setProperty(j, 'fullintegral', 0)}
+                    intbeamsitem.visible = false
                 }
             }
 
@@ -403,112 +406,19 @@ ApplicationWindow {
                     columns: 2
                     anchors.fill: parent
 
-                    ToolButton {
-                        id: ch0view
-                        text: 'ch0'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
+                    Repeater {
+                        model: 8
+                        ToolButton {
+                            text: 'ch' + index
+                            checkable: true
+                            hoverEnabled: true
+                            checked: true
 
-                        onClicked: {
-                            chartviewchs.series('ch0').visible = ch0view.checked
-                            legendlist.itemAt(0).visible = checked
-                        }
-                    }
-
-                   ToolButton {
-                        id: ch1view
-                        text: 'ch1'
-                        checkable: true
-                        checked: true
-                        hoverEnabled: true
-
-                        onClicked: {
-                            chartviewchs.series('ch1').visible = ch1view.checked
-                            legendlist.itemAt(1).visible = checked
-                        }
-
-                   }
-
-                    ToolButton {
-                        id: ch2view
-                        text: 'ch2'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
-
-                        onClicked: {
-                            chartviewchs.series('ch2').visible = ch2view.checked
-                            legendlist.itemAt(2).visible = checked
-                        }
-
-                    }
-
-                    ToolButton {
-                        id: ch3view
-                        text: 'ch3'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
-
-                        onClicked: {
-                            chartviewchs.series('ch3').visible = ch3view.checked
-                            legendlist.itemAt(3).visible = checked
-                        }
-
-                    }
-
-                    ToolButton {
-                        id: ch4view
-                        text: 'ch4'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
-
-                        onClicked: {
-                            chartviewchs.series('ch4').visible = ch4view.checked
-                            legendlist.itemAt(4).visible = checked
-                        }
-                    }
-
-                    ToolButton {
-                        id: ch5view
-                        text: 'ch5'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
-
-                        onClicked: {
-                            chartviewchs.series('ch5').visible = ch5view.checked
-                            legendlist.itemAt(5).visible = checked
-                        }
-
-                    }
-
-                    ToolButton {
-                        id: ch6view
-                        text: 'ch6'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
-
-                        onClicked: {
-                            chartviewchs.series('ch6').visible = ch6view.checked
-                            legendlist.itemAt(6).visible = checked
-                        }
-
-                    }
-
-                    ToolButton {
-                        id: ch7view
-                        text: 'ch7'
-                        checkable: true
-                        hoverEnabled: true
-                        checked: true
-
-                        onClicked: {
-                            chartviewchs.series('ch7').visible = checked
-                            legendlist.itemAt(7).visible = checked
+                            onClicked: {
+                                chartviewchs.series('ch' + index).visible = checked
+                                legendlist.itemAt(index).visible = checked
+                                intlist.itemAt(index).visible = checked
+                            }
                         }
 
                     }
@@ -545,16 +455,53 @@ ApplicationWindow {
 
             Item {
                 id: mylegend
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.left: coordinatestext.right
+                anchors.leftMargin: 200
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 Row {
                     spacing: 5
                     Repeater {
                         id: legendlist
-                        model: ['red', 'lightblue', 'lightgreen', 'yellow', 'cyan', 'fuchsia', 'orange', 'lightgrey']
+                        model: ListModel {
+                            id: listmodelfullintegrals
+                            ListElement {
+                                mycolor: 'red'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'lightblue'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'lightgreen'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'yellow'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'cyan'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'fuchsia'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'orange'
+                                fullintegral: 0
+                                }
+                            ListElement {
+                                mycolor: 'lightgrey'
+                                fullintegral: 0
+                                }
+                        }
+
+
                         Item {
-                            width: 40
+                            width: 100
                             height: 20
                             visible: true
                             Row {
@@ -563,12 +510,12 @@ ApplicationWindow {
                                    width: 10
                                     height: 10
                                     anchors.verticalCenter: parent.verticalCenter
-                                    color: modelData
+                                    color: mycolor
                                     border.width: 1
                                 }
 
                                 Text {
-                                    text: 'ch' + index
+                                    text: fullintegral > 0 ? 'ch' + index + ' ' + fullintegral : 'ch' + index
                                     color: 'lightgrey'
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -633,11 +580,71 @@ ApplicationWindow {
                     }
                 }
 
-                Label {
-                    id: intbeamslabel
+                Item {
+                    id: intbeamsitem
                     visible: false
-                    color: 'white'
+                    Column {
+                        spacing: 3
+                        Repeater {
+                            id: intlist
+                            model: ListModel {
+                                id: integralsmodel
+                                ListElement {
+                                    mycolor: 'red'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'lightblue'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'lightgreen'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'yellow'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'cyan'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'fuchsia'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'orange'
+                                    intvalue: 0
+                                }
+                                ListElement {
+                                    mycolor: 'lightgrey'
+                                    intvalue: 0
+                                }
+                            }
+                            Item {
+                                width: 40
+                                height: 20
+                                visible: true
+                                Row {
+                                    spacing: 3
+                                    Rectangle {
+                                       width: 10
+                                        height: 10
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        color: mycolor
+                                        border.width: 1
+                                    }
 
+                                    Text {
+                                        text: 'ch' + index + ': ' + intvalue
+                                        color: 'lightgrey'
+                                        anchors.verticalCenter: parent.verticalCenter
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 onPositionChanged: {
@@ -645,22 +652,18 @@ ApplicationWindow {
                     var cp = chartviewchs.mapToValue(p, chartviewchs.series('ch0'))
                     var valuex = cp.x.toFixed(2)
                     var valuey = cp.y.toFixed(2)
+
                     if (starttimes.length > 0 & finishtimes.length == starttimes.length){
                         for (var i = 0; i < starttimes.length; i++)
                             if ( valuex > starttimes[i] & valuex < finishtimes[i]){
-                                intbeamslabel.visible = true
-                                intbeamslabel.x = mouseX
-                                intbeamslabel.y = mouseY
-                                intbeamslabel.text = 'ch0: ' + qmlch0.listaint[i].toFixed(2) + '\n' +
-                                        'ch1: ' + qmlch1.listaint[i].toFixed(2) + '\n' +
-                                        'ch2: ' + qmlch2.listaint[i].toFixed(2) + '\n' +
-                                        'ch3: ' + qmlch3.listaint[i].toFixed(2) + '\n' +
-                                        'ch4: ' + qmlch4.listaint[i].toFixed(2) + '\n' +
-                                        'ch5: ' + qmlch5.listaint[i].toFixed(2) + '\n' +
-                                        'ch6: ' + qmlch6.listaint[i].toFixed(2) + '\n' +
-                                        'ch7: ' + qmlch7.listaint[i].toFixed(2)
-
+                                intbeamsitem.visible = true
+                                intbeamsitem.x = mouseX
+                                intbeamsitem.y = mouseY
+                                for (var j = 0; j < 8; j++){
+                                    integralsmodel.setProperty(j, 'intvalue', lqmlchs[j].listaint[i].toFixed(2))
+                                }
                             }
+
                     }
                     coordinatestext.text = 'x: ' + valuex + '  y: ' + valuey
 
@@ -955,7 +958,7 @@ ApplicationWindow {
         onSignallimitsin: {
             console.log('start times 0: ' + starttimes[0])
             console.log('finish times 0: ' + finishtimes[0])
-            var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
+            //var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
             for (var m = 0; m < 8; m++){
                 for (var k=0; k < chartviewchs.series('ch'+m).count; k++){
                     chartviewchs.series('ch'+m).replace(chartviewchs.series('ch'+m).at(k).x, chartviewchs.series('ch'+m).at(k).y, chartviewchs.series('ch'+m).at(k).x, chartviewchs.series('ch' + m).at(k).y - lqmlchs[m].zero)
@@ -981,6 +984,9 @@ ApplicationWindow {
             axisYch.min = 0
             ma.starttimes = starttimes
             ma.finishtimes = finishtimes
+            for (var x = 0; x < 8; x++){
+                listmodelfullintegrals.setProperty(x, 'fullintegral', lqmlchs[x].integral.toFixed(2))
+            }
 
         }
     }
