@@ -146,24 +146,24 @@ ApplicationWindow {
 
         GroupBox {
             id: savefilegroupbox
-            title: 'File'
+            title: 'File. Save as:'
             anchors.left: parent.left
             anchors.leftMargin: 12
             anchors.top: parent.top
             anchors.topMargin: 12
-            width: 200
+            width: 300
             height: 100
             Row {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                Text {
-                    text: 'Save as: '
-                    color: 'lightgrey'
-                }
+
                 TextInput {
                     id: filename
-                    width: 100
+                    objectName: 'filename'
+                    width: 200
+                    text: 'default'
                     color: 'lightgrey'
+
                 }
                 Text {text: '.csv'; color: 'lightgrey'}
            }
@@ -800,8 +800,8 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYPS
-                    min: 50
-                    max: 80
+                    min: 57.20
+                    max: 57.70
                     titleText:"Voltage (V)"
                 }
 
@@ -862,8 +862,8 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYvref
-                    min: 0
-                    max: 1
+                    min: 1.24975
+                    max: 1.25025
                     titleText:"Voltage (V)"
                 }
 
