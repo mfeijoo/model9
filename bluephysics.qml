@@ -4,6 +4,7 @@ import QtQuick.Window 2.10
 import QtCharts 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
+import QtQuick.VirtualKeyboard 2.1
 
 
 ApplicationWindow {
@@ -106,6 +107,13 @@ ApplicationWindow {
         id: metadataview
         anchors.fill: parent
         visible: false
+
+        InputPanel {
+            id: inputpanel
+            y: Qt.inputMethod.visible ? parent.height - inputpanel.height : parent.height
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
 
         Rectangle {
             id: metadatatoolbar
