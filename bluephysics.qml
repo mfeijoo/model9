@@ -862,8 +862,8 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYvref
-                    min: 1.24975
-                    max: 1.25025
+                    min: 1.2490
+                    max: 1.2505
                     titleText:"Voltage (V)"
                 }
 
@@ -952,8 +952,8 @@ ApplicationWindow {
             if (minus12V > axisYminus12V.max) {axisYminus12V.max = minus12V * 1.05}
             if (minus12V < axisYminus12V.min) {axisYminus12V = minus12V * 0.95}
             var vref = lista[13] * 0.0625 / 1000
-            if (vref > axisYvref.max) {axisYvref.max = vref * 1.05}
-            if (vref < axisYvref.min) {axisYvref.min = vref * 0.95}
+            //if (vref > axisYvref.max) {axisYvref.max = vref * 1.05}
+            //if (vref < axisYvref.min) {axisYvref.min = vref * 0.95}
             linetemp.append(time, temp)
             chartviewchs.series('ch0').append(time, ch0v)
             chartviewchs.series('ch1').append(time, ch1v)
