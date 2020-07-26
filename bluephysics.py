@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 #branch guitoqml
 
 #from PyQt5 import QtCore
 import sys
 import os
-#os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
+os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
 #os.environ["QT_VIRTUALKEYBOARD_STYLE"] = "retro"
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Material"
 #print (os.environ)
@@ -14,6 +15,7 @@ import time
 import serial
 import serial.tools.list_ports
 import pandas as pd
+#from PyQt5.QtQuick import QQuickView
 
 #Create the global lists of measurements
 timemeas = []
@@ -248,11 +250,11 @@ class SubtractDcThread(QThread):
         self.ser = serial.Serial(device, 115200, timeout=1)
         self.ser.write('s'.encode())
         #uncoment if emulator
-        value = 0
+        #value = 0
         for i in range(3):
             #comment next 2 if emulator
             line = self.ser.readline().decode().strip().split(',')
-            #print (line)
+            print (line)
 
             #change this part for not emulator
             #sdcprogressbar.setProperty('value', value)
@@ -502,15 +504,24 @@ def qmlstart():
     filesnow = os.listdir('rawdata')
     if ('%s.csv' %dmetadata['File Name'] in filesnow) and (dmetadata['File Name'] != 'default'):
         filename = dmetadata['File Name']
-        #check if file names ends with -num
-        if '-' in filename:
-            pos = filename.find('-')
-            current_num = int(filename[pos+1:])
-            new_num = current_num + 1
-            new_name = '%s-%s' %(filename[:pos], new_num)
+        samefiles = [f for f in filesnow if f.startswith(filename)]
+        #print (samefiles)
+        samefilesnumbers = []
+        for samefile in samefiles:
+            if '-' in samefile:
+                pos = samefile.find('-')
+                current_num = int(samefile[pos+1:-4])
+                samefilesnumbers.append(current_num)
+
+        #print (samefilesnumbers)
+        if len(samefilesnumbers) == 0:
+            new_name = '%s-2' %filename
 
         else:
-            new_name = '%s-2' %filename
+            maxnumb = max(samefilesnumbers)
+            newnumb = maxnumb + 1
+            new_name = '%s-%s' %(filename, newnumb)
+
 
         dmetadata['File Name'] = new_name
 
