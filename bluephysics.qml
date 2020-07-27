@@ -20,7 +20,6 @@ ApplicationWindow {
 
     property var lqmlchs: [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
 
-
     Item {
         id: mainmenu
         anchors.fill: parent
@@ -358,22 +357,28 @@ ApplicationWindow {
                 onClicked: {
                     axisXtemp.min = 0
                     axisXtemp.max = 60
-                    axisYtemp.min = 23
-                    axisYtemp.max = 23.1
+                    axisYtemp.first = true
                     linetemp.clear()
                     axisXPS.min = 0
                     axisXPS.max = 60
-                    axisYPS.min = 57.5
-                    axisYPS.max = 57.6
+                    axisYPS.first = true
                     linePS.clear()
+                    axisX5V.min = 0
+                    axisX5V.max = 60
+                    axisY5V.first = true
                     line5V.clear()
+                    axisXvref.min = 0
+                    axisXvref.max = 60
+                    axisYvref.first = true
                     linevref.clear()
+                    axisXminus12V.min = 0
+                    axisXminus12V.max = 60
+                    axisYminus12V.first = true
                     lineminus12V.clear()
                     chartviewchs.removeAllSeries()
                     axisXch.min = 0
                     axisXch.max = 60
-                    axisYch.min = -0.5
-                    axisYch.max = 0.5
+                    axisYch.first = true
                     var colors = ['red', 'lightblue', 'lightgreen', 'yellow', 'cyan', 'fuchsia', 'orange', 'lightgrey']
 
                     for (var i = 0; i < 8; i++){
@@ -560,8 +565,7 @@ ApplicationWindow {
 
             ValueAxis {
                 id: axisYch
-                min: 0
-                max: 1
+                property bool first: true
                 titleText: 'Voltage (V)'
             }
 
@@ -746,8 +750,7 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYtemp
-                    min: 22
-                    max: 23
+                    property bool first: true
                     titleText:"Temp. (C)"
                 }
 
@@ -777,8 +780,7 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisY5V
-                    min: 4.5
-                    max: 5.5
+                    property bool first: true
                     titleText:"Voltage (V)"
                 }
 
@@ -808,8 +810,7 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYPS
-                    min: 57.20
-                    max: 57.70
+                    property bool first: true
                     titleText:"Voltage (V)"
                 }
 
@@ -839,8 +840,7 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYminus12V
-                    min: -14
-                    max: -12
+                    property bool first: true
                     titleText:"Voltage (V)"
                 }
 
@@ -870,8 +870,7 @@ ApplicationWindow {
 
                 ValueAxis {
                     id: axisYvref
-                    min: 1.2490
-                    max: 1.2505
+                    property bool first: true
                     titleText:"Voltage (V)"
                 }
 
@@ -889,6 +888,7 @@ ApplicationWindow {
 
     Connections {
         target: listain
+
         property real time
         property real temp
         property real ch0v
@@ -903,8 +903,6 @@ ApplicationWindow {
         property real v5
         property real minus12V
         property real vref
-
-
 
         onSignaldatain: {
             time = lista[0]
@@ -924,44 +922,152 @@ ApplicationWindow {
             }
 
             var temp = lista[1]
-            if (temp > axisYtemp.max) {axisYtemp.max = temp * 1.05}
-            if (temp < axisYtemp.min) {axisYtemp.min = temp * 0.95}
+            if (axisYtemp.first == true) {
+                axisYtemp.min = temp - 0.005
+                axisYtemp.max = temp + 0.005
+                axisYtemp.first = false
+
+            }
+            else {
+                if (temp > axisYtemp.max) {axisYtemp.max = temp + 0.005}
+                if (temp < axisYtemp.min) {axisYtemp.min = temp - 0.005}
+            }
+
+
             var ch0v = -lista[2]  * 20.48 / 65535 + 10.24
-            if (ch0v > axisYch.max) {axisYch.max = ch0v * 1.05}
-            if (ch0v < axisYch.min) {axisYch.min = ch0v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch0v - 0.005
+                axisYch.max = ch0v + 0.005
+            }
+            else {
+                if (ch0v > axisYch.max) {axisYch.max = ch0v + 0.005}
+                if (ch0v < axisYch.min) {axisYch.min = ch0v - 0.005}
+            }
+
             var ch1v = -lista[3]  * 20.48 / 65535 + 10.24
-            if (ch1v > axisYch.max) {axisYch.max = ch1v * 1.05}
-            if (ch1v < axisYch.min) {axisYch.min = ch1v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch1v - 0.005
+                axisYch.max = ch1v + 0.005
+            }
+            else {
+                if (ch1v > axisYch.max) {axisYch.max = ch1v + 0.005}
+                if (ch1v < axisYch.min) {axisYch.min = ch1v - 0.005}
+            }
+
             var ch2v = -lista[4]  * 20.48 / 65535 + 10.24
-            if (ch2v > axisYch.max) {axisYch.max = ch2v * 1.05}
-            if (ch2v < axisYch.min) {axisYch.min = ch2v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch2v - 0.005
+                axisYch.max = ch2v + 0.005
+            }
+            else {
+                if (ch2v > axisYch.max) {axisYch.max = ch2v + 0.005}
+                if (ch2v < axisYch.min) {axisYch.min = ch2v - 0.005}
+            }
+
             var ch3v = -lista[5]  * 20.48 / 65535 + 10.24
-            if (ch3v > axisYch.max) {axisYch.max = ch3v * 1.05}
-            if (ch3v < axisYch.min) {axisYch.min = ch3v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch3v - 0.005
+                axisYch.max = ch3v + 0.005
+            }
+            else {
+                if (ch3v > axisYch.max) {axisYch.max = ch3v + 0.005}
+                if (ch3v < axisYch.min) {axisYch.min = ch3v - 0.005}
+            }
+
             var ch4v = -lista[6]  * 20.48 / 65535 + 10.24
-            if (ch4v > axisYch.max) {axisYch.max = ch4v * 1.05}
-            if (ch4v < axisYch.min) {axisYch.min = ch4v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch4v - 0.005
+                axisYch.max = ch4v + 0.005
+            }
+            else {
+                if (ch4v > axisYch.max) {axisYch.max = ch4v + 0.005}
+                if (ch4v < axisYch.min) {axisYch.min = ch4v - 0.005}
+            }
+
             var ch5v = -lista[7]  * 20.48 / 65535 + 10.24
-            if (ch5v > axisYch.max) {axisYch.max = ch5v * 1.05}
-            if (ch5v < axisYch.min) {axisYch.min = ch5v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch5v - 0.005
+                axisYch.max = ch5v + 0.005
+            }
+            else {
+                if (ch5v > axisYch.max) {axisYch.max = ch5v + 0.005}
+                if (ch5v < axisYch.min) {axisYch.min = ch5v - 0.005}
+            }
+
             var ch6v = -lista[8]  * 20.48 / 65535 + 10.24
-            if (ch6v > axisYch.max) {axisYch.max = ch6v * 1.05}
-            if (ch6v < axisYch.min) {axisYch.min = ch6v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch6v - 0.005
+                axisYch.max = ch6v + 0.005
+            }
+            else {
+                if (ch6v > axisYch.max) {axisYch.max = ch6v + 0.005}
+                if (ch6v < axisYch.min) {axisYch.min = ch6v - 0.005}
+            }
+
+
             var ch7v = -lista[9]  * 20.48 / 65535 + 10.24
-            if (ch7v > axisYch.max) {axisYch.max = ch7v * 1.05}
-            if (ch7v < axisYch.min) {axisYch.min = ch7v * 1.95}
+            if (axisYch.first == true) {
+                axisYch.min = ch7v - 0.005
+                axisYch.max = ch7v + 0.005
+                axisYch.first = false
+            }
+            else {
+                if (ch7v > axisYch.max) {axisYch.max = ch7v + 0.005}
+                if (ch7v < axisYch.min) {axisYch.min = ch7v - 0.005}
+            }
+
+
             var v5 = lista[10] * 0.1875 / 1000
-            if (v5 > axisY5V.max) {axisY5V.max = v5 * 1.05}
-            if (v5 < axisY5V.min) {axisY5V.min = v5 * 0.95}
+            if (axisY5V.first == true) {
+                axisY5V.min = v5 - 0.0005
+                axisY5V.max = v5 + 0.0005
+                axisY5V.first = false
+
+            }
+            else {
+                if (v5 > axisY5V.max) {axisY5V.max = v5 + 0.0005}
+                if (v5 < axisY5V.min) {axisY5V.min = v5 - 0.0005}
+            }
+
+
             var ps = lista[11] * 0.1875 * 16.341 / 1000
-            if (ps > axisYPS.max) {axisYPS.max = ps * 1.05}
-            if (ps < axisYPS.min) {axisYPS.min = ps * 0.95}
+            if (axisYPS.first == true) {
+                axisYPS.min = ps - 0.005
+                axisYPS.max = ps + 0.005
+                axisYPS.first = false
+
+            }
+            else {
+                if (ps > axisYPS.max) {axisYPS.max = ps + 0.005}
+                if (ps < axisYPS.min) {axisYPS.min = ps - 0.005}
+            }
+
+
             var minus12V = lista[12] * 0.1875 * -2.6470 / 1000
-            if (minus12V > axisYminus12V.max) {axisYminus12V.max = minus12V * 1.05}
-            if (minus12V < axisYminus12V.min) {axisYminus12V = minus12V * 0.95}
+            if (axisYminus12V.first == true) {
+                axisYminus12V.min = minus12V - 0.0005
+                axisYminus12V.max = minus12V + 0.0005
+                axisYminus12V.first = false
+
+            }
+            else {
+                if (minus12V > axisYminus12V.max) {axisYminus12V.max = minus12V + 0.0005}
+                if (minus12V < axisYminus12V.min) {axisYminus12V.min = minus12V - 0.0005}
+            }
+
             var vref = lista[13] * 0.0625 / 1000
-            //if (vref > axisYvref.max) {axisYvref.max = vref * 1.05}
-            //if (vref < axisYvref.min) {axisYvref.min = vref * 0.95}
+            if (axisYvref.first == true) {
+                axisYvref.min = vref - 0.00005
+                axisYvref.max = vref + 0.00005
+                axisYvref.first = false
+
+            }
+            else {
+                if (vref > axisYvref.max) {axisYvref.max = vref + 0.00005}
+                if (vref < axisYvref.min) {axisYvref.min = vref - 0.00005}
+            }
+
+
             linetemp.append(time, temp)
             chartviewchs.series('ch0').append(time, ch0v)
             chartviewchs.series('ch1').append(time, ch1v)
