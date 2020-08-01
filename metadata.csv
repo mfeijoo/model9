@@ -1,0 +1,37 @@
+Date Time,11 Jun 2020 15:36:00
+File Name,default
+Adjacent Channels Ratio,1
+Reference Charge,142
+Calibration Factor,1
+Facility,BluePhysics
+Investigator,Marcos
+Integration Time,300
+Operational Mode,Integartor
+Source,LINAC
+Brand,Varian
+Particles,Photons
+Energy,6
+Dose Rate,500
+Gantry,0
+Collimator,0
+Couch,270
+Field Size X1,1.5
+Field Size X2,20
+Field Size Y1,1.5
+Field Size Y2,1.5
+Setup,SAD
+Distance,100
+MU,100
+Sensor 0 Position X,0
+Sensor 0 Position Y,0
+Sensor 0 Position Z,0
+Sensor 1 Position X,0
+Sensor 1 Position Y,0
+Sensor 1 Position Z,0
+Sensor 2 Position X,0
+Sensor 2 Position Y,0
+Sensor 2 Position Z,0
+Sensor 3 Position X,0
+Sensor 3 Position Y,0
+Sensor 3 Position Z,0
+Comments,Testing the new adquisition board
