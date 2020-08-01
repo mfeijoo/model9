@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#branch guitoqml
+#branch master
 
 #from PyQt5 import QtCore
 import sys
@@ -15,6 +15,7 @@ import time
 import serial
 import serial.tools.list_ports
 import pandas as pd
+import numpy as np
 #from PyQt5.QtQuick import QQuickView
 
 #Create the global lists of measurements
@@ -64,45 +65,42 @@ class CH():
         #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
         #subtract zero
         #self.df['measnCz'] = self.df.measnC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measnC'].mean()
-        self.zero = self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measV'].mean()
-        self.df['measVz'] = self.df.measV - self.zero
+        #self.zero = self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measV'].mean()
+        self.df['measVz'] = np.nan
         #self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
         #calculate integral
-        self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measVz'].sum()
+        #self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measVz'].sum()
         #self.integral = self.df.loc[:, 'measz'].sum()
         #put the full plot
         #self.viewplot()
 
         #Now we calculate the integrals of each beam and put it in a list
+        #Calculating the local zero for each beam
         self.listaint = []
         for (st, ft) in zip(starttimes, finishtimes):
-                intbeamn = self.df.loc[(self.df.time>(st-2))&(self.df.time<(ft+2)), 'measVz'].sum()
-                self.listaint.append(float(intbeamn))
+            localzero = self.df.loc[((self.df.time > st-3)&(self.df.time<st-1))|((self.df.time>ft+1)&(self.df.time<ft+3)), 'measV'].mean()
+            self.df.loc[(self.df.time > st-3)&(self.df.time<ft+3), 'measVz'] = self.df.loc[(self.df.time > st-3)&(self.df.time<ft+3), 'measV'] - localzero
+            intbeamn = self.df.loc[(self.df.time>(st-1))&(self.df.time<(ft+1)), 'measVz'].sum()
+            self.listaint.append(float(intbeamn))
+
+        #calculate integral
+        self.integral = self.df.measVz.sum()
 
         print ('%s integrals: %s' %(self.name, self.listaint))
 
 
 class CHQml(QObject):
 
-    zeroChanged = pyqtSignal(float)
     integralChanged = pyqtSignal(float)
     listaintChanged = pyqtSignal(list)
+
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self._integral = 0.0
-        self._zero = 0.0
         self._listaint = []
-
-    @pyqtProperty(float, notify=zeroChanged)
-    def zero(self):
-        return self._zero
-
-    @zero.setter
-    def zero(self, j):
-        if self._zero != j:
-            self._zero = j
-            self.zeroChanged.emit(j)
+        self._listatimes = []
+        self._listavzeros = []
 
     @pyqtProperty(float, notify=integralChanged)
     def integral(self):
@@ -156,10 +154,10 @@ class EmulatorThread(QThread):
         
     def run(self):
         self.stop = False
-        file = open('./rawdata/emulatormeasurements.csv', 'r')
+        file = open('./rawdata/emulatormeasurmentslong.csv', 'r')
         self.lines =  file.readlines()
         file.close()
-        self.ser2 = serial.Serial ('/dev/pts/2', 115200, timeout=1)
+        self.ser2 = serial.Serial ('/dev/pts/3', 115200, timeout=1)
         for line in self.lines:
             self.ser2.write(line.encode())
             #print(line)
@@ -190,28 +188,28 @@ class RegulatePSThread(QThread):
         self.stop = False
 
         #comment next 6 if emulator
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.serreg = serial.Serial(device, 115200, timeout=1)
-        psset = psspinbox.property('realValue')
-        self.serreg.write(('r%.2f,' %psset).encode())
-        print (('r%.2f,' %psset).encode())
-        line = self.serreg.readline().decode().strip().split(',')
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.serreg = serial.Serial(device, 115200, timeout=1)
+        #psset = psspinbox.property('realValue')
+        #self.serreg.write(('r%.2f,' %psset).encode())
+        #print (('r%.2f,' %psset).encode())
+        #line = self.serreg.readline().decode().strip().split(',')
 
         regulateprogressbar.setProperty('value', 0)
 
         value = 0
         #emulator 13 no emulator 5
-        for i in range(5):
+        for i in range(13):
             #comment next 2 if emulator
-            line = self.serreg.readline().decode().strip().split(',')
-            print (line)
+            #line = self.serreg.readline().decode().strip().split(',')
+            #print (line)
             regulateprogressbar.setProperty('value', value)
             value = value + 1
             #comment if not emulator
-            #time.sleep(0.5)
+            time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        while len(line) == 10:
+        '''while len(line) == 10:
 
             if self.stop:
                 break
@@ -219,18 +217,18 @@ class RegulatePSThread(QThread):
             line = self.serreg.readline().decode().strip().split(',')
             regulateprogressbar.setProperty('value', value)
             value = value + 1
-            print (line)
+            print (line)'''
 
         regulateprogressbar.setProperty('value', 13)
         regulateb.setProperty('checked', False)
         #comment if emulator
-        self.serreg.close()
+        #self.serreg.close()
 
 
     def stopping(self):
         self.stop = True
         #comment if emulator
-        self.serreg.close()
+        #self.serreg.close()
         self.wait()
         self.quit()
         print('Regulate PS stopoped')
@@ -246,36 +244,36 @@ class SubtractDcThread(QThread):
 
     def run(self):
         #comment next 3 if emulator
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.ser = serial.Serial(device, 115200, timeout=1)
-        self.ser.write('s'.encode())
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.ser = serial.Serial(device, 115200, timeout=1)
+        #self.ser.write('s'.encode())
         #uncoment if emulator
-        #value = 0
+        value = 0
         for i in range(3):
             #comment next 2 if emulator
-            line = self.ser.readline().decode().strip().split(',')
-            print (line)
+            #line = self.ser.readline().decode().strip().split(',')
+            #print (line)
 
             #change this part for not emulator
-            #sdcprogressbar.setProperty('value', value)
-            #value = value + 1
-            #time.sleep(0.5)
+            sdcprogressbar.setProperty('value', value)
+            value = value + 1
+            time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        while len(line) == 9:
+        '''while len(line) == 9:
             line = self.ser.readline().decode().strip().split(',')
             sdcprogressbar.setProperty('value', int(line[0]))
-            print(line)
+            print(line)'''
 
         sdcprogressbar.setProperty('value', 8)
         subtractdcb.setProperty('checked', False)
         #comment if emulator
-        self.ser.close()
+        #self.ser.close()
 
     def stopping(self):
         self.stop = True
         #comment if emulator
-        self.ser.close()
+        #self.ser.close()
         self.wait()
         self.quit()
         print('measure stopoped')
@@ -294,16 +292,16 @@ class MeasureThread(QThread):
     def run(self):
         self.stop = False
         #emulator
-        #self.ser = serial.Serial ('/dev/pts/3', 115200, timeout=1)
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.ser = serial.Serial (device, 115200, timeout=1)
+        self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        #self.ser = serial.Serial (device, 115200, timeout=1)
         #One reading to discard garbge
         reading0 = self.ser.readline().decode().strip().split(',')
 
         #second reading to check starting time
         #comment if emulator
-        reading1 = self.ser.readline().decode().strip().split(',')
-        tstart = int(reading1[0])
+        #reading1 = self.ser.readline().decode().strip().split(',')
+        #tstart = int(reading1[0])
         
         while True:
             
@@ -315,8 +313,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                #listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
-                listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
+                listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
+                #listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
             except:
@@ -346,7 +344,7 @@ class StopThread(QThread):
 
         #stop the emulator thread
         #comment if not emulator
-        #emulator.stopping()
+        emulator.stopping()
 
         #stop the regulate ps
         if regulateps.isRunning():
@@ -409,8 +407,6 @@ class StopThread(QThread):
             ch.calcintegral(starttimes, finishtimes)
             dqmlchs[key]._integral = ch.integral
             dqmlchs[key]._listaint = ch.listaint
-            dqmlchs[key]._zero = ch.zero
-
 
         #send to qml the limits to plot in chartview
         self.signallimitslists.emit(list(starttimes), list(finishtimes))
@@ -456,7 +452,7 @@ engine.load('bluephysics.qml')
 
 #Create the emulator thread
 #Comment if not emulator
-#emulator = EmulatorThread()
+emulator = EmulatorThread()
 
 #Create the measure thread
 measure = MeasureThread()
@@ -527,7 +523,7 @@ def qmlstart():
 
     #Start the emulator thread
     #Comment if not emulator
-    #emulator.start()
+    emulator.start()
 
     #Start the measurements thread
     measure.start()

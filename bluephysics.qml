@@ -481,6 +481,78 @@ ApplicationWindow {
             theme: ChartView.ChartThemeDark
             legend.visible: false
 
+            ListModel {
+               id: listmodelfullintegrals
+               ListElement {
+                   mycolor: 'red'
+                   fullintegral: 0
+                }
+                ListElement {
+                    mycolor: 'lightblue'
+                    fullintegral: 0
+                }
+                ListElement {
+                    mycolor: 'lightgreen'
+                    fullintegral: 0
+                }
+                ListElement {
+                    mycolor: 'yellow'
+                    fullintegral: 0
+                }
+                ListElement {
+                     mycolor: 'cyan'
+                     fullintegral: 0
+                }
+                ListElement {
+                     mycolor: 'fuchsia'
+                     fullintegral: 0
+                }
+                ListElement {
+                     mycolor: 'orange'
+                     fullintegral: 0
+                }
+                ListElement {
+                     mycolor: 'lightgrey'
+                     fullintegral: 0
+                }
+              }
+
+            ListModel {
+               id: integralsmodel
+               ListElement {
+                   mycolor: 'red'
+                   intvalue: 0
+               }
+               ListElement {
+                   mycolor: 'lightblue'
+                   intvalue: 0
+               }
+               ListElement {
+                    mycolor: 'lightgreen'
+                    intvalue: 0
+               }
+               ListElement {
+                    mycolor: 'yellow'
+                    intvalue: 0
+               }
+               ListElement {
+                    mycolor: 'cyan'
+                    intvalue: 0
+               }
+               ListElement {
+                    mycolor: 'fuchsia'
+                    intvalue: 0
+               }
+               ListElement {
+                    mycolor: 'orange'
+                    intvalue: 0
+               }
+               ListElement {
+                    mycolor: 'lightgrey'
+                    intvalue: 0
+               }
+             }
+
             Item {
                 id: mylegend
                 anchors.left: coordinatestext.right
@@ -492,42 +564,7 @@ ApplicationWindow {
                     spacing: 5
                     Repeater {
                         id: legendlist
-                        model: ListModel {
-                            id: listmodelfullintegrals
-                            ListElement {
-                                mycolor: 'red'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'lightblue'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'lightgreen'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'yellow'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'cyan'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'fuchsia'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'orange'
-                                fullintegral: 0
-                                }
-                            ListElement {
-                                mycolor: 'lightgrey'
-                                fullintegral: 0
-                                }
-                        }
-
+                        model: listmodelfullintegrals
 
                         Item {
                             width: 100
@@ -615,41 +652,8 @@ ApplicationWindow {
                         spacing: 3
                         Repeater {
                             id: intlist
-                            model: ListModel {
-                                id: integralsmodel
-                                ListElement {
-                                    mycolor: 'red'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'lightblue'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'lightgreen'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'yellow'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'cyan'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'fuchsia'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'orange'
-                                    intvalue: 0
-                                }
-                                ListElement {
-                                    mycolor: 'lightgrey'
-                                    intvalue: 0
-                                }
-                            }
+                            model: integralsmodel
+
                             Item {
                                 width: 40
                                 height: 20
@@ -689,8 +693,8 @@ ApplicationWindow {
                                 intbeamsitem.x = mouseX
                                 intbeamsitem.y = mouseY
                                 for (var j = 0; j < 8; j++){
-                                   //console.log('ch' + j + ' object name at ' + i + ' is ' + typeof (lqmlchs[j].listaint[i]))
-                                   integralsmodel.setProperty(j, 'intvalue', lqmlchs[j].listaint[i].toFixed(2))
+                                   //console.log('ch' + j + ' object name at ' + i + ' is ' + typeof (Math.round(lqmlchs[j].listaint[i]*100)/100))
+                                   integralsmodel.setProperty(j, 'intvalue', Math.round(lqmlchs[j].listaint[i] * 100)/100)
                                 }
                             }
                         }
@@ -1091,34 +1095,29 @@ ApplicationWindow {
         onSignallimitsin: {
             console.log('start times 0: ' + starttimes[0])
             console.log('finish times 0: ' + finishtimes[0])
-            //var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
-            for (var m = 0; m < 8; m++){
-                for (var k=0; k < chartviewchs.series('ch'+m).count; k++){
-                    chartviewchs.series('ch'+m).replace(chartviewchs.series('ch'+m).at(k).x, chartviewchs.series('ch'+m).at(k).y, chartviewchs.series('ch'+m).at(k).x, chartviewchs.series('ch' + m).at(k).y - lqmlchs[m].zero)
-                }
-            }
+            var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
 
             for (var i = 0; i < starttimes.length; i++){
                 var starlimit = chartviewchs.createSeries(ChartView.SeriesTypeLine, 'start' + i, axisXch, axisYch)
                 starlimit.color = 'lightgreen'
                 starlimit.style = Qt.DashLine
-                starlimit.append (starttimes[i] - 2, axisYch.min)
-                starlimit.append (starttimes[i] - 2 , axisYch.max)
+                starlimit.append (starttimes[i] - 1, axisYch.min)
+                starlimit.append (starttimes[i] - 1 , axisYch.max)
             }
 
             for (var j = 0; j < finishtimes.length; j++){
                 var finishlimit = chartviewchs.createSeries(ChartView.SeriesTypeLine, 'finish' + j, axisXch, axisYch)
                 finishlimit.color = 'lightsalmon'
                 finishlimit.style = Qt.DashLine
-                finishlimit.append (finishtimes[j] + 2, axisYch.min)
-                finishlimit.append (finishtimes[j] + 2 , axisYch.max)
+                finishlimit.append (finishtimes[j] + 1, axisYch.min)
+                finishlimit.append (finishtimes[j] + 1 , axisYch.max)
             }
 
             axisYch.min = 0
             ma.starttimes = starttimes
             ma.finishtimes = finishtimes
             for (var x = 0; x < 8; x++){
-                listmodelfullintegrals.setProperty(x, 'fullintegral', lqmlchs[x].integral.toFixed(2))
+                listmodelfullintegrals.setProperty(x, 'fullintegral', Math.round(lqmlchs[x].integral * 100)/100 )
             }
 
         }
