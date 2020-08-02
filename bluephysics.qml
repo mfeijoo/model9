@@ -162,7 +162,6 @@ ApplicationWindow {
             height: 100
             Row {
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
 
                 TextInput {
                     id: filename
@@ -174,6 +173,115 @@ ApplicationWindow {
                 }
                 Text {text: '.csv'; color: 'lightgrey'}
            }
+        }
+
+        GroupBox {
+            id: controllergroupbox
+            title: 'Controller Settings'
+            anchors.left: parent.left
+            anchors.leftMargin: 12
+            anchors.top: savefilegroupbox.bottom
+            anchors.topMargin: 12
+            width: 300
+            height: 250
+
+
+            GroupBox {
+                id: integrationtimegroupbox
+                title: 'Integration Time (ms)'
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 100
+
+
+                 SpinBox {
+                     id: integrationtimespinbox
+                     objectName: 'integrationtimespinbox'
+                     anchors.fill: parent
+                     from: 0
+                     to: 1000
+                     value: 300
+                     editable: true
+                  }
+                }
+
+                Switch {
+                     id: integrationpulseswitch
+                     objectName: 'integrationpulseswitch'
+                     anchors.left: parent.left
+                     anchors.right: parenet.right
+                     anchors.top: integrationtimegroupbox.bottom
+                     checked: true
+                     text: checked ? qsTr("Integration Mode") : qsTr("Pulse Mode")
+                }
+
+                Button {
+                    id: sendtocontroller
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: integrationpulseswitch.bottom
+                    text: qsTr("Send to Controller")
+                }
+        }
+
+        GroupBox {
+            id: sensorsinfo
+            title: qsTr("Sensors Information")
+            anchors.top: parent.top
+            anchors.topMargin: 12
+            anchors.left: savefilegroupbox.right
+            anchors.leftMargin: 12
+            anchors.bottom: controllergroupbox.bottom
+            width: 800
+
+            Grid {
+                anchors.fill: parent
+                columns: 8
+                rows: 5
+
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("Pair")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("Ch Sensor")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("Ch Cherenkov")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("ACR")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("Calib. (cGy/nC)")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("X pos. (cm)")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("Y pos. (cm)")}
+                }
+                Rectangle {
+                    width: 100
+                    height: 40
+                    Text {text: qsTr("Z pos. (cm)")}
+                }
+            }
+
         }
     }
 
@@ -294,8 +402,8 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.top: regulatebutton.bottom
                     anchors.topMargin: 6
-                    from: 0
-                    to: 13
+                    from: 50
+                    to: psspinbox.realValue
                 }
             }
 
