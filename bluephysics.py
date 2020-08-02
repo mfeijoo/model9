@@ -9,8 +9,9 @@ os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Material"
 #print (os.environ)
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QThread, pyqtSignal, QObject, pyqtSlot, pyqtProperty
+from PyQt5.QtCore import QThread, pyqtSignal, QObject, pyqtSlot, pyqtProperty, QPointF
 from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt5.QtChart import QXYSeries
 import time
 import serial
 import serial.tools.list_ports
@@ -86,6 +87,8 @@ class CH():
         #calculate integral
         self.integral = self.df.measVz.sum()
 
+        self.dftoplot = self.df.dropna()
+
         print ('%s integrals: %s' %(self.name, self.listaint))
 
 
@@ -99,8 +102,8 @@ class CHQml(QObject):
         super().__init__(parent)
         self._integral = 0.0
         self._listaint = []
-        self._listatimes = []
-        self._listavzeros = []
+        self.listatimes = []
+        self.listavzeros = []
 
     @pyqtProperty(float, notify=integralChanged)
     def integral(self):
@@ -121,6 +124,11 @@ class CHQml(QObject):
         if self._listaint != li:
             self._listaint = li
             self.listaintChanged.emit(li)
+
+    @pyqtSlot(QXYSeries)
+    def update_serie(self, serie):
+        points = [QPointF(x,y) for (x,y) in zip(self.listatimes, self.listavzeros)]
+        serie.replace(points)
 
 
 
@@ -188,28 +196,28 @@ class RegulatePSThread(QThread):
         self.stop = False
 
         #comment next 6 if emulator
-        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        #self.serreg = serial.Serial(device, 115200, timeout=1)
-        #psset = psspinbox.property('realValue')
-        #self.serreg.write(('r%.2f,' %psset).encode())
-        #print (('r%.2f,' %psset).encode())
-        #line = self.serreg.readline().decode().strip().split(',')
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.serreg = serial.Serial(device, 115200, timeout=1)
+        psset = psspinbox.property('realValue')
+        self.serreg.write(('r%.2f,' %psset).encode())
+        print (('r%.2f,' %psset).encode())
+        line = self.serreg.readline().decode().strip().split(',')
 
         regulateprogressbar.setProperty('value', 0)
 
         value = 0
         #emulator 13 no emulator 5
-        for i in range(13):
+        for i in range(5):
             #comment next 2 if emulator
-            #line = self.serreg.readline().decode().strip().split(',')
-            #print (line)
+            line = self.serreg.readline().decode().strip().split(',')
+            print (line)
             regulateprogressbar.setProperty('value', value)
             value = value + 1
             #comment if not emulator
-            time.sleep(0.5)
+            #time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        '''while len(line) == 10:
+        while len(line) == 10:
 
             if self.stop:
                 break
@@ -217,18 +225,18 @@ class RegulatePSThread(QThread):
             line = self.serreg.readline().decode().strip().split(',')
             regulateprogressbar.setProperty('value', value)
             value = value + 1
-            print (line)'''
+            print (line)
 
         regulateprogressbar.setProperty('value', 13)
         regulateb.setProperty('checked', False)
         #comment if emulator
-        #self.serreg.close()
+        self.serreg.close()
 
 
     def stopping(self):
         self.stop = True
         #comment if emulator
-        #self.serreg.close()
+        self.serreg.close()
         self.wait()
         self.quit()
         print('Regulate PS stopoped')
@@ -244,36 +252,36 @@ class SubtractDcThread(QThread):
 
     def run(self):
         #comment next 3 if emulator
-        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        #self.ser = serial.Serial(device, 115200, timeout=1)
-        #self.ser.write('s'.encode())
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.ser = serial.Serial(device, 115200, timeout=1)
+        self.ser.write('s'.encode())
         #uncoment if emulator
-        value = 0
+        #value = 0
         for i in range(3):
             #comment next 2 if emulator
-            #line = self.ser.readline().decode().strip().split(',')
-            #print (line)
+            line = self.ser.readline().decode().strip().split(',')
+            print (line)
 
             #change this part for not emulator
-            sdcprogressbar.setProperty('value', value)
-            value = value + 1
-            time.sleep(0.5)
+            #sdcprogressbar.setProperty('value', value)
+            #value = value + 1
+            #time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        '''while len(line) == 9:
+        while len(line) == 9:
             line = self.ser.readline().decode().strip().split(',')
             sdcprogressbar.setProperty('value', int(line[0]))
-            print(line)'''
+            print(line)
 
         sdcprogressbar.setProperty('value', 8)
         subtractdcb.setProperty('checked', False)
         #comment if emulator
-        #self.ser.close()
+        self.ser.close()
 
     def stopping(self):
         self.stop = True
         #comment if emulator
-        #self.ser.close()
+        self.ser.close()
         self.wait()
         self.quit()
         print('measure stopoped')
@@ -292,16 +300,16 @@ class MeasureThread(QThread):
     def run(self):
         self.stop = False
         #emulator
-        self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
-        #device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        #self.ser = serial.Serial (device, 115200, timeout=1)
+        #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        self.ser = serial.Serial (device, 115200, timeout=1)
         #One reading to discard garbge
         reading0 = self.ser.readline().decode().strip().split(',')
 
         #second reading to check starting time
         #comment if emulator
-        #reading1 = self.ser.readline().decode().strip().split(',')
-        #tstart = int(reading1[0])
+        reading1 = self.ser.readline().decode().strip().split(',')
+        tstart = int(reading1[0])
         
         while True:
             
@@ -313,8 +321,8 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
-                #listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
+                #listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
+                listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
             except:
@@ -344,7 +352,7 @@ class StopThread(QThread):
 
         #stop the emulator thread
         #comment if not emulator
-        emulator.stopping()
+        #emulator.stopping()
 
         #stop the regulate ps
         if regulateps.isRunning():
@@ -407,6 +415,8 @@ class StopThread(QThread):
             ch.calcintegral(starttimes, finishtimes)
             dqmlchs[key]._integral = ch.integral
             dqmlchs[key]._listaint = ch.listaint
+            dqmlchs[key].listatimes = ch.dftoplot.time.tolist()
+            dqmlchs[key].listavzeros = ch.dftoplot.measVz.tolist()
 
         #send to qml the limits to plot in chartview
         self.signallimitslists.emit(list(starttimes), list(finishtimes))
@@ -452,7 +462,7 @@ engine.load('bluephysics.qml')
 
 #Create the emulator thread
 #Comment if not emulator
-emulator = EmulatorThread()
+#emulator = EmulatorThread()
 
 #Create the measure thread
 measure = MeasureThread()
@@ -523,7 +533,7 @@ def qmlstart():
 
     #Start the emulator thread
     #Comment if not emulator
-    emulator.start()
+    #emulator.start()
 
     #Start the measurements thread
     measure.start()

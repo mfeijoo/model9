@@ -1120,6 +1120,10 @@ ApplicationWindow {
                 listmodelfullintegrals.setProperty(x, 'fullintegral', Math.round(lqmlchs[x].integral * 100)/100 )
             }
 
+            for (var k = 0; k < 8; k++){
+                lqmlchs[k].update_serie(chartviewchs.series('ch' + k))
+            }
+
         }
     }
 
