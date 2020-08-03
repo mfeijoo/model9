@@ -218,6 +218,7 @@ ApplicationWindow {
 
                 Button {
                     id: sendtocontroller
+                    objectName: 'sendtocontrollerbt'
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: integrationpulseswitch.bottom

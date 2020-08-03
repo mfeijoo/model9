@@ -17,6 +17,7 @@ import serial
 import serial.tools.list_ports
 import pandas as pd
 import numpy as np
+import atexit
 #from PyQt5.QtQuick import QQuickView
 
 #Create the global lists of measurements
@@ -542,6 +543,26 @@ def qmlstart():
     #Start the measurements thread
     measure.start()
 
+def qmlsendtocontroller():
+    device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+    serc = serial.Serial(device, 115200, timeout=1)
+    inttime = integrationtimespinbox.property('value')
+    intpulse = integrationpulseswitch.property('text')
+    texttosend = 'c%s,%s' %(inttime, intpulse[0])
+    print (texttosend.encode())
+    dmetadata['Integration Time'] = inttime
+    dmetadata['Operational Mode'] = intpulse
+    serc.write(texttosend.encode())
+    serc.close()
+
+def goodbye():
+    print ('bye')
+    metadatafile = open('metadata.csv', 'w')
+    for key in metadatakeylist:
+        metadatafile.write('%s,%s\n' %(key, dmetadata[key]))
+        #print ('%s,%s\n' %(key, dmetadata[key]))
+    metadatafile.close()
+
 
 #Create an object from qml linked to the start button
 startb = engine.rootObjects()[0].findChild(QObject, 'startbutton')
@@ -568,6 +589,20 @@ subtractdcb = engine.rootObjects()[0].findChild(QObject, 'subtractdcb')
 subtractdcb.clicked.connect(mysubtractdc.start)
 
 sdcprogressbar = engine.rootObjects()[0].findChild(QObject, 'sdcprogressbar')
+
+integrationtimespinbox = engine.rootObjects()[0].findChild(QObject, 'integrationtimespinbox')
+integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
+
+integrationpulseswitch = engine.rootObjects()[0].findChild(QObject, 'integrationpulseswitch')
+if dmetadata['Operational Mode'] == 'Pulse Mode':
+    integrationpulseswitch.setProperty('checked', False)
+else:
+    integrationpulseswitch.setProperty('checked', True)
+
+sendtocontrollerbt = engine.rootObjects()[0].findChild(QObject, 'sendtocontrollerbt')
+sendtocontrollerbt.clicked.connect(qmlsendtocontroller)
+
+atexit.register(goodbye)
 
 
 #Close qml engine if the app is closed
