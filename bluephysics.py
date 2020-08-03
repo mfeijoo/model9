@@ -61,19 +61,8 @@ class CH():
         except IndexError:
             self.ts = self.time[0]
             self.tf = self.time[-1]
-        #correct temperature
-        #self.df['meastc'] = self.df.loc[self.df.meas<1, 'meas'] - 0.2318 * (self.df.loc[self.df.meas<1, 'temp'] - 27)
-        #self.df.loc[self.df.meas>=1, 'meastc'] = self.df.loc[self.df.meas>=1, 'meas'] - 0.087 * (self.df.loc[self.df.meas>=1, 'temp'] -27)
-        #subtract zero
-        #self.df['measnCz'] = self.df.measnC - self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measnC'].mean()
-        #self.zero = self.df.loc[(self.df.time<(self.ts-2))|(self.df.time>(self.tf+2)), 'measV'].mean()
+
         self.df['measVz'] = np.nan
-        #self.df['measz'] = self.df.meas - self.df.loc[self.df.time < 5, 'meas'].mean()
-        #calculate integral
-        #self.integral = self.df.loc[(self.df.time>(self.ts-2))&(self.df.time<(self.tf+2)), 'measVz'].sum()
-        #self.integral = self.df.loc[:, 'measz'].sum()
-        #put the full plot
-        #self.viewplot()
 
         #Now we calculate the integrals of each beam and put it in a list
         #Calculating the local zero for each beam
@@ -89,7 +78,7 @@ class CH():
 
         self.dftoplot = self.df.dropna()
 
-        print ('%s integrals: %s' %(self.name, self.listaint))
+        #print ('%s integrals: %s' %(self.name, self.listaint))
 
 
 class CHQml(QObject):
@@ -179,7 +168,7 @@ class EmulatorThread(QThread):
         self.stop = True
         self.wait()
         self.quit()
-        print ('emulator stopped')
+        #print ('emulator stopped')
 
 
 class RegulatePSThread(QThread):
@@ -197,7 +186,7 @@ class RegulatePSThread(QThread):
 
         #comment next 6 if emulator
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.serreg = serial.Serial(device, 115200, timeout=1)
+        self.serreg = serial.Serial(device, 115200, timeout=2)
         psset = psspinbox.property('realValue')
         self.serreg.write(('r%.2f,' %psset).encode())
         print (('r%.2f,' %psset).encode())
@@ -205,29 +194,31 @@ class RegulatePSThread(QThread):
 
         regulateprogressbar.setProperty('value', 0)
 
-        value = 0
+
         #emulator 13 no emulator 5
         for i in range(5):
             #comment next 2 if emulator
             line = self.serreg.readline().decode().strip().split(',')
             print (line)
-            regulateprogressbar.setProperty('value', value)
-            value = value + 1
+            if len(line) == 6:
+                value = float(line[-1])
+                regulateprogressbar.setProperty('value', value)
             #comment if not emulator
             #time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        while len(line) == 10:
+        while (len(line) == 6):
 
             if self.stop:
                 break
 
             line = self.serreg.readline().decode().strip().split(',')
+            value = float(line[-1])
             regulateprogressbar.setProperty('value', value)
-            value = value + 1
             print (line)
 
-        regulateprogressbar.setProperty('value', 13)
+        print ('Regulating PS is done')
+        #regulateprogressbar.setProperty('value', 13)
         regulateb.setProperty('checked', False)
         #comment if emulator
         self.serreg.close()
@@ -239,7 +230,7 @@ class RegulatePSThread(QThread):
         self.serreg.close()
         self.wait()
         self.quit()
-        print('Regulate PS stopoped')
+        #print('Regulate PS stopoped')
 
 
 class SubtractDcThread(QThread):
@@ -260,7 +251,7 @@ class SubtractDcThread(QThread):
         for i in range(3):
             #comment next 2 if emulator
             line = self.ser.readline().decode().strip().split(',')
-            print (line)
+            #print (line)
 
             #change this part for not emulator
             #sdcprogressbar.setProperty('value', value)
@@ -271,7 +262,7 @@ class SubtractDcThread(QThread):
         while len(line) == 9:
             line = self.ser.readline().decode().strip().split(',')
             sdcprogressbar.setProperty('value', int(line[0]))
-            print(line)
+            #print(line)
 
         sdcprogressbar.setProperty('value', 8)
         subtractdcb.setProperty('checked', False)
@@ -284,7 +275,7 @@ class SubtractDcThread(QThread):
         self.ser.close()
         self.wait()
         self.quit()
-        print('measure stopoped')
+        #print('measure stopoped')
 
 
 class MeasureThread(QThread):
@@ -303,10 +294,12 @@ class MeasureThread(QThread):
         #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
         device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
         self.ser = serial.Serial (device, 115200, timeout=1)
-        #One reading to discard garbge
+        #readings to discard garbge
         reading0 = self.ser.readline().decode().strip().split(',')
+        while len(reading0) == 6:
+            print (self.ser.readline().decode().strip().split(','))
 
-        #second reading to check starting time
+        #next reading to check starting time
         #comment if emulator
         reading1 = self.ser.readline().decode().strip().split(',')
         tstart = int(reading1[0])
@@ -325,8 +318,10 @@ class MeasureThread(QThread):
                 listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
-            except:
+            except (TypeError, ValueError):
                 pass
+
+
 
 
     def stopping(self):
@@ -334,7 +329,7 @@ class MeasureThread(QThread):
         self.ser.close()
         self.wait()
         self.quit()
-        print('measure stopoped')
+        #print('measure stopoped')
     
 #This is the function to be executed when clicking
 #stop button in qml
@@ -404,9 +399,9 @@ class StopThread(QThread):
         dfftimes =  dffchanges[dffchanges.timediff > 0.5].copy()
         #print (dfftimes.head())
         starttimes = dfftimes.loc[dfftimes.chdiff < 0, 'time']
-        print (starttimes)
+        #print (starttimes)
         finishtimes = dfftimes.loc[dfftimes.chdiff > 0, 'time']
-        print (finishtimes)
+        #print (finishtimes)
 
         #Calculate the integrals in each region
         #and update the information in the dqmlchs objects
@@ -556,7 +551,7 @@ regulateb.clicked.connect(regulateps.start)
 psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
 
 filenamefromqml = engine.rootObjects()[0].findChild(QObject, 'filename')
-print (filenamefromqml)
+#print (filenamefromqml)
 
 regulateprogressbar = engine.rootObjects()[0].findChild(QObject, 'regulateprogressbar')
 

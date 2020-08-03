@@ -93,7 +93,7 @@ void setup() {
   TC1->COUNT16.CC[0].reg = 19999;                    // Use CC0 register as TOP value, set for 50Hz PWM
   while (TC1->COUNT16.SYNCBUSY.bit.CC0);             // Wait for synchronization
 
-  TC1->COUNT16.CC[1].reg = 14999;                     // Set the duty cycle to 50% (CC1 half of CC0)
+  TC1->COUNT16.CC[1].reg = 14999;                     // Set the duty cycle to 100% (CC1 half of CC0)
   while (TC1->COUNT16.SYNCBUSY.bit.CC1);             // Wait for synchronization
 
   TC1->COUNT16.CTRLA.bit.ENABLE = 1;                 // Enable timer TC1
@@ -169,7 +169,7 @@ void setup() {
   digitalWrite (psonoffpin, LOW);
 
   //Setpot for the first time
-  setpot(500);
+  setpot(1);
   
   //Then wait 2 seconds and turn on the Power Suplly
   delay(2000);
@@ -495,40 +495,43 @@ void setvoltdc(int ch, unsigned int dcvch){
 
 void regulatePS(){
   //measure PS once
-  potlow = 0;
-  pothigh = 1023;
-  potnow = 512;
+  //potlow = 0;
+  //pothigh = 1023;
+  potnow = 255;
   setpot(potnow);
+  delay (1000);
   readPS();
 
 
   while (!((PSV <= (setvolt + 0.006)) && (PSV >= (setvolt - 0.006)))){
-    if (pothigh - potlow == 1){
+    /*if (pothigh - potlow == 1){
       break;
-    }
+    }*/
     led.setPixelColor(0, colorred); //Dot star orange blinking 
     led.show();                        //indicates regulating PS
     //voltage is too high
     if (PSV > (setvolt + 0.006)){
-      pothigh = potnow;
+      //pothigh = potnow;
+      potnow = potnow - 1;
     }
     //voltage is too low
     else if (PSV < (setvolt - 0.006)){
-      potlow = potnow;
+      //potlow = potnow;
+      potnow = potnow + 1;
     }
-    potnow = int((potlow + pothigh) / 2);
+    //potnow = int((potlow + pothigh) / 2);
     setpot(potnow);
     readPS();
     led.setPixelColor(0, coloroff);
     led.show();
     Serial.print("setvolt,");
     Serial.print(setvolt, 2);
-    Serial.print(",pothigh,");
-    Serial.print(pothigh);
+    //Serial.print(",pothigh,");
+    //Serial.print(pothigh);
     Serial.print(",potnow,");
     Serial.print(potnow);
-    Serial.print(",potlow,");
-    Serial.print(potlow);
+    //Serial.print(",potlow,");
+    //Serial.print(potlow);
     Serial.print(",PS,");
     Serial.println(PSV, 4);
     //digitalWrite (ledpin, HIGH);
@@ -558,7 +561,7 @@ void setpot(int x) {
   SPI.transfer16(0x400 | x);
   digitalWrite(CSpotpin, HIGH);
   SPI.endTransaction();
-  delay(500);
+  delay(1000);
 }
 
 //function to substract dark current

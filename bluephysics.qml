@@ -294,8 +294,8 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.top: regulatebutton.bottom
                     anchors.topMargin: 6
-                    from: 0
-                    to: 13
+                    from: 56.4
+                    to: psspinbox.realValue
                 }
             }
 
