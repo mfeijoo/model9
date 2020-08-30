@@ -52,8 +52,8 @@ class CH():
 
     def calcintegral(self, starttimes, finishtimes):
         self.df = pd.DataFrame({'time':self.time, 'meas':self.meas, 'temp':self.temp})
-        self.df['measV'] = (-(self.df.meas * 20.48/65535) + 10.24)
-        #self.df['measnC'] = (-(self.df.meas * 20.48/65535) + 10.24) * 1.8
+        #self.df['measV'] = (-(self.df.meas * 20.48/65535) + 10.24)
+        self.df['measA'] = (-(self.df.meas * 20.48/65535) + 10.24) * 1.8 / (int(dmetadata['Integration Time']) * 1e-3)
         #Calculate start and end of radiation
         #self.df['measdiff'] = self.df.meas.diff()
         try:
@@ -63,19 +63,20 @@ class CH():
             self.ts = self.time[0]
             self.tf = self.time[-1]
 
-        self.df['measVz'] = np.nan
+        #self.df['measVz'] = np.nan
+        self.df['measAz'] = np.nan
 
         #Now we calculate the integrals of each beam and put it in a list
         #Calculating the local zero for each beam
         self.listaint = []
         for (st, ft) in zip(starttimes, finishtimes):
-            localzero = self.df.loc[((self.df.time > st-3)&(self.df.time<st-1))|((self.df.time>ft+1)&(self.df.time<ft+3)), 'measV'].mean()
-            self.df.loc[(self.df.time > st-3)&(self.df.time<ft+3), 'measVz'] = self.df.loc[(self.df.time > st-3)&(self.df.time<ft+3), 'measV'] - localzero
-            intbeamn = self.df.loc[(self.df.time>(st-1))&(self.df.time<(ft+1)), 'measVz'].sum()
+            localzero = self.df.loc[((self.df.time > st-3)&(self.df.time<st-1))|((self.df.time>ft+1)&(self.df.time<ft+3)), 'measA'].mean()
+            self.df.loc[(self.df.time > st-3)&(self.df.time<ft+3), 'measAz'] = self.df.loc[(self.df.time > st-3)&(self.df.time<ft+3), 'measA'] - localzero
+            intbeamn = self.df.loc[(self.df.time>(st-1))&(self.df.time<(ft+1)), 'measAz'].sum() * (int(dmetadata['Integration Time']) * 1e-3)
             self.listaint.append(float(intbeamn))
 
         #calculate integral
-        self.integral = self.df.measVz.sum()
+        self.integral = self.df.measAz.sum() * (int(dmetadata['Integration Time']) * 1e-3)
 
         self.dftoplot = self.df.dropna()
 
@@ -421,7 +422,8 @@ class StopThread(QThread):
             dqmlchs[key]._integral = ch.integral
             dqmlchs[key]._listaint = ch.listaint
             dqmlchs[key].listatimes = ch.dftoplot.time.tolist()
-            dqmlchs[key].listavzeros = ch.dftoplot.measVz.tolist()
+            #dqmlchs[key].listavzeros = ch.dftoplot.measVz.tolist()
+            dqmlchs[key].listavzeros = ch.dftoplot.measAz.tolist()
 
         #send to qml the limits to plot in chartview
         self.signallimitslists.emit(list(starttimes), list(finishtimes))
@@ -487,6 +489,27 @@ listmetadata = [pair.split(',') for pair in metadatafile.readlines()]
 metadatakeylist = [key for [key, value] in listmetadata]
 metadatafile.close()
 dmetadata = {key:value.strip() for [key,value] in listmetadata}
+
+def from_gui_to_dic():
+    dmetadata['Power Supply'] = str(psspinbox.property('value')/100)
+    dmetadata['Integration Time'] = str(integrationtimespinbox.property('value'))
+
+def from_dic_to_gui():
+    #print ('set psspintbox value property to: %s' %dmetadata['Power Supply'])
+    psspinbox.setProperty('value', float(dmetadata['Power Supply']) * 100)
+    integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
+
+
+#Create an object from qml linked to the integration time spinbox
+integrationtimespinbox = engine.rootObjects()[0].findChild(QObject, 'integrationtimespinbox')
+integrationtimespinbox.valueModified.connect(from_gui_to_dic)
+
+#Create an object from qml linked to the power supply spinbox
+psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
+psspinbox.valueModified.connect(from_gui_to_dic)
+
+#Now form dmetadata dic update the GUI
+from_dic_to_gui()
 
 
 #This is the function to be excuted when clicking
@@ -577,8 +600,6 @@ stopb.clicked.connect(mystopthread.start)
 
 regulateb = engine.rootObjects()[0].findChild(QObject, 'regulatebutton')
 regulateb.clicked.connect(regulateps.start)
-
-psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
 
 filenamefromqml = engine.rootObjects()[0].findChild(QObject, 'filename')
 #print (filenamefromqml)

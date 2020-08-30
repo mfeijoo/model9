@@ -153,7 +153,7 @@ ApplicationWindow {
 
         GroupBox {
             id: savefilegroupbox
-            title: 'File. Save as:'
+            title: 'Save as:'
             anchors.left: parent.left
             anchors.leftMargin: 12
             anchors.top: parent.top
@@ -210,7 +210,7 @@ ApplicationWindow {
                      id: integrationpulseswitch
                      objectName: 'integrationpulseswitch'
                      anchors.left: parent.left
-                     anchors.right: parenet.right
+                     anchors.right: parent.right
                      anchors.top: integrationtimegroupbox.bottom
                      checked: true
                      text: checked ? qsTr("Integration Mode") : qsTr("Pulse Mode")
@@ -234,53 +234,804 @@ ApplicationWindow {
             anchors.left: savefilegroupbox.right
             anchors.leftMargin: 12
             anchors.bottom: controllergroupbox.bottom
-            width: 800
+            width: 1020
 
-            Grid {
-                anchors.fill: parent
+            GridLayout {
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
                 columns: 8
-                rows: 5
 
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("Pair")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("Pair")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("Ch Sensor")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("Ch. Sensor")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("Ch Cherenkov")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("Ch. Cher.")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("ACR")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("ACR")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("Calib. (cGy/nC)")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("Calib (cGy/nC)")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("X pos. (cm)")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("X (cm)")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("Y pos. (cm)")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("Y (cm)")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
                 Rectangle {
-                    width: 100
+                    width: 120
                     height: 40
-                    Text {text: qsTr("Z pos. (cm)")}
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("Z (cm)")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+
                 }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("0")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 1
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: acr0
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(acr0.from, acr0.to)
+                            top: Math.max(acr0.from, acr0.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', acr0.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: calib0
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(calib0.from, calib0.to)
+                            top: Math.max(calib0.from, calib0.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', calib0.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: x0
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(x0.from, x0.to)
+                            top: Math.max(x0.from, x0.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', x0.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: y0
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(y0.from, y0.to)
+                            top: Math.max(y0.from, y0.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', y0.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: z0
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(z0.from, z0.to)
+                            top: Math.max(z0.from, z0.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', z0.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("1")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 2
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 3
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: acr1
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(acr1.from, acr1.to)
+                            top: Math.max(acr1.from, acr1.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', acr1.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: calib1
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(calib1.from, calib1.to)
+                            top: Math.max(calib1.from, calib1.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', calib1.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: x1
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(x1.from, x1.to)
+                            top: Math.max(x1.from, x1.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', x1.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: y1
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(y1.from, y1.to)
+                            top: Math.max(y1.from, y1.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', y1.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: z1
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(z1.from, z1.to)
+                            top: Math.max(z1.from, z1.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', z1.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("2")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 4
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 5
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: acr2
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(acr2.from, acr2.to)
+                            top: Math.max(acr2.from, acr2.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', acr2.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: calib2
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(calib2.from, calib2.to)
+                            top: Math.max(calib2.from, calib2.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', calib2.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: x2
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(x2.from, x2.to)
+                            top: Math.max(x2.from, x2.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', x2.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: y2
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(y2.from, y2.to)
+                            top: Math.max(y2.from, y2.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', y2.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: z2
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(z2.from, z2.to)
+                            top: Math.max(z2.from, z2.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', z2.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    border.color: 'lightgrey'
+                    Text {
+                        text: qsTr("3")
+                        color: 'lightgrey'
+                        anchors.centerIn: parent
+                    }
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 6
+                }
+                ComboBox {
+                    width: 120
+                    height: 40
+                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    currentIndex: 7
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: acr3
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(acr3.from, acr3.to)
+                            top: Math.max(acr3.from, acr3.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', acr3.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: calib3
+                        from: 0
+                        value: 1000
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 3
+                        property real realValue: value / 1000
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(calib3.from, calib3.to)
+                            top: Math.max(calib3.from, calib3.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 1000).toLocaleString(locale, 'f', calib3.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 1000
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: x3
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(x3.from, x3.to)
+                            top: Math.max(x3.from, x3.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', x3.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: y3
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(y3.from, y3.to)
+                            top: Math.max(y3.from, y3.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', y3.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+                Rectangle {
+                    width: 120
+                    height: 40
+                    color: 'transparent'
+                    SpinBox {
+                        id: z3
+                        from: -2000
+                        value: 0
+                        to: 2000
+                        stepSize: 1
+                        editable: true
+                        anchors.fill: parent
+                        font.pointSize: 10
+
+                        property int decimals: 2
+                        property real realValue: value / 100
+
+                        validator: DoubleValidator {
+                            bottom: Math.min(z3.from, z3.to)
+                            top: Math.max(z3.from, z3.to)
+                        }
+
+                        textFromValue: function(value, locale) {
+                            return Number(value / 100).toLocaleString(locale, 'f', z3.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * 100
+                        }
+                     }
+                }
+
+
+
+
             }
 
         }
@@ -699,6 +1450,12 @@ ApplicationWindow {
 
 
                     }
+
+                    Text {
+                        id: unitsfullintegrals
+                        text: '(nC)'
+                        color: 'lightgrey'
+                    }
                 }
             }
 
@@ -712,7 +1469,8 @@ ApplicationWindow {
             ValueAxis {
                 id: axisYch
                 property bool first: true
-                titleText: 'Voltage (V)'
+                //titleText: 'Voltage (V)'
+                titleText: 'Amp. (nA)'
             }
 
 
@@ -784,6 +1542,13 @@ ApplicationWindow {
                                     }
                                 }
                             }
+                        }
+
+                        Text {
+                            id: integralsunits
+                            text: '(nC)'
+                            color: 'lightgrey'
+
                         }
                     }
                 }
@@ -1004,14 +1769,14 @@ ApplicationWindow {
 
         property real time
         property real temp
-        property real ch0v
-        property real ch1v
-        property real ch2v
-        property real ch3v
-        property real ch4v
-        property real ch5v
-        property real ch6v
-        property real ch7v
+        property real ch0
+        property real ch1
+        property real ch2
+        property real ch3
+        property real ch4
+        property real ch5
+        property real ch6
+        property real ch7
         property real ps
         property real v5
         property real minus12V
@@ -1047,86 +1812,94 @@ ApplicationWindow {
             }
 
 
-            var ch0v = -lista[2]  * 20.48 / 65535 + 10.24
+            //var ch0 = -lista[2]  * 20.48 / 65535 + 10.24
+            var ch0 = (-lista[2]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch0v - 0.005
-                axisYch.max = ch0v + 0.005
+                axisYch.min = ch0 - 0.005
+                axisYch.max = ch0 + 0.005
             }
             else {
-                if (ch0v > axisYch.max) {axisYch.max = ch0v + 0.005}
-                if (ch0v < axisYch.min) {axisYch.min = ch0v - 0.005}
+                if (ch0 > axisYch.max) {axisYch.max = ch0 + 0.005}
+                if (ch0 < axisYch.min) {axisYch.min = ch0 - 0.005}
             }
 
-            var ch1v = -lista[3]  * 20.48 / 65535 + 10.24
+           //var ch1 = -lista[3]  * 20.48 / 65535 + 10.24
+            var ch1 = (-lista[3]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch1v - 0.005
-                axisYch.max = ch1v + 0.005
+                axisYch.min = ch1 - 0.005
+                axisYch.max = ch1 + 0.005
             }
             else {
-                if (ch1v > axisYch.max) {axisYch.max = ch1v + 0.005}
-                if (ch1v < axisYch.min) {axisYch.min = ch1v - 0.005}
+                if (ch1 > axisYch.max) {axisYch.max = ch1 + 0.005}
+                if (ch1 < axisYch.min) {axisYch.min = ch1 - 0.005}
             }
 
-            var ch2v = -lista[4]  * 20.48 / 65535 + 10.24
+            //var ch2 = -lista[4]  * 20.48 / 65535 + 10.24
+            var ch2 = (-lista[4]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch2v - 0.005
-                axisYch.max = ch2v + 0.005
+                axisYch.min = ch2 - 0.005
+                axisYch.max = ch2 + 0.005
             }
             else {
-                if (ch2v > axisYch.max) {axisYch.max = ch2v + 0.005}
-                if (ch2v < axisYch.min) {axisYch.min = ch2v - 0.005}
+                if (ch2 > axisYch.max) {axisYch.max = ch2 + 0.005}
+                if (ch2 < axisYch.min) {axisYch.min = ch2 - 0.005}
             }
 
-            var ch3v = -lista[5]  * 20.48 / 65535 + 10.24
+            //var ch3 = -lista[5]  * 20.48 / 65535 + 10.24
+            var ch3 = (-lista[5]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch3v - 0.005
-                axisYch.max = ch3v + 0.005
+                axisYch.min = ch3 - 0.005
+                axisYch.max = ch3 + 0.005
             }
             else {
-                if (ch3v > axisYch.max) {axisYch.max = ch3v + 0.005}
-                if (ch3v < axisYch.min) {axisYch.min = ch3v - 0.005}
+                if (ch3 > axisYch.max) {axisYch.max = ch3 + 0.005}
+                if (ch3 < axisYch.min) {axisYch.min = ch3 - 0.005}
             }
 
-            var ch4v = -lista[6]  * 20.48 / 65535 + 10.24
+            //var ch4 = -lista[6]  * 20.48 / 65535 + 10.24
+            var ch4 = (-lista[6]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch4v - 0.005
-                axisYch.max = ch4v + 0.005
+                axisYch.min = ch4 - 0.005
+                axisYch.max = ch4 + 0.005
             }
             else {
-                if (ch4v > axisYch.max) {axisYch.max = ch4v + 0.005}
-                if (ch4v < axisYch.min) {axisYch.min = ch4v - 0.005}
+                if (ch4 > axisYch.max) {axisYch.max = ch4 + 0.005}
+                if (ch4 < axisYch.min) {axisYch.min = ch4 - 0.005}
             }
 
-            var ch5v = -lista[7]  * 20.48 / 65535 + 10.24
+            //var ch5 = -lista[7]  * 20.48 / 65535 + 10.24
+            var ch5 = (-lista[7]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch5v - 0.005
-                axisYch.max = ch5v + 0.005
+                axisYch.min = ch5 - 0.005
+                axisYch.max = ch5 + 0.005
             }
             else {
-                if (ch5v > axisYch.max) {axisYch.max = ch5v + 0.005}
-                if (ch5v < axisYch.min) {axisYch.min = ch5v - 0.005}
+                if (ch5 > axisYch.max) {axisYch.max = ch5 + 0.005}
+                if (ch5 < axisYch.min) {axisYch.min = ch5 - 0.005}
             }
 
-            var ch6v = -lista[8]  * 20.48 / 65535 + 10.24
+            //var ch6 = -lista[8]  * 20.48 / 65535 + 10.24
+            var ch6 = (-lista[8]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch6v - 0.005
-                axisYch.max = ch6v + 0.005
+                axisYch.min = ch6 - 0.005
+                axisYch.max = ch6 + 0.005
             }
             else {
-                if (ch6v > axisYch.max) {axisYch.max = ch6v + 0.005}
-                if (ch6v < axisYch.min) {axisYch.min = ch6v - 0.005}
+                if (ch6 > axisYch.max) {axisYch.max = ch6 + 0.005}
+                if (ch6 < axisYch.min) {axisYch.min = ch6 - 0.005}
             }
 
 
-            var ch7v = -lista[9]  * 20.48 / 65535 + 10.24
+            //var ch7 = -lista[9]  * 20.48 / 65535 + 10.24
+            var ch7 = (-lista[9]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
             if (axisYch.first == true) {
-                axisYch.min = ch7v - 0.005
-                axisYch.max = ch7v + 0.005
+                axisYch.min = ch7 - 0.005
+                axisYch.max = ch7 + 0.005
                 axisYch.first = false
             }
             else {
-                if (ch7v > axisYch.max) {axisYch.max = ch7v + 0.005}
-                if (ch7v < axisYch.min) {axisYch.min = ch7v - 0.005}
+                if (ch7 > axisYch.max) {axisYch.max = ch7 + 0.005}
+                if (ch7 < axisYch.min) {axisYch.min = ch7 - 0.005}
             }
 
 
@@ -1182,14 +1955,14 @@ ApplicationWindow {
 
 
             linetemp.append(time, temp)
-            chartviewchs.series('ch0').append(time, ch0v)
-            chartviewchs.series('ch1').append(time, ch1v)
-            chartviewchs.series('ch2').append(time, ch2v)
-            chartviewchs.series('ch3').append(time, ch3v)
-            chartviewchs.series('ch4').append(time, ch4v)
-            chartviewchs.series('ch5').append(time, ch5v)
-            chartviewchs.series('ch6').append(time, ch6v)
-            chartviewchs.series('ch7').append(time, ch7v)
+            chartviewchs.series('ch0').append(time, ch0)
+            chartviewchs.series('ch1').append(time, ch1)
+            chartviewchs.series('ch2').append(time, ch2)
+            chartviewchs.series('ch3').append(time, ch3)
+            chartviewchs.series('ch4').append(time, ch4)
+            chartviewchs.series('ch5').append(time, ch5)
+            chartviewchs.series('ch6').append(time, ch6)
+            chartviewchs.series('ch7').append(time, ch7)
             line5V.append(time, v5)
             linePS.append(time, ps)
             lineminus12V.append(time, minus12V)
