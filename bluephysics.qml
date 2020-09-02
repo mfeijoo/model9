@@ -12,7 +12,7 @@ ApplicationWindow {
     objectName: 'mainapplication'
     width: Screen.width
     height: Screen.height
-    title: " Blue Physics v. 9.0.1"
+    title: " Blue Physics v9.0.1 file: " + filename.text + '.csv'
     visible: true
 
     Material.theme: Material.Dark
@@ -37,6 +37,7 @@ ApplicationWindow {
 
         ToolButton {
             id: metadatabutton
+            objectName: 'metadatabutton'
             width: 125
             height: 125
             hoverEnabled: true
@@ -130,6 +131,7 @@ ApplicationWindow {
 
             ToolButton {
                 id: metadatabacktomainmenubutton
+                objectName: 'metadatabacktohome'
                 width: 125
                 height: 100
                 anchors.top: parent.top
@@ -203,6 +205,7 @@ ApplicationWindow {
                      to: 1000
                      value: 300
                      editable: true
+                     onValueModified: sendtocontroller.enabled = true
                   }
                 }
 
@@ -214,6 +217,7 @@ ApplicationWindow {
                      anchors.top: integrationtimegroupbox.bottom
                      checked: true
                      text: checked ? qsTr("Integration Mode") : qsTr("Pulse Mode")
+                     onCheckedChanged: sendtocontroller.enabled = true
                 }
 
                 Button {
@@ -223,6 +227,7 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.top: integrationpulseswitch.bottom
                     text: qsTr("Send to Controller")
+                    enabled: false
                 }
         }
 
@@ -271,7 +276,7 @@ ApplicationWindow {
                     color: 'transparent'
                     border.color: 'lightgrey'
                     Text {
-                        text: qsTr("Ch. Cher.")
+                        text: qsTr("Ch. Cherenk.")
                         color: 'lightgrey'
                         anchors.centerIn: parent
                     }
@@ -295,7 +300,7 @@ ApplicationWindow {
                     color: 'transparent'
                     border.color: 'lightgrey'
                     Text {
-                        text: qsTr("Calib (cGy/nC)")
+                        text: qsTr("Calib. (cGy/nC)")
                         color: 'lightgrey'
                         anchors.centerIn: parent
                     }
@@ -349,14 +354,18 @@ ApplicationWindow {
                     }
                 }
                 ComboBox {
+                    id: pair0chsensor
+                    objectName: 'pair0chsensor'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                 }
                 ComboBox {
+                    id: pair0chcherenkov
+                    objectName: 'pair0chcherenkov'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 1
                 }
                 Rectangle {
@@ -365,16 +374,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: acr0
+                        objectName: 'acr0'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(acr0.from, acr0.to)
@@ -382,10 +392,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', acr0.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', acr0.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -395,16 +405,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: calib0
+                        objectName: 'calib0'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(calib0.from, calib0.to)
@@ -412,10 +423,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', calib0.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', calib0.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -425,6 +436,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: x0
+                        objectName: 'x0'
                         from: -2000
                         value: 0
                         to: 2000
@@ -455,6 +467,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: y0
+                        objectName: 'y0'
                         from: -2000
                         value: 0
                         to: 2000
@@ -485,6 +498,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: z0
+                        objectName: 'z0'
                         from: -2000
                         value: 0
                         to: 2000
@@ -521,15 +535,19 @@ ApplicationWindow {
                     }
                 }
                 ComboBox {
+                    id: pair1chsensor
+                    objectName: 'pair1chsensor'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 2
                 }
                 ComboBox {
+                    id: pair1chcherenkov
+                    objectName: 'pair1chcherenkov'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 3
                 }
                 Rectangle {
@@ -538,16 +556,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: acr1
+                        objectName: 'acr1'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(acr1.from, acr1.to)
@@ -555,10 +574,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', acr1.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', acr1.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -568,16 +587,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: calib1
+                        objectName: 'calib1'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(calib1.from, calib1.to)
@@ -585,10 +605,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', calib1.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', calib1.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -598,6 +618,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: x1
+                        objectName: 'x1'
                         from: -2000
                         value: 0
                         to: 2000
@@ -628,6 +649,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: y1
+                        objectName: 'y1'
                         from: -2000
                         value: 0
                         to: 2000
@@ -658,6 +680,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: z1
+                        objectName: 'z1'
                         from: -2000
                         value: 0
                         to: 2000
@@ -694,15 +717,19 @@ ApplicationWindow {
                     }
                 }
                 ComboBox {
+                    id: pair2chsensor
+                    objectName: 'pair2chsensor'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 4
                 }
                 ComboBox {
+                    id: pair2chcherenkov
+                    objectName: 'pair2chcherenkov'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 5
                 }
                 Rectangle {
@@ -711,16 +738,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: acr2
+                        objectName: 'acr2'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(acr2.from, acr2.to)
@@ -728,10 +756,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', acr2.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', acr2.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -741,16 +769,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: calib2
+                        objectName: 'calib2'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(calib2.from, calib2.to)
@@ -758,10 +787,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', calib2.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', calib2.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -771,6 +800,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: x2
+                        objectName: 'x2'
                         from: -2000
                         value: 0
                         to: 2000
@@ -801,6 +831,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: y2
+                        objectName: 'y2'
                         from: -2000
                         value: 0
                         to: 2000
@@ -831,6 +862,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: z2
+                        objectName: 'z2'
                         from: -2000
                         value: 0
                         to: 2000
@@ -867,15 +899,19 @@ ApplicationWindow {
                     }
                 }
                 ComboBox {
+                    id: pair3chsensor
+                    objectName: 'pair3chsensor'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 6
                 }
                 ComboBox {
+                    id: pair3chcherenkov
+                    objectName: 'pair3chcherenkov'
                     width: 120
                     height: 40
-                    model: ['Ch0', 'Ch1', 'Ch2', 'Ch3', 'Ch4', 'Ch5', 'Ch6', 'Ch7']
+                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     currentIndex: 7
                 }
                 Rectangle {
@@ -884,16 +920,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: acr3
+                        objectName: 'acr3'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(acr3.from, acr3.to)
@@ -901,10 +938,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', acr3.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', acr3.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -914,16 +951,17 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: calib3
+                        objectName: 'calib3'
                         from: 0
-                        value: 1000
-                        to: 2000
+                        value: 10000
+                        to: 20000
                         stepSize: 1
                         editable: true
                         anchors.fill: parent
                         font.pointSize: 10
 
-                        property int decimals: 3
-                        property real realValue: value / 1000
+                        property int decimals: 4
+                        property real realValue: value / 10000
 
                         validator: DoubleValidator {
                             bottom: Math.min(calib3.from, calib3.to)
@@ -931,10 +969,10 @@ ApplicationWindow {
                         }
 
                         textFromValue: function(value, locale) {
-                            return Number(value / 1000).toLocaleString(locale, 'f', calib3.decimals)
+                            return Number(value / 10000).toLocaleString(locale, 'f', calib3.decimals)
                         }
                         valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 1000
+                            return Number.fromLocaleString(locale, text) * 10000
                         }
                      }
                 }
@@ -944,6 +982,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: x3
+                        objectName: 'x3'
                         from: -2000
                         value: 0
                         to: 2000
@@ -974,6 +1013,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: y3
+                        objectName: 'y3'
                         from: -2000
                         value: 0
                         to: 2000
@@ -1004,6 +1044,7 @@ ApplicationWindow {
                     color: 'transparent'
                     SpinBox {
                         id: z3
+                        objectName: 'z3'
                         from: -2000
                         value: 0
                         to: 2000
@@ -1028,12 +1069,27 @@ ApplicationWindow {
                         }
                      }
                 }
-
-
-
-
             }
 
+        }
+
+        GroupBox {
+            id: comments
+            anchors.top: parent.top
+            anchors.topMargin: 12
+            anchors.left: sensorsinfo.right
+            anchors.leftMargin: 12
+            anchors.right: metadatatoolbar.left
+            anchors.rightMargin: 12
+            anchors.bottom: controllergroupbox.bottom
+            title: 'Comments'
+            TextEdit {
+                id: commentstext
+                objectName: 'commentstext'
+                anchors.fill: parent
+                color: 'lightgrey'
+                wrapMode: TextEdit.WordWrap
+            }
         }
     }
 
@@ -1447,8 +1503,6 @@ ApplicationWindow {
                                 }
                             }
                         }
-
-
                     }
 
                     Text {
@@ -1470,7 +1524,7 @@ ApplicationWindow {
                 id: axisYch
                 property bool first: true
                 //titleText: 'Voltage (V)'
-                titleText: 'Amp. (nA)'
+                titleText: 'Currrent (nA)'
             }
 
 
@@ -1977,7 +2031,7 @@ ApplicationWindow {
         onSignallimitsin: {
             console.log('start times 0: ' + starttimes[0])
             console.log('finish times 0: ' + finishtimes[0])
-            var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
+            //var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
 
             for (var i = 0; i < starttimes.length; i++){
                 var starlimit = chartviewchs.createSeries(ChartView.SeriesTypeLine, 'start' + i, axisXch, axisYch)

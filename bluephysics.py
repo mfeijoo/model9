@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 #branch master
 
+#########################################################################
+#                           IMPORTS                                     #
+#########################################################################
+
 #from PyQt5 import QtCore
 import sys
 import os
@@ -20,12 +24,20 @@ import numpy as np
 import atexit
 #from PyQt5.QtQuick import QQuickView
 
+#########################################################################
+#                      GLOBAL VARIABLES                                 #
+#########################################################################
+
 #Create the global lists of measurements
 timemeas = []
 PSmeas = []
 minus12Vmeas = []
 v5Vmeas = []
 vrefVmeas = []
+
+#########################################################################
+#                    GLOBAL FUNCTIONS                                   #
+#########################################################################
 
 #From signal info update the lists with all measurements
 def update(lista):
@@ -39,7 +51,162 @@ def update(lista):
     minus12Vmeas.append(lista[len(dchs)+4])
     v5Vmeas.append(lista[len(dchs)+2])
     vrefVmeas.append(lista[len(dchs)+5])
+def from_gui_to_dic():
+    dmetadata['Power Supply'] = str(psspinbox.property('value')/100)
+    if sendtocontrollerbt.property('enabled') == False:
+        dmetadata['Integration Time'] = str(integrationtimespinbox.property('value'))
+        dmetadata['Operational Mode'] = integrationpulseswitch.property('text')
+    dmetadata['File Name'] = filenamefromqml.property('text')
+    dmetadata['Pair 0 Ch Sensor'] = 'ch%s' % pair0chsensor.property('currentIndex')
+    dmetadata['Pair 0 Ch Cherenkov'] = 'ch%s' % pair0chcherenkov.property('currentIndex')
+    dmetadata['Pair 1 Ch Sensor'] = 'ch%s' % pair1chsensor.property('currentIndex')
+    dmetadata['Pair 1 Ch Cherenkov'] = 'ch%s' % pair1chcherenkov.property('currentIndex')
+    dmetadata['Pair 2 Ch Sensor'] = 'ch%s' % pair2chsensor.property('currentIndex')
+    dmetadata['Pair 2 Ch Cherenkov'] = 'ch%s' % pair2chcherenkov.property('currentIndex')
+    dmetadata['Pair 3 Ch Sensor'] = 'ch%s' % pair3chsensor.property('currentIndex')
+    dmetadata['Pair 3 Ch Cherenkov'] = 'ch%s' % pair3chcherenkov.property('currentIndex')
+    dmetadata['ACR0'] = str(acr0.property('realValue'))
+    dmetadata['ACR1'] = str(acr1.property('realValue'))
+    dmetadata['ACR2'] = str(acr2.property('realValue'))
+    dmetadata['ACR3'] = str(acr3.property('realValue'))
+    dmetadata['Calib0'] = str(calib0.property('realValue'))
+    dmetadata['Calib1'] = str(calib1.property('realValue'))
+    dmetadata['Calib2'] = str(calib2.property('realValue'))
+    dmetadata['Calib3'] = str(calib3.property('realValue'))
+    dmetadata['X0'] = str(x0.property('realValue'))
+    dmetadata['Y0'] = str(y0.property('realValue'))
+    dmetadata['Z0'] = str(z0.property('realValue'))
+    dmetadata['X1'] = str(x1.property('realValue'))
+    dmetadata['Y1'] = str(y1.property('realValue'))
+    dmetadata['Z1'] = str(z1.property('realValue'))
+    dmetadata['X2'] = str(x2.property('realValue'))
+    dmetadata['Y2'] = str(y2.property('realValue'))
+    dmetadata['Z2'] = str(z2.property('realValue'))
+    dmetadata['X3'] = str(x3.property('realValue'))
+    dmetadata['Y3'] = str(y3.property('realValue'))
+    dmetadata['Z3'] = str(z3.property('realValue'))
+    dmetadata['Comments'] = commentstext.property('text').replace(',', '')
 
+
+
+
+def from_dic_to_gui():
+
+    #print ('set psspintbox value property to: %s' %dmetadata['Power Supply'])
+    psspinbox.setProperty('value', float(dmetadata['Power Supply']) * 100)
+    integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
+    sendtocontrollerbt.setProperty('enabled', False)
+    if dmetadata['Operational Mode'] == 'Pulse Mode':
+        integrationpulseswitch.setProperty('checked', False)
+    else:
+        integrationpulseswitch.setProperty('checked', True)
+    pair0chsensor.setProperty('currentIndex', int(dmetadata['Pair 0 Ch Sensor'][-1]))
+    pair0chcherenkov.setProperty('currentIndex', int(dmetadata['Pair 0 Ch Cherenkov'][-1]))
+    pair1chsensor.setProperty('currentIndex', int(dmetadata['Pair 1 Ch Sensor'][-1]))
+    pair1chcherenkov.setProperty('currentIndex', int(dmetadata['Pair 1 Ch Cherenkov'][-1]))
+    pair2chsensor.setProperty('currentIndex', int(dmetadata['Pair 2 Ch Sensor'][-1]))
+    pair2chcherenkov.setProperty('currentIndex', int(dmetadata['Pair 2 Ch Cherenkov'][-1]))
+    pair3chsensor.setProperty('currentIndex', int(dmetadata['Pair 3 Ch Sensor'][-1]))
+    pair3chcherenkov.setProperty('currentIndex', int(dmetadata['Pair 3 Ch Cherenkov'][-1]))
+    acr0.setProperty('value', int(float(dmetadata['ACR0'])*10000))
+    acr1.setProperty('value', int(float(dmetadata['ACR1'])*10000))
+    acr2.setProperty('value', int(float(dmetadata['ACR2'])*10000))
+    acr3.setProperty('value', int(float(dmetadata['ACR3'])*10000))
+    calib0.setProperty('value', int(float(dmetadata['Calib0'])*10000))
+    calib1.setProperty('value', int(float(dmetadata['Calib1'])*10000))
+    calib2.setProperty('value', int(float(dmetadata['Calib2'])*10000))
+    calib3.setProperty('value', int(float(dmetadata['Calib3'])*10000))
+    x0.setProperty('value', int(float(dmetadata['X0'])*100))
+    y0.setProperty('value', int(float(dmetadata['Y0'])*100))
+    z0.setProperty('value', int(float(dmetadata['Z0'])*100))
+    x1.setProperty('value', int(float(dmetadata['X1'])*100))
+    y1.setProperty('value', int(float(dmetadata['Y1'])*100))
+    z1.setProperty('value', int(float(dmetadata['Z1'])*100))
+    x2.setProperty('value', int(float(dmetadata['X2'])*100))
+    y2.setProperty('value', int(float(dmetadata['Y2'])*100))
+    z2.setProperty('value', int(float(dmetadata['Z2'])*100))
+    x3.setProperty('value', int(float(dmetadata['X3'])*100))
+    y3.setProperty('value', int(float(dmetadata['Y3'])*100))
+    z3.setProperty('value', int(float(dmetadata['Z3'])*100))
+    commentstext.setProperty('text', dmetadata['Comments'])
+
+
+#This is the function to be excuted when clicking
+#the start button in qml
+def qmlstart():
+    global timemeas, PSmeas, minus12Vmeas, v5Vmeas, vrefmeas
+    #Prepare the lists to store data
+    #first clean up all the lists
+    for ch in dchs.values():
+        ch.time = []
+        ch.temp = []
+        ch.meas = []
+        timemeas = []
+        PSmeas = []
+        minus12Vmeas = []
+        v5Vmeas = []
+        vrefVmeas = []
+
+    #update dmetadata date with teh time and date
+    #of the start of measurement
+    dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
+
+    #Prepare the file to store all data
+    #Check if the file already exist, to prevent overwritting
+    filesnow = os.listdir('rawdata')
+    if ('%s.csv' %dmetadata['File Name'] in filesnow) and (dmetadata['File Name'] != 'default'):
+        filename = dmetadata['File Name']
+        samefiles = [f for f in filesnow if f.startswith(filename)]
+        #print (samefiles)
+        samefilesnumbers = []
+        for samefile in samefiles:
+            if '-' in samefile:
+                pos = samefile.find('-')
+                current_num = int(samefile[pos+1:-4])
+                samefilesnumbers.append(current_num)
+
+            #print (samefilesnumbers)
+            if len(samefilesnumbers) == 0:
+                new_name = '%s-2' %filename
+
+            else:
+               maxnumb = max(samefilesnumbers)
+               newnumb = maxnumb + 1
+               new_name = '%s-%s' %(filename, newnumb)
+
+
+            dmetadata['File Name'] = new_name
+
+    #Start the emulator thread
+    #Comment if not emulator
+    #emulator.start()
+
+    #Start the measurements thread
+    measure.start()
+
+def qmlsendtocontroller():
+    device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+    serc = serial.Serial(device, 115200, timeout=1)
+    inttime = integrationtimespinbox.property('value')
+    intpulse = integrationpulseswitch.property('text')
+    texttosend = 'c%s,%s' %(inttime, intpulse[0])
+    serc.write(texttosend.encode())
+    serc.close()
+    sendtocontrollerbt.setProperty('enabled', False)
+
+def goodbye():
+    print ('bye')
+    metadatafile = open('metadata.csv', 'w')
+    for key in metadatakeylist:
+        metadatafile.write('%s,%s\n' %(key, dmetadata[key]))
+        #print ('%s,%s\n' %(key, dmetadata[key]))
+    metadatafile.close()
+
+
+
+#########################################################################
+#                     CLASSES                                           #
+#########################################################################
 
 class CH():
 
@@ -87,14 +254,20 @@ class CHQml(QObject):
 
     integralChanged = pyqtSignal(float)
     listaintChanged = pyqtSignal(list)
+    nameChanged = pyqtSignal(str)
 
 
-    def __init__(self, parent=None):
+    def __init__(self, chname, parent=None):
         super().__init__(parent)
+        self._name = chname
         self._integral = 0.0
         self._listaint = []
         self.listatimes = []
         self.listavzeros = []
+
+    @pyqtProperty(str, notify=nameChanged)
+    def name(self):
+        return self._name
 
     @pyqtProperty(float, notify=integralChanged)
     def integral(self):
@@ -211,7 +384,7 @@ class RegulatePSThread(QThread):
             #time.sleep(0.5)
 
         #comment the whole while loop if emulator
-
+        listapots = []
         while (len(line) == 6):
 
             if self.stop:
@@ -220,15 +393,16 @@ class RegulatePSThread(QThread):
             line = self.serreg.readline().decode().strip().split(',')
             value = float(line[-1])
             regulateprogressbar.setProperty('value', value)
-
+            listapots.append(line[3])
             #print (line)
 
-
-        print ('Regulating PS is done')
+        #print ('Regulating PS is done')
+        #print ('lista pots: ', listapots)
         #regulateprogressbar.setProperty('value', 13)
         regulateb.setProperty('checked', False)
         #comment if emulator
         self.serreg.close()
+        dmetadata['PS Pot'] = listapots[-2]
 
 
     def stopping(self):
@@ -269,17 +443,25 @@ class SubtractDcThread(QThread):
             #time.sleep(0.5)
 
         #comment the whole while loop if emulator
+        dclines = []
         while len(line) == 9:
             line = self.ser.readline().decode().strip().split(',')
             sdcprogressbar.setProperty('value', int(line[0]))
-
-            #print(line)
-
+            dclines.append([line[0], line[4]])
 
         sdcprogressbar.setProperty('value', 8)
         subtractdcb.setProperty('checked', False)
         #comment if emulator
         self.ser.close()
+        #Record all the values of darkcurrent for all channels and put in metadata
+        dfdc = pd.DataFrame(dclines, columns=['ch', 'dcvalue'])
+        dfdc.drop(dfdc.index[-1], inplace=True)
+        listadcvalues = dfdc.groupby('ch').apply(lambda x: x.iloc[-1,-1]).tolist()
+        print (listadcvalues)
+        for i, value in enumerate(listadcvalues):
+            dmetadata['Dark Current Ch%s' %i] = value
+
+
 
     def stopping(self):
         self.stop = True
@@ -391,20 +573,17 @@ class StopThread(QThread):
         filemeas.close()
 
         #Now let's calculate the limit times of each shot
-        #monitor channel
+        #monitor channel will be the channel wiht maximum measurement
         mch = 'ch0'
-        #reference channel Cerenkov
-        rch = 'ch1'
+        for ch in sorted(dchs):
+            if min(dchs[ch].meas) < min(dchs[mch].meas):
+                mch = ch
+        print ('the monitor channel is: %s' %mch)
 
         #lets find the start and stop of all beams
         dff = pd.DataFrame({'time':dchs[mch].time, mch:dchs[mch].meas})
-        #print(dff.head())
-        #print (dff.dtypes)
-        #print (dff.describe())
         dff['chdiff'] = dff[mch].diff()
-        #print(dff.head())
         dffchanges =  dff.loc[dff.chdiff.abs() > 1000, :].copy()
-        #print (dffchanges.head())
         dffchanges['timediff'] = dffchanges.time.diff()
         dffchanges.fillna(1, inplace=True)
         dfftimes =  dffchanges[dffchanges.timediff > 0.5].copy()
@@ -430,30 +609,48 @@ class StopThread(QThread):
 
 
 
-#Create the main app
-app = QApplication(sys.argv)
+#########################################################################
+#            CREATE PYTHON OBJECTS                                      #
+#########################################################################
 
 #Create a qml object to update qml with teh list of measurements
 listain = Listain()
-
 mylimitslines = LimitsLines()
-
 regulateps = RegulatePSThread()
-
 mysubtractdc = SubtractDcThread()
-
 mystopthread = StopThread()
-mystopthread.signallimitslists.connect(mylimitslines.limitsin)
-
 #create the channels based in the number of channels
 number_of_ch = 8
 dchs = {'ch%s' %i : CH(i) for i in range(number_of_ch)}
-
 #create python objects to be ready to push to qml for each channel
-dqmlchs = {'ch%s' %i : CHQml() for i in range(number_of_ch)}
+dqmlchs = {'ch%s' %i : CHQml('ch%s' %i) for i in range(number_of_ch)}
+#Create the emulator thread
+#Comment if not emulator
+#emulator = EmulatorThread()
+#Create the measure thread
+measure = MeasureThread()
+#From metadata.csv file create a dic with current metadata
+metadatafile = open('metadata.csv', 'r')
+listmetadata = [pair.split(',') for pair in metadatafile.readlines()]
+metadatakeylist = [key for [key, value] in listmetadata]
+metadatafile.close()
+dmetadata = {key:value.strip() for [key,value] in listmetadata}
+
+#########################################################################
+#            QML ENGINE                                                 #
+#########################################################################
+
+
+#Create the main app
+app = QApplication(sys.argv)
 
 #create the qml engine
 engine = QQmlApplicationEngine()
+
+
+#########################################################################
+#            PUSH OBJECTS TO QML ENGINE                                 #
+#########################################################################
 
 #include the listain object as a qml object
 engine.rootContext().setContextProperty('listain', listain)
@@ -464,15 +661,76 @@ engine.rootContext().setContextProperty('limitslines', mylimitslines)
 for i, qmlch in enumerate(dqmlchs.values()):
     engine.rootContext().setContextProperty('qmlch%s' %i, qmlch)
 
-#Load the qml file
+
+#########################################################################
+#            LOAD QML FILE TO ENGINE                                    #
+#########################################################################
+
+#Load the qmlfile
 engine.load('bluephysics.qml')
 
-#Create the emulator thread
-#Comment if not emulator
-#emulator = EmulatorThread()
+#########################################################################
+#            GET OBJECTS FROM QML ENGINE                                #
+#########################################################################
 
-#Create the measure thread
-measure = MeasureThread()
+metadatabutton = engine.rootObjects()[0].findChild(QObject, 'metadatabutton')
+#Create an object from qml linked to the integration time spinbox
+integrationtimespinbox = engine.rootObjects()[0].findChild(QObject, 'integrationtimespinbox')
+#Create an object from qml linked to the power supply spinbox
+psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
+#Create an object from qml linked to the start button
+startb = engine.rootObjects()[0].findChild(QObject, 'startbutton')
+#Create an object in python from qml linked to the stop button
+stopb = engine.rootObjects()[0].findChild(QObject, 'stopbutton')
+#Create and object in python from qml linked to the home metadata button
+metadatabacktohome = engine.rootObjects()[0].findChild(QObject, 'metadatabacktohome')
+regulateb = engine.rootObjects()[0].findChild(QObject, 'regulatebutton')
+filenamefromqml = engine.rootObjects()[0].findChild(QObject, 'filename')
+regulateprogressbar = engine.rootObjects()[0].findChild(QObject, 'regulateprogressbar')
+subtractdcb = engine.rootObjects()[0].findChild(QObject, 'subtractdcb')
+sdcprogressbar = engine.rootObjects()[0].findChild(QObject, 'sdcprogressbar')
+integrationtimespinbox = engine.rootObjects()[0].findChild(QObject, 'integrationtimespinbox')
+integrationpulseswitch = engine.rootObjects()[0].findChild(QObject, 'integrationpulseswitch')
+sendtocontrollerbt = engine.rootObjects()[0].findChild(QObject, 'sendtocontrollerbt')
+pair0chsensor = engine.rootObjects()[0].findChild(QObject, 'pair0chsensor')
+pair0chcherenkov = engine.rootObjects()[0].findChild(QObject, 'pair0chcherenkov')
+pair1chsensor = engine.rootObjects()[0].findChild(QObject, 'pair1chsensor')
+pair1chcherenkov = engine.rootObjects()[0].findChild(QObject, 'pair1chcherenkov')
+pair2chsensor = engine.rootObjects()[0].findChild(QObject, 'pair2chsensor')
+pair2chcherenkov = engine.rootObjects()[0].findChild(QObject, 'pair2chcherenkov')
+pair3chsensor = engine.rootObjects()[0].findChild(QObject, 'pair3chsensor')
+pair3chcherenkov = engine.rootObjects()[0].findChild(QObject, 'pair3chcherenkov')
+acr0 = engine.rootObjects()[0].findChild(QObject, 'acr0')
+acr1 = engine.rootObjects()[0].findChild(QObject, 'acr1')
+acr2 = engine.rootObjects()[0].findChild(QObject, 'acr2')
+acr3 = engine.rootObjects()[0].findChild(QObject, 'acr3')
+calib0 = engine.rootObjects()[0].findChild(QObject, 'calib0')
+calib1 = engine.rootObjects()[0].findChild(QObject, 'calib1')
+calib2 = engine.rootObjects()[0].findChild(QObject, 'calib2')
+calib3 = engine.rootObjects()[0].findChild(QObject, 'calib3')
+x0 = engine.rootObjects()[0].findChild(QObject, 'x0')
+y0 = engine.rootObjects()[0].findChild(QObject, 'y0')
+z0 = engine.rootObjects()[0].findChild(QObject, 'z0')
+x1 = engine.rootObjects()[0].findChild(QObject, 'x1')
+y1 = engine.rootObjects()[0].findChild(QObject, 'y1')
+z1 = engine.rootObjects()[0].findChild(QObject, 'z1')
+x2 = engine.rootObjects()[0].findChild(QObject, 'x2')
+y2 = engine.rootObjects()[0].findChild(QObject, 'y2')
+z2 = engine.rootObjects()[0].findChild(QObject, 'z2')
+x3 = engine.rootObjects()[0].findChild(QObject, 'x3')
+y3 = engine.rootObjects()[0].findChild(QObject, 'y3')
+z3 = engine.rootObjects()[0].findChild(QObject, 'z3')
+commentstext = engine.rootObjects()[0].findChild(QObject, 'commentstext')
+
+
+
+
+#########################################################################
+#            SIGNALS                                                    #
+#########################################################################
+
+metadatabutton.clicked.connect(from_dic_to_gui)
+mystopthread.signallimitslists.connect(mylimitslines.limitsin)
 
 #info is the signal created with every measurements
 #updatea listain qml object to update graphs in qml
@@ -482,149 +740,40 @@ measure.info.connect(listain.lista)
 #and then save all measurements in a file
 measure.info.connect(update)
 
-
-#From metadata.csv file create a dic with current metadata
-metadatafile = open('metadata.csv', 'r')
-listmetadata = [pair.split(',') for pair in metadatafile.readlines()]
-metadatakeylist = [key for [key, value] in listmetadata]
-metadatafile.close()
-dmetadata = {key:value.strip() for [key,value] in listmetadata}
-
-def from_gui_to_dic():
-    dmetadata['Power Supply'] = str(psspinbox.property('value')/100)
-    dmetadata['Integration Time'] = str(integrationtimespinbox.property('value'))
-
-def from_dic_to_gui():
-    #print ('set psspintbox value property to: %s' %dmetadata['Power Supply'])
-    psspinbox.setProperty('value', float(dmetadata['Power Supply']) * 100)
-    integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
-
-
-#Create an object from qml linked to the integration time spinbox
-integrationtimespinbox = engine.rootObjects()[0].findChild(QObject, 'integrationtimespinbox')
-integrationtimespinbox.valueModified.connect(from_gui_to_dic)
-
-#Create an object from qml linked to the power supply spinbox
-psspinbox = engine.rootObjects()[0].findChild(QObject, 'psspinbox')
 psspinbox.valueModified.connect(from_gui_to_dic)
 
-#Now form dmetadata dic update the GUI
-from_dic_to_gui()
-
-
-#This is the function to be excuted when clicking
-#the start button in qml
-def qmlstart():
-    global timemeas, PSmeas, minus12Vmeas, v5Vmeas, vrefmeas
-    #Prepare the lists to store data
-    #first clean up all the lists
-    for ch in dchs.values():
-        ch.time = []
-        ch.temp = []
-        ch.meas = []
-    timemeas = []
-    PSmeas = []
-    minus12Vmeas = []
-    v5Vmeas = []
-    vrefVmeas = []
-
-    #update dmetadata date with teh time and date
-    #of the start of measurement
-    dmetadata['Date Time'] = time.strftime('%d %b %Y %H:%M:%S')
-
-    #Prepare the file to store all data
-    #Check if the file already exist, to prevent overwritting
-    dmetadata['File Name'] = filenamefromqml.property('text')
-    filesnow = os.listdir('rawdata')
-    if ('%s.csv' %dmetadata['File Name'] in filesnow) and (dmetadata['File Name'] != 'default'):
-        filename = dmetadata['File Name']
-        samefiles = [f for f in filesnow if f.startswith(filename)]
-        #print (samefiles)
-        samefilesnumbers = []
-        for samefile in samefiles:
-            if '-' in samefile:
-                pos = samefile.find('-')
-                current_num = int(samefile[pos+1:-4])
-                samefilesnumbers.append(current_num)
-
-        #print (samefilesnumbers)
-        if len(samefilesnumbers) == 0:
-            new_name = '%s-2' %filename
-
-        else:
-            maxnumb = max(samefilesnumbers)
-            newnumb = maxnumb + 1
-            new_name = '%s-%s' %(filename, newnumb)
-
-
-        dmetadata['File Name'] = new_name
-
-    #Start the emulator thread
-    #Comment if not emulator
-    #emulator.start()
-
-    #Start the measurements thread
-    measure.start()
-
-def qmlsendtocontroller():
-    device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-    serc = serial.Serial(device, 115200, timeout=1)
-    inttime = integrationtimespinbox.property('value')
-    intpulse = integrationpulseswitch.property('text')
-    texttosend = 'c%s,%s' %(inttime, intpulse[0])
-    print (texttosend.encode())
-    dmetadata['Integration Time'] = inttime
-    dmetadata['Operational Mode'] = intpulse
-    serc.write(texttosend.encode())
-    serc.close()
-
-def goodbye():
-    print ('bye')
-    metadatafile = open('metadata.csv', 'w')
-    for key in metadatakeylist:
-        metadatafile.write('%s,%s\n' %(key, dmetadata[key]))
-        #print ('%s,%s\n' %(key, dmetadata[key]))
-    metadatafile.close()
-
-
-#Create an object from qml linked to the start button
-startb = engine.rootObjects()[0].findChild(QObject, 'startbutton')
-#Now link the start button signal with the qmlstart function in python
+#link the start button signal with the qmlstart function in python
 startb.clicked.connect(qmlstart)
 
-#Create an object in python from qml linked to the stop button
-stopb = engine.rootObjects()[0].findChild(QObject, 'stopbutton')
 #Connect the signal click from the stop button in qml
 #to the python funcition called qmlstop
 stopb.clicked.connect(mystopthread.start)
 
-regulateb = engine.rootObjects()[0].findChild(QObject, 'regulatebutton')
+metadatabacktohome.clicked.connect(from_gui_to_dic)
+
 regulateb.clicked.connect(regulateps.start)
 
-filenamefromqml = engine.rootObjects()[0].findChild(QObject, 'filename')
-#print (filenamefromqml)
-
-regulateprogressbar = engine.rootObjects()[0].findChild(QObject, 'regulateprogressbar')
-
-subtractdcb = engine.rootObjects()[0].findChild(QObject, 'subtractdcb')
 subtractdcb.clicked.connect(mysubtractdc.start)
 
-sdcprogressbar = engine.rootObjects()[0].findChild(QObject, 'sdcprogressbar')
-
-integrationtimespinbox = engine.rootObjects()[0].findChild(QObject, 'integrationtimespinbox')
-integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
-
-integrationpulseswitch = engine.rootObjects()[0].findChild(QObject, 'integrationpulseswitch')
-if dmetadata['Operational Mode'] == 'Pulse Mode':
-    integrationpulseswitch.setProperty('checked', False)
-else:
-    integrationpulseswitch.setProperty('checked', True)
-
-sendtocontrollerbt = engine.rootObjects()[0].findChild(QObject, 'sendtocontrollerbt')
 sendtocontrollerbt.clicked.connect(qmlsendtocontroller)
+
+#########################################################################
+#            THINGS TO DO AT START                                      #
+#########################################################################
+
+#Now form dmetadata dic update the GUI
+from_dic_to_gui()
+
+#########################################################################
+#            THINGS TO DO AT EXIT                                       #
+#########################################################################
+
 
 atexit.register(goodbye)
 
+#########################################################################
+#            CLOSE ENGINE AND APP                                       #
+#########################################################################
 
 #Close qml engine if the app is closed
 engine.quit.connect(app.quit)

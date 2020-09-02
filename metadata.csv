@@ -1,6 +1,43 @@
-Date Time,30 Aug 2020 12:36:26
+Date Time,01 Sep 2020 21:52:00
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
+Dark Current Ch0,12543
+Dark Current Ch1,12351
+Dark Current Ch2,14655
+Dark Current Ch3,12863
+Dark Current Ch4,14334
+Dark Current Ch5,11775
+Dark Current Ch6,14830
+Dark Current Ch7,18815
+Pair 0 Ch Sensor,ch0
+Pair 0 Ch Cherenkov,ch1
+Pair 1 Ch Sensor,ch2
+Pair 1 Ch Cherenkov,ch3
+Pair 2 Ch Sensor,ch4
+Pair 2 Ch Cherenkov,ch5
+Pair 3 Ch Sensor,ch6
+Pair 3 Ch Cherenkov,ch7
+ACR0,1.0
+ACR1,1.0
+ACR2,1.0
+ACR3,1.0
+Calib0,1.0
+Calib1,1.0
+Calib2,0.9998
+Calib3,1.0
+X0,0.0
+Y0,0.0
+Z0,0.0
+X1,0.0
+Y1,0.0
+Z1,0.0
+X2,0.0
+Y2,0.0
+Z2,0.0
+X3,0.0
+Y3,0.0
+Z3,0.0
 Power Supply,57.59
-Comments,Testing the new adquisition board
+PS Pot,315
+Comments,Esto es una prueba de los comentarios grabados en metadata  prueba  de que se quitan  las commas
