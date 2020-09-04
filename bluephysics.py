@@ -93,6 +93,7 @@ def from_gui_to_dic():
 def from_dic_to_gui():
 
     #print ('set psspintbox value property to: %s' %dmetadata['Power Supply'])
+    filenamefromqml.setProperty('text', dmetadata['File Name'])
     psspinbox.setProperty('value', float(dmetadata['Power Supply']) * 100)
     integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
     sendtocontrollerbt.setProperty('enabled', False)
@@ -153,29 +154,7 @@ def qmlstart():
 
     #Prepare the file to store all data
     #Check if the file already exist, to prevent overwritting
-    filesnow = os.listdir('rawdata')
-    if ('%s.csv' %dmetadata['File Name'] in filesnow) and (dmetadata['File Name'] != 'default'):
-        filename = dmetadata['File Name']
-        samefiles = [f for f in filesnow if f.startswith(filename)]
-        #print (samefiles)
-        samefilesnumbers = []
-        for samefile in samefiles:
-            if '-' in samefile:
-                pos = samefile.find('-')
-                current_num = int(samefile[pos+1:-4])
-                samefilesnumbers.append(current_num)
 
-            #print (samefilesnumbers)
-            if len(samefilesnumbers) == 0:
-                new_name = '%s-2' %filename
-
-            else:
-               maxnumb = max(samefilesnumbers)
-               newnumb = maxnumb + 1
-               new_name = '%s-%s' %(filename, newnumb)
-
-
-            dmetadata['File Name'] = new_name
 
     #Start the emulator thread
     #Comment if not emulator
