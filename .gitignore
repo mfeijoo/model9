@@ -1,4 +1,4 @@
-rawdata*
+rawdata/*
 !rawdata/emulator*
 *ipynb*
 .~*
