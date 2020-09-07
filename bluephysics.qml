@@ -1154,6 +1154,7 @@ ApplicationWindow {
                     checked: true
                     height: 50
                     hoverEnabled: true
+                    enabled: regulatebutton.checked ? false : true
 
                 }
 
@@ -1170,6 +1171,7 @@ ApplicationWindow {
                     anchors.topMargin: 6
                     font.pointSize: 10
                     editable: true
+                    enabled: regulatebutton.checked ? false : true
 
                     property int decimals: 2
                     property real realValue: value / 100

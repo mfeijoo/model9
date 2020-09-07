@@ -8,6 +8,7 @@
 #from PyQt5 import QtCore
 import sys
 import os
+#from glob import glob
 os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
 #os.environ["QT_VIRTUALKEYBOARD_STYLE"] = "retro"
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Material"
@@ -154,6 +155,23 @@ def qmlstart():
 
     #Prepare the file to store all data
     #Check if the file already exist, to prevent overwritting
+    filenow = '%s.csv' %dmetadata['File Name']
+    filesindisk = os.listdir('rawdata')
+    #is the file in the disk and it is not default.csv?
+    if (filenow in filesindisk and filenow != 'default.csv'):
+        n = 2
+        pos = filenow.find('-')
+        if pos != -1:
+            originalname = filenow[:pos]
+        else:
+            originalname = dmetadata['File Name']
+        while filenow in filesindisk:
+            filenow = '%s-%s.csv' %(originalname, n)
+            n = n + 1
+            print (filenow)
+    dmetadata ['File Name'] = filenow[:-4]
+    from_dic_to_gui()
+
 
 
     #Start the emulator thread
@@ -355,7 +373,7 @@ class RegulatePSThread(QThread):
         for i in range(5):
             #comment next 2 if emulator
             line = self.serreg.readline().decode().strip().split(',')
-            #print (line)
+            print (line)
             if len(line) == 6:
                 value = float(line[-1])
                 regulateprogressbar.setProperty('value', value)
@@ -373,7 +391,7 @@ class RegulatePSThread(QThread):
             value = float(line[-1])
             regulateprogressbar.setProperty('value', value)
             listapots.append(line[3])
-            #print (line)
+            print (line)
 
         #print ('Regulating PS is done')
         #print ('lista pots: ', listapots)
@@ -387,6 +405,7 @@ class RegulatePSThread(QThread):
     def stopping(self):
         self.stop = True
         #comment if emulator
+        #self.serreg.write('n'.encode())
         self.serreg.close()
         self.wait()
         self.quit()

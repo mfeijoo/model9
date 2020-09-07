@@ -169,7 +169,7 @@ void setup() {
   digitalWrite (psonoffpin, LOW);
 
   //Setpot for the first time
-  setpot(1);
+  setpot(300);
   
   //Then wait 2 seconds and turn on the Power Suplly
   delay(2000);
@@ -503,19 +503,22 @@ void regulatePS(){
   readPS();
 
 
-  while (!((PSV <= (setvolt + 0.006)) && (PSV >= (setvolt - 0.006)))){
-    /*if (pothigh - potlow == 1){
-      break;
-    }*/
+  while (!((PSV <= (setvolt + 0.007)) && (PSV >= (setvolt - 0.007)))){
+    if (Serial.available() > 0) {
+    char inChar = (char)Serial.read();
+        if (inChar == 'n'){
+          break;
+        }
+    }
     led.setPixelColor(0, colorred); //Dot star orange blinking 
     led.show();                        //indicates regulating PS
     //voltage is too high
-    if (PSV > (setvolt + 0.006)){
+    if (PSV > (setvolt + 0.007)){
       //pothigh = potnow;
       potnow = potnow - 1;
     }
     //voltage is too low
-    else if (PSV < (setvolt - 0.006)){
+    else if (PSV < (setvolt - 0.007)){
       //potlow = potnow;
       potnow = potnow + 1;
     }

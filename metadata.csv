@@ -1,15 +1,15 @@
-Date Time,04 Sep 2020 15:33:49
-File Name,cartucho1zeroluz
+Date Time,07 Sep 2020 09:50:48
+File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
-Dark Current Ch0,43519
-Dark Current Ch1,20223
-Dark Current Ch2,28607
-Dark Current Ch3,28588
-Dark Current Ch4,21271
-Dark Current Ch5,18943
-Dark Current Ch6,27647
-Dark Current Ch7,21511
+Dark Current Ch0,16191
+Dark Current Ch1,23319
+Dark Current Ch2,20438
+Dark Current Ch3,18411
+Dark Current Ch4,15103
+Dark Current Ch5,21055
+Dark Current Ch6,14079
+Dark Current Ch7,13895
 Pair 0 Ch Sensor,ch0
 Pair 0 Ch Cherenkov,ch1
 Pair 1 Ch Sensor,ch2
@@ -39,5 +39,5 @@ X3,0.0
 Y3,0.0
 Z3,0.0
 Power Supply,56.69
-PS Pot,266
+PS Pot,267
 Comments,Cartucho 1 no luz en casa sensoer en jirafilla
