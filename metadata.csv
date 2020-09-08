@@ -1,4 +1,4 @@
-Date Time,07 Sep 2020 09:50:48
+Date Time,07 Sep 2020 22:34:40
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
@@ -40,4 +40,7 @@ Y3,0.0
 Z3,0.0
 Power Supply,56.69
 PS Pot,267
+Socatport1,2
+Socatport2,3
+Emulatorswitch,True
 Comments,Cartucho 1 no luz en casa sensoer en jirafilla

@@ -118,7 +118,7 @@ ApplicationWindow {
         Rectangle {
             id: metadatatoolbar
             x: 1136
-            width: 150
+            width: 125
             color: "transparent"
             z: 0
             anchors.bottom: parent.bottom
@@ -129,28 +129,74 @@ ApplicationWindow {
             anchors.rightMargin: 0
 
 
-            ToolButton {
-                id: metadatabacktomainmenubutton
-                objectName: 'metadatabacktohome'
-                width: 125
-                height: 100
-                anchors.top: parent.top
-                anchors.topMargin: 6
-                hoverEnabled: true
-                text: 'Main Menu'
-                anchors.horizontalCenter: parent.horizontalCenter
-                icon.source: "iconspd/home.png"
-                icon.height: 90
-                font.pointSize: 12
-                display: AbstractButton.TextUnderIcon
-                icon.width: 90
-                icon.color: "#00000000"
+            Column {
+                anchors.fill: parent
+                spacing: 12
 
-                onClicked: {
-                    metadataview.visible = false
-                    mainmenu.visible = true
+                ToolButton {
+                    id: metadatabacktomainmenubutton
+                    objectName: 'metadatabacktohome'
+                    width: 125
+                    height: 100
+                    hoverEnabled: true
+                    text: 'Main Menu'
+                    icon.source: "iconspd/home.png"
+                    icon.height: 90
+                    font.pointSize: 12
+                    display: AbstractButton.TextUnderIcon
+                    icon.width: 90
+                    icon.color: "#00000000"
+
+                    onClicked: {
+                        metadataview.visible = false
+                        mainmenu.visible = true
+                    }
+                }
+
+                GroupBox {
+                    title: 'Emulator'
+                    height: 260
+                    width: 122
+
+                    Column {
+                        anchors.fill: parent
+                        spacing: 6
+
+                        Text {
+                            text: 'socat port1'
+                            color: 'lightgrey'
+                        }
+                        ComboBox {
+                            id: socatport1
+                            objectName: 'socatport1'
+                            model: 6
+                            width: parent.width
+                        }
+                        Text {
+                            text: 'socat port2'
+                            color: 'lightgrey'
+                        }
+                        ComboBox {
+                            id: socatport2
+                            objectName: 'socatport2'
+                            model: 6
+                            width: parent.width
+                        }
+                        Switch {
+                            id: emulatorswitch
+                            objectName: 'emulatorswitch'
+                            width: parent.width
+                            checked: false
+                            text: checked ? qsTr("on") : qsTr("off")
+
+                        }
+
+
+                    }
                 }
             }
+
+
         }
 
         GroupBox {

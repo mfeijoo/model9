@@ -52,6 +52,8 @@ def update(lista):
     minus12Vmeas.append(lista[len(dchs)+4])
     v5Vmeas.append(lista[len(dchs)+2])
     vrefVmeas.append(lista[len(dchs)+5])
+
+
 def from_gui_to_dic():
     dmetadata['Power Supply'] = str(psspinbox.property('value')/100)
     if sendtocontrollerbt.property('enabled') == False:
@@ -87,6 +89,12 @@ def from_gui_to_dic():
     dmetadata['Y3'] = str(y3.property('realValue'))
     dmetadata['Z3'] = str(z3.property('realValue'))
     dmetadata['Comments'] = commentstext.property('text').replace(',', '')
+    dmetadata['Socatport1'] = socatport1.property('currentText')
+    dmetadata['Socatport2'] = socatport2.property('currentText')
+    if emulatorswitch.property('checked'):
+        dmetadata['Emulatorswitch'] = 'True'
+    else:
+        dmetadata['Emulatorswitch'] = 'False'
 
 
 
@@ -131,6 +139,12 @@ def from_dic_to_gui():
     y3.setProperty('value', int(float(dmetadata['Y3'])*100))
     z3.setProperty('value', int(float(dmetadata['Z3'])*100))
     commentstext.setProperty('text', dmetadata['Comments'])
+    socatport1.setProperty('currentIndex', int(dmetadata['Socatport1']))
+    socatport2.setProperty('currentIndex', int(dmetadata['Socatport2']))
+    if dmetadata['Emulatorswitch'] == 'True':
+        emulatorswitch.setProperty('checked', True)
+    else:
+        emulatorswitch.setProperty('checked', False)
 
 
 #This is the function to be excuted when clicking
@@ -176,7 +190,8 @@ def qmlstart():
 
     #Start the emulator thread
     #Comment if not emulator
-    #emulator.start()
+    if emulatorswitch.property('checked'):
+        emulator.start()
 
     #Start the measurements thread
     measure.start()
@@ -326,7 +341,8 @@ class EmulatorThread(QThread):
         file = open('./rawdata/emulatormeasurmentslong.csv', 'r')
         self.lines =  file.readlines()
         file.close()
-        self.ser2 = serial.Serial ('/dev/pts/3', 115200, timeout=1)
+
+        self.ser2 = serial.Serial ('/dev/pts/%s' %socatport1.property('currentText'), 115200, timeout=1)
         for line in self.lines:
             self.ser2.write(line.encode())
             #print(line)
@@ -357,56 +373,65 @@ class RegulatePSThread(QThread):
         self.stop = False
 
         #comment next 6 if emulator
-
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.serreg = serial.Serial(device, 115200, timeout=2)
-        psset = psspinbox.property('realValue')
-        self.serreg.write(('r%.2f,' %psset).encode())
-        print (('r%.2f,' %psset).encode())
-        line = self.serreg.readline().decode().strip().split(',')
+        if not emulatorswitch.property('checked'):
+            device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+            self.serreg = serial.Serial(device, 115200, timeout=2)
+            psset = psspinbox.property('realValue')
+            self.serreg.write(('r%.2f,' %psset).encode())
+            print (('r%.2f,' %psset).encode())
+            line = self.serreg.readline().decode().strip().split(',')
 
 
         regulateprogressbar.setProperty('value', 0)
 
 
         #emulator 13 no emulator 5
-        for i in range(5):
+        if emulatorswitch.property('checked'):
+            linevalue = 13
+        else:
+            linevalue = 5
+        for i in range(linevalue):
             #comment next 2 if emulator
-            line = self.serreg.readline().decode().strip().split(',')
-            print (line)
+            if not emulatorswitch.property('checked'):
+                line = self.serreg.readline().decode().strip().split(',')
+                print (line)
             if len(line) == 6:
                 value = float(line[-1])
                 regulateprogressbar.setProperty('value', value)
             #comment if not emulator
-            #time.sleep(0.5)
+            if emulatorswitch.property('checked'):
+                time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        listapots = []
-        while (len(line) == 6):
+        if not emulatorswitch.property('checked'):
+            listapots = []
+            while (len(line) == 6):
 
-            if self.stop:
-                break
+                if self.stop:
+                    break
 
-            line = self.serreg.readline().decode().strip().split(',')
-            value = float(line[-1])
-            regulateprogressbar.setProperty('value', value)
-            listapots.append(line[3])
-            print (line)
+                line = self.serreg.readline().decode().strip().split(',')
+                value = float(line[-1])
+                regulateprogressbar.setProperty('value', value)
+                listapots.append(line[3])
+                #print (line)
 
         #print ('Regulating PS is done')
         #print ('lista pots: ', listapots)
         #regulateprogressbar.setProperty('value', 13)
         regulateb.setProperty('checked', False)
         #comment if emulator
-        self.serreg.close()
-        dmetadata['PS Pot'] = listapots[-2]
+        if not emulatorswitch.property('checked'):
+            self.serreg.close()
+            dmetadata['PS Pot'] = listapots[-2]
 
 
     def stopping(self):
         self.stop = True
         #comment if emulator
-        #self.serreg.write('n'.encode())
-        self.serreg.close()
+        if not emulatorswitch.property('checked'):
+            self.serreg.write('n'.encode())
+            self.serreg.close()
         self.wait()
         self.quit()
         #print('Regulate PS stopoped')
@@ -422,49 +447,55 @@ class SubtractDcThread(QThread):
 
     def run(self):
         #comment next 3 if emulator
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.ser = serial.Serial(device, 115200, timeout=1)
-        self.ser.write('s'.encode())
+        if not emulatorswitch.property('checked'):
+            device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+            self.ser = serial.Serial(device, 115200, timeout=1)
+            self.ser.write('s'.encode())
         #uncoment if emulator
-        #value = 0
+        if emulatorswitch.property('checked'):
+            value = 0
         for i in range(3):
             #comment next 2 if emulator
-
-            line = self.ser.readline().decode().strip().split(',')
-            value = int(line[0])
+            if not emulatorswitch.property('checked'):
+                line = self.ser.readline().decode().strip().split(',')
+                value = int(line[0])
 
             #print (line)
 
             #change this part for not emulator
             sdcprogressbar.setProperty('value', value)
-            #value = value + 1
-            #time.sleep(0.5)
+            if emulatorswitch.property('checked'):
+                value = value + 1
+                time.sleep(0.5)
 
         #comment the whole while loop if emulator
-        dclines = []
-        while len(line) == 9:
-            line = self.ser.readline().decode().strip().split(',')
-            sdcprogressbar.setProperty('value', int(line[0]))
-            dclines.append([line[0], line[4]])
+        if not emulatorswitch.property('checked'):
+            dclines = []
+            while len(line) == 9:
+                line = self.ser.readline().decode().strip().split(',')
+                sdcprogressbar.setProperty('value', int(line[0]))
+                dclines.append([line[0], line[4]])
 
         sdcprogressbar.setProperty('value', 8)
         subtractdcb.setProperty('checked', False)
         #comment if emulator
-        self.ser.close()
-        #Record all the values of darkcurrent for all channels and put in metadata
-        dfdc = pd.DataFrame(dclines, columns=['ch', 'dcvalue'])
-        dfdc.drop(dfdc.index[-1], inplace=True)
-        listadcvalues = dfdc.groupby('ch').apply(lambda x: x.iloc[-1,-1]).tolist()
-        print (listadcvalues)
-        for i, value in enumerate(listadcvalues):
-            dmetadata['Dark Current Ch%s' %i] = value
+        if not emulatorswitch.property('checked'):
+            self.ser.close()
+            #Record all the values of darkcurrent for all channels and put in metadata
+            dfdc = pd.DataFrame(dclines, columns=['ch', 'dcvalue'])
+            dfdc.drop(dfdc.index[-1], inplace=True)
+            listadcvalues = dfdc.groupby('ch').apply(lambda x: x.iloc[-1,-1]).tolist()
+            print (listadcvalues)
+            for i, value in enumerate(listadcvalues):
+                dmetadata['Dark Current Ch%s' %i] = value
 
 
 
     def stopping(self):
         self.stop = True
         #comment if emulator
-        self.ser.close()
+        if not emulatorswitch.property('checked'):
+            self.ser.close()
         self.wait()
         self.quit()
         #print('measure stopoped')
@@ -483,17 +514,20 @@ class MeasureThread(QThread):
     def run(self):
         self.stop = False
         #emulator
-        #self.ser = serial.Serial ('/dev/pts/4', 115200, timeout=1)
-        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-        self.ser = serial.Serial (device, 115200, timeout=1)
+        if emulatorswitch.property('checked'):
+            self.ser = serial.Serial ('/dev/pts/%s' %socatport2.property('currentText'), 115200, timeout=1)
+        else:
+            device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+            self.ser = serial.Serial (device, 115200, timeout=1)
         #readings to discard garbge
 
         reading0 = self.ser.readline().decode().strip().split(',')
 
         #next reading to check starting time
         #comment if emulator
-        reading1 = self.ser.readline().decode().strip().split(',')
-        tstart = int(reading1[0])
+        if not emulatorswitch.property('checked'):
+            reading1 = self.ser.readline().decode().strip().split(',')
+            tstart = int(reading1[0])
         
         while True:
             
@@ -505,11 +539,13 @@ class MeasureThread(QThread):
                 reading = self.ser.readline().decode().strip().split(',')
                 #print (reading)
                 #comment if not emulator
-                #listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
-                listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
+                if emulatorswitch.property('checked'):
+                    listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
+                else:
+                    listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
                 #print (listatosend)
                 self.info.emit(listatosend)
-            except (TypeError, ValueError):
+            except:
                 pass
 
 
@@ -538,7 +574,8 @@ class StopThread(QThread):
 
         #stop the emulator thread
         #comment if not emulator
-        #emulator.stopping()
+        if emulatorswitch.property('checked'):
+            emulator.stopping()
 
         #stop the regulate ps
         if regulateps.isRunning():
@@ -623,8 +660,8 @@ dchs = {'ch%s' %i : CH(i) for i in range(number_of_ch)}
 #create python objects to be ready to push to qml for each channel
 dqmlchs = {'ch%s' %i : CHQml('ch%s' %i) for i in range(number_of_ch)}
 #Create the emulator thread
-#Comment if not emulator
-#emulator = EmulatorThread()
+#Dont comment, leave it alsways created
+emulator = EmulatorThread()
 #Create the measure thread
 measure = MeasureThread()
 #From metadata.csv file create a dic with current metadata
@@ -719,7 +756,10 @@ x3 = engine.rootObjects()[0].findChild(QObject, 'x3')
 y3 = engine.rootObjects()[0].findChild(QObject, 'y3')
 z3 = engine.rootObjects()[0].findChild(QObject, 'z3')
 commentstext = engine.rootObjects()[0].findChild(QObject, 'commentstext')
-
+socatport1 = engine.rootObjects()[0].findChild(QObject, 'socatport1')
+socatport2 = engine.rootObjects()[0].findChild(QObject, 'socatport2')
+emulatorswitch = engine.rootObjects()[0].findChild(QObject, 'emulatorswitch')
+#print (emulatorswitch.property('text'))
 
 
 
