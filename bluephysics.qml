@@ -1380,6 +1380,34 @@ ApplicationWindow {
                     startbutton.enabled = true
                     startbutton.checked = false
                     stopbutton.enabled = false
+
+                    for (var i = 0; i < 8; i++){
+                        if (lqmlchs[i].name === pair0chsensor.currentText){
+                            var pair0chsen = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair0chcherenkov.currentText){
+                            var pair0chche = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair1chsensor.currentText){
+                            var pair1chsen = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair1chcherenkov.currentText){
+                            var pair1chche = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair2chsensor.currentText){
+                            var pair2chsen = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair2chcherenkov.currentText){
+                            var pair2chche = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair3chsensor.currentText){
+                            var pair3chsen = lqmlchs[i]
+                        }
+                        if (lqmlchs[i].name === pair3chcherenkov.currentText){
+                            var pair3chche = lqmlchs[i]
+                        }
+                    }
+                    console.log('Pair 3 ch sensor is: ' + pair3chsen.name)
                 }
             }
 

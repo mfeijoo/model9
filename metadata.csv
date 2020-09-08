@@ -1,4 +1,4 @@
-Date Time,07 Sep 2020 22:47:30
+Date Time,08 Sep 2020 16:54:10
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
@@ -16,8 +16,8 @@ Pair 1 Ch Sensor,ch2
 Pair 1 Ch Cherenkov,ch3
 Pair 2 Ch Sensor,ch4
 Pair 2 Ch Cherenkov,ch5
-Pair 3 Ch Sensor,ch6
-Pair 3 Ch Cherenkov,ch7
+Pair 3 Ch Sensor,ch7
+Pair 3 Ch Cherenkov,ch6
 ACR0,1.0
 ACR1,1.0
 ACR2,1.0
