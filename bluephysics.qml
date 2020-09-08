@@ -1165,12 +1165,11 @@ ApplicationWindow {
                 anchors.top: parent.top
                 anchors.topMargin: 6
                 hoverEnabled: true
-                text: 'Main Menu'
                 anchors.horizontalCenter: parent.horizontalCenter
                 icon.source: "iconspd/home.png"
                 icon.height: 90
                 font.pointSize: 12
-                display: AbstractButton.TextUnderIcon
+                display: AbstractButton.IconOnly
                 icon.width: 90
                 icon.color: "#00000000"
 
@@ -1188,7 +1187,7 @@ ApplicationWindow {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.rightMargin: 6
-                height: 220
+                height: 170
 
                 ToolButton {
                     id: psonoff
@@ -1198,7 +1197,7 @@ ApplicationWindow {
                     anchors.right: parent.right
                     checkable: true
                     checked: true
-                    height: 50
+                    height: 25
                     hoverEnabled: true
                     enabled: regulatebutton.checked ? false : true
 
@@ -1243,7 +1242,7 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.top: psspinbox.bottom
                     anchors.topMargin: 6
-                    height: 50
+                    height: 25
                     text: regulatebutton.checked ? 'Regulating' : 'Regulate'
                     hoverEnabled: true
                     checkable: true
@@ -1271,7 +1270,7 @@ ApplicationWindow {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.rightMargin: 6
-                height: 110
+                height: 90
 
                 ToolButton {
                     id: subtractdc
@@ -1281,7 +1280,7 @@ ApplicationWindow {
                     anchors.right: parent.right
                     hoverEnabled: true
                     text: subtractdc.checked ? 'Subtracting' : 'Subtract'
-                    height: 50
+                    height: 25
                     checkable: true
                     enabled: (startbutton.checked | regulatebutton.checked) ? false : true
 
@@ -1419,10 +1418,16 @@ ApplicationWindow {
                 anchors.right: parent.right
                 anchors.rightMargin: 6
                 anchors.left: parent.left
-                height: 250
+                height: 350
+
+                ButtonGroup {
+                    id: resultsgroup
+                    exclusive: true
+                }
+
 
                 GridLayout {
-                    rows: 4
+                    rows: 6
                     columns: 2
                     anchors.fill: parent
 
@@ -1442,8 +1447,30 @@ ApplicationWindow {
                         }
 
                     }
+                    ToolButton {
+                        id: chargebt
+                        text: 'Chr'
+                        checkable: true
+                        checked: true
+                        ButtonGroup.group: resultsgroup
+                    }
+                    ToolButton {
+                        id: chargedosebt
+                        text: '~dose'
+                        checkable: true
+                        checked: false
+                        ButtonGroup.group: resultsgroup
+                    }
+                    ToolButton {
+                        id: dosebt
+                        text: 'Dose'
+                        checkable: true
+                        checked: false
+                        ButtonGroup.group: resultsgroup
+                    }
                 }
             }
+
 
             GroupBox {
                 id: groupboxplot2iew
