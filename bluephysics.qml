@@ -19,6 +19,22 @@ ApplicationWindow {
     Material.accent: Material.LightBlue
 
     property var lqmlchs: [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
+    property var pair0chsen
+    property var pair0chche
+    property var pair1chsen
+    property var pair1chche
+    property var pair2chsen
+    property var pair2chche
+    property var pair3chsen
+    property var pair3chche
+    property var pair0chargedose
+    property var pair1chargedose
+    property var pair2chargedose
+    property var pair3chargedose
+    property var pair0dose
+    property var pair1dose
+    property var pair2dose
+    property var pair3dose
 
     Item {
         id: mainmenu
@@ -139,11 +155,10 @@ ApplicationWindow {
                     width: 125
                     height: 100
                     hoverEnabled: true
-                    text: 'Main Menu'
                     icon.source: "iconspd/home.png"
                     icon.height: 90
                     font.pointSize: 12
-                    display: AbstractButton.TextUnderIcon
+                    display: AbstractButton.IconOnly
                     icon.width: 90
                     icon.color: "#00000000"
 
@@ -1144,7 +1159,6 @@ ApplicationWindow {
         anchors.fill: parent
         visible: false
 
-
         Rectangle {
             id: rectangle
             x: 1136
@@ -1349,12 +1363,16 @@ ApplicationWindow {
                         serienow.color = colors[i]
                         serienow.useOpenGL = true
                     }
+                    for (var j = 0; j < 8; j++){listmodelfullintegrals.setProperty(j, 'mytext', 'ch' + j)}
 
 
                     ma.starttimes = []
                     ma.finishtimes = []
                     stopbutton.enabled = true
-                    for (var j = 0; j < 8; j++){listmodelfullintegrals.setProperty(j, 'fullintegral', 0)}
+                    chargebt.checked = true
+                    chargebt.enabled = false
+                    chargedosebt.enabled = false
+                    dosebt.enabled = false
                     intbeamsitem.visible = false
                 }
             }
@@ -1379,34 +1397,38 @@ ApplicationWindow {
                     startbutton.enabled = true
                     startbutton.checked = false
                     stopbutton.enabled = false
+                    console.log('pair 0 ch sensor: ' + qmlch1.integral)
 
                     for (var i = 0; i < 8; i++){
                         if (lqmlchs[i].name === pair0chsensor.currentText){
-                            var pair0chsen = lqmlchs[i]
+                            pair0chsen = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair0chcherenkov.currentText){
-                            var pair0chche = lqmlchs[i]
+                            pair0chche = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair1chsensor.currentText){
-                            var pair1chsen = lqmlchs[i]
+                            pair1chsen = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair1chcherenkov.currentText){
-                            var pair1chche = lqmlchs[i]
+                            pair1chche = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair2chsensor.currentText){
-                            var pair2chsen = lqmlchs[i]
+                            pair2chsen = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair2chcherenkov.currentText){
-                            var pair2chche = lqmlchs[i]
+                            pair2chche = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair3chsensor.currentText){
-                            var pair3chsen = lqmlchs[i]
+                            pair3chsen = lqmlchs[i]
                         }
                         if (lqmlchs[i].name === pair3chcherenkov.currentText){
-                            var pair3chche = lqmlchs[i]
+                            pair3chche = lqmlchs[i]
                         }
                     }
-                    console.log('Pair 3 ch sensor is: ' + pair3chsen.name)
+
+                    chargebt.enabled = true
+                    chargedosebt.enabled = true
+                    dosebt.enabled = true
                 }
             }
 
@@ -1450,23 +1472,52 @@ ApplicationWindow {
                     ToolButton {
                         id: chargebt
                         text: 'Chr'
+                        enabled: false
                         checkable: true
                         checked: true
                         ButtonGroup.group: resultsgroup
+                        onClicked: {
+                            for(var i = 0; i < 8; i++){
+                                listmodelfullintegrals.setProperty(i, 'mytext', 'ch' + i + ' ' + Math.round(lqmlchs[i].integral * 100)/100)
+                            }
+                        }
                     }
                     ToolButton {
                         id: chargedosebt
                         text: '~dose'
+                        enabled: false
                         checkable: true
                         checked: false
                         ButtonGroup.group: resultsgroup
+                        onClicked: {
+                            listmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.integral - pair0chche.integral * acr0.realValue) *100)/100)
+                            listmodelfullintegrals.setProperty(1, 'mytext', '')
+                            listmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.integral - pair1chche.integral * acr1.realValue) *100)/100)
+                            listmodelfullintegrals.setProperty(3, 'mytext', '')
+                            listmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.integral - pair2chche.integral * acr2.realValue) *100)/100)
+                            listmodelfullintegrals.setProperty(5, 'mytext', '')
+                            listmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.integral - pair3chche.integral * acr3.realValue) *100)/100)
+                            listmodelfullintegrals.setProperty(7, 'mytext', '')
+                        }
+
                     }
                     ToolButton {
                         id: dosebt
                         text: 'Dose'
+                        enabled: false
                         checkable: true
                         checked: false
                         ButtonGroup.group: resultsgroup
+                        onClicked: {
+                            listmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.integral - pair0chche.integral * acr0.realValue) * calib0.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(1, 'mytext', '')
+                            listmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.integral - pair1chche.integral * acr1.realValue) * calib1.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(3, 'mytext', '')
+                            listmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.integral - pair2chche.integral * acr2.realValue) * calib2.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(5, 'mytext', '')
+                            listmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.integral - pair3chche.integral * acr3.realValue) * calib3.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(7, 'mytext', '')
+                        }
                     }
                 }
             }
@@ -1505,34 +1556,58 @@ ApplicationWindow {
                ListElement {
                    mycolor: 'red'
                    fullintegral: 0
+                   chargedose: 0
+                   dose: 0
+                   mytext: 'ch0'
                 }
                 ListElement {
                     mycolor: 'lightblue'
                     fullintegral: 0
+                    chargedose: 0
+                    dose: 0
+                    mytext: 'ch1'
                 }
                 ListElement {
                     mycolor: 'lightgreen'
                     fullintegral: 0
+                    chargedose: 0
+                    dose: 0
+                    mytext: 'ch2'
                 }
                 ListElement {
                     mycolor: 'yellow'
                     fullintegral: 0
+                    chargedose: 0
+                    dose: 0
+                    mytext: 'ch3'
                 }
                 ListElement {
                      mycolor: 'cyan'
                      fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch4'
                 }
                 ListElement {
                      mycolor: 'fuchsia'
                      fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch5'
                 }
                 ListElement {
                      mycolor: 'orange'
                      fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch6'
                 }
                 ListElement {
                      mycolor: 'lightgrey'
                      fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch7'
                 }
               }
 
@@ -1541,34 +1616,42 @@ ApplicationWindow {
                ListElement {
                    mycolor: 'red'
                    intvalue: 0
+                   mytext: 'ch0'
                }
                ListElement {
                    mycolor: 'lightblue'
                    intvalue: 0
+                   mytext: 'ch1'
                }
                ListElement {
                     mycolor: 'lightgreen'
                     intvalue: 0
+                    mytext: 'ch2'
                }
                ListElement {
                     mycolor: 'yellow'
                     intvalue: 0
+                    mytext: 'ch3'
                }
                ListElement {
                     mycolor: 'cyan'
                     intvalue: 0
+                    mytext: 'ch4'
                }
                ListElement {
                     mycolor: 'fuchsia'
                     intvalue: 0
+                    mytext: 'ch5'
                }
                ListElement {
                     mycolor: 'orange'
                     intvalue: 0
+                    mytext: 'ch6'
                }
                ListElement {
                     mycolor: 'lightgrey'
                     intvalue: 0
+                    mytext: 'ch7'
                }
              }
 
@@ -1600,7 +1683,7 @@ ApplicationWindow {
                                 }
 
                                 Text {
-                                    text: fullintegral > 0 ? 'ch' + index + ' ' + fullintegral : 'ch' + index
+                                    text: mytext
                                     color: 'lightgrey'
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -1610,7 +1693,7 @@ ApplicationWindow {
 
                     Text {
                         id: unitsfullintegrals
-                        text: '(nC)'
+                        text: (chargebt.checked | chargedosebt.checked) ? '(nC)' : '(cGy)'
                         color: 'lightgrey'
                     }
                 }
@@ -1693,7 +1776,7 @@ ApplicationWindow {
                                     }
 
                                     Text {
-                                        text: 'ch' + index + ': ' + intvalue
+                                        text: mytext
                                         color: 'lightgrey'
                                         anchors.verticalCenter: parent.verticalCenter
                                     }
@@ -1703,7 +1786,7 @@ ApplicationWindow {
 
                         Text {
                             id: integralsunits
-                            text: '(nC)'
+                            text: (chargebt.checked | chargedosebt.checked) ? '(nC)' : '(cGy)'
                             color: 'lightgrey'
 
                         }
@@ -1723,10 +1806,34 @@ ApplicationWindow {
                                 intbeamsitem.visible = true
                                 intbeamsitem.x = mouseX
                                 intbeamsitem.y = mouseY
-                                for (var j = 0; j < 8; j++){
-                                   //console.log('ch' + j + ' object name at ' + i + ' is ' + typeof (Math.round(lqmlchs[j].listaint[i]*100)/100))
-                                   integralsmodel.setProperty(j, 'intvalue', Math.round(lqmlchs[j].listaint[i] * 100)/100)
+                                if (chargebt.checked){
+                                    for (var j = 0; j < 8; j++){
+                                       //console.log('ch' + j + ' object name at ' + i + ' is ' + typeof (Math.round(lqmlchs[j].listaint[i]*100)/100))
+                                      integralsmodel.setProperty(j, 'mytext', 'ch' + j + ' ' + Math.round(lqmlchs[j].listaint[i] * 100)/100)
+                                    }
                                 }
+                                if (chargedosebt.checked){
+                                    integralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.listaint[i] - pair0chche.listaint[i] * acr0.realValue)* 100)/100)
+                                    integralsmodel.setProperty(1, 'mytext', '')
+                                    integralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.listaint[i] - pair1chche.listaint[i] * acr1.realValue)* 100)/100)
+                                    integralsmodel.setProperty(3, 'mytext', '')
+                                    integralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.listaint[i] - pair2chche.listaint[i] * acr2.realValue)* 100)/100)
+                                    integralsmodel.setProperty(5, 'mytext', '')
+                                    integralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.listaint[i] - pair3chche.listaint[i] * acr3.realValue)* 100)/100)
+                                    integralsmodel.setProperty(7, 'mytext', '')
+                                }
+                                if (dosebt.checked){
+                                    integralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.listaint[i] - pair0chche.listaint[i] * acr0.realValue) * calib0.realValue * 100)/100)
+                                    integralsmodel.setProperty(1, 'mytext', '')
+                                    integralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.listaint[i] - pair1chche.listaint[i] * acr1.realValue) * calib1.realValue * 100)/100)
+                                    integralsmodel.setProperty(3, 'mytext', '')
+                                    integralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.listaint[i] - pair2chche.listaint[i] * acr2.realValue) * calib2.realValue * 100)/100)
+                                    integralsmodel.setProperty(5, 'mytext', '')
+                                    integralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.listaint[i] - pair3chche.listaint[i] * acr3.realValue) * calib3.realValue * 100)/100)
+                                    integralsmodel.setProperty(7, 'mytext', '')
+                                }
+
+
                             }
                         }
 
@@ -2156,8 +2263,9 @@ ApplicationWindow {
             ma.starttimes = starttimes
             ma.finishtimes = finishtimes
             for (var x = 0; x < 8; x++){
-                listmodelfullintegrals.setProperty(x, 'fullintegral', Math.round(lqmlchs[x].integral * 100)/100 )
+                listmodelfullintegrals.setProperty(x, 'mytext', 'ch' + x + ' ' + Math.round(lqmlchs[x].integral * 100)/100 )
             }
+
 
             for (var k = 0; k < 8; k++){
                 lqmlchs[k].update_serie(chartviewchs.series('ch' + k))
