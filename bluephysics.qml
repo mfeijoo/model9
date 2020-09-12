@@ -209,6 +209,16 @@ ApplicationWindow {
 
                     }
                 }
+                SpinBox{
+                    id: limitsspinbox
+                    anchors.right: parent.right
+                    anchors.left: parent.left
+                    objectName: 'limitsspinbox'
+                    from: 0
+                    to: 10
+                    value: 2
+                    editable: true
+                }
             }
 
 

@@ -618,7 +618,9 @@ class StopThread(QThread):
         #lets find the start and stop of all beams
         dff = pd.DataFrame({'time':dchs[mch].time, mch:dchs[mch].meas})
         dff['chdiff'] = dff[mch].diff()
-        dffchanges =  dff.loc[dff.chdiff.abs() > 1000, :].copy()
+        lv = limitsspinbox.property('value')
+        print (lv, type(lv))
+        dffchanges =  dff.loc[dff.chdiff.abs() > (lv * 1000), :].copy()
         dffchanges['timediff'] = dffchanges.time.diff()
         dffchanges.fillna(1, inplace=True)
         dfftimes =  dffchanges[dffchanges.timediff > 0.5].copy()
@@ -759,6 +761,7 @@ commentstext = engine.rootObjects()[0].findChild(QObject, 'commentstext')
 socatport1 = engine.rootObjects()[0].findChild(QObject, 'socatport1')
 socatport2 = engine.rootObjects()[0].findChild(QObject, 'socatport2')
 emulatorswitch = engine.rootObjects()[0].findChild(QObject, 'emulatorswitch')
+limitsspinbox = engine.rootObjects()[0].findChild(QObject, 'limitsspinbox')
 #print (emulatorswitch.property('text'))
 
 
