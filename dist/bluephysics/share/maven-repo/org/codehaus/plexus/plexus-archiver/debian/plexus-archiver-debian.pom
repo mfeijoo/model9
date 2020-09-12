@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.codehaus.plexus</groupId>
+	<artifactId>plexus-archiver</artifactId>
+	<version>debian</version>
+	<packaging>jar</packaging>
+	<name>Plexus Archiver Component</name>
+	<properties>
+		<javaVersion>7</javaVersion>
+		
+			<debian.com.google.code.findbugs.jsr305.originalVersion>3.0.2</debian.com.google.code.findbugs.jsr305.originalVersion>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.junit.junit.originalVersion>4.12</debian.junit.junit.originalVersion>
+		
+			<debian.mavenRules>org.apache.maven.plugins maven-enforcer-plugin * * * *,
+		org.apache.maven.plugins maven-scm-publish-plugin * * * *</debian.mavenRules>
+		
+			<debian.org.apache.commons.commons-compress.originalVersion>1.16.1</debian.org.apache.commons.commons-compress.originalVersion>
+		
+			<debian.org.codehaus.plexus.plexus-container-default.originalVersion>1.0-alpha-30</debian.org.codehaus.plexus.plexus-container-default.originalVersion>
+		
+			<debian.org.codehaus.plexus.plexus-io.originalVersion>3.0.1</debian.org.codehaus.plexus.plexus-io.originalVersion>
+		
+			<debian.org.codehaus.plexus.plexus-utils.originalVersion>3.1.0</debian.org.codehaus.plexus.plexus-utils.originalVersion>
+		
+			<debian.org.iq80.snappy.snappy.originalVersion>0.4</debian.org.iq80.snappy.snappy.originalVersion>
+		
+			<debian.org.tukaani.xz.originalVersion>1.8</debian.org.tukaani.xz.originalVersion>
+		
+			<debian.originalVersion>3.6.0</debian.originalVersion>
+		
+			<debian.package>libplexus-archiver-java</debian.package>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-container-default</artifactId>
+			<version>1.5.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>2.x</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-io</artifactId>
+			<version>debian</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>debian</version>
+		</dependency>
+		<dependency>
+			<groupId>org.xerial.snappy</groupId>
+			<artifactId>snappy-java</artifactId>
+			<version>debian</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>debian</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.tukaani</groupId>
+			<artifactId>xz</artifactId>
+			<version>debian</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

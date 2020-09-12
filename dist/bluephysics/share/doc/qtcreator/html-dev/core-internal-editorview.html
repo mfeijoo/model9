@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>EditorView Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >EditorView</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">EditorView Class</h1>
+<span class="small-subtitle">(<a href="core-internal-editorview.html">Core::Internal::EditorView</a>)<br/></span>
+<ul>
+<li><a href="core-internal-editorview-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#addCurrentPositionToNavigationHistory">addCurrentPositionToNavigationHistory</a></b>(const int &amp;<i>saveState</i> = ...)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#canGoBack">canGoBack</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#canGoForward">canGoForward</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#copyNavigationHistoryFrom">copyNavigationHistoryFrom</a></b>(Core::Internal::EditorView *<i>other</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#cutForwardNavigationHistory">cutForwardNavigationHistory</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#editorHistory">editorHistory</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#goForwardInNavigationHistory">goForwardInNavigationHistory</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#updateEditorHistory">updateEditorHistory</a></b>(Core::IEditor *<i>editor</i>)</td></tr>
+</table></div>
+<a name="protected-functions"></a>
+<h2 id="protected-functions">Protected Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#focusInEvent">focusInEvent</a></b>(<i>int *</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#mousePressEvent">mousePressEvent</a></b>(int *<i>e</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="core-internal-editorview.html#paintEvent">paintEvent</a></b>(<i>int *</i>) override</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$addCurrentPositionToNavigationHistory[overload1]$$$addCurrentPositionToNavigationHistoryconstint& -->
+<h3 class="fn" id="addCurrentPositionToNavigationHistory"><a name="addCurrentPositionToNavigationHistory"></a><span class="type">void</span> EditorView::<span class="name">addCurrentPositionToNavigationHistory</span>(const <span class="type">int</span> &amp;<i>saveState</i> = ...)</h3>
+<!-- @@@addCurrentPositionToNavigationHistory -->
+<!-- $$$canGoBack[overload1]$$$canGoBack -->
+<h3 class="fn" id="canGoBack"><a name="canGoBack"></a><span class="type">bool</span> EditorView::<span class="name">canGoBack</span>() const</h3>
+<!-- @@@canGoBack -->
+<!-- $$$canGoForward[overload1]$$$canGoForward -->
+<h3 class="fn" id="canGoForward"><a name="canGoForward"></a><span class="type">bool</span> EditorView::<span class="name">canGoForward</span>() const</h3>
+<!-- @@@canGoForward -->
+<!-- $$$copyNavigationHistoryFrom[overload1]$$$copyNavigationHistoryFromCore::Internal::EditorView* -->
+<h3 class="fn" id="copyNavigationHistoryFrom"><a name="copyNavigationHistoryFrom"></a><span class="type">void</span> EditorView::<span class="name">copyNavigationHistoryFrom</span>(<span class="type">Core::Internal::EditorView</span> *<i>other</i>)</h3>
+<!-- @@@copyNavigationHistoryFrom -->
+<!-- $$$cutForwardNavigationHistory[overload1]$$$cutForwardNavigationHistory -->
+<h3 class="fn" id="cutForwardNavigationHistory"><a name="cutForwardNavigationHistory"></a><span class="type">void</span> EditorView::<span class="name">cutForwardNavigationHistory</span>()</h3>
+<!-- @@@cutForwardNavigationHistory -->
+<!-- $$$editorHistory[overload1]$$$editorHistory -->
+<h3 class="fn" id="editorHistory"><a name="editorHistory"></a><span class="type">int</span> EditorView::<span class="name">editorHistory</span>() const</h3>
+<!-- @@@editorHistory -->
+<!-- $$$focusInEvent[overload1]$$$focusInEventint* -->
+<h3 class="fn" id="focusInEvent"><a name="focusInEvent"></a><code>[protected] </code><span class="type">void</span> EditorView::<span class="name">focusInEvent</span>(<i>int *</i>)</h3>
+<!-- @@@focusInEvent -->
+<!-- $$$goForwardInNavigationHistory[overload1]$$$goForwardInNavigationHistory -->
+<h3 class="fn" id="goForwardInNavigationHistory"><a name="goForwardInNavigationHistory"></a><span class="type">void</span> EditorView::<span class="name">goForwardInNavigationHistory</span>()</h3>
+<!-- @@@goForwardInNavigationHistory -->
+<!-- $$$mousePressEvent[overload1]$$$mousePressEventint* -->
+<h3 class="fn" id="mousePressEvent"><a name="mousePressEvent"></a><code>[protected] </code><span class="type">void</span> EditorView::<span class="name">mousePressEvent</span>(<span class="type">int</span> *<i>e</i>)</h3>
+<!-- @@@mousePressEvent -->
+<!-- $$$paintEvent[overload1]$$$paintEventint* -->
+<h3 class="fn" id="paintEvent"><a name="paintEvent"></a><code>[protected] </code><span class="type">void</span> EditorView::<span class="name">paintEvent</span>(<i>int *</i>)</h3>
+<!-- @@@paintEvent -->
+<!-- $$$updateEditorHistory[overload1]$$$updateEditorHistoryCore::IEditor* -->
+<h3 class="fn" id="updateEditorHistory"><a name="updateEditorHistory"></a><span class="type">void</span> EditorView::<span class="name">updateEditorHistory</span>(<span class="type">Core::IEditor</span> *<i>editor</i>)</h3>
+<!-- @@@updateEditorHistory -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

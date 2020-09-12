@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- utils.qdoc -->
+  <title>Utils Namespace | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >Utils Namespace</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#namespaces">Namespaces</a></li>
+<li class="level1"><a href="#classes">Classes</a></li>
+<li class="level1"><a href="#types">Types</a></li>
+<li class="level1"><a href="#functions">Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">Utils Namespace</h1>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">   <span class="preprocessor">#include &lt;Utils&gt;</span>
+</td></tr></table></div><ul>
+</ul>
+<a name="namespaces"></a>
+<h2 id="namespaces">Namespaces</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="utils-fadingindicator.html">FadingIndicator</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="utils-internal.html">Internal</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="utils-osspecificaspects.html">OsSpecificAspects</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="utils-ui.html">Ui</a></b></td></tr>
+</table></div>
+<a name="classes"></a>
+<h2 id="classes">Classes</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-consoleprocessprivate.html">ConsoleProcessPrivate</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-elfprogramheader.html">ElfProgramHeader</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-elfsectionheader.html">ElfSectionHeader</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-linecolumn.html">LineColumn</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-treemodel.html">TreeModel</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-typedtreeitem.html">TypedTreeItem</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-view.html">View</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-functiontakesargument.html">functionTakesArgument</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="utils-functiontraits.html">functionTraits</a></b></td></tr>
+</table></div>
+<a name="types"></a>
+<h2 id="types">Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ActivationMode-enum">ActivationMode</a></b> { DoubleClickActivation, SingleClickActivation, PlatformDefaultActivation }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ApplyMode-enum">ApplyMode</a></b> { ImmediateApply, DeferedApply }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#DebugSymbolsType-enum">DebugSymbolsType</a></b> { UnknownSymbols, NoSymbols, LinkedSymbols, BuildIdSymbols, PlainSymbols, FastSymbols }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ElfClass-enum">ElfClass</a></b> { Elf_ELFCLASS32, Elf_ELFCLASS64 }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ElfEndian-enum">ElfEndian</a></b> { Elf_ELFDATANONE, Elf_ELFDATA2LSB, Elf_ELFDATA2MSB, Elf_ELFDATANUM }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ElfMachine-enum">ElfMachine</a></b> { Elf_EM_386, Elf_EM_ARM, Elf_EM_X86_64 }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ElfProgramHeaderType-enum">ElfProgramHeaderType</a></b> { Elf_PT_NULL, Elf_PT_LOAD, Elf_PT_DYNAMIC, Elf_PT_INTERP, ..., Elf_PT_NUM }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ElfSectionHeaderType-enum">ElfSectionHeaderType</a></b> { Elf_SHT_NULL, Elf_SHT_PROGBITS, Elf_SHT_SYMTAB, Elf_SHT_STRTAB, ..., Elf_SHT_SYMTAB_SHNDX }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ElfType-enum">ElfType</a></b> { Elf_ET_NONE, Elf_ET_REL, Elf_ET_EXEC, Elf_ET_DYN, Elf_ET_CORE }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#HighlightingItemRole-enum">HighlightingItemRole</a></b> { LineNumber, StartColumn, Length, Foreground, Background, User }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#MimeMatchMode-enum">MimeMatchMode</a></b> { MatchDefault, MatchExtension, MatchContent }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#MimeStartupPhase-enum">MimeStartupPhase</a></b> { BeforeInitialize, PluginsLoading, PluginsInitializing, PluginsDelayedInitializing, UpAndRunning }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> typedef </td><td class="memItemRight bottomAlign"><b><a href="utils.html#OptionalLineColumn-typedef">OptionalLineColumn</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#OsType-enum">OsType</a></b> { OsTypeWindows, OsTypeLinux, OsTypeMac, OsTypeOtherUnix, OsTypeOther }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#ProgressIndicatorSize-enum">ProgressIndicatorSize</a></b> { Small, Medium, Large }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="utils.html#WinDLLVersionType-enum">WinDLLVersionType</a></b> { WinDLLFileVersion, WinDLLProductVersion }</td></tr>
+</table></div>
+<a name="functions"></a>
+<h2 id="functions">Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="utils.html#addMimeTypes">addMimeTypes</a></b>(const int &amp;<i>id</i>, const int &amp;<i>data</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#allOf">allOf</a></b>(const T &amp;<i>container</i>, F <i>predicate</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#anyOf">anyOf</a></b>(const T &amp;<i>container</i>, F <i>predicate</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#anyOf-1">anyOf</a></b>(const T &amp;<i>container</i>, R (S::*)() const <i>predicate</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#anyOf-2">anyOf</a></b>(const T &amp;<i>container</i>, R S::*<i>member</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> T *</td><td class="memItemRight bottomAlign"><b><a href="utils.html#checkEventType">checkEventType</a></b>(int *<i>ev</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#contains">contains</a></b>(const T &amp;<i>container</i>, F <i>function</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#contains-1">contains</a></b>(const T &amp;<i>container</i>, R (S::*)() const <i>function</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#contains-2">contains</a></b>(const C &amp;<i>container</i>, R S::*<i>member</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils.html#count">count</a></b>(const T &amp;<i>container</i>, F <i>predicate</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> decltype(auto) </td><td class="memItemRight bottomAlign"><b><a href="utils.html#equal">equal</a></b>(R (S::*)() const <i>function</i>, T <i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> decltype(auto) </td><td class="memItemRight bottomAlign"><b><a href="utils.html#equal-1">equal</a></b>(R S::*<i>member</i>, T <i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> auto </td><td class="memItemRight bottomAlign"><b><a href="utils.html#equalTo">equalTo</a></b>(Type &amp;&amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils.html#erase">erase</a></b>(T &amp;<i>container</i>, F <i>predicate</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> auto </td><td class="memItemRight bottomAlign"><b><a href="utils.html#greaterEqualThan">greaterEqualThan</a></b>(Type &amp;&amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> auto </td><td class="memItemRight bottomAlign"><b><a href="utils.html#greaterThan">greaterThan</a></b>(Type &amp;&amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> auto </td><td class="memItemRight bottomAlign"><b><a href="utils.html#lessEqualThan">lessEqualThan</a></b>(Type &amp;&amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> auto </td><td class="memItemRight bottomAlign"><b><a href="utils.html#lessThan">lessThan</a></b>(Type &amp;&amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> T </td><td class="memItemRight bottomAlign"><b><a href="utils.html#makeUniquelyNumbered">makeUniquelyNumbered</a></b>(const T &amp;<i>preferred</i>, const Container &amp;<i>reserved</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="utils.html#parseUsedPortFromNetstatOutput">parseUsedPortFromNetstatOutput</a></b>(const int &amp;<i>line</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils.html#qHash">qHash</a></b>(<i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils.html#runAsync">runAsync</a></b>(<i>int *</i>, <i>int</i>, <i>Function &amp;&amp;</i>, <i>Args &amp;&amp;...</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils.html#runAsync-1">runAsync</a></b>(<i>int</i>, <i>Function &amp;&amp;</i>, <i>Args &amp;&amp;...</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils.html#runAsync-2">runAsync</a></b>(<i>int</i>, <i>int</i>, <i>Function &amp;&amp;</i>, <i>Args &amp;&amp;...</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="utils.html#setGlobPatternsForMimeType">setGlobPatternsForMimeType</a></b>(const int &amp;<i>mimeType</i>, const class QStringList &amp;<i>patterns</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="utils.html#setMagicRulesForMimeType">setMagicRulesForMimeType</a></b>(const int &amp;<i>mimeType</i>, <i>const int</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="utils.html#setMimeStartupPhase">setMimeStartupPhase</a></b>(<i>Utils::MimeStartupPhase</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="utils.html#unCommentSelection">unCommentSelection</a></b>(int *<i>edit</i>, const int &amp;<i>definiton</i> = ...)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> auto </td><td class="memItemRight bottomAlign"><b><a href="utils.html#unequalTo">unequalTo</a></b>(Type &amp;&amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> T </td><td class="memItemRight bottomAlign"><b><a href="utils.html#withNtfsPermissions">withNtfsPermissions</a></b>(const int &amp;<i>task</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-not-eq">operator!=</a></b>(const int &amp;<i>p1</i>, const int &amp;<i>p2</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-not-eq-1">operator!=</a></b>(Utils::LineColumn <i>first</i>, Utils::LineColumn <i>second</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-lt">operator&lt;</a></b>(const int &amp;<i>p1</i>, const int &amp;<i>p2</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-lt-eq">operator&lt;=</a></b>(const int &amp;<i>p1</i>, const int &amp;<i>p2</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-eq-eq">operator==</a></b>(const int &amp;<i>p1</i>, const int &amp;<i>p2</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-eq-eq-1">operator==</a></b>(Utils::LineColumn <i>first</i>, Utils::LineColumn <i>second</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-gt">operator&gt;</a></b>(const int &amp;<i>p1</i>, const int &amp;<i>p2</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils.html#operator-gt-eq">operator&gt;=</a></b>(const int &amp;<i>p1</i>, const int &amp;<i>p2</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$Utils-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>The Utils namespace contains a collection of utility classes and functions for use by all plugins.</p>
+</div>
+<!-- @@@Utils -->
+<div class="nmspace">
+<h2>Namespaces</h2>
+<!-- $$$FadingIndicator -->
+<h3 class="fn" id=""><a name=""></a>namespace Utils::<span class="name">FadingIndicator</span></h3>
+<!-- @@@FadingIndicator -->
+<!-- $$$Internal -->
+<h3 class="fn" id=""><a name=""></a>namespace Utils::<span class="name">Internal</span></h3>
+<!-- @@@Internal -->
+<!-- $$$OsSpecificAspects -->
+<h3 class="fn" id=""><a name=""></a>namespace Utils::<span class="name">OsSpecificAspects</span></h3>
+<!-- @@@OsSpecificAspects -->
+<!-- $$$Ui -->
+<h3 class="fn" id=""><a name=""></a>namespace Utils::<span class="name">Ui</span></h3>
+<!-- @@@Ui -->
+</div>
+<div class="classes">
+<h2>Classes</h2>
+<h3> class <a href="utils-consoleprocessprivate.html">ConsoleProcessPrivate</a></h3><h3> class <a href="utils-elfprogramheader.html">ElfProgramHeader</a></h3><h3> class <a href="utils-elfsectionheader.html">ElfSectionHeader</a></h3><h3> class <a href="utils-linecolumn.html">LineColumn</a></h3><h3> class <a href="utils-treemodel.html">TreeModel</a></h3><!-- $$$TreeModel-brief -->
+<p>The <a href="utils-treemodel.html">TreeModel</a> class is a convienience base class for models to use in a QTreeView. <a href="utils-treemodel.html#details">More...</a></p>
+<!-- @@@TreeModel -->
+<h3> class <a href="utils-typedtreeitem.html">TypedTreeItem</a></h3><h3> class <a href="utils-view.html">View</a></h3><h3> class <a href="utils-functiontakesargument.html">functionTakesArgument</a></h3><h3> class <a href="utils-functiontraits.html">functionTraits</a></h3></div>
+<div class="types">
+<h2>Type Documentation</h2>
+<!-- $$$ActivationMode$$$DoubleClickActivation$$$SingleClickActivation$$$PlatformDefaultActivation -->
+<h3 class="fn" id="ActivationMode-enum"><a name="ActivationMode-enum"></a>enum Utils::<span class="name">ActivationMode</span></h3>
+<!-- @@@ActivationMode -->
+<!-- $$$ApplyMode$$$ImmediateApply$$$DeferedApply -->
+<h3 class="fn" id="ApplyMode-enum"><a name="ApplyMode-enum"></a>enum Utils::<span class="name">ApplyMode</span></h3>
+<!-- @@@ApplyMode -->
+<!-- $$$DebugSymbolsType$$$UnknownSymbols$$$NoSymbols$$$LinkedSymbols$$$BuildIdSymbols$$$PlainSymbols$$$FastSymbols -->
+<h3 class="fn" id="DebugSymbolsType-enum"><a name="DebugSymbolsType-enum"></a>enum Utils::<span class="name">DebugSymbolsType</span></h3>
+<!-- @@@DebugSymbolsType -->
+<!-- $$$ElfClass$$$Elf_ELFCLASS32$$$Elf_ELFCLASS64 -->
+<h3 class="fn" id="ElfClass-enum"><a name="ElfClass-enum"></a>enum Utils::<span class="name">ElfClass</span></h3>
+<!-- @@@ElfClass -->
+<!-- $$$ElfEndian$$$Elf_ELFDATANONE$$$Elf_ELFDATA2LSB$$$Elf_ELFDATA2MSB$$$Elf_ELFDATANUM -->
+<h3 class="fn" id="ElfEndian-enum"><a name="ElfEndian-enum"></a>enum Utils::<span class="name">ElfEndian</span></h3>
+<!-- @@@ElfEndian -->
+<!-- $$$ElfMachine$$$Elf_EM_386$$$Elf_EM_ARM$$$Elf_EM_X86_64 -->
+<h3 class="fn" id="ElfMachine-enum"><a name="ElfMachine-enum"></a>enum Utils::<span class="name">ElfMachine</span></h3>
+<!-- @@@ElfMachine -->
+<!-- $$$ElfProgramHeaderType$$$Elf_PT_NULL$$$Elf_PT_LOAD$$$Elf_PT_DYNAMIC$$$Elf_PT_INTERP$$$Elf_PT_NOTE$$$Elf_PT_SHLIB$$$Elf_PT_PHDR$$$Elf_PT_TLS$$$Elf_PT_NUM -->
+<h3 class="fn" id="ElfProgramHeaderType-enum"><a name="ElfProgramHeaderType-enum"></a>enum Utils::<span class="name">ElfProgramHeaderType</span></h3>
+<!-- @@@ElfProgramHeaderType -->
+<!-- $$$ElfSectionHeaderType$$$Elf_SHT_NULL$$$Elf_SHT_PROGBITS$$$Elf_SHT_SYMTAB$$$Elf_SHT_STRTAB$$$Elf_SHT_RELA$$$Elf_SHT_HASH$$$Elf_SHT_DYNAMIC$$$Elf_SHT_NOTE$$$Elf_SHT_NOBITS$$$Elf_SHT_REL$$$Elf_SHT_SHLIB$$$Elf_SHT_DYNSYM$$$Elf_SHT_INIT_ARRAY$$$Elf_SHT_FINI_ARRAY$$$Elf_SHT_PREINIT_ARRAY$$$Elf_SHT_GROUP$$$Elf_SHT_SYMTAB_SHNDX -->
+<h3 class="fn" id="ElfSectionHeaderType-enum"><a name="ElfSectionHeaderType-enum"></a>enum Utils::<span class="name">ElfSectionHeaderType</span></h3>
+<!-- @@@ElfSectionHeaderType -->
+<!-- $$$ElfType$$$Elf_ET_NONE$$$Elf_ET_REL$$$Elf_ET_EXEC$$$Elf_ET_DYN$$$Elf_ET_CORE -->
+<h3 class="fn" id="ElfType-enum"><a name="ElfType-enum"></a>enum Utils::<span class="name">ElfType</span></h3>
+<!-- @@@ElfType -->
+<!-- $$$HighlightingItemRole$$$LineNumber$$$StartColumn$$$Length$$$Foreground$$$Background$$$User -->
+<h3 class="fn" id="HighlightingItemRole-enum"><a name="HighlightingItemRole-enum"></a>enum Utils::<span class="name">HighlightingItemRole</span></h3>
+<!-- @@@HighlightingItemRole -->
+<!-- $$$MimeMatchMode$$$MatchDefault$$$MatchExtension$$$MatchContent -->
+<h3 class="fn" id="MimeMatchMode-enum"><a name="MimeMatchMode-enum"></a>enum Utils::<span class="name">MimeMatchMode</span></h3>
+<!-- @@@MimeMatchMode -->
+<!-- $$$MimeStartupPhase$$$BeforeInitialize$$$PluginsLoading$$$PluginsInitializing$$$PluginsDelayedInitializing$$$UpAndRunning -->
+<h3 class="fn" id="MimeStartupPhase-enum"><a name="MimeStartupPhase-enum"></a>enum Utils::<span class="name">MimeStartupPhase</span></h3>
+<!-- @@@MimeStartupPhase -->
+<!-- $$$OptionalLineColumn -->
+<h3 class="fn" id="OptionalLineColumn-typedef"><a name="OptionalLineColumn-typedef"></a>typedef Utils::<span class="name">OptionalLineColumn</span></h3>
+<!-- @@@OptionalLineColumn -->
+<!-- $$$OsType$$$OsTypeWindows$$$OsTypeLinux$$$OsTypeMac$$$OsTypeOtherUnix$$$OsTypeOther -->
+<h3 class="fn" id="OsType-enum"><a name="OsType-enum"></a>enum Utils::<span class="name">OsType</span></h3>
+<!-- @@@OsType -->
+<!-- $$$ProgressIndicatorSize$$$Small$$$Medium$$$Large -->
+<h3 class="fn" id="ProgressIndicatorSize-enum"><a name="ProgressIndicatorSize-enum"></a>enum Utils::<span class="name">ProgressIndicatorSize</span></h3>
+<p>Size of a progress indicator.</p>
+<div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
+<tr><td class="topAlign"><code>Utils::Small</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">Small icon size. Useful for tool bars, status bars, rows in tree views, and so on.</td></tr>
+<tr><td class="topAlign"><code>Utils::Medium</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Larger progress indicator useful for covering whole medium sized widgets.</td></tr>
+<tr><td class="topAlign"><code>Utils::Large</code></td><td class="topAlign tblval"><code>2</code></td><td class="topAlign">Very large progress indicator that can be used to cover large parts of a UI.</td></tr>
+</table></div>
+<p><b>See also </b><a href="utils.html#ProgressIndicator-var">Utils::ProgressIndicator</a> and <a href="utils.html#ProgressIndicatorPainter-var">Utils::ProgressIndicatorPainter</a>.</p>
+<!-- @@@ProgressIndicatorSize -->
+<!-- $$$WinDLLVersionType$$$WinDLLFileVersion$$$WinDLLProductVersion -->
+<h3 class="fn" id="WinDLLVersionType-enum"><a name="WinDLLVersionType-enum"></a>enum Utils::<span class="name">WinDLLVersionType</span></h3>
+<!-- @@@WinDLLVersionType -->
+</div>
+<div class="func">
+<h2>Function Documentation</h2>
+<!-- $$$addMimeTypes[overload1]$$$addMimeTypesconstint&constint& -->
+<h3 class="fn" id="addMimeTypes"><a name="addMimeTypes"></a><span class="type">Utils::Q_DECL_IMPORT</span> Utils::<span class="name">addMimeTypes</span>(const <span class="type">int</span> &amp;<i>id</i>, const <span class="type">int</span> &amp;<i>data</i>)</h3>
+<!-- @@@addMimeTypes -->
+<!-- $$$allOf[overload1]$$$allOfconstT&F -->
+<h3 class="fn" id="allOf"><a name="allOf"></a><span class="type">bool</span> Utils::<span class="name">allOf</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">F</span> <i>predicate</i>)</h3>
+<!-- @@@allOf -->
+<!-- $$$anyOf[overload1]$$$anyOfconstT&F -->
+<h3 class="fn" id="anyOf"><a name="anyOf"></a><span class="type">bool</span> Utils::<span class="name">anyOf</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">F</span> <i>predicate</i>)</h3>
+<!-- @@@anyOf -->
+<!-- $$$anyOf$$$anyOfconstT&R(S::*)()const -->
+<h3 class="fn" id="anyOf-1"><a name="anyOf-1"></a><span class="type">bool</span> Utils::<span class="name">anyOf</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">R</span> (<span class="type">S::</span>*)() const <i>predicate</i>)</h3>
+<!-- @@@anyOf -->
+<!-- $$$anyOf$$$anyOfconstT&RS::* -->
+<h3 class="fn" id="anyOf-2"><a name="anyOf-2"></a><span class="type">bool</span> Utils::<span class="name">anyOf</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">R</span> <span class="type">S::</span>*<i>member</i>)</h3>
+<!-- @@@anyOf -->
+<!-- $$$checkEventType[overload1]$$$checkEventTypeint* -->
+<h3 class="fn" id="checkEventType"><a name="checkEventType"></a><span class="type">T</span> *Utils::<span class="name">checkEventType</span>(<span class="type">int</span> *<i>ev</i>)</h3>
+<!-- @@@checkEventType -->
+<!-- $$$contains[overload1]$$$containsconstT&F -->
+<h3 class="fn" id="contains"><a name="contains"></a><span class="type">bool</span> Utils::<span class="name">contains</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">F</span> <i>function</i>)</h3>
+<!-- @@@contains -->
+<!-- $$$contains$$$containsconstT&R(S::*)()const -->
+<h3 class="fn" id="contains-1"><a name="contains-1"></a><span class="type">bool</span> Utils::<span class="name">contains</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">R</span> (<span class="type">S::</span>*)() const <i>function</i>)</h3>
+<!-- @@@contains -->
+<!-- $$$contains$$$containsconstC&RS::* -->
+<h3 class="fn" id="contains-2"><a name="contains-2"></a><span class="type">bool</span> Utils::<span class="name">contains</span>(const <span class="type">C</span> &amp;<i>container</i>, <span class="type">R</span> <span class="type">S::</span>*<i>member</i>)</h3>
+<!-- @@@contains -->
+<!-- $$$count[overload1]$$$countconstT&F -->
+<h3 class="fn" id="count"><a name="count"></a><span class="type">int</span> Utils::<span class="name">count</span>(const <span class="type">T</span> &amp;<i>container</i>, <span class="type">F</span> <i>predicate</i>)</h3>
+<!-- @@@count -->
+<!-- $$$equal[overload1]$$$equalR(S::*)()constT -->
+<h3 class="fn" id="equal"><a name="equal"></a><span class="type">decltype</span>(<span class="type">auto</span>) Utils::<span class="name">equal</span>(<span class="type">R</span> (<span class="type">S::</span>*)() const <i>function</i>, <span class="type">T</span> <i>value</i>)</h3>
+<!-- @@@equal -->
+<!-- $$$equal$$$equalRS::*T -->
+<h3 class="fn" id="equal-1"><a name="equal-1"></a><span class="type">decltype</span>(<span class="type">auto</span>) Utils::<span class="name">equal</span>(<span class="type">R</span> <span class="type">S::</span>*<i>member</i>, <span class="type">T</span> <i>value</i>)</h3>
+<!-- @@@equal -->
+<!-- $$$equalTo[overload1]$$$equalToType&& -->
+<h3 class="fn" id="equalTo"><a name="equalTo"></a><span class="type">auto</span> Utils::<span class="name">equalTo</span>(<span class="type">Type</span> &amp;&amp;<i>value</i>)</h3>
+<!-- @@@equalTo -->
+<!-- $$$erase[overload1]$$$eraseT&F -->
+<h3 class="fn" id="erase"><a name="erase"></a><span class="type">void</span> Utils::<span class="name">erase</span>(<span class="type">T</span> &amp;<i>container</i>, <span class="type">F</span> <i>predicate</i>)</h3>
+<!-- @@@erase -->
+<!-- $$$greaterEqualThan[overload1]$$$greaterEqualThanType&& -->
+<h3 class="fn" id="greaterEqualThan"><a name="greaterEqualThan"></a><span class="type">auto</span> Utils::<span class="name">greaterEqualThan</span>(<span class="type">Type</span> &amp;&amp;<i>value</i>)</h3>
+<!-- @@@greaterEqualThan -->
+<!-- $$$greaterThan[overload1]$$$greaterThanType&& -->
+<h3 class="fn" id="greaterThan"><a name="greaterThan"></a><span class="type">auto</span> Utils::<span class="name">greaterThan</span>(<span class="type">Type</span> &amp;&amp;<i>value</i>)</h3>
+<!-- @@@greaterThan -->
+<!-- $$$lessEqualThan[overload1]$$$lessEqualThanType&& -->
+<h3 class="fn" id="lessEqualThan"><a name="lessEqualThan"></a><span class="type">auto</span> Utils::<span class="name">lessEqualThan</span>(<span class="type">Type</span> &amp;&amp;<i>value</i>)</h3>
+<!-- @@@lessEqualThan -->
+<!-- $$$lessThan[overload1]$$$lessThanType&& -->
+<h3 class="fn" id="lessThan"><a name="lessThan"></a><span class="type">auto</span> Utils::<span class="name">lessThan</span>(<span class="type">Type</span> &amp;&amp;<i>value</i>)</h3>
+<!-- @@@lessThan -->
+<!-- $$$makeUniquelyNumbered[overload1]$$$makeUniquelyNumberedconstT&constContainer& -->
+<h3 class="fn" id="makeUniquelyNumbered"><a name="makeUniquelyNumbered"></a><span class="type">T</span> Utils::<span class="name">makeUniquelyNumbered</span>(const <span class="type">T</span> &amp;<i>preferred</i>, const <span class="type">Container</span> &amp;<i>reserved</i>)</h3>
+<!-- @@@makeUniquelyNumbered -->
+<!-- $$$parseUsedPortFromNetstatOutput[overload1]$$$parseUsedPortFromNetstatOutputconstint& -->
+<h3 class="fn" id="parseUsedPortFromNetstatOutput"><a name="parseUsedPortFromNetstatOutput"></a><span class="type">Utils::Q_DECL_IMPORT</span> Utils::<span class="name">parseUsedPortFromNetstatOutput</span>(const <span class="type">int</span> &amp;<i>line</i>)</h3>
+<!-- @@@parseUsedPortFromNetstatOutput -->
+<!-- $$$qHash[overload1]$$$qHashconstint& -->
+<h3 class="fn" id="qHash"><a name="qHash"></a><span class="type">int</span> Utils::<span class="name">qHash</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@qHash -->
+<!-- $$$runAsync[overload1]$$$runAsyncint*intFunction&&Args&&... -->
+<h3 class="fn" id="runAsync"><a name="runAsync"></a><span class="type">int</span> Utils::<span class="name">runAsync</span>(<i>int *</i>, <i>int</i>, <i>Function &amp;&amp;</i>, <i>Args &amp;&amp;...</i>)</h3>
+<!-- @@@runAsync -->
+<!-- $$$runAsync$$$runAsyncintFunction&&Args&&... -->
+<h3 class="fn" id="runAsync-1"><a name="runAsync-1"></a><span class="type">int</span> Utils::<span class="name">runAsync</span>(<i>int</i>, <i>Function &amp;&amp;</i>, <i>Args &amp;&amp;...</i>)</h3>
+<!-- @@@runAsync -->
+<!-- $$$runAsync$$$runAsyncintintFunction&&Args&&... -->
+<h3 class="fn" id="runAsync-2"><a name="runAsync-2"></a><span class="type">int</span> Utils::<span class="name">runAsync</span>(<i>int</i>, <i>int</i>, <i>Function &amp;&amp;</i>, <i>Args &amp;&amp;...</i>)</h3>
+<!-- @@@runAsync -->
+<!-- $$$setGlobPatternsForMimeType[overload1]$$$setGlobPatternsForMimeTypeconstint&constclassQStringList& -->
+<h3 class="fn" id="setGlobPatternsForMimeType"><a name="setGlobPatternsForMimeType"></a><span class="type">Utils::Q_DECL_IMPORT</span> Utils::<span class="name">setGlobPatternsForMimeType</span>(const <span class="type">int</span> &amp;<i>mimeType</i>, const <span class="type">class</span> <span class="type">QStringList</span> &amp;<i>patterns</i>)</h3>
+<!-- @@@setGlobPatternsForMimeType -->
+<!-- $$$setMagicRulesForMimeType[overload1]$$$setMagicRulesForMimeTypeconstint&constint -->
+<h3 class="fn" id="setMagicRulesForMimeType"><a name="setMagicRulesForMimeType"></a><span class="type">Utils::Q_DECL_IMPORT</span> Utils::<span class="name">setMagicRulesForMimeType</span>(const <span class="type">int</span> &amp;<i>mimeType</i>, <i>const int</i>)</h3>
+<!-- @@@setMagicRulesForMimeType -->
+<!-- $$$setMimeStartupPhase[overload1]$$$setMimeStartupPhaseUtils::MimeStartupPhase -->
+<h3 class="fn" id="setMimeStartupPhase"><a name="setMimeStartupPhase"></a><span class="type">Utils::Q_DECL_IMPORT</span> Utils::<span class="name">setMimeStartupPhase</span>(<i>Utils::MimeStartupPhase</i>)</h3>
+<!-- @@@setMimeStartupPhase -->
+<!-- $$$unCommentSelection[overload1]$$$unCommentSelectionint*constint& -->
+<h3 class="fn" id="unCommentSelection"><a name="unCommentSelection"></a><span class="type">Utils::Q_DECL_IMPORT</span> Utils::<span class="name">unCommentSelection</span>(<span class="type">int</span> *<i>edit</i>, const <span class="type">int</span> &amp;<i>definiton</i> = ...)</h3>
+<!-- @@@unCommentSelection -->
+<!-- $$$unequalTo[overload1]$$$unequalToType&& -->
+<h3 class="fn" id="unequalTo"><a name="unequalTo"></a><span class="type">auto</span> Utils::<span class="name">unequalTo</span>(<span class="type">Type</span> &amp;&amp;<i>value</i>)</h3>
+<!-- @@@unequalTo -->
+<!-- $$$withNtfsPermissions[overload1]$$$withNtfsPermissionsconstint& -->
+<h3 class="fn" id="withNtfsPermissions"><a name="withNtfsPermissions"></a><span class="type">T</span> Utils::<span class="name">withNtfsPermissions</span>(const <span class="type">int</span> &amp;<i>task</i>)</h3>
+<!-- @@@withNtfsPermissions -->
+<!-- $$$operator!=[overload1]$$$operator!=constint&constint& -->
+<h3 class="fn" id="operator-not-eq"><a name="operator-not-eq"></a><span class="type">bool</span> Utils::<span class="name">operator!=</span>(const <span class="type">int</span> &amp;<i>p1</i>, const <span class="type">int</span> &amp;<i>p2</i>)</h3>
+<!-- @@@operator!= -->
+<!-- $$$operator!=$$$operator!=Utils::LineColumnUtils::LineColumn -->
+<h3 class="fn" id="operator-not-eq-1"><a name="operator-not-eq-1"></a><span class="type">bool</span> Utils::<span class="name">operator!=</span>(<span class="type">Utils::LineColumn</span> <i>first</i>, <span class="type">Utils::LineColumn</span> <i>second</i>)</h3>
+<!-- @@@operator!= -->
+<!-- $$$operator<[overload1]$$$operator<constint&constint& -->
+<h3 class="fn" id="operator-lt"><a name="operator-lt"></a><span class="type">bool</span> Utils::<span class="name">operator&lt;</span>(const <span class="type">int</span> &amp;<i>p1</i>, const <span class="type">int</span> &amp;<i>p2</i>)</h3>
+<!-- @@@operator< -->
+<!-- $$$operator<=[overload1]$$$operator<=constint&constint& -->
+<h3 class="fn" id="operator-lt-eq"><a name="operator-lt-eq"></a><span class="type">bool</span> Utils::<span class="name">operator&lt;=</span>(const <span class="type">int</span> &amp;<i>p1</i>, const <span class="type">int</span> &amp;<i>p2</i>)</h3>
+<!-- @@@operator<= -->
+<!-- $$$operator==[overload1]$$$operator==constint&constint& -->
+<h3 class="fn" id="operator-eq-eq"><a name="operator-eq-eq"></a><span class="type">bool</span> Utils::<span class="name">operator==</span>(const <span class="type">int</span> &amp;<i>p1</i>, const <span class="type">int</span> &amp;<i>p2</i>)</h3>
+<!-- @@@operator== -->
+<!-- $$$operator==$$$operator==Utils::LineColumnUtils::LineColumn -->
+<h3 class="fn" id="operator-eq-eq-1"><a name="operator-eq-eq-1"></a><span class="type">bool</span> Utils::<span class="name">operator==</span>(<span class="type">Utils::LineColumn</span> <i>first</i>, <span class="type">Utils::LineColumn</span> <i>second</i>)</h3>
+<!-- @@@operator== -->
+<!-- $$$operator>[overload1]$$$operator>constint&constint& -->
+<h3 class="fn" id="operator-gt"><a name="operator-gt"></a><span class="type">bool</span> Utils::<span class="name">operator&gt;</span>(const <span class="type">int</span> &amp;<i>p1</i>, const <span class="type">int</span> &amp;<i>p2</i>)</h3>
+<!-- @@@operator> -->
+<!-- $$$operator>=[overload1]$$$operator>=constint&constint& -->
+<h3 class="fn" id="operator-gt-eq"><a name="operator-gt-eq"></a><span class="type">bool</span> Utils::<span class="name">operator&gt;=</span>(const <span class="type">int</span> &amp;<i>p1</i>, const <span class="type">int</span> &amp;<i>p2</i>)</h3>
+<!-- @@@operator>= -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

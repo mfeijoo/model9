@@ -1,0 +1,17 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>javax.activation</groupId>
+  <artifactId>javax.activation-api</artifactId>
+  <version>debian</version>
+  <packaging>jar</packaging>
+  <properties>
+    <debian.package>libactivation-java</debian.package>
+  </properties>
+  <distributionManagement>
+    <relocation>
+      <groupId>com.sun.activation</groupId>
+      <artifactId>javax.activation</artifactId>
+      <version>debian</version>
+    </relocation>
+  </distributionManagement>
+</project>

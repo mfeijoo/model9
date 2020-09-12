@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sun.xml.fastinfoset</groupId>
+	<artifactId>FastInfosetUtilities</artifactId>
+	<version>debian</version>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>com.sun.xml.fastinfoset</groupId>
+		<artifactId>fastinfoset-project</artifactId>
+		<version>debian</version>
+	</parent>
+	<properties>
+		
+			<debian.com.sun.xml.fastinfoset.FastInfoset.originalVersion>1.2.12</debian.com.sun.xml.fastinfoset.FastInfoset.originalVersion>
+		
+			<debian.com.sun.xml.stream.buffer.streambuffer.originalVersion>0.7</debian.com.sun.xml.stream.buffer.streambuffer.originalVersion>
+		
+			<debian.com.sun.xsom.xsom.originalVersion>20100725</debian.com.sun.xsom.xsom.originalVersion>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.originalVersion>1.2.12</debian.originalVersion>
+		
+			<debian.package>libfastinfoset-java</debian.package>
+	</properties>
+	
+	<name>fastinfoset-utilities</name>
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.fastinfoset</groupId>
+			<artifactId>FastInfoset</artifactId>
+			<version>debian</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xsom</groupId>
+			<artifactId>xsom</artifactId>
+			<version>debian</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.stream.buffer</groupId>
+			<artifactId>streambuffer</artifactId>
+			<version>debian</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,17 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>javax.websocket</groupId>
+  <artifactId>javax.websocket-api</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+  <properties>
+    <debian.package>libwebsocket-api-java</debian.package>
+  </properties>
+  <distributionManagement>
+    <relocation>
+      <groupId>javax.websocket</groupId>
+      <artifactId>javax.websocket-api</artifactId>
+      <version>debian</version>
+    </relocation>
+  </distributionManagement>
+</project>

@@ -1,0 +1,38 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://github.com/xerial/snappy-java
+Comment: lib/silk-weaver.jar is not packaged in Debian, and the other files in
+ this directory are not useful to the Debian package, so they were removed.
+ The native snappy library, for which the sources are not present in the snappy-java
+ archive, was removed as well.
+Removed: lib src/main/resources/org/xerial/snappy/native
+Files-Excluded: src/main/resources/org/xerial/snappy/native/*
+                lib/*
+                *.class
+                .travis.yml
+                .gitignore
+
+Files: *
+Copyright: 2008-2011, Taro L. Saito
+           2011-2016, xerial.org
+License: Apache-2.0
+
+Files: debian/*
+Copyright: 2012 Charles Plessy <plessy@debian.org>
+           2012-2018 Andreas Tille <tille@debian.org>
+License: Apache-2.0
+
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+     http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ .
+ On Debian systems, the complete text of the Apache License version 2.0
+ can be found in ‘/usr/share/common-licenses/Apache-2.0’.

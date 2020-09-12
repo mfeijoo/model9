@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.ow2.asm</groupId>
+	<artifactId>asm</artifactId>
+	<version>debian</version>
+	<packaging>jar</packaging><properties>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.mavenRules>org.ow2.asm * * s/.*/debian/ * *</debian.mavenRules>
+		
+			<debian.org.junit.jupiter.junit-jupiter-api.originalVersion>5.3.0</debian.org.junit.jupiter.junit-jupiter-api.originalVersion>
+		
+			<debian.org.junit.jupiter.junit-jupiter-params.originalVersion>5.3.0</debian.org.junit.jupiter.junit-jupiter-params.originalVersion>
+		
+			<debian.org.ow2.asm.asm-test.originalVersion>7.0-SNAPSHOT</debian.org.ow2.asm.asm-test.originalVersion>
+		
+			<debian.originalVersion>7.0</debian.originalVersion>
+		
+			<debian.package>libasm-java</debian.package>
+	</properties>
+	
+	<dependencies>
+	</dependencies>
+</project>

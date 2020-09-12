@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>MimeTypeParserBase Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >MimeTypeParserBase</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">MimeTypeParserBase Class</h1>
+<span class="small-subtitle">(<a href="utils-internal-mimetypeparserbase.html">Utils::Internal::MimeTypeParserBase</a>)<br/></span>
+<ul>
+<li><a href="utils-internal-mimetypeparserbase-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="protected-functions"></a>
+<h2 id="protected-functions">Protected Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimetypeparserbase.html#mimeTypeExists">mimeTypeExists</a></b>(const int &amp;<i>mimeTypeName</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimetypeparserbase.html#process">process</a></b>(const int &amp;<i>t</i>, int *<i>errorMessage</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimetypeparserbase.html#processAlias">processAlias</a></b>(const int &amp;<i>alias</i>, const int &amp;<i>name</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimetypeparserbase.html#processMagicMatcher">processMagicMatcher</a></b>(const int &amp;<i>matcher</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimetypeparserbase.html#processParent">processParent</a></b>(const int &amp;<i>child</i>, const int &amp;<i>parent</i>) = 0</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$mimeTypeExists[overload1]$$$mimeTypeExistsconstint& -->
+<h3 class="fn" id="mimeTypeExists"><a name="mimeTypeExists"></a><code>[pure virtual protected] </code><span class="type">bool</span> MimeTypeParserBase::<span class="name">mimeTypeExists</span>(const <span class="type">int</span> &amp;<i>mimeTypeName</i>)</h3>
+<!-- @@@mimeTypeExists -->
+<!-- $$$process[overload1]$$$processconstint&int* -->
+<h3 class="fn" id="process"><a name="process"></a><code>[pure virtual protected] </code><span class="type">bool</span> MimeTypeParserBase::<span class="name">process</span>(const <span class="type">int</span> &amp;<i>t</i>, <span class="type">int</span> *<i>errorMessage</i>)</h3>
+<!-- @@@process -->
+<!-- $$$processAlias[overload1]$$$processAliasconstint&constint& -->
+<h3 class="fn" id="processAlias"><a name="processAlias"></a><code>[pure virtual protected] </code><span class="type">void</span> MimeTypeParserBase::<span class="name">processAlias</span>(const <span class="type">int</span> &amp;<i>alias</i>, const <span class="type">int</span> &amp;<i>name</i>)</h3>
+<!-- @@@processAlias -->
+<!-- $$$processMagicMatcher[overload1]$$$processMagicMatcherconstint& -->
+<h3 class="fn" id="processMagicMatcher"><a name="processMagicMatcher"></a><code>[pure virtual protected] </code><span class="type">void</span> MimeTypeParserBase::<span class="name">processMagicMatcher</span>(const <span class="type">int</span> &amp;<i>matcher</i>)</h3>
+<!-- @@@processMagicMatcher -->
+<!-- $$$processParent[overload1]$$$processParentconstint&constint& -->
+<h3 class="fn" id="processParent"><a name="processParent"></a><code>[pure virtual protected] </code><span class="type">void</span> MimeTypeParserBase::<span class="name">processParent</span>(const <span class="type">int</span> &amp;<i>child</i>, const <span class="type">int</span> &amp;<i>parent</i>)</h3>
+<!-- @@@processParent -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

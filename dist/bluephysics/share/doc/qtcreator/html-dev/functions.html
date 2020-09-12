@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- qtcreator-api.qdoc -->
+  <title>Qt Creator Functions | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >Qt Creator Functions</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar"><div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">Qt Creator Functions</h1>
+<span class="subtitle"></span>
+<!-- $$$functions.html-description -->
+<div class="descr"> <a name="details"></a>
+<p  class="centerAlign functionIndex"><b><a href="#a">A</a>&nbsp;<a href="#b">B</a>&nbsp;<a href="#c">C</a>&nbsp;<a href="#d">D</a>&nbsp;<a href="#e">E</a>&nbsp;<a href="#f">F</a>&nbsp;<a href="#g">G</a>&nbsp;<a href="#h">H</a>&nbsp;<a href="#i">I</a>&nbsp;<a href="#j">J</a>&nbsp;<a href="#k">K</a>&nbsp;<a href="#l">L</a>&nbsp;<a href="#m">M</a>&nbsp;<a href="#n">N</a>&nbsp;<a href="#o">O</a>&nbsp;<a href="#p">P</a>&nbsp;<a href="#q">Q</a>&nbsp;<a href="#r">R</a>&nbsp;<a href="#s">S</a>&nbsp;<a href="#t">T</a>&nbsp;<a href="#u">U</a>&nbsp;<a href="#v">V</a>&nbsp;<a href="#w">W</a>&nbsp;<a href="#x">X</a>&nbsp;<a href="#y">Y</a>&nbsp;<a href="#z">Z</a>&nbsp;</b></p>
+<ul>
+<li>Breakpoint: <a href="eventcallback.html#Breakpoint">EventCallback</a></li>
+<li>ChangeDebuggeeState: <a href="eventcallback.html#ChangeDebuggeeState">EventCallback</a></li>
+<li>ChangeEngineState: <a href="eventcallback.html#ChangeEngineState">EventCallback</a></li>
+<li>ChangeSymbolState: <a href="eventcallback.html#ChangeSymbolState">EventCallback</a></li>
+<li>CreateProcess: <a href="eventcallback.html#CreateProcess">EventCallback</a></li>
+<li>CreateThread: <a href="eventcallback.html#CreateThread">EventCallback</a></li>
+<li>Exception: <a href="eventcallback.html#Exception">EventCallback</a></li>
+<li>ExitProcess: <a href="eventcallback.html#ExitProcess">EventCallback</a></li>
+<li>ExitThread: <a href="eventcallback.html#ExitThread">EventCallback</a></li>
+<li>GetInterestMask: <a href="eventcallback.html#GetInterestMask">EventCallback</a></li>
+<li>LoadModule: <a href="eventcallback.html#LoadModule">EventCallback</a></li>
+<li>Q_DECLARE_FLAGS: <a href="debugger-internal-debuggercommand.html#Q_DECLARE_FLAGS">Debugger::Internal::DebuggerCommand</a></li>
+<li>QueryInterface: <a href="eventcallback.html#QueryInterface">EventCallback</a></li>
+<li>STDMETHOD_: <a href="eventcallback.html#STDMETHOD_">EventCallback</a></li>
+<li>SessionStatus: <a href="eventcallback.html#SessionStatus">EventCallback</a></li>
+<li>SystemError: <a href="eventcallback.html#SystemError">EventCallback</a></li>
+<li>UnloadModule: <a href="eventcallback.html#UnloadModule">EventCallback</a></li>
+<li>absoluteFullIName:<a name="a"></a> <a href="abstractsymbolgroupnode.html#absoluteFullIName">AbstractSymbolGroupNode</a></li>
+<li>accept: <a href="abstractsymbolgroupnode.html#accept">AbstractSymbolGroupNode</a> <a href="core-internal-executefilter.html#accept">Core::Internal::ExecuteFilter</a> <a href="symbolgroup.html#accept">SymbolGroup</a></li>
+<li>activationMode: <a href="utils-view.html#activationMode">Utils::View</a></li>
+<li>addAlias: <a href="utils-internal-mimexmlprovider.html#addAlias">Utils::Internal::MimeXMLProvider</a></li>
+<li>addChild: <a href="basesymbolgroupnode.html#addChild">BaseSymbolGroupNode</a> <a href="debugger-internal-gdbmi.html#addChild">Debugger::Internal::GdbMi</a> <a href="debugger-internal-parsetreenode.html#addChild">Debugger::Internal::ParseTreeNode</a> <a href="texteditor-internal-rule.html#addChild">TextEditor::Internal::Rule</a></li>
+<li>addCurrentPositionToNavigationHistory: <a href="core-internal-editorview.html#addCurrentPositionToNavigationHistory">Core::Internal::EditorView</a></li>
+<li>addData: <a href="utils-internal-mimexmlprovider.html#addData">Utils::Internal::MimeXMLProvider</a></li>
+<li>addDelimiters: <a href="texteditor-internal-highlightdefinition.html#addDelimiters">TextEditor::Internal::HighlightDefinition</a></li>
+<li>addFlags: <a href="abstractsymbolgroupnode.html#addFlags">AbstractSymbolGroupNode</a></li>
+<li>addGlob: <a href="utils-internal-mimeallglobpatterns.html#addGlob">Utils::Internal::MimeAllGlobPatterns</a></li>
+<li>addGlobPattern: <a href="utils-internal-mimexmlprovider.html#addGlobPattern">Utils::Internal::MimeXMLProvider</a></li>
+<li>addIncludeRulesInstruction: <a href="texteditor-internal-context.html#addIncludeRulesInstruction">TextEditor::Internal::Context</a></li>
+<li>addKeyword: <a href="texteditor-internal-keywordlist.html#addKeyword">TextEditor::Internal::KeywordList</a></li>
+<li>addMagicMatcher: <a href="utils-internal-mimexmlprovider.html#addMagicMatcher">Utils::Internal::MimeXMLProvider</a></li>
+<li>addMatch: <a href="utils-internal-mimeglobmatchresult.html#addMatch">Utils::Internal::MimeGlobMatchResult</a></li>
+<li>addMimeType: <a href="utils-internal-mimexmlprovider.html#addMimeType">Utils::Internal::MimeXMLProvider</a></li>
+<li>addMimeTypes: <a href="utils.html#addMimeTypes">Utils</a></li>
+<li>addParent: <a href="utils-internal-mimexmlprovider.html#addParent">Utils::Internal::MimeXMLProvider</a></li>
+<li>addPointerType: <a href="symbolgroupvalue.html#addPointerType">SymbolGroupValue</a></li>
+<li>addRow: <a href="projectexplorer-internal-customwizardfieldpage.html#addRow">ProjectExplorer::Internal::CustomWizardFieldPage</a></li>
+<li>addRule: <a href="texteditor-internal-context.html#addRule-1">TextEditor::Internal::Context</a> <a href="utils-internal-mimemagicrulematcher.html#addRule">Utils::Internal::MimeMagicRuleMatcher</a></li>
+<li>addRules: <a href="utils-internal-mimemagicrulematcher.html#addRules">Utils::Internal::MimeMagicRuleMatcher</a></li>
+<li>addSubstitution: <a href="debugger-internal-globalparsestate.html#addSubstitution">Debugger::Internal::GlobalParseState</a></li>
+<li>addSymbol: <a href="symbolgroup.html#addSymbol-1">SymbolGroup</a> <a href="symbolgroupvalue.html#addSymbol">SymbolGroupValue</a></li>
+<li>addSymbolByName: <a href="symbolgroupnode.html#addSymbolByName">SymbolGroupNode</a></li>
+<li>addSymbolForAncestor: <a href="symbolgroupvalue.html#addSymbolForAncestor">SymbolGroupValue</a></li>
+<li>addTask: <a href="projectexplorer-internal-taskmodel-categorydata.html#addTask">ProjectExplorer::Internal::TaskModel::CategoryData</a></li>
+<li>addTemplateParam: <a href="debugger-internal-globalparsestate.html#addTemplateParam">Debugger::Internal::GlobalParseState</a></li>
+<li>addWatch: <a href="watchessymbolgroup.html#addWatch">WatchesSymbolGroup</a></li>
+<li>addWindow: <a href="core-internal-windowlist.html#addWindow">Core::Internal::WindowList</a></li>
+<li>address: <a href="debugger-debugger-internal-location.html#address">Debugger::Debugger::Internal::Location</a> <a href="symbolgroupnode.html#address">SymbolGroupNode</a> <a href="symbolgroupvalue.html#address">SymbolGroupValue</a></li>
+<li>addressOfAncestor: <a href="symbolgroupvalue.html#addressOfAncestor">SymbolGroupValue</a></li>
+<li>advance: <a href="debugger-internal-globalparsestate.html#advance">Debugger::Internal::GlobalParseState</a></li>
+<li>advanced: <a href="extensioncommandcontext.html#advanced">ExtensionCommandContext</a></li>
+<li>allMimeTypes: <a href="utils-internal-mimedatabaseprivate.html#allMimeTypes">Utils::Internal::MimeDatabasePrivate</a> <a href="utils-internal-mimeproviderbase.html#allMimeTypes">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#allMimeTypes">Utils::Internal::MimeXMLProvider</a></li>
+<li>allOf: <a href="utils.html#allOf">Utils</a></li>
+<li>anyOf: <a href="utils.html#anyOf-2">Utils</a></li>
+<li>append: <a href="debugger-internal-debuggercommandsequence.html#append">Debugger::Internal::DebuggerCommandSequence</a></li>
+<li>appendChild: <a href="core-internal-searchresulttreeitem.html#appendChild">Core::Internal::SearchResultTreeItem</a></li>
+<li>appendComment: <a href="debugger-internal-disassemblerlines.html#appendComment">Debugger::Internal::DisassemblerLines</a></li>
+<li>appendLine: <a href="debugger-internal-disassemblerlines.html#appendLine">Debugger::Internal::DisassemblerLines</a></li>
+<li>appendSourceLine: <a href="debugger-internal-disassemblerlines.html#appendSourceLine">Debugger::Internal::DisassemblerLines</a></li>
+<li>appendUnparsed: <a href="debugger-internal-disassemblerlines.html#appendUnparsed">Debugger::Internal::DisassemblerLines</a></li>
+<li>applicationMainThreadId: <a href="debugger-internal-terminalrunner.html#applicationMainThreadId">Debugger::Internal::TerminalRunner</a></li>
+<li>applicationPid: <a href="debugger-internal-terminalrunner.html#applicationPid">Debugger::Internal::TerminalRunner</a></li>
+<li>applyImpl: <a href="projectexplorer-internal-customtoolchainconfigwidget.html#applyImpl">ProjectExplorer::Internal::CustomToolChainConfigWidget</a></li>
+<li>arg: <a href="debugger-internal-debuggercommand.html#arg-4">Debugger::Internal::DebuggerCommand</a></li>
+<li>argsToPython: <a href="debugger-internal-debuggercommand.html#argsToPython">Debugger::Internal::DebuggerCommand</a></li>
+<li>argsToString: <a href="debugger-internal-debuggercommand.html#argsToString">Debugger::Internal::DebuggerCommand</a></li>
+<li>arguments: <a href="projectexplorer-internal-processstep.html#arguments">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>asSymbolGroupNode: <a href="abstractsymbolgroupnode.html#asSymbolGroupNode-1">AbstractSymbolGroupNode</a> <a href="symbolgroupnode.html#asSymbolGroupNode-1">SymbolGroupNode</a></li>
+<li>assign: <a href="symbolgroup.html#assign">SymbolGroup</a> <a href="symbolgroupnode.html#assign">SymbolGroupNode</a></li>
+<li>at: <a href="debugger-internal-disassemblerlines.html#at">Debugger::Internal::DisassemblerLines</a></li>
+<li>autoIndent: <a href="texteditor-textdocumentmanipulator.html#autoIndent">TextEditor::TextDocumentManipulator</a></li>
+<li>begin:<a name="b"></a> <a href="debugger-internal-gdbmi.html#begin">Debugger::Internal::GdbMi</a> <a href="qmljs-ast-sourcelocation.html#begin">QmlJS::AST::SourceLocation</a></li>
+<li>beginRegion: <a href="texteditor-internal-rule.html#beginRegion">TextEditor::Internal::Rule</a></li>
+<li>bool2String: <a href="debugger-internal-parsetreenode.html#bool2String">Debugger::Internal::ParseTreeNode</a></li>
+<li>breakpoint: <a href="debugger-internal-subbreakpointitem.html#breakpointx">Debugger::Internal::SubBreakpointItem</a></li>
+<li>bytesLength: <a href="debugger-internal-disassemblerlines.html#bytesLength">Debugger::Internal::DisassemblerLines</a></li>
+<li>call:<a name="c"></a> <a href="extensioncontext.html#call">ExtensionContext</a></li>
+<li>canBeDisassembled: <a href="debugger-debugger-internal-location.html#canBeDisassembled">Debugger::Debugger::Internal::Location</a></li>
+<li>canExpand: <a href="symbolgroupnode.html#canExpand">SymbolGroupNode</a></li>
+<li>canGoBack: <a href="core-internal-editorview.html#canGoBack">Core::Internal::EditorView</a></li>
+<li>canGoForward: <a href="core-internal-editorview.html#canGoForward">Core::Internal::EditorView</a></li>
+<li>canHandleContentReplacement: <a href="utils-internal-colortip.html#canHandleContentReplacement">Utils::Internal::ColorTip</a> <a href="utils-internal-texttip.html#canHandleContentReplacement">Utils::Internal::TextTip</a></li>
+<li>cancelled: <a href="core-internal-searchresultwidget.html#cancelled">Core::Internal::SearchResultWidget</a></li>
+<li>captures: <a href="texteditor-internal-progressdata.html#captures">TextEditor::Internal::ProgressData</a></li>
+<li>cdbVersion: <a href="extensioncontext.html#cdbVersion">ExtensionContext</a></li>
+<li>channel: <a href="projectexplorer-customparserexpression.html#channel">ProjectExplorer::CustomParserExpression</a></li>
+<li>charPredicateMatchSucceed: <a href="texteditor-internal-rule.html#charPredicateMatchSucceed-1">TextEditor::Internal::Rule</a></li>
+<li>characterAt: <a href="texteditor-textdocumentmanipulator.html#characterAt">TextEditor::TextDocumentManipulator</a></li>
+<li>characters: <a href="texteditor-internal-highlightdefinitionhandler.html#characters">TextEditor::Internal::HighlightDefinitionHandler</a></li>
+<li>checkEventType: <a href="utils.html#checkEventType">Utils</a></li>
+<li>checkRecode: <a href="dumpparameters.html#checkRecode">DumpParameters</a></li>
+<li>checkState: <a href="core-internal-searchresulttreeitem.html#checkState">Core::Internal::SearchResultTreeItem</a> <a href="debugger-debugger-internal-debuggerengine.html#checkState">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>childAt: <a href="abstractsymbolgroupnode.html#childAt">AbstractSymbolGroupNode</a> <a href="core-internal-searchresulttreeitem.html#childAt">Core::Internal::SearchResultTreeItem</a> <a href="debugger-internal-gdbmi.html#childAt">Debugger::Internal::GdbMi</a> <a href="debugger-internal-parsetreenode.html#childAt">Debugger::Internal::ParseTreeNode</a> <a href="utils-typedtreeitem.html#childAt">Utils::TypedTreeItem</a></li>
+<li>childByIName: <a href="abstractsymbolgroupnode.html#childByIName">AbstractSymbolGroupNode</a></li>
+<li>childCount: <a href="debugger-internal-gdbmi.html#childCount">Debugger::Internal::GdbMi</a> <a href="debugger-internal-parsetreenode.html#childCount">Debugger::Internal::ParseTreeNode</a> <a href="symbolgroupvalue.html#childCount">SymbolGroupValue</a></li>
+<li>children: <a href="abstractsymbolgroupnode.html#children">AbstractSymbolGroupNode</a> <a href="basesymbolgroupnode.html#children">BaseSymbolGroupNode</a> <a href="referencesymbolgroupnode.html#children">ReferenceSymbolGroupNode</a></li>
+<li>childrenCount: <a href="core-internal-searchresulttreeitem.html#childrenCount">Core::Internal::SearchResultTreeItem</a></li>
+<li>childrenVisited: <a href="dumpsymbolgroupnodevisitor.html#childrenVisited">DumpSymbolGroupNodeVisitor</a> <a href="symbolgroupnodevisitor.html#childrenVisited">SymbolGroupNodeVisitor</a></li>
+<li>clear: <a href="debugger-debugger-internal-stackframe.html#clear">Debugger::Debugger::Internal::StackFrame</a> <a href="extensioncontext-cdbversion.html#clear">ExtensionContext::CdbVersion</a> <a href="projectexplorer-internal-customwizardfield.html#clear">ProjectExplorer::Internal::CustomWizardField</a> <a href="projectexplorer-internal-customwizardparameters.html#clear">ProjectExplorer::Internal::CustomWizardParameters</a> <a href="projectexplorer-internal-taskmodel-categorydata.html#clear">ProjectExplorer::Internal::TaskModel::CategoryData</a> <a href="texteditor-colorscheme.html#clear">TextEditor::ColorScheme</a> <a href="utils-internal-mimeallglobpatterns.html#clear">Utils::Internal::MimeAllGlobPatterns</a></li>
+<li>clearBracesMatches: <a href="texteditor-internal-progressdata.html#clearBracesMatches">TextEditor::Internal::ProgressData</a></li>
+<li>clearChildren: <a href="core-internal-searchresulttreeitem.html#clearChildren">Core::Internal::SearchResultTreeItem</a></li>
+<li>clearError: <a href="projectexplorer-internal-customwizardfieldpage.html#clearError">ProjectExplorer::Internal::CustomWizardFieldPage</a></li>
+<li>clearFlags: <a href="abstractsymbolgroupnode.html#clearFlags">AbstractSymbolGroupNode</a></li>
+<li>clearIncludeRulesInstructions: <a href="texteditor-internal-context.html#clearIncludeRulesInstructions">TextEditor::Internal::Context</a></li>
+<li>clone: <a href="debugger-internal-parsetreenode.html#clone">Debugger::Internal::ParseTreeNode</a> <a href="texteditor-internal-rule.html#clone">TextEditor::Internal::Rule</a></li>
+<li>cloneSession: <a href="projectexplorer-internal-sessionmodel.html#cloneSession">ProjectExplorer::Internal::SessionModel</a></li>
+<li>closeEvent: <a href="core-internal-mainwindow.html#closeEvent">Core::Internal::MainWindow</a></li>
+<li>collapse: <a href="symbolgroup.html#collapse">SymbolGroup</a> <a href="symbolgroupnode.html#collapse">SymbolGroupNode</a></li>
+<li>collect: <a href="texteditor-internal-circularclipboard.html#collect-1">TextEditor::Internal::CircularClipboard</a></li>
+<li>color: <a href="texteditor-internal-itemdata.html#color">TextEditor::Internal::ItemData</a></li>
+<li>column: <a href="qmlerror.html#column">QmlError</a> <a href="texteditor-internal-rule.html#column">TextEditor::Internal::Rule</a></li>
+<li>comboEntryTextKey: <a href="projectexplorer-internal-customwizardfield.html#comboEntryTextKey">ProjectExplorer::Internal::CustomWizardField</a></li>
+<li>comboEntryValueKey: <a href="projectexplorer-internal-customwizardfield.html#comboEntryValueKey">ProjectExplorer::Internal::CustomWizardField</a></li>
+<li>command: <a href="projectexplorer-internal-processstep.html#command">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>commands: <a href="debugger-internal-debuggercommandsequence.html#commands">Debugger::Internal::DebuggerCommandSequence</a></li>
+<li>companionEngine: <a href="debugger-debugger-internal-debuggerengine.html#companionEngine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>compareLexigraphically: <a href="core-locatorfilterentry.html#compareLexigraphically">Core::LocatorFilterEntry</a></li>
+<li>completionList: <a href="core-internal-locatorpopup.html#completionList">Core::Internal::LocatorPopup</a></li>
+<li>conditionsMatch: <a href="debugger-internal-breakpointparameters.html#conditionsMatch">Debugger::Internal::BreakpointParameters</a></li>
+<li>configure: <a href="utils-internal-colortip.html#configure">Utils::Internal::ColorTip</a> <a href="utils-internal-texttip.html#configure">Utils::Internal::TextTip</a></li>
+<li>configureId: <a href="texteditor-internal-context.html#configureId">TextEditor::Internal::Context</a></li>
+<li>containerChildren: <a href="">global</a></li>
+<li>containerSize: <a href="">global</a></li>
+<li>contains: <a href="texteditor-colorscheme.html#contains">TextEditor::ColorScheme</a> <a href="utils.html#contains-2">Utils</a></li>
+<li>context: <a href="symbolgroupvalue.html#context">SymbolGroupValue</a> <a href="texteditor-internal-highlightdefinition.html#context">TextEditor::Internal::HighlightDefinition</a> <a href="texteditor-internal-rule.html#context">TextEditor::Internal::Rule</a></li>
+<li>continueInferior: <a href="debugger-debugger-internal-debuggerengine.html#continueInferior">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>control: <a href="extensioncommandcontext.html#control">ExtensionCommandContext</a></li>
+<li>controlModifier: <a href="utils-osspecificaspects.html#controlModifier">Utils::OsSpecificAspects</a></li>
+<li>copyNavigationHistoryFrom: <a href="core-internal-editorview.html#copyNavigationHistoryFrom">Core::Internal::EditorView</a></li>
+<li>count: <a href="utils.html#count">Utils</a></li>
+<li>coversAddress: <a href="debugger-internal-disassemblerlines.html#coversAddress">Debugger::Internal::DisassemblerLines</a></li>
+<li>create: <a href="localssymbolgroup.html#create">LocalsSymbolGroup</a> <a href="mapnodesymbolgroupnode.html#create">MapNodeSymbolGroupNode</a> <a href="projectexplorer-customwizardmetafactory.html#create">ProjectExplorer::CustomWizardMetaFactory</a> <a href="projectexplorer-internal-fieldpagefactory.html#create">ProjectExplorer::Internal::FieldPageFactory</a> <a href="projectexplorer-internal-filepagefactory.html#create">ProjectExplorer::Internal::FilePageFactory</a> <a href="projectexplorer-internal-kitspagefactory.html#create">ProjectExplorer::Internal::KitsPageFactory</a> <a href="projectexplorer-internal-projectpagefactory.html#create">ProjectExplorer::Internal::ProjectPageFactory</a> <a href="projectexplorer-internal-summarypagefactory.html#create">ProjectExplorer::Internal::SummaryPageFactory</a> <a href="projectexplorer-runconfigurationcreationinfo.html#create">ProjectExplorer::RunConfigurationCreationInfo</a> <a href="symbolgroupnode.html#create">SymbolGroupNode</a> <a href="watchessymbolgroup.html#create">WatchesSymbolGroup</a></li>
+<li>createArrayNode: <a href="referencesymbolgroupnode.html#createArrayNode">ReferenceSymbolGroupNode</a></li>
+<li>createConfigWidget: <a href="projectexplorer-internal-processstep.html#createConfigWidget">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>createContext: <a href="texteditor-internal-highlightdefinition.html#createContext">TextEditor::Internal::HighlightDefinition</a></li>
+<li>createItemData: <a href="texteditor-internal-highlightdefinition.html#createItemData">TextEditor::Internal::HighlightDefinition</a></li>
+<li>createKeywordList: <a href="texteditor-internal-highlightdefinition.html#createKeywordList">TextEditor::Internal::HighlightDefinition</a></li>
+<li>createProcessor: <a href="texteditor-internal-clipboardassistprovider.html#createProcessor">TextEditor::Internal::ClipboardAssistProvider</a></li>
+<li>currentPosition: <a href="texteditor-textdocumentmanipulator.html#currentPosition">TextEditor::TextDocumentManipulator</a></li>
+<li>cutForwardNavigationHistory: <a href="core-internal-editorview.html#cutForwardNavigationHistory">Core::Internal::EditorView</a></li>
+<li>cvQualifiers: <a href="debugger-internal-localnamenode.html#cvQualifiers">Debugger::Internal::LocalNameNode</a> <a href="debugger-internal-namenode.html#cvQualifiers">Debugger::Internal::NameNode</a> <a href="debugger-internal-nestednamenode.html#cvQualifiers">Debugger::Internal::NestedNameNode</a></li>
+<li>data:<a name="d"></a> <a href="debugger-internal-disassemblerlines.html#data">Debugger::Internal::DisassemblerLines</a> <a href="debugger-internal-gdbmi.html#data">Debugger::Internal::GdbMi</a> <a href="debugger-internal-subbreakpointitem.html#data">Debugger::Internal::SubBreakpointItem</a></li>
+<li>dataSpaces: <a href="extensioncommandcontext.html#dataSpaces">ExtensionCommandContext</a></li>
+<li>debug: <a href="abstractsymbolgroupnode.html#debug">AbstractSymbolGroupNode</a> <a href="mapnodesymbolgroupnode.html#debug">MapNodeSymbolGroupNode</a> <a href="referencesymbolgroupnode.html#debug">ReferenceSymbolGroupNode</a> <a href="symbolgroup.html#debug">SymbolGroup</a> <a href="symbolgroupnode.html#debug">SymbolGroupNode</a></li>
+<li>debugSymbolGroup: <a href="symbolgroup.html#debugSymbolGroup">SymbolGroup</a></li>
+<li>debuggerName: <a href="debugger-debugger-internal-debuggerengine.html#debuggerName">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>decodeFormatArgument: <a href="dumpparameters.html#decodeFormatArgument">DumpParameters</a></li>
+<li>defaultAction: <a href="core-internal-shortcutsettingswidget.html#defaultAction">Core::Internal::ShortcutSettingsWidget</a></li>
+<li>defaultMimeType: <a href="utils-internal-mimedatabaseprivate.html#defaultMimeType">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>definition: <a href="texteditor-internal-context.html#definition">TextEditor::Internal::Context</a> <a href="texteditor-internal-rule.html#definition">TextEditor::Internal::Rule</a></li>
+<li>definitionFilesPath: <a href="texteditor-highlightersettings.html#definitionFilesPath">TextEditor::HighlighterSettings</a></li>
+<li>deleteSession: <a href="projectexplorer-internal-sessionmodel.html#deleteSession">ProjectExplorer::Internal::SessionModel</a></li>
+<li>demangle: <a href="debugger-internal-namedemangler.html#demangle">Debugger::Internal::NameDemangler</a></li>
+<li>demangledName: <a href="debugger-internal-namedemangler.html#demangledName">Debugger::Internal::NameDemangler</a></li>
+<li>description: <a href="qmlerror.html#description">QmlError</a></li>
+<li>detachDebugger: <a href="debugger-debugger-internal-debuggerengine.html#detachDebugger">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>detectRecursion: <a href="texteditor-internal-progressdata.html#detectRecursion">TextEditor::Internal::ProgressData</a></li>
+<li>device: <a href="debugger-debugger-internal-debuggerengine.html#device">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>differencesTo: <a href="debugger-internal-breakpointparameters.html#differencesTo">Debugger::Internal::BreakpointParameters</a></li>
+<li>discardImpl: <a href="projectexplorer-internal-customtoolchainconfigwidget.html#discardImpl">ProjectExplorer::Internal::CustomToolChainConfigWidget</a></li>
+<li>discardSymbolGroup: <a href="extensioncontext.html#discardSymbolGroup">ExtensionContext</a></li>
+<li>discardWatchesSymbolGroup: <a href="extensioncontext.html#discardWatchesSymbolGroup">ExtensionContext</a></li>
+<li>displayName: <a href="texteditor-colorscheme.html#displayName">TextEditor::ColorScheme</a></li>
+<li>doClone: <a href="texteditor-internal-stringdetectrule.html#doClone">TextEditor::Internal::StringDetectRule</a></li>
+<li>doMatchSucceed: <a href="texteditor-internal-stringdetectrule.html#doMatchSucceed">TextEditor::Internal::StringDetectRule</a></li>
+<li>doReplaceExpressions: <a href="texteditor-internal-stringdetectrule.html#doReplaceExpressions">TextEditor::Internal::StringDetectRule</a></li>
+<li>doUpdateLocals: <a href="debugger-debugger-internal-debuggerengine.html#doUpdateLocals">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>dump: <a href="abstractsymbolgroupnode.html#dump">AbstractSymbolGroupNode</a> <a href="mapnodesymbolgroupnode.html#dump">MapNodeSymbolGroupNode</a> <a href="referencesymbolgroupnode.html#dump">ReferenceSymbolGroupNode</a> <a href="symbolgroup.html#dump-1">SymbolGroup</a> <a href="symbolgroupnode.html#dump">SymbolGroupNode</a></li>
+<li>dumpBasicData: <a href="abstractsymbolgroupnode.html#dumpBasicData">AbstractSymbolGroupNode</a></li>
+<li>dumpNode: <a href="symbolgroupnode.html#dumpNode">SymbolGroupNode</a></li>
+<li>dumperContainerSize: <a href="symbolgroupnode.html#dumperContainerSize">SymbolGroupNode</a></li>
+<li>dumperType: <a href="symbolgroupnode.html#dumperType">SymbolGroupNode</a></li>
+<li>editorHistory:<a name="e"></a> <a href="core-internal-editorview.html#editorHistory">Core::Internal::EditorView</a></li>
+<li>emitJumpToSearchResult: <a href="core-internal-searchresulttreeview.html#emitJumpToSearchResult">Core::Internal::SearchResultTreeView</a></li>
+<li>encourageApply: <a href="texteditor-textdocumentmanipulator.html#encourageApply">TextEditor::TextDocumentManipulator</a></li>
+<li>end: <a href="debugger-internal-gdbmi.html#end">Debugger::Internal::GdbMi</a> <a href="qmljs-ast-sourcelocation.html#end">QmlJS::AST::SourceLocation</a></li>
+<li>endAddress: <a href="debugger-internal-disassemblerlines.html#endAddress">Debugger::Internal::DisassemblerLines</a></li>
+<li>endDocument: <a href="texteditor-internal-highlightdefinitionhandler.html#endDocument">TextEditor::Internal::HighlightDefinitionHandler</a></li>
+<li>endElement: <a href="texteditor-internal-highlightdefinitionhandler.html#endElement">TextEditor::Internal::HighlightDefinitionHandler</a></li>
+<li>endLineOffsetDifference: <a href="core-search-textrange.html#endLineOffsetDifference">Core::Search::TextRange</a></li>
+<li>endRegion: <a href="texteditor-internal-rule.html#endRegion">TextEditor::Internal::Rule</a></li>
+<li>equal: <a href="utils.html#equal-1">Utils</a></li>
+<li>equalTo: <a href="utils.html#equalTo">Utils</a></li>
+<li>equals: <a href="debugger-internal-breakpointparameters.html#equals">Debugger::Internal::BreakpointParameters</a> <a href="texteditor-colorscheme.html#equals">TextEditor::ColorScheme</a> <a href="texteditor-highlightersettings.html#equals">TextEditor::HighlighterSettings</a> <a href="texteditor-snippetssettings.html#equals">TextEditor::SnippetsSettings</a> <a href="utils-internal-colortip.html#equals">Utils::Internal::ColorTip</a> <a href="utils-internal-texttip.html#equals">Utils::Internal::TextTip</a></li>
+<li>erase: <a href="utils.html#erase">Utils</a></li>
+<li>error: <a href="symbolgroupvalue.html#error">SymbolGroupValue</a></li>
+<li>errorString: <a href="debugger-internal-namedemangler.html#errorString">Debugger::Internal::NameDemangler</a></li>
+<li>escapeCString: <a href="debugger-internal-gdbmi.html#escapeCString">Debugger::Internal::GdbMi</a></li>
+<li>event: <a href="core-internal-commandcombobox.html#event">Core::Internal::CommandComboBox</a> <a href="core-internal-locatorpopup.html#event">Core::Internal::LocatorPopup</a> <a href="core-internal-newdialog.html#event">Core::Internal::NewDialog</a> <a href="core-internal-optionspopup.html#event">Core::Internal::OptionsPopup</a> <a href="core-internal-progressview.html#event">Core::Internal::ProgressView</a></li>
+<li>eventFilter: <a href="core-internal-locatorpopup.html#eventFilter">Core::Internal::LocatorPopup</a> <a href="core-internal-optionspopup.html#eventFilter">Core::Internal::OptionsPopup</a> <a href="core-internal-progressview.html#eventFilter">Core::Internal::ProgressView</a> <a href="core-internal-shortcutbutton.html#eventFilter">Core::Internal::ShortcutButton</a> <a href="core-internal-windowsupport.html#eventFilter">Core::Internal::WindowSupport</a></li>
+<li>example: <a href="projectexplorer-customparserexpression.html#example">ProjectExplorer::CustomParserExpression</a></li>
+<li>executeJumpToLine: <a href="debugger-debugger-internal-debuggerengine.html#executeJumpToLine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executeReturn: <a href="debugger-debugger-internal-debuggerengine.html#executeReturn">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executeRunToFunction: <a href="debugger-debugger-internal-debuggerengine.html#executeRunToFunction">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executeRunToLine: <a href="debugger-debugger-internal-debuggerengine.html#executeRunToLine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executeStepIn: <a href="debugger-debugger-internal-debuggerengine.html#executeStepIn">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executeStepOut: <a href="debugger-debugger-internal-debuggerengine.html#executeStepOut">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executeStepOver: <a href="debugger-debugger-internal-debuggerengine.html#executeStepOver">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>executionStatus: <a href="extensioncontext.html#executionStatus">ExtensionContext</a></li>
+<li>exit: <a href="core-internal-mainwindow.html#exit">Core::Internal::MainWindow</a></li>
+<li>expand: <a href="symbolgroup.html#expand">SymbolGroup</a> <a href="symbolgroupnode.html#expand">SymbolGroupNode</a></li>
+<li>expandList: <a href="symbolgroup.html#expandList">SymbolGroup</a></li>
+<li>expandListRunComplexDumpers: <a href="symbolgroup.html#expandListRunComplexDumpers">SymbolGroup</a></li>
+<li>expandRunComplexDumpers: <a href="symbolgroup.html#expandRunComplexDumpers">SymbolGroup</a> <a href="symbolgroupnode.html#expandRunComplexDumpers">SymbolGroupNode</a></li>
+<li>exportAction: <a href="core-internal-shortcutsettingswidget.html#exportAction">Core::Internal::ShortcutSettingsWidget</a></li>
+<li>fallbackDefinitionFilesPath:<a name="f"></a> <a href="texteditor-highlightersettings.html#fallbackDefinitionFilesPath">TextEditor::HighlighterSettings</a></li>
+<li>fallthroughContext: <a href="texteditor-internal-context.html#fallthroughContext">TextEditor::Internal::Context</a></li>
+<li>fieldOffset: <a href="symbolgroupvalue.html#fieldOffset">SymbolGroupValue</a></li>
+<li>fileName: <a href="debugger-debugger-internal-location.html#fileName">Debugger::Debugger::Internal::Location</a></li>
+<li>fileNameCap: <a href="projectexplorer-customparserexpression.html#fileNameCap">ProjectExplorer::CustomParserExpression</a></li>
+<li>fileNameCaseSensitivity: <a href="utils-osspecificaspects.html#fileNameCaseSensitivity">Utils::OsSpecificAspects</a></li>
+<li>filterColumn: <a href="core-internal-shortcutsettingswidget.html#filterColumn">Core::Internal::ShortcutSettingsWidget</a></li>
+<li>find: <a href="symbolgroup.html#find">SymbolGroup</a></li>
+<li>findByData: <a href="utils-internal-mimedatabaseprivate.html#findByData">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>findByFileName: <a href="utils-internal-mimeproviderbase.html#findByFileName">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#findByFileName">Utils::Internal::MimeXMLProvider</a></li>
+<li>findByMagic: <a href="utils-internal-mimeproviderbase.html#findByMagic">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#findByMagic">Utils::Internal::MimeXMLProvider</a></li>
+<li>findFirstLevelChild: <a href="utils-typedtreeitem.html#findFirstLevelChild">Utils::TypedTreeItem</a></li>
+<li>findItemAtLevel: <a href="utils-treemodel.html#findItemAtLevel">Utils::TreeModel</a></li>
+<li>findMember: <a href="symbolgroupvalue.html#findMember">SymbolGroupValue</a></li>
+<li>findNonRootItem: <a href="utils-treemodel.html#findNonRootItem">Utils::TreeModel</a></li>
+<li>first: <a href="texteditor-blockrange.html#first">TextEditor::BlockRange</a></li>
+<li>fixQrcFrame: <a href="debugger-debugger-internal-stackframe.html#fixQrcFrame">Debugger::Debugger::Internal::StackFrame</a></li>
+<li>fixWatchExpression: <a href="watchessymbolgroup.html#fixWatchExpression">WatchesSymbolGroup</a></li>
+<li>flags: <a href="abstractsymbolgroupnode.html#flags">AbstractSymbolGroupNode</a></li>
+<li>floatValue: <a href="symbolgroupvalue.html#floatValue">SymbolGroupValue</a></li>
+<li>focusInEvent: <a href="core-internal-editorview.html#focusInEvent">Core::Internal::EditorView</a> <a href="core-internal-outputpanemanager.html#focusInEvent">Core::Internal::OutputPaneManager</a></li>
+<li>focusNextPrevChild: <a href="core-internal-findtoolbar.html#focusNextPrevChild">Core::Internal::FindToolBar</a></li>
+<li>focusOutEvent: <a href="core-internal-locatorpopup.html#focusOutEvent">Core::Internal::LocatorPopup</a> <a href="debugger-internal-consoleedit.html#focusOutEvent">Debugger::Internal::ConsoleEdit</a></li>
+<li>forAllChildren: <a href="utils-typedtreeitem.html#forAllChildren">Utils::TypedTreeItem</a></li>
+<li>forAllItems: <a href="utils-treemodel.html#forAllItems">Utils::TreeModel</a></li>
+<li>forFirstLevelChildren: <a href="utils-typedtreeitem.html#forFirstLevelChildren">Utils::TypedTreeItem</a></li>
+<li>forItemsAtLevel: <a href="utils-treemodel.html#forItemsAtLevel">Utils::TreeModel</a></li>
+<li>forSelectedItems: <a href="utils-treemodel.html#forSelectedItems">Utils::TreeModel</a></li>
+<li>format: <a href="dumpparameters.html#format">DumpParameters</a></li>
+<li>formatCurrentFile: <a href="texteditor.html#formatCurrentFile">TextEditor</a></li>
+<li>formatEditor: <a href="texteditor.html#formatEditor">TextEditor</a></li>
+<li>formatEditorAsync: <a href="texteditor.html#formatEditorAsync">TextEditor</a></li>
+<li>formatFor: <a href="texteditor-colorscheme.html#formatFor-1">TextEditor::ColorScheme</a></li>
+<li>formatStartParameters: <a href="debugger-debugger-internal-debuggerengine.html#formatStartParameters">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>frame: <a href="localssymbolgroup.html#frame">LocalsSymbolGroup</a></li>
+<li>frameDown: <a href="debugger-debugger-internal-debuggerengine.html#frameDown">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>frameUp: <a href="debugger-debugger-internal-debuggerengine.html#frameUp">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>from: <a href="debugger-debugger-internal-location.html#from">Debugger::Debugger::Internal::Location</a></li>
+<li>fromGdbMI: <a href="debugger-internal-winexception.html#fromGdbMI">Debugger::Internal::WinException</a></li>
+<li>fromSettings: <a href="debugger-internal-globaldebuggeroptions.html#fromSettings">Debugger::Internal::GlobalDebuggerOptions</a> <a href="projectexplorer-internal-expanddata.html#fromSettings">ProjectExplorer::Internal::ExpandData</a> <a href="texteditor-highlightersettings.html#fromSettings">TextEditor::HighlighterSettings</a> <a href="texteditor-snippetssettings.html#fromSettings">TextEditor::SnippetsSettings</a></li>
+<li>fromString: <a href="debugger-internal-disassemblerline.html#fromString">Debugger::Internal::DisassemblerLine</a> <a href="debugger-internal-gdbmi.html#fromString">Debugger::Internal::GdbMi</a></li>
+<li>fromStringMultiple: <a href="debugger-internal-gdbmi.html#fromStringMultiple">Debugger::Internal::GdbMi</a></li>
+<li>function: <a href="localssymbolgroup.html#function">LocalsSymbolGroup</a></li>
+<li>functionName: <a href="debugger-debugger-internal-location.html#functionName">Debugger::Debugger::Internal::Location</a></li>
+<li>future: <a href="utils-internal-asyncjob.html#future">Utils::Internal::AsyncJob</a></li>
+<li>gccPredefinedMacrosOptions:<a name="g"></a> <a href="projectexplorer.html#gccPredefinedMacrosOptions">ProjectExplorer</a></li>
+<li>get: <a href="qtinfo.html#get">QtInfo</a></li>
+<li>getAllModuleNames: <a href="symbolgroupvalue.html#getAllModuleNames">SymbolGroupValue</a></li>
+<li>getSymbolParameters: <a href="symbolgroup.html#getSymbolParameters-1">SymbolGroup</a></li>
+<li>goForwardInNavigationHistory: <a href="core-internal-editorview.html#goForwardInNavigationHistory">Core::Internal::EditorView</a></li>
+<li>greaterEqualThan: <a href="utils.html#greaterEqualThan">Utils</a></li>
+<li>greaterThan: <a href="utils.html#greaterThan">Utils</a></li>
+<li>handleAbort:<a name="h"></a> <a href="debugger-debugger-internal-debuggerengine.html#handleAbort">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleAddToWatchWindow: <a href="debugger-debugger-internal-debuggerengine.html#handleAddToWatchWindow">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleDownKey: <a href="debugger-internal-consoleedit.html#handleDownKey">Debugger::Internal::ConsoleEdit</a></li>
+<li>handleExecContinue: <a href="debugger-debugger-internal-debuggerengine.html#handleExecContinue">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecDetach: <a href="debugger-debugger-internal-debuggerengine.html#handleExecDetach">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecInterrupt: <a href="debugger-debugger-internal-debuggerengine.html#handleExecInterrupt">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecJumpToLine: <a href="debugger-debugger-internal-debuggerengine.html#handleExecJumpToLine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecReturn: <a href="debugger-debugger-internal-debuggerengine.html#handleExecReturn">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecRunToLine: <a href="debugger-debugger-internal-debuggerengine.html#handleExecRunToLine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecRunToSelectedFunction: <a href="debugger-debugger-internal-debuggerengine.html#handleExecRunToSelectedFunction">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecStepIn: <a href="debugger-debugger-internal-debuggerengine.html#handleExecStepIn">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecStepOut: <a href="debugger-debugger-internal-debuggerengine.html#handleExecStepOut">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleExecStepOver: <a href="debugger-debugger-internal-debuggerengine.html#handleExecStepOver">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleFrameDown: <a href="debugger-debugger-internal-debuggerengine.html#handleFrameDown">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleFrameUp: <a href="debugger-debugger-internal-debuggerengine.html#handleFrameUp">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleHelpRequest: <a href="core-helpmanager.html#handleHelpRequest-1">Core::HelpManager</a></li>
+<li>handleReset: <a href="debugger-debugger-internal-debuggerengine.html#handleReset">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>handleUpKey: <a href="debugger-internal-consoleedit.html#handleUpKey">Debugger::Internal::ConsoleEdit</a></li>
+<li>handleUserStop: <a href="debugger-debugger-internal-debuggerengine.html#handleUserStop">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>hasChildren: <a href="texteditor-internal-rule.html#hasChildren">TextEditor::Internal::Rule</a></li>
+<li>hasDebugInfo: <a href="debugger-debugger-internal-location.html#hasDebugInfo">Debugger::Debugger::Internal::Location</a></li>
+<li>hasName: <a href="debugger-internal-gdbmi.html#hasName">Debugger::Internal::GdbMi</a></li>
+<li>hasPattern: <a href="utils-internal-mimeglobpatternlist.html#hasPattern">Utils::Internal::MimeGlobPatternList</a></li>
+<li>hasQualifiers: <a href="debugger-internal-cvqualifiersnode.html#hasQualifiers">Debugger::Internal::CvQualifiersNode</a></li>
+<li>hasReturnType: <a href="debugger-internal-barefunctiontypenode.html#hasReturnType">Debugger::Internal::BareFunctionTypeNode</a></li>
+<li>hookCallbacks: <a href="extensioncontext.html#hookCallbacks">ExtensionContext</a></li>
+<li>hookedClient: <a href="extensioncontext.html#hookedClient">ExtensionContext</a></li>
+<li>humanReadable: <a href="dumpparameters.html#humanReadable">DumpParameters</a></li>
+<li>iName:<a name="i"></a> <a href="abstractsymbolgroupnode.html#iName">AbstractSymbolGroupNode</a></li>
+<li>id: <a href="projectexplorer-customparser.html#id">ProjectExplorer::CustomParser</a> <a href="texteditor-internal-context.html#id">TextEditor::Internal::Context</a></li>
+<li>ignoredFilesPatterns: <a href="texteditor-highlightersettings.html#ignoredFilesPatterns">TextEditor::HighlighterSettings</a></li>
+<li>immutable: <a href="projectexplorer-internal-processstep.html#immutable">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>importAction: <a href="core-internal-shortcutsettingswidget.html#importAction">Core::Internal::ShortcutSettingsWidget</a></li>
+<li>includeRulesInstructions: <a href="texteditor-internal-context.html#includeRulesInstructions">TextEditor::Internal::Context</a></li>
+<li>incrementOffset: <a href="texteditor-internal-progressdata.html#incrementOffset-1">TextEditor::Internal::ProgressData</a></li>
+<li>index: <a href="debugger-internal-templateparamnode.html#index">Debugger::Internal::TemplateParamNode</a> <a href="symbolgroupnode.html#index">SymbolGroupNode</a> <a href="texteditor-internal-snippetscollection-hint.html#index">TextEditor::Internal::SnippetsCollection::Hint</a></li>
+<li>indexByIName: <a href="abstractsymbolgroupnode.html#indexByIName">AbstractSymbolGroupNode</a></li>
+<li>indexHint: <a href="texteditor-internal-includerulesinstruction.html#indexHint">TextEditor::Internal::IncludeRulesInstruction</a></li>
+<li>indexOf: <a href="abstractsymbolgroupnode.html#indexOf">AbstractSymbolGroupNode</a></li>
+<li>infoOfAncestor: <a href="symbolgroupvalue.html#infoOfAncestor">SymbolGroupValue</a></li>
+<li>inherits: <a href="utils-internal-mimedatabaseprivate.html#inherits">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>init: <a href="projectexplorer-internal-processstep.html#init">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>initialContext: <a href="texteditor-internal-highlightdefinition.html#initialContext">TextEditor::Internal::HighlightDefinition</a></li>
+<li>initialize: <a href="extensioncontext.html#initialize">ExtensionContext</a></li>
+<li>innerTypes: <a href="symbolgroupvalue.html#innerTypes">SymbolGroupValue</a></li>
+<li>innerTypesOf: <a href="symbolgroupvalue.html#innerTypesOf">SymbolGroupValue</a></li>
+<li>inputLostFocus: <a href="core-internal-locatorpopup.html#inputLostFocus">Core::Internal::LocatorPopup</a></li>
+<li>inputWidget: <a href="core-internal-locatorpopup.html#inputWidget">Core::Internal::LocatorPopup</a></li>
+<li>insertChild: <a href="core-internal-searchresulttreeitem.html#insertChild-1">Core::Internal::SearchResultTreeItem</a></li>
+<li>insertCodeSnippet: <a href="texteditor-textdocumentmanipulator.html#insertCodeSnippet">TextEditor::TextDocumentManipulator</a></li>
+<li>insertOrderedChild: <a href="utils-typedtreeitem.html#insertOrderedChild">Utils::TypedTreeItem</a></li>
+<li>insertionIndex: <a href="core-internal-searchresulttreeitem.html#insertionIndex-1">Core::Internal::SearchResultTreeItem</a></li>
+<li>inspectorView: <a href="debugger-debugger-internal-debuggerengine.html#inspectorView">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>instance: <a href="extensioncommandcontext.html#instance">ExtensionCommandContext</a> <a href="extensioncontext.html#instance">ExtensionContext</a> <a href="texteditor-internal-circularclipboard.html#instance">TextEditor::Internal::CircularClipboard</a> <a href="utils-internal-mimedatabaseprivate.html#instance">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>intSize: <a href="symbolgroupvalue.html#intSize">SymbolGroupValue</a></li>
+<li>intValue: <a href="symbolgroupvalue.html#intValue">SymbolGroupValue</a></li>
+<li>interruptInferior: <a href="debugger-debugger-internal-debuggerengine.html#interruptInferior">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>isActive: <a href="texteditor-internal-dynamicrule.html#isActive">TextEditor::Internal::DynamicRule</a></li>
+<li>isAlphabeticallySorted: <a href="dumpparameters.html#isAlphabeticallySorted">DumpParameters</a></li>
+<li>isArrayType: <a href="symbolgroupvalue.html#isArrayType">SymbolGroupValue</a></li>
+<li>isAssembler: <a href="debugger-internal-disassemblerline.html#isAssembler">Debugger::Internal::DisassemblerLine</a></li>
+<li>isBold: <a href="texteditor-internal-itemdata.html#isBold">TextEditor::Internal::ItemData</a></li>
+<li>isBoldSpecified: <a href="texteditor-internal-itemdata.html#isBoldSpecified">TextEditor::Internal::ItemData</a></li>
+<li>isBreakpoint: <a href="debugger-internal-breakpointparameters.html#isBreakpoint">Debugger::Internal::BreakpointParameters</a></li>
+<li>isCaseSensitive: <a href="utils-internal-mimeglobpattern.html#isCaseSensitive">Utils::Internal::MimeGlobPattern</a></li>
+<li>isClosingBraceMatchAtNonEnd: <a href="texteditor-internal-progressdata.html#isClosingBraceMatchAtNonEnd">TextEditor::Internal::ProgressData</a></li>
+<li>isCode: <a href="debugger-internal-disassemblerline.html#isCode">Debugger::Internal::DisassemblerLine</a></li>
+<li>isComment: <a href="debugger-internal-disassemblerline.html#isComment">Debugger::Internal::DisassemblerLine</a></li>
+<li>isCommentAfterWhiteSpaces: <a href="texteditor-internal-highlightdefinition.html#isCommentAfterWhiteSpaces">TextEditor::Internal::HighlightDefinition</a></li>
+<li>isConstructorOrDestructorOrConversionOperator: <a href="debugger-internal-localnamenode.html#isConstructorOrDestructorOrConversionOperator">Debugger::Internal::LocalNameNode</a> <a href="debugger-internal-namenode.html#isConstructorOrDestructorOrConversionOperator">Debugger::Internal::NameNode</a> <a href="debugger-internal-nestednamenode.html#isConstructorOrDestructorOrConversionOperator">Debugger::Internal::NestedNameNode</a> <a href="debugger-internal-prefixnode.html#isConstructorOrDestructorOrConversionOperator">Debugger::Internal::PrefixNode</a> <a href="debugger-internal-unqualifiednamenode.html#isConstructorOrDestructorOrConversionOperator">Debugger::Internal::UnqualifiedNameNode</a> <a href="debugger-internal-unscopednamenode.html#isConstructorOrDestructorOrConversionOperator">Debugger::Internal::UnscopedNameNode</a></li>
+<li>isCppBreakpoint: <a href="debugger-internal-breakpointparameters.html#isCppBreakpoint">Debugger::Internal::BreakpointParameters</a></li>
+<li>isCppDebugging: <a href="debugger-debugger-internal-debuggerrunparameters.html#isCppDebugging">Debugger::Debugger::Internal::DebuggerRunParameters</a></li>
+<li>isCustomized: <a href="texteditor-internal-itemdata.html#isCustomized">TextEditor::Internal::ItemData</a></li>
+<li>isDelimiter: <a href="texteditor-internal-highlightdefinition.html#isDelimiter">TextEditor::Internal::HighlightDefinition</a></li>
+<li>isDirtyImpl: <a href="projectexplorer-internal-customtoolchainconfigwidget.html#isDirtyImpl">ProjectExplorer::Internal::CustomToolChainConfigWidget</a></li>
+<li>isDynamic: <a href="texteditor-internal-context.html#isDynamic">TextEditor::Internal::Context</a></li>
+<li>isEmpty: <a href="debugger-internal-debuggercommandsequence.html#isEmpty">Debugger::Internal::DebuggerCommandSequence</a> <a href="texteditor-colorscheme.html#isEmpty">TextEditor::ColorScheme</a></li>
+<li>isExpanded: <a href="symbolgroupnode.html#isExpanded">SymbolGroupNode</a></li>
+<li>isExternC: <a href="debugger-internal-functiontypenode.html#isExternC">Debugger::Internal::FunctionTypeNode</a></li>
+<li>isFallthrough: <a href="texteditor-internal-context.html#isFallthrough">TextEditor::Internal::Context</a></li>
+<li>isFirstNonSpace: <a href="texteditor-internal-rule.html#isFirstNonSpace">TextEditor::Internal::Rule</a></li>
+<li>isGenerated: <a href="core-internal-searchresulttreeitem.html#isGenerated">Core::Internal::SearchResultTreeItem</a></li>
+<li>isIgnoredFilePattern: <a href="texteditor-highlightersettings.html#isIgnoredFilePattern">TextEditor::HighlighterSettings</a></li>
+<li>isIndentationBasedFolding: <a href="texteditor-internal-highlightdefinition.html#isIndentationBasedFolding">TextEditor::Internal::HighlightDefinition</a></li>
+<li>isInteractive: <a href="utils-internal-texttip.html#isInteractive">Utils::Internal::TextTip</a></li>
+<li>isItalic: <a href="texteditor-internal-itemdata.html#isItalic">TextEditor::Internal::ItemData</a></li>
+<li>isItalicSpecified: <a href="texteditor-internal-itemdata.html#isItalicSpecified">TextEditor::Internal::ItemData</a></li>
+<li>isKeyword: <a href="texteditor-internal-keywordlist.html#isKeyword">TextEditor::Internal::KeywordList</a></li>
+<li>isLeaf: <a href="core-internal-searchresulttreeitem.html#isLeaf">Core::Internal::SearchResultTreeItem</a></li>
+<li>isList: <a href="debugger-internal-gdbmi.html#isList">Debugger::Internal::GdbMi</a></li>
+<li>isLocatedAt: <a href="debugger-internal-breakpointparameters.html#isLocatedAt">Debugger::Internal::BreakpointParameters</a></li>
+<li>isLookAhead: <a href="texteditor-internal-rule.html#isLookAhead">TextEditor::Internal::Rule</a></li>
+<li>isMatch: <a href="projectexplorer-glob.html#isMatch">ProjectExplorer::Glob</a></li>
+<li>isMemoryAccessible: <a href="symbolgroupnode.html#isMemoryAccessible">SymbolGroupNode</a></li>
+<li>isModulesWindowVisible: <a href="debugger-debugger-internal-debuggerengine.html#isModulesWindowVisible">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>isMovable: <a href="symbolgroupvalue.html#isMovable">SymbolGroupValue</a></li>
+<li>isNativeMixedActive: <a href="debugger-debugger-internal-debuggerengine.html#isNativeMixedActive">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>isNativeMixedActiveFrame: <a href="debugger-debugger-internal-debuggerengine.html#isNativeMixedActiveFrame">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>isNativeMixedDebugging: <a href="debugger-debugger-internal-debuggerrunparameters.html#isNativeMixedDebugging">Debugger::Debugger::Internal::DebuggerRunParameters</a></li>
+<li>isNativeMixedEnabled: <a href="debugger-debugger-internal-debuggerengine.html#isNativeMixedEnabled">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>isNull: <a href="texteditor-blockrange.html#isNull">TextEditor::BlockRange</a></li>
+<li>isOnlySpacesSoFar: <a href="texteditor-internal-progressdata.html#isOnlySpacesSoFar">TextEditor::Internal::ProgressData</a></li>
+<li>isOpeningBraceMatchAtFirstNonSpace: <a href="texteditor-internal-progressdata.html#isOpeningBraceMatchAtFirstNonSpace">TextEditor::Internal::ProgressData</a></li>
+<li>isPointerType: <a href="symbolgroupvalue.html#isPointerType">SymbolGroupValue</a></li>
+<li>isQmlFileAndLineBreakpoint: <a href="debugger-internal-breakpointparameters.html#isQmlFileAndLineBreakpoint">Debugger::Internal::BreakpointParameters</a></li>
+<li>isRegistersWindowVisible: <a href="debugger-debugger-internal-debuggerengine.html#isRegistersWindowVisible">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>isStrikeOut: <a href="texteditor-internal-itemdata.html#isStrikeOut">TextEditor::Internal::ItemData</a></li>
+<li>isStrikeOutSpecified: <a href="texteditor-internal-itemdata.html#isStrikeOutSpecified">TextEditor::Internal::ItemData</a></li>
+<li>isTemplate: <a href="debugger-internal-localnamenode.html#isTemplate">Debugger::Internal::LocalNameNode</a> <a href="debugger-internal-namenode.html#isTemplate">Debugger::Internal::NameNode</a> <a href="debugger-internal-nestednamenode.html#isTemplate">Debugger::Internal::NestedNameNode</a> <a href="debugger-internal-prefixnode.html#isTemplate">Debugger::Internal::PrefixNode</a></li>
+<li>isTracepoint: <a href="debugger-internal-breakpointparameters.html#isTracepoint">Debugger::Internal::BreakpointParameters</a></li>
+<li>isUnderlined: <a href="texteditor-internal-itemdata.html#isUnderlined">TextEditor::Internal::ItemData</a></li>
+<li>isUnderlinedSpecified: <a href="texteditor-internal-itemdata.html#isUnderlinedSpecified">TextEditor::Internal::ItemData</a></li>
+<li>isUsable: <a href="debugger-debugger-internal-stackframe.html#isUsable">Debugger::Debugger::Internal::StackFrame</a></li>
+<li>isVTableType: <a href="symbolgroupvalue.html#isVTableType">SymbolGroupValue</a></li>
+<li>isValid: <a href="debugger-internal-breakpointparameters.html#isValid">Debugger::Internal::BreakpointParameters</a> <a href="debugger-internal-contextdata.html#isValid">Debugger::Internal::ContextData</a> <a href="debugger-internal-gdbmi.html#isValid">Debugger::Internal::GdbMi</a> <a href="qmlerror.html#isValid">QmlError</a> <a href="qmljs-ast-sourcelocation.html#isValid">QmlJS::AST::SourceLocation</a> <a href="symbolgroupvalue.html#isValid">SymbolGroupValue</a> <a href="texteditor-internal-highlightdefinition.html#isValid">TextEditor::Internal::HighlightDefinition</a> <a href="utils-internal-mimeproviderbase.html#isValid">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#isValid">Utils::Internal::MimeXMLProvider</a> <a href="utils-linecolumn.html#isValid">Utils::LineColumn</a></li>
+<li>isWatchIname: <a href="watchessymbolgroup.html#isWatchIname">WatchesSymbolGroup</a></li>
+<li>isWatchpoint: <a href="debugger-internal-breakpointparameters.html#isWatchpoint">Debugger::Internal::BreakpointParameters</a></li>
+<li>isWillContinueLine: <a href="texteditor-internal-progressdata.html#isWillContinueLine">TextEditor::Internal::ProgressData</a></li>
+<li>itemData: <a href="texteditor-internal-context.html#itemData">TextEditor::Internal::Context</a> <a href="texteditor-internal-highlightdefinition.html#itemData">TextEditor::Internal::HighlightDefinition</a> <a href="texteditor-internal-rule.html#itemData">TextEditor::Internal::Rule</a></li>
+<li>itemForIndex: <a href="utils-treemodel.html#itemForIndex">Utils::TreeModel</a></li>
+<li>itemForIndexAtLevel: <a href="utils-treemodel.html#itemForIndexAtLevel">Utils::TreeModel</a></li>
+<li>jsExecutionEngine:<a name="j"></a> <a href="extensioncontext.html#jsExecutionEngine">ExtensionContext</a></li>
+<li>keyPressEvent:<a name="k"></a> <a href="debugger-internal-consoleedit.html#keyPressEvent">Debugger::Internal::ConsoleEdit</a> <a href="utils-view.html#keyPressEvent">Utils::View</a></li>
+<li>keywordList: <a href="texteditor-internal-highlightdefinition.html#keywordList">TextEditor::Internal::HighlightDefinition</a></li>
+<li>keywordsSensitive: <a href="texteditor-internal-highlightdefinition.html#keywordsSensitive">TextEditor::Internal::HighlightDefinition</a></li>
+<li>kitToolTip: <a href="debugger-internal-debuggerkitchooser.html#kitToolTip">Debugger::Internal::DebuggerKitChooser</a></li>
+<li>languageContext:<a name="l"></a> <a href="debugger-debugger-internal-cppdebuggerengine.html#languageContext">Debugger::Debugger::Internal::CppDebuggerEngine</a></li>
+<li>languageId: <a href="projectexplorer-deprecated-toolchain.html#languageId">ProjectExplorer::Deprecated::Toolchain</a></li>
+<li>languageOption: <a href="projectexplorer.html#languageOption">ProjectExplorer</a></li>
+<li>last: <a href="texteditor-blockrange.html#last">TextEditor::BlockRange</a></li>
+<li>lastUsedSnippetGroup: <a href="texteditor-snippetssettings.html#lastUsedSnippetGroup">TextEditor::SnippetsSettings</a></li>
+<li>length: <a href="core-search-textrange.html#length">Core::Search::TextRange</a></li>
+<li>lessEqualThan: <a href="utils.html#lessEqualThan">Utils</a></li>
+<li>lessThan: <a href="utils.html#lessThan">Utils</a></li>
+<li>line: <a href="qmlerror.html#line">QmlError</a></li>
+<li>lineBeginContext: <a href="texteditor-internal-context.html#lineBeginContext">TextEditor::Internal::Context</a></li>
+<li>lineEmptyContext: <a href="texteditor-internal-context.html#lineEmptyContext">TextEditor::Internal::Context</a></li>
+<li>lineEndContext: <a href="texteditor-internal-context.html#lineEndContext">TextEditor::Internal::Context</a></li>
+<li>lineForAddress: <a href="debugger-internal-disassemblerlines.html#lineForAddress">Debugger::Internal::DisassemblerLines</a></li>
+<li>lineNumber: <a href="debugger-debugger-internal-location.html#lineNumber">Debugger::Debugger::Internal::Location</a></li>
+<li>lineNumberCap: <a href="projectexplorer-customparserexpression.html#lineNumberCap">ProjectExplorer::CustomParserExpression</a></li>
+<li>listAliases: <a href="utils-internal-mimeproviderbase.html#listAliases">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#listAliases">Utils::Internal::MimeXMLProvider</a></li>
+<li>load: <a href="projectexplorer-internal-extraabi.html#load">ProjectExplorer::Internal::ExtraAbi</a> <a href="texteditor-colorscheme.html#load">TextEditor::ColorScheme</a> <a href="utils-internal-mimexmlprovider.html#load">Utils::Internal::MimeXMLProvider</a></li>
+<li>loadBuiltinTypes: <a href="qmljs-plugindumper.html#loadBuiltinTypes">QmlJS::PluginDumper</a></li>
+<li>loadGenericIcon: <a href="utils-internal-mimeproviderbase.html#loadGenericIcon">Utils::Internal::MimeProviderBase</a></li>
+<li>loadIcon: <a href="utils-internal-mimeproviderbase.html#loadIcon">Utils::Internal::MimeProviderBase</a></li>
+<li>loadMimeTypePrivate: <a href="utils-internal-mimeproviderbase.html#loadMimeTypePrivate">Utils::Internal::MimeProviderBase</a></li>
+<li>loadPluginTypes: <a href="qmljs-plugindumper.html#loadPluginTypes">QmlJS::PluginDumper</a></li>
+<li>magicRules:<a name="m"></a> <a href="utils-internal-mimemagicrulematcher.html#magicRules">Utils::Internal::MimeMagicRuleMatcher</a></li>
+<li>makeReadOnlyImpl: <a href="projectexplorer-internal-customtoolchainconfigwidget.html#makeReadOnlyImpl">ProjectExplorer::Internal::CustomToolChainConfigWidget</a></li>
+<li>makeUniquelyNumbered: <a href="utils.html#makeUniquelyNumbered">Utils</a></li>
+<li>manageSessions: <a href="projectexplorer-internal-projectwelcomepage.html#manageSessions">ProjectExplorer::Internal::ProjectWelcomePage</a></li>
+<li>mangledRepresentationStartsWith: <a href="debugger-internal-arraytypenode.html#mangledRepresentationStartsWith">Debugger::Internal::ArrayTypeNode</a> <a href="debugger-internal-barefunctiontypenode.html#mangledRepresentationStartsWith">Debugger::Internal::BareFunctionTypeNode</a> <a href="debugger-internal-baseunresolvednamenode.html#mangledRepresentationStartsWith">Debugger::Internal::BaseUnresolvedNameNode</a> <a href="debugger-internal-builtintypenode.html#mangledRepresentationStartsWith">Debugger::Internal::BuiltinTypeNode</a> <a href="debugger-internal-calloffsetrule.html#mangledRepresentationStartsWith">Debugger::Internal::CallOffsetRule</a> <a href="debugger-internal-classenumtyperule.html#mangledRepresentationStartsWith">Debugger::Internal::ClassEnumTypeRule</a> <a href="debugger-internal-ctordtornamenode.html#mangledRepresentationStartsWith">Debugger::Internal::CtorDtorNameNode</a> <a href="debugger-internal-cvqualifiersnode.html#mangledRepresentationStartsWith">Debugger::Internal::CvQualifiersNode</a> <a href="debugger-internal-decltypenode.html#mangledRepresentationStartsWith">Debugger::Internal::DeclTypeNode</a> <a href="debugger-internal-destructornamenode.html#mangledRepresentationStartsWith">Debugger::Internal::DestructorNameNode</a> <a href="debugger-internal-discriminatorrule.html#mangledRepresentationStartsWith">Debugger::Internal::DiscriminatorRule</a> <a href="debugger-internal-encodingnode.html#mangledRepresentationStartsWith">Debugger::Internal::EncodingNode</a> <a href="debugger-internal-exprprimarynode.html#mangledRepresentationStartsWith">Debugger::Internal::ExprPrimaryNode</a> <a href="debugger-internal-expressionnode.html#mangledRepresentationStartsWith">Debugger::Internal::ExpressionNode</a> <a href="debugger-internal-floatvaluenode.html#mangledRepresentationStartsWith">Debugger::Internal::FloatValueNode</a> <a href="debugger-internal-functionparamnode.html#mangledRepresentationStartsWith">Debugger::Internal::FunctionParamNode</a> <a href="debugger-internal-functiontypenode.html#mangledRepresentationStartsWith">Debugger::Internal::FunctionTypeNode</a> <a href="debugger-internal-initializernode.html#mangledRepresentationStartsWith">Debugger::Internal::InitializerNode</a> <a href="debugger-internal-lambdasignode.html#mangledRepresentationStartsWith">Debugger::Internal::LambdaSigNode</a> <a href="debugger-internal-localnamenode.html#mangledRepresentationStartsWith">Debugger::Internal::LocalNameNode</a> <a href="debugger-internal-manglednamerule.html#mangledRepresentationStartsWith">Debugger::Internal::MangledNameRule</a> <a href="debugger-internal-namenode.html#mangledRepresentationStartsWith">Debugger::Internal::NameNode</a> <a href="debugger-internal-nestednamenode.html#mangledRepresentationStartsWith">Debugger::Internal::NestedNameNode</a> <a href="debugger-internal-nonnegativenumbernode.html#mangledRepresentationStartsWith">Debugger::Internal::NonNegativeNumberNode</a> <a href="debugger-internal-numbernode.html#mangledRepresentationStartsWith">Debugger::Internal::NumberNode</a> <a href="debugger-internal-operatornamenode.html#mangledRepresentationStartsWith">Debugger::Internal::OperatorNameNode</a> <a href="debugger-internal-pointertomembertypenode.html#mangledRepresentationStartsWith">Debugger::Internal::PointerToMemberTypeNode</a> <a href="debugger-internal-prefixnode.html#mangledRepresentationStartsWith">Debugger::Internal::PrefixNode</a> <a href="debugger-internal-simpleidnode.html#mangledRepresentationStartsWith">Debugger::Internal::SimpleIdNode</a> <a href="debugger-internal-sourcenamenode.html#mangledRepresentationStartsWith">Debugger::Internal::SourceNameNode</a> <a href="debugger-internal-specialnamenode.html#mangledRepresentationStartsWith">Debugger::Internal::SpecialNameNode</a> <a href="debugger-internal-substitutionnode.html#mangledRepresentationStartsWith">Debugger::Internal::SubstitutionNode</a> <a href="debugger-internal-templateargnode.html#mangledRepresentationStartsWith">Debugger::Internal::TemplateArgNode</a> <a href="debugger-internal-templateargsnode.html#mangledRepresentationStartsWith">Debugger::Internal::TemplateArgsNode</a> <a href="debugger-internal-templateparamnode.html#mangledRepresentationStartsWith">Debugger::Internal::TemplateParamNode</a> <a href="debugger-internal-typenode.html#mangledRepresentationStartsWith">Debugger::Internal::TypeNode</a> <a href="debugger-internal-unnamedtypenamenode.html#mangledRepresentationStartsWith">Debugger::Internal::UnnamedTypeNameNode</a> <a href="debugger-internal-unqualifiednamenode.html#mangledRepresentationStartsWith">Debugger::Internal::UnqualifiedNameNode</a> <a href="debugger-internal-unresolvednamenode.html#mangledRepresentationStartsWith">Debugger::Internal::UnresolvedNameNode</a> <a href="debugger-internal-unresolvedqualifierlevelrule.html#mangledRepresentationStartsWith">Debugger::Internal::UnresolvedQualifierLevelRule</a> <a href="debugger-internal-unresolvedtyperule.html#mangledRepresentationStartsWith">Debugger::Internal::UnresolvedTypeRule</a> <a href="debugger-internal-unscopednamenode.html#mangledRepresentationStartsWith">Debugger::Internal::UnscopedNameNode</a></li>
+<li>markUninitialized: <a href="symbolgroup.html#markUninitialized">SymbolGroup</a></li>
+<li>match: <a href="projectexplorer-customparserexpression.html#match">ProjectExplorer::CustomParserExpression</a> <a href="utils-internal-mimeglobpatternlist.html#match">Utils::Internal::MimeGlobPatternList</a></li>
+<li>matchCharacter: <a href="texteditor-internal-rule.html#matchCharacter">TextEditor::Internal::Rule</a></li>
+<li>matchEscapeSequence: <a href="texteditor-internal-rule.html#matchEscapeSequence">TextEditor::Internal::Rule</a></li>
+<li>matchFileName: <a href="utils-internal-mimeglobpattern.html#matchFileName">Utils::Internal::MimeGlobPattern</a></li>
+<li>matchHexSequence: <a href="texteditor-internal-rule.html#matchHexSequence">TextEditor::Internal::Rule</a></li>
+<li>matchOctalSequence: <a href="texteditor-internal-rule.html#matchOctalSequence">TextEditor::Internal::Rule</a></li>
+<li>matchSucceed: <a href="texteditor-internal-rule.html#matchSucceed">TextEditor::Internal::Rule</a></li>
+<li>matches: <a href="utils-internal-mimemagicrulematcher.html#matches">Utils::Internal::MimeMagicRuleMatcher</a></li>
+<li>matchesFor: <a href="core-internal-executefilter.html#matchesFor">Core::Internal::ExecuteFilter</a></li>
+<li>matchingGlobs: <a href="utils-internal-mimeallglobpatterns.html#matchingGlobs">Utils::Internal::MimeAllGlobPatterns</a></li>
+<li>memory: <a href="symbolgroupnode.html#memory">SymbolGroupNode</a></li>
+<li>messageCap: <a href="projectexplorer-customparserexpression.html#messageCap">ProjectExplorer::CustomParserExpression</a></li>
+<li>messageType: <a href="qmlerror.html#messageType">QmlError</a></li>
+<li>mid: <a href="core-search-textrange.html#mid">Core::Search::TextRange</a></li>
+<li>mimeType: <a href="utils-internal-mimeglobpattern.html#mimeType">Utils::Internal::MimeGlobPattern</a></li>
+<li>mimeTypeExists: <a href="utils-internal-mimetypeparser.html#mimeTypeExists">Utils::Internal::MimeTypeParser</a> <a href="utils-internal-mimetypeparserbase.html#mimeTypeExists">Utils::Internal::MimeTypeParserBase</a></li>
+<li>mimeTypeForFileName: <a href="utils-internal-mimedatabaseprivate.html#mimeTypeForFileName">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>mimeTypeForFileNameAndData: <a href="utils-internal-mimedatabaseprivate.html#mimeTypeForFileNameAndData">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>mimeTypeForName: <a href="utils-internal-mimedatabaseprivate.html#mimeTypeForName">Utils::Internal::MimeDatabasePrivate</a> <a href="utils-internal-mimeproviderbase.html#mimeTypeForName">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#mimeTypeForName">Utils::Internal::MimeXMLProvider</a></li>
+<li>mimetype: <a href="utils-internal-mimemagicrulematcher.html#mimetypex">Utils::Internal::MimeMagicRuleMatcher</a></li>
+<li>modelData: <a href="debugger-internal-floatwatchlineedit.html#modelData">Debugger::Internal::FloatWatchLineEdit</a></li>
+<li>module: <a href="localssymbolgroup.html#module">LocalsSymbolGroup</a> <a href="symbolgroupnode.html#module">SymbolGroupNode</a> <a href="symbolgroupvalue.html#module">SymbolGroupValue</a></li>
+<li>moduleName: <a href="qtinfo.html#moduleName">QtInfo</a></li>
+<li>moduleOfType: <a href="symbolgroupvalue.html#moduleOfType">SymbolGroupValue</a></li>
+<li>mousePressEvent: <a href="core-internal-editorview.html#mousePressEvent">Core::Internal::EditorView</a> <a href="core-internal-progressbar.html#mousePressEvent">Core::Internal::ProgressBar</a></li>
+<li>msgAssignError: <a href="symbolgroupnode.html#msgAssignError">SymbolGroupNode</a></li>
+<li>msgInterrupted: <a href="debugger-debugger-internal-debuggerengine.html#msgInterrupted">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>msgStopped: <a href="debugger-debugger-internal-debuggerengine.html#msgStopped">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>msgStoppedByException: <a href="debugger-debugger-internal-debuggerengine.html#msgStoppedByException">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>msgStoppedBySignal: <a href="debugger-debugger-internal-debuggerengine.html#msgStoppedBySignal">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>multiLineCommentEnd: <a href="texteditor-internal-highlightdefinition.html#multiLineCommentEnd">TextEditor::Internal::HighlightDefinition</a></li>
+<li>multiLineCommentRegion: <a href="texteditor-internal-highlightdefinition.html#multiLineCommentRegion">TextEditor::Internal::HighlightDefinition</a></li>
+<li>multiLineCommentStart: <a href="texteditor-internal-highlightdefinition.html#multiLineCommentStart">TextEditor::Internal::HighlightDefinition</a></li>
+<li>name:<a name="n"></a> <a href="abstractsymbolgroupnode.html#name">AbstractSymbolGroupNode</a> <a href="debugger-internal-gdbmi.html#name">Debugger::Internal::GdbMi</a> <a href="symbolgroupvalue.html#name">SymbolGroupValue</a> <a href="texteditor-internal-context.html#name">TextEditor::Internal::Context</a></li>
+<li>nameForStyle: <a href="texteditor-constants.html#nameForStyle">TextEditor::Constants</a></li>
+<li>navigateStateChanged: <a href="core-internal-searchresultwidget.html#navigateStateChanged">Core::Internal::SearchResultWidget</a></li>
+<li>needsMarker: <a href="debugger-debugger-internal-location.html#needsMarker">Debugger::Debugger::Internal::Location</a></li>
+<li>needsRaise: <a href="debugger-debugger-internal-location.html#needsRaise">Debugger::Debugger::Internal::Location</a></li>
+<li>newSession: <a href="projectexplorer-internal-sessionmodel.html#newSession">ProjectExplorer::Internal::SessionModel</a></li>
+<li>next: <a href="texteditor-internal-circularclipboard.html#next">TextEditor::Internal::CircularClipboard</a></li>
+<li>node: <a href="symbolgroupvalue.html#node">SymbolGroupValue</a></li>
+<li>nonRootItemForIndex: <a href="utils-treemodel.html#nonRootItemForIndex">Utils::TreeModel</a></li>
+<li>normalizedMask: <a href="core-internal-magicdata.html#normalizedMask">Core::Internal::MagicData</a></li>
+<li>notifyBreakpointChangeFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointChangeFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointChangeOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointChangeOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointChangeProceeding: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointChangeProceeding">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointInsertFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointInsertFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointInsertOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointInsertOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointInsertProceeding: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointInsertProceeding">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointNeedsReinsertion: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointNeedsReinsertion">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointPending: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointPending">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointRemoveFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointRemoveFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointRemoveOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointRemoveOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyBreakpointRemoveProceeding: <a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointRemoveProceeding">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyDebuggerProcessFinished: <a href="debugger-debugger-internal-debuggerengine.html#notifyDebuggerProcessFinished">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineIll: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineIll">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineRunAndInferiorRunOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunAndInferiorRunOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineRunAndInferiorStopOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunAndInferiorStopOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineRunFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineRunOkAndInferiorUnrunnable: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunOkAndInferiorUnrunnable">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineSetupFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineSetupFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineSetupOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineSetupOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineShutdownFinished: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineShutdownFinished">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyEngineSpontaneousShutdown: <a href="debugger-debugger-internal-debuggerengine.html#notifyEngineSpontaneousShutdown">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyIdleCommand: <a href="extensioncontext.html#notifyIdleCommand">ExtensionContext</a></li>
+<li>notifyInferiorExited: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorExited">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorIll: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorIll">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorRunFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorRunFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorRunOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorRunOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorRunRequested: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorRunRequested">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorShutdownFinished: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorShutdownFinished">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorSpontaneousStop: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorSpontaneousStop">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorStopFailed: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorStopFailed">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyInferiorStopOk: <a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorStopOk">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>notifyState: <a href="extensioncontext.html#notifyState">ExtensionContext</a></li>
+<li>number: <a href="debugger-internal-nonnegativenumbernode.html#number">Debugger::Internal::NonNegativeNumberNode</a></li>
+<li>object:<a name="o"></a> <a href="qmlerror.html#object">QmlError</a></li>
+<li>offset: <a href="texteditor-internal-progressdata.html#offset">TextEditor::Internal::ProgressData</a></li>
+<li>offsetOfAncestor: <a href="symbolgroupvalue.html#offsetOfAncestor">SymbolGroupValue</a></li>
+<li>offsetOfChild: <a href="symbolgroupvalue.html#offsetOfChild">SymbolGroupValue</a></li>
+<li>openMemoryEditor: <a href="debugger-debugger-internal-debuggerengine.html#openMemoryEditor">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>openProject: <a href="projectexplorer-internal-projectwelcomepage.html#openProject">ProjectExplorer::Internal::ProjectWelcomePage</a></li>
+<li>operator bool: <a href="symbolgroupvalue.html#operator-bool">SymbolGroupValue</a></li>
+<li>operator!=: <a href="cplusplus.html#operator-not-eq">CPlusPlus</a> <a href="core-internal-magicdata.html#operator-not-eq">Core::Internal::MagicData</a> <a href="debugger-internal-breakpointparameters.html#operator-not-eq">Debugger::Internal::BreakpointParameters</a> <a href="projectexplorer-customparsersettings.html#operator-not-eq">ProjectExplorer::CustomParserSettings</a> <a href="qmljs.html#operator-not-eq">QmlJS</a> <a href="texteditor.html#operator-not-eq-3">TextEditor</a> <a href="utils.html#operator-not-eq-1">Utils</a> <a href="vcsbase.html#operator-not-eq">VcsBase</a></li>
+<li>operator&amp;: <a href="projectexplorer.html#operator-and">ProjectExplorer</a></li>
+<li>operator&amp;=: <a href="projectexplorer.html#operator-and-eq">ProjectExplorer</a></li>
+<li>operator(): <a href="cplusplus-pp-skip-argument.html#operator-28-29">CPlusPlus::pp_skip_argument</a> <a href="cplusplus-pp-skip-blanks.html#operator-28-29">CPlusPlus::pp_skip_blanks</a> <a href="cplusplus-pp-skip-char-literal.html#operator-28-29">CPlusPlus::pp_skip_char_literal</a> <a href="cplusplus-pp-skip-comment-or-divop.html#operator-28-29">CPlusPlus::pp_skip_comment_or_divop</a> <a href="cplusplus-pp-skip-identifier.html#operator-28-29">CPlusPlus::pp_skip_identifier</a> <a href="cplusplus-pp-skip-number.html#operator-28-29">CPlusPlus::pp_skip_number</a> <a href="cplusplus-pp-skip-string-literal.html#operator-28-29">CPlusPlus::pp_skip_string_literal</a> <a href="cplusplus-pp-skip-whitespaces.html#operator-28-29">CPlusPlus::pp_skip_whitespaces</a></li>
+<li>operator&lt;: <a href="qmljs.html#operator-lt">QmlJS</a> <a href="utils.html#operator-lt">Utils</a></li>
+<li>operator&lt;&lt;: <a href="texteditor.html#operator-lt-lt">TextEditor</a></li>
+<li>operator&lt;=: <a href="utils.html#operator-lt-eq">Utils</a></li>
+<li>operator=: <a href="projectexplorer-internal-targetsetupwidget-buildinfostore.html#operator-eq-1">ProjectExplorer::Internal::TargetSetupWidget::BuildInfoStore</a> <a href="qmlerror.html#operator-eq">QmlError</a> <a href="texteditor-internal-context.html#operator-eq">TextEditor::Internal::Context</a></li>
+<li>operator==: <a href="cplusplus.html#operator-eq-eq">CPlusPlus</a> <a href="core-internal-magicdata.html#operator-eq-eq">Core::Internal::MagicData</a> <a href="core-locatorfilterentry.html#operator-eq-eq">Core::LocatorFilterEntry</a> <a href="debugger.html#operator-eq-eq">Debugger</a> <a href="debugger-internal-breakpointparameters.html#operator-eq-eq">Debugger::Internal::BreakpointParameters</a> <a href="projectexplorer.html#operator-eq-eq">ProjectExplorer</a> <a href="projectexplorer-customparserexpression.html#operator-eq-eq">ProjectExplorer::CustomParserExpression</a> <a href="projectexplorer-customparsersettings.html#operator-eq-eq">ProjectExplorer::CustomParserSettings</a> <a href="projectexplorer-glob.html#operator-eq-eq">ProjectExplorer::Glob</a> <a href="projectexplorer-internal-expanddata.html#operator-eq-eq">ProjectExplorer::Internal::ExpandData</a> <a href="qmljs.html#operator-eq-eq">QmlJS</a> <a href="texteditor.html#operator-eq-eq-3">TextEditor</a> <a href="utils.html#operator-eq-eq-1">Utils</a> <a href="utils-internal-mimemagicrulematcher.html#operator-eq-eq">Utils::Internal::MimeMagicRuleMatcher</a> <a href="vcsbase.html#operator-eq-eq">VcsBase</a></li>
+<li>operator&gt;: <a href="utils.html#operator-gt">Utils</a></li>
+<li>operator&gt;=: <a href="utils.html#operator-gt-eq">Utils</a></li>
+<li>operator[]: <a href="debugger-internal-gdbmi.html#operator-5b-5d">Debugger::Internal::GdbMi</a> <a href="symbolgroupvalue.html#operator-5b-5d-1">SymbolGroupValue</a></li>
+<li>operator|: <a href="projectexplorer.html#operator-7c">ProjectExplorer</a></li>
+<li>operator|=: <a href="projectexplorer.html#operator-7c-eq">ProjectExplorer</a></li>
+<li>operator~: <a href="projectexplorer.html#operator-7e">ProjectExplorer</a></li>
+<li>paint:<a name="p"></a> <a href="core-internal-badgelabel.html#paint">Core::Internal::BadgeLabel</a> <a href="core-internal-searchresulttreeitemdelegate.html#paint">Core::Internal::SearchResultTreeItemDelegate</a></li>
+<li>paintEvent: <a href="core-internal-editorview.html#paintEvent">Core::Internal::EditorView</a> <a href="utils-internal-colortip.html#paintEvent">Utils::Internal::ColorTip</a> <a href="utils-internal-texttip.html#paintEvent">Utils::Internal::TextTip</a></li>
+<li>parameters: <a href="extensioncontext.html#parameters-1">ExtensionContext</a></li>
+<li>parent: <a href="abstractsymbolgroupnode.html#parent-1">AbstractSymbolGroupNode</a> <a href="core-internal-searchresulttreeitem.html#parent">Core::Internal::SearchResultTreeItem</a> <a href="symbolgroupvalue.html#parent">SymbolGroupValue</a> <a href="utils-typedtreeitem.html#parent">Utils::TypedTreeItem</a></li>
+<li>parentIname: <a href="symbolgroupnodevisitor.html#parentIname">SymbolGroupNodeVisitor</a></li>
+<li>parents: <a href="utils-internal-mimeproviderbase.html#parents">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#parents">Utils::Internal::MimeXMLProvider</a></li>
+<li>parse: <a href="debugger-internal-calloffsetrule.html#parse">Debugger::Internal::CallOffsetRule</a> <a href="debugger-internal-classenumtyperule.html#parse">Debugger::Internal::ClassEnumTypeRule</a> <a href="debugger-internal-discriminatorrule.html#parse">Debugger::Internal::DiscriminatorRule</a> <a href="debugger-internal-manglednamerule.html#parse">Debugger::Internal::MangledNameRule</a> <a href="debugger-internal-unresolvedqualifierlevelrule.html#parse">Debugger::Internal::UnresolvedQualifierLevelRule</a> <a href="debugger-internal-unresolvedtyperule.html#parse">Debugger::Internal::UnresolvedTypeRule</a> <a href="extensionsystem-internal-optionsparser.html#parse">ExtensionSystem::Internal::OptionsParser</a> <a href="projectexplorer-internal-customwizardparameters.html#parse-1">ProjectExplorer::Internal::CustomWizardParameters</a></li>
+<li>parseCString: <a href="debugger-internal-gdbmi.html#parseCString">Debugger::Internal::GdbMi</a></li>
+<li>parseFrame: <a href="debugger-debugger-internal-stackframe.html#parseFrame">Debugger::Debugger::Internal::StackFrame</a></li>
+<li>parseFrames: <a href="debugger-debugger-internal-stackframe.html#parseFrames">Debugger::Debugger::Internal::StackFrame</a></li>
+<li>parseList: <a href="debugger-internal-gdbmi.html#parseList">Debugger::Internal::GdbMi</a></li>
+<li>parseParameters: <a href="symbolgroupnode.html#parseParameters">SymbolGroupNode</a></li>
+<li>parseResultOrValue: <a href="debugger-internal-gdbmi.html#parseResultOrValue">Debugger::Internal::GdbMi</a></li>
+<li>parseRule: <a href="debugger-internal-parsetreenode.html#parseRule">Debugger::Internal::ParseTreeNode</a></li>
+<li>parseState: <a href="debugger-internal-parsetreenode.html#parseState">Debugger::Internal::ParseTreeNode</a></li>
+<li>parseTuple: <a href="debugger-internal-gdbmi.html#parseTuple">Debugger::Internal::GdbMi</a></li>
+<li>parseTuple_helper: <a href="debugger-internal-gdbmi.html#parseTuple_helper">Debugger::Internal::GdbMi</a></li>
+<li>parseUsedPortFromNetstatOutput: <a href="utils.html#parseUsedPortFromNetstatOutput">Utils</a></li>
+<li>parseValue: <a href="debugger-internal-gdbmi.html#parseValue">Debugger::Internal::GdbMi</a></li>
+<li>partialVariables: <a href="debugger-debugger-internal-updateparameters.html#partialVariables">Debugger::Debugger::Internal::UpdateParameters</a></li>
+<li>paste: <a href="texteditor-textdocumentmanipulator.html#paste">TextEditor::TextDocumentManipulator</a></li>
+<li>pasteAllChildren: <a href="debugger-internal-parsetreenode.html#pasteAllChildren">Debugger::Internal::ParseTreeNode</a></li>
+<li>pathListSeparator: <a href="utils-osspecificaspects.html#pathListSeparator">Utils::OsSpecificAspects</a></li>
+<li>pathWithNativeSeparators: <a href="utils-osspecificaspects.html#pathWithNativeSeparators">Utils::OsSpecificAspects</a></li>
+<li>pattern: <a href="projectexplorer-customparserexpression.html#pattern">ProjectExplorer::CustomParserExpression</a> <a href="utils-internal-mimeglobpattern.html#pattern">Utils::Internal::MimeGlobPattern</a></li>
+<li>paused: <a href="core-internal-searchresultwidget.html#paused">Core::Internal::SearchResultWidget</a></li>
+<li>peek: <a href="debugger-internal-globalparsestate.html#peek">Debugger::Internal::GlobalParseState</a></li>
+<li>pointedToSymbolName: <a href="symbolgroupvalue.html#pointedToSymbolName">SymbolGroupValue</a></li>
+<li>pointerData: <a href="symbolgroupvalue.html#pointerData">SymbolGroupValue</a></li>
+<li>pointerDiffSize: <a href="symbolgroupvalue.html#pointerDiffSize">SymbolGroupValue</a></li>
+<li>pointerSize: <a href="symbolgroupvalue.html#pointerSize">SymbolGroupValue</a></li>
+<li>pointerType: <a href="symbolgroupvalue.html#pointerType">SymbolGroupValue</a></li>
+<li>pointerTypeCast: <a href="symbolgroupvalue.html#pointerTypeCast">SymbolGroupValue</a></li>
+<li>pointerValue: <a href="symbolgroupvalue.html#pointerValue">SymbolGroupValue</a></li>
+<li>popFromStack: <a href="debugger-internal-globalparsestate.html#popFromStack">Debugger::Internal::GlobalParseState</a></li>
+<li>positionAt: <a href="texteditor-textdocumentmanipulator.html#positionAt">TextEditor::TextDocumentManipulator</a></li>
+<li>preferredSize: <a href="core-internal-locatorpopup.html#preferredSize">Core::Internal::LocatorPopup</a></li>
+<li>prependModuleAndNameSpace: <a href="qtinfo.html#prependModuleAndNameSpace">QtInfo</a></li>
+<li>prependQtCoreModule: <a href="qtinfo.html#prependQtCoreModule">QtInfo</a></li>
+<li>prependQtGuiModule: <a href="qtinfo.html#prependQtGuiModule">QtInfo</a></li>
+<li>prependQtModule: <a href="qtinfo.html#prependQtModule">QtInfo</a></li>
+<li>prependQtNetworkModule: <a href="qtinfo.html#prependQtNetworkModule">QtInfo</a></li>
+<li>prependQtScriptModule: <a href="qtinfo.html#prependQtScriptModule">QtInfo</a></li>
+<li>prependQtWidgetsModule: <a href="qtinfo.html#prependQtWidgetsModule">QtInfo</a></li>
+<li>print: <a href="debugger-internal-parsetreenode.html#print">Debugger::Internal::ParseTreeNode</a></li>
+<li>priority: <a href="utils-internal-mimemagicrulematcher.html#priority">Utils::Internal::MimeMagicRuleMatcher</a></li>
+<li>process: <a href="utils-internal-mimetypeparser.html#process">Utils::Internal::MimeTypeParser</a> <a href="utils-internal-mimetypeparserbase.html#process">Utils::Internal::MimeTypeParserBase</a></li>
+<li>processAlias: <a href="utils-internal-mimetypeparser.html#processAlias">Utils::Internal::MimeTypeParser</a> <a href="utils-internal-mimetypeparserbase.html#processAlias">Utils::Internal::MimeTypeParserBase</a></li>
+<li>processFile: <a href="projectexplorer-internal-customwizardcontext.html#processFile">ProjectExplorer::Internal::CustomWizardContext</a></li>
+<li>processMagicMatcher: <a href="utils-internal-mimetypeparser.html#processMagicMatcher">Utils::Internal::MimeTypeParser</a> <a href="utils-internal-mimetypeparserbase.html#processMagicMatcher">Utils::Internal::MimeTypeParserBase</a></li>
+<li>processParent: <a href="utils-internal-mimetypeparser.html#processParent">Utils::Internal::MimeTypeParser</a> <a href="utils-internal-mimetypeparserbase.html#processParent">Utils::Internal::MimeTypeParserBase</a></li>
+<li>progressFinished: <a href="texteditor-internal-rule.html#progressFinished">TextEditor::Internal::Rule</a></li>
+<li>provider: <a href="utils-internal-mimedatabaseprivate.html#provider">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>pushToStack: <a href="debugger-internal-globalparsestate.html#pushToStack">Debugger::Internal::GlobalParseState</a></li>
+<li>qHash:<a name="q"></a> <a href="cplusplus.html#qHash">CPlusPlus</a> <a href="core.html#qHash">Core</a> <a href="projectexplorer.html#qHash-1">ProjectExplorer</a> <a href="qmljs.html#qHash">QmlJS</a> <a href="utils.html#qHash">Utils</a></li>
+<li>qtTypeInfoVersion: <a href="qtinfo.html#qtTypeInfoVersion">QtInfo</a></li>
+<li>query: <a href="aggregation.html#query">Aggregation</a></li>
+<li>query_all: <a href="aggregation.html#query_all">Aggregation</a></li>
+<li>raiseWatchersWindow:<a name="r"></a> <a href="debugger-debugger-internal-debuggerengine.html#raiseWatchersWindow">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>readAhead: <a href="debugger-internal-globalparsestate.html#readAhead">Debugger::Internal::GlobalParseState</a></li>
+<li>readDouble: <a href="symbolgroupvalue.html#readDouble">SymbolGroupValue</a></li>
+<li>readIntValue: <a href="symbolgroupvalue.html#readIntValue">SymbolGroupValue</a></li>
+<li>readIntegerFromAncestor: <a href="symbolgroupvalue.html#readIntegerFromAncestor">SymbolGroupValue</a></li>
+<li>readMemory: <a href="symbolgroupvalue.html#readMemory">SymbolGroupValue</a></li>
+<li>readNameOfScheme: <a href="texteditor-colorscheme.html#readNameOfScheme">TextEditor::ColorScheme</a></li>
+<li>readPointerValue: <a href="symbolgroupvalue.html#readPointerValue">SymbolGroupValue</a></li>
+<li>readPointerValueFromAncestor: <a href="symbolgroupvalue.html#readPointerValueFromAncestor">SymbolGroupValue</a></li>
+<li>readSettings: <a href="debugger-internal-registerpostmortemaction.html#readSettings">Debugger::Internal::RegisterPostMortemAction</a></li>
+<li>readSignedValue: <a href="symbolgroupvalue.html#readSignedValue">SymbolGroupValue</a></li>
+<li>readUnsignedValue: <a href="symbolgroupvalue.html#readUnsignedValue">SymbolGroupValue</a></li>
+<li>recode: <a href="dumpparameters.html#recode">DumpParameters</a></li>
+<li>refresh: <a href="core-internal-executefilter.html#refresh">Core::Internal::ExecuteFilter</a></li>
+<li>registerDocumentation: <a href="core-helpmanager.html#registerDocumentation">Core::HelpManager</a></li>
+<li>registers: <a href="extensioncommandcontext.html#registers">ExtensionCommandContext</a></li>
+<li>removeChildAt: <a href="basesymbolgroupnode.html#removeChildAt">BaseSymbolGroupNode</a></li>
+<li>removeChildren: <a href="basesymbolgroupnode.html#removeChildren">BaseSymbolGroupNode</a></li>
+<li>removeDelimiters: <a href="texteditor-internal-highlightdefinition.html#removeDelimiters">TextEditor::Internal::HighlightDefinition</a></li>
+<li>removeMimeType: <a href="utils-internal-mimeallglobpatterns.html#removeMimeType">Utils::Internal::MimeAllGlobPatterns</a> <a href="utils-internal-mimeglobpatternlist.html#removeMimeType">Utils::Internal::MimeGlobPatternList</a></li>
+<li>removeSelf: <a href="symbolgroupnode.html#removeSelf">SymbolGroupNode</a></li>
+<li>removeSymbol: <a href="symbolgroup.html#removeSymbol">SymbolGroup</a></li>
+<li>removeTask: <a href="projectexplorer-internal-taskmodel-categorydata.html#removeTask">ProjectExplorer::Internal::TaskModel::CategoryData</a></li>
+<li>removeWindow: <a href="core-internal-windowlist.html#removeWindow">Core::Internal::WindowList</a></li>
+<li>removedFromEditor: <a href="debugger-debugger-internal-locationmark.html#removedFromEditor">Debugger::Debugger::Internal::LocationMark</a></li>
+<li>renameSession: <a href="projectexplorer-internal-sessionmodel.html#renameSession">ProjectExplorer::Internal::SessionModel</a></li>
+<li>replace: <a href="texteditor-textdocumentmanipulator.html#replace">TextEditor::TextDocumentManipulator</a></li>
+<li>replaceButtonClicked: <a href="core-internal-searchresultwidget.html#replaceButtonClicked">Core::Internal::SearchResultWidget</a></li>
+<li>replaceCurrentScript: <a href="debugger-internal-consoleedit.html#replaceCurrentScript">Debugger::Internal::ConsoleEdit</a></li>
+<li>replaceExpressions: <a href="texteditor-internal-dynamicrule.html#replaceExpressions">TextEditor::Internal::DynamicRule</a></li>
+<li>replaceFields: <a href="projectexplorer-internal-customwizardcontext.html#replaceFields-1">ProjectExplorer::Internal::CustomWizardContext</a></li>
+<li>replaceItemData: <a href="texteditor-internal-includerulesinstruction.html#replaceItemData">TextEditor::Internal::IncludeRulesInstruction</a></li>
+<li>report: <a href="extensioncontext.html#report">ExtensionContext</a></li>
+<li>reportLong: <a href="extensioncontext.html#reportLong">ExtensionContext</a></li>
+<li>requestInterruptInferior: <a href="debugger-debugger-internal-debuggerengine.html#requestInterruptInferior">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>requestPopup: <a href="core-internal-searchresultwidget.html#requestPopup">Core::Internal::SearchResultWidget</a></li>
+<li>reserveChildren: <a href="basesymbolgroupnode.html#reserveChildren">BaseSymbolGroupNode</a></li>
+<li>reset: <a href="projectexplorer-internal-customwizardcontext.html#reset">ProjectExplorer::Internal::CustomWizardContext</a></li>
+<li>resetInferior: <a href="debugger-debugger-internal-debuggerengine.html#resetInferior">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>resetLocation: <a href="debugger-internal-sourceagent.html#resetLocation">Debugger::Internal::SourceAgent</a></li>
+<li>resizeEvent: <a href="core-internal-findtoolbar.html#resizeEvent">Core::Internal::FindToolBar</a> <a href="utils-internal-texttip.html#resizeEvent">Utils::Internal::TextTip</a></li>
+<li>resolveAlias: <a href="utils-internal-mimeproviderbase.html#resolveAlias">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#resolveAlias">Utils::Internal::MimeXMLProvider</a></li>
+<li>resolveReference: <a href="abstractsymbolgroupnode.html#resolveReference-1">AbstractSymbolGroupNode</a> <a href="referencesymbolgroupnode.html#resolveReference-1">ReferenceSymbolGroupNode</a></li>
+<li>resolveSymbol: <a href="symbolgroupvalue.html#resolveSymbol">SymbolGroupValue</a></li>
+<li>resolveSymbolName: <a href="symbolgroupvalue.html#resolveSymbolName">SymbolGroupValue</a></li>
+<li>resolveType: <a href="symbolgroupvalue.html#resolveType">SymbolGroupValue</a></li>
+<li>restarted: <a href="core-internal-searchresultwidget.html#restarted">Core::Internal::SearchResultWidget</a></li>
+<li>restoreOffset: <a href="texteditor-internal-progressdata.html#restoreOffset">TextEditor::Internal::ProgressData</a></li>
+<li>root: <a href="symbolgroup.html#root-1">SymbolGroup</a></li>
+<li>rootItem: <a href="utils-treemodel.html#rootItem">Utils::TreeModel</a></li>
+<li>rowOfItem: <a href="core-internal-searchresulttreeitem.html#rowOfItem">Core::Internal::SearchResultTreeItem</a></li>
+<li>run: <a href="projectexplorer-internal-processstep.html#run">ProjectExplorer::Internal::ProcessStep</a> <a href="utils-internal-asyncjob.html#run">Utils::Internal::AsyncJob</a></li>
+<li>runAsync: <a href="utils.html#runAsync-2">Utils</a></li>
+<li>runComplexDumpers: <a href="symbolgroupnode.html#runComplexDumpers">SymbolGroupNode</a></li>
+<li>runEngine: <a href="debugger-debugger-internal-debuggerengine.html#runEngine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>save:<a name="s"></a> <a href="texteditor-colorscheme.html#save">TextEditor::ColorScheme</a></li>
+<li>saveOffset: <a href="texteditor-internal-progressdata.html#saveOffset">TextEditor::Internal::ProgressData</a></li>
+<li>saveSettings: <a href="core-internal-locator.html#saveSettings">Core::Internal::Locator</a></li>
+<li>scheduleMaybeRedumpBuiltins: <a href="qmljs-plugindumper.html#scheduleMaybeRedumpBuiltins">QmlJS::PluginDumper</a></li>
+<li>scheduleRedumpPlugins: <a href="qmljs-plugindumper.html#scheduleRedumpPlugins">QmlJS::PluginDumper</a></li>
+<li>searchAgainRequested: <a href="core-internal-searchresultwidget.html#searchAgainRequested">Core::Internal::SearchResultWidget</a></li>
+<li>selected: <a href="projectexplorer-internal-sessionview.html#selected">ProjectExplorer::Internal::SessionView</a></li>
+<li>selectionColor: <a href="texteditor-internal-itemdata.html#selectionColor">TextEditor::Internal::ItemData</a></li>
+<li>sendRequestPopup: <a href="core-internal-searchresultwidget.html#sendRequestPopup">Core::Internal::SearchResultWidget</a></li>
+<li>sessionSwitched: <a href="projectexplorer-internal-sessionview.html#sessionSwitched">ProjectExplorer::Internal::SessionView</a></li>
+<li>setActivationMode: <a href="utils-view.html#setActivationMode">Utils::View</a></li>
+<li>setActive: <a href="texteditor-internal-dynamicrule.html#setActive">TextEditor::Internal::DynamicRule</a></li>
+<li>setActiveWindow: <a href="core-internal-windowlist.html#setActiveWindow">Core::Internal::WindowList</a></li>
+<li>setArguments: <a href="projectexplorer-internal-processstep.html#setArguments">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>setAutoCompleteSkipPosition: <a href="texteditor-textdocumentmanipulator.html#setAutoCompleteSkipPosition">TextEditor::TextDocumentManipulator</a></li>
+<li>setBeginRegion: <a href="texteditor-internal-rule.html#setBeginRegion">TextEditor::Internal::Rule</a></li>
+<li>setBold: <a href="texteditor-internal-itemdata.html#setBold">TextEditor::Internal::ItemData</a></li>
+<li>setBytesLength: <a href="debugger-internal-disassemblerlines.html#setBytesLength">Debugger::Internal::DisassemblerLines</a></li>
+<li>setCaptures: <a href="texteditor-internal-progressdata.html#setCaptures">TextEditor::Internal::ProgressData</a></li>
+<li>setChannel: <a href="projectexplorer-customparserexpression.html#setChannel">ProjectExplorer::CustomParserExpression</a></li>
+<li>setChar: <a href="texteditor-internal-detect2charsrule.html#setChar">TextEditor::Internal::Detect2CharsRule</a> <a href="texteditor-internal-detectcharrule.html#setChar">TextEditor::Internal::DetectCharRule</a> <a href="texteditor-internal-rangedetectrule.html#setChar">TextEditor::Internal::RangeDetectRule</a></li>
+<li>setChar1: <a href="texteditor-internal-detect2charsrule.html#setChar1">TextEditor::Internal::Detect2CharsRule</a> <a href="texteditor-internal-rangedetectrule.html#setChar1">TextEditor::Internal::RangeDetectRule</a></li>
+<li>setCharacterSet: <a href="texteditor-internal-anycharrule.html#setCharacterSet">TextEditor::Internal::AnyCharRule</a></li>
+<li>setCheckState: <a href="core-internal-searchresulttreeitem.html#setCheckState">Core::Internal::SearchResultTreeItem</a></li>
+<li>setClosingBraceMatchAtNonEnd: <a href="texteditor-internal-progressdata.html#setClosingBraceMatchAtNonEnd">TextEditor::Internal::ProgressData</a></li>
+<li>setColor: <a href="texteditor-internal-itemdata.html#setColor">TextEditor::Internal::ItemData</a></li>
+<li>setColumn: <a href="qmlerror.html#setColumn">QmlError</a> <a href="texteditor-internal-rule.html#setColumn">TextEditor::Internal::Rule</a></li>
+<li>setCommand: <a href="projectexplorer-internal-processstep.html#setCommand">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>setCommentAfterWhitespaces: <a href="texteditor-internal-highlightdefinition.html#setCommentAfterWhitespaces">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setContent: <a href="debugger-internal-sourceagent.html#setContent">Debugger::Internal::SourceAgent</a> <a href="utils-internal-colortip.html#setContent">Utils::Internal::ColorTip</a> <a href="utils-internal-texttip.html#setContent">Utils::Internal::TextTip</a></li>
+<li>setContext: <a href="texteditor-internal-rule.html#setContext">TextEditor::Internal::Rule</a></li>
+<li>setCursorPosition: <a href="texteditor-textdocumentmanipulator.html#setCursorPosition">TextEditor::TextDocumentManipulator</a></li>
+<li>setDebuggerName: <a href="debugger-debugger-internal-debuggerengine.html#setDebuggerName">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>setDefinition: <a href="texteditor-internal-context.html#setDefinition">TextEditor::Internal::Context</a> <a href="texteditor-internal-rule.html#setDefinition">TextEditor::Internal::Rule</a></li>
+<li>setDefinitionFilesPath: <a href="texteditor-highlightersettings.html#setDefinitionFilesPath">TextEditor::HighlighterSettings</a></li>
+<li>setDescription: <a href="qmlerror.html#setDescription">QmlError</a></li>
+<li>setDisplayName: <a href="texteditor-colorscheme.html#setDisplayName">TextEditor::ColorScheme</a></li>
+<li>setDynamic: <a href="texteditor-internal-context.html#setDynamic">TextEditor::Internal::Context</a></li>
+<li>setEndRegion: <a href="texteditor-internal-rule.html#setEndRegion">TextEditor::Internal::Rule</a></li>
+<li>setExample: <a href="projectexplorer-customparserexpression.html#setExample">ProjectExplorer::CustomParserExpression</a></li>
+<li>setFallbackDefinitionFilesPath: <a href="texteditor-highlightersettings.html#setFallbackDefinitionFilesPath">TextEditor::HighlighterSettings</a></li>
+<li>setFallthrough: <a href="texteditor-internal-context.html#setFallthrough">TextEditor::Internal::Context</a></li>
+<li>setFallthroughContext: <a href="texteditor-internal-context.html#setFallthroughContext">TextEditor::Internal::Context</a></li>
+<li>setFileName: <a href="debugger-debugger-internal-location.html#setFileName">Debugger::Debugger::Internal::Location</a></li>
+<li>setFileNameCap: <a href="projectexplorer-customparserexpression.html#setFileNameCap">ProjectExplorer::CustomParserExpression</a></li>
+<li>setFirstNonSpace: <a href="texteditor-internal-rule.html#setFirstNonSpace">TextEditor::Internal::Rule</a></li>
+<li>setFormatFor: <a href="texteditor-colorscheme.html#setFormatFor">TextEditor::ColorScheme</a></li>
+<li>setFromToolchain: <a href="projectexplorer-internal-customtoolchainconfigwidget.html#setFromToolchain">ProjectExplorer::Internal::CustomToolChainConfigWidget</a></li>
+<li>setGenerated: <a href="core-internal-searchresulttreeitem.html#setGenerated">Core::Internal::SearchResultTreeItem</a></li>
+<li>setGlobPatternsForMimeType: <a href="utils.html#setGlobPatternsForMimeType">Utils</a> <a href="utils-internal-mimeproviderbase.html#setGlobPatternsForMimeType">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#setGlobPatternsForMimeType">Utils::Internal::MimeXMLProvider</a></li>
+<li>setIgnoredFilesPatterns: <a href="texteditor-highlightersettings.html#setIgnoredFilesPatterns">TextEditor::HighlighterSettings</a></li>
+<li>setIndentationBasedFolding: <a href="texteditor-internal-highlightdefinition.html#setIndentationBasedFolding">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setInsensitive: <a href="texteditor-internal-keywordrule.html#setInsensitive">TextEditor::Internal::KeywordRule</a> <a href="texteditor-internal-regexprrule.html#setInsensitive">TextEditor::Internal::RegExprRule</a> <a href="texteditor-internal-stringdetectrule.html#setInsensitive">TextEditor::Internal::StringDetectRule</a></li>
+<li>setItalic: <a href="texteditor-internal-itemdata.html#setItalic">TextEditor::Internal::ItemData</a></li>
+<li>setItemData: <a href="texteditor-internal-context.html#setItemData">TextEditor::Internal::Context</a> <a href="texteditor-internal-rule.html#setItemData">TextEditor::Internal::Rule</a></li>
+<li>setKeywordsSensitive: <a href="texteditor-internal-highlightdefinition.html#setKeywordsSensitive">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setLastUsedSnippetGroup: <a href="texteditor-snippetssettings.html#setLastUsedSnippetGroup">TextEditor::SnippetsSettings</a></li>
+<li>setLine: <a href="qmlerror.html#setLine">QmlError</a></li>
+<li>setLineBeginContext: <a href="texteditor-internal-context.html#setLineBeginContext">TextEditor::Internal::Context</a></li>
+<li>setLineEmptyContext: <a href="texteditor-internal-context.html#setLineEmptyContext">TextEditor::Internal::Context</a></li>
+<li>setLineEndContext: <a href="texteditor-internal-context.html#setLineEndContext">TextEditor::Internal::Context</a></li>
+<li>setLineNumberCap: <a href="projectexplorer-customparserexpression.html#setLineNumberCap">ProjectExplorer::CustomParserExpression</a></li>
+<li>setList: <a href="texteditor-internal-keywordrule.html#setList">TextEditor::Internal::KeywordRule</a></li>
+<li>setLookAhead: <a href="texteditor-internal-rule.html#setLookAhead">TextEditor::Internal::Rule</a></li>
+<li>setMagicRulesForMimeType: <a href="utils.html#setMagicRulesForMimeType">Utils</a> <a href="utils-internal-mimeproviderbase.html#setMagicRulesForMimeType">Utils::Internal::MimeProviderBase</a> <a href="utils-internal-mimexmlprovider.html#setMagicRulesForMimeType">Utils::Internal::MimeXMLProvider</a></li>
+<li>setMessageCap: <a href="projectexplorer-customparserexpression.html#setMessageCap">ProjectExplorer::CustomParserExpression</a></li>
+<li>setMessageType: <a href="qmlerror.html#setMessageType">QmlError</a></li>
+<li>setMimeStartupPhase: <a href="utils.html#setMimeStartupPhase">Utils</a></li>
+<li>setMimeTypeForHighlighter: <a href="texteditor.html#setMimeTypeForHighlighter">TextEditor</a></li>
+<li>setMinimal: <a href="texteditor-internal-regexprrule.html#setMinimal">TextEditor::Internal::RegExprRule</a></li>
+<li>setModelData: <a href="debugger-internal-floatwatchlineedit.html#setModelData">Debugger::Internal::FloatWatchLineEdit</a></li>
+<li>setMultiLineCommentEnd: <a href="texteditor-internal-highlightdefinition.html#setMultiLineCommentEnd">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setMultiLineCommentRegion: <a href="texteditor-internal-highlightdefinition.html#setMultiLineCommentRegion">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setMultiLineCommentStart: <a href="texteditor-internal-highlightdefinition.html#setMultiLineCommentStart">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setName: <a href="texteditor-internal-context.html#setName">TextEditor::Internal::Context</a></li>
+<li>setNeedsMarker: <a href="debugger-debugger-internal-location.html#setNeedsMarker">Debugger::Debugger::Internal::Location</a></li>
+<li>setNeedsRaise: <a href="debugger-debugger-internal-location.html#setNeedsRaise">Debugger::Debugger::Internal::Location</a></li>
+<li>setObject: <a href="qmlerror.html#setObject">QmlError</a></li>
+<li>setOffset: <a href="texteditor-internal-progressdata.html#setOffset">TextEditor::Internal::ProgressData</a></li>
+<li>setOnlySpacesSoFar: <a href="texteditor-internal-progressdata.html#setOnlySpacesSoFar">TextEditor::Internal::ProgressData</a></li>
+<li>setOpeningBraceMatchAtFirstNonSpace: <a href="texteditor-internal-progressdata.html#setOpeningBraceMatchAtFirstNonSpace">TextEditor::Internal::ProgressData</a></li>
+<li>setParameters: <a href="debugger-internal-subbreakpointitem.html#setParameters">Debugger::Internal::SubBreakpointItem</a></li>
+<li>setParent: <a href="abstractsymbolgroupnode.html#setParent">AbstractSymbolGroupNode</a></li>
+<li>setPattern: <a href="projectexplorer-customparserexpression.html#setPattern">ProjectExplorer::CustomParserExpression</a> <a href="texteditor-internal-regexprrule.html#setPattern">TextEditor::Internal::RegExprRule</a></li>
+<li>setProvider: <a href="utils-internal-mimedatabaseprivate.html#setProvider">Utils::Internal::MimeDatabasePrivate</a></li>
+<li>setSelectionColor: <a href="texteditor-internal-itemdata.html#setSelectionColor">TextEditor::Internal::ItemData</a></li>
+<li>setSelectionWidgetVisible: <a href="core-internal-fancytabwidget.html#setSelectionWidgetVisible">Core::Internal::FancyTabWidget</a></li>
+<li>setSettings: <a href="projectexplorer-customparser.html#setSettings">ProjectExplorer::CustomParser</a></li>
+<li>setShowLocals: <a href="debugger-internal-localsandinspectorwindow.html#setShowLocals">Debugger::Internal::LocalsAndInspectorWindow</a></li>
+<li>setSingleLineComment: <a href="texteditor-internal-highlightdefinition.html#setSingleLineComment">TextEditor::Internal::HighlightDefinition</a></li>
+<li>setSourceProducerName: <a href="debugger-internal-sourceagent.html#setSourceProducerName">Debugger::Internal::SourceAgent</a></li>
+<li>setState: <a href="debugger-debugger-internal-debuggerengine.html#setState">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>setStateNotification: <a href="extensioncontext.html#setStateNotification">ExtensionContext</a></li>
+<li>setStopReason: <a href="extensioncontext.html#setStopReason">ExtensionContext</a></li>
+<li>setStrikeOut: <a href="texteditor-internal-itemdata.html#setStrikeOut">TextEditor::Internal::ItemData</a></li>
+<li>setString: <a href="texteditor-internal-stringdetectrule.html#setString">TextEditor::Internal::StringDetectRule</a></li>
+<li>setStyle: <a href="texteditor-internal-itemdata.html#setStyle">TextEditor::Internal::ItemData</a></li>
+<li>setTabWidth: <a href="core-internal-searchresulttreeitemdelegate.html#setTabWidth">Core::Internal::SearchResultTreeItemDelegate</a></li>
+<li>setText: <a href="core-internal-badgelabel.html#setText">Core::Internal::BadgeLabel</a></li>
+<li>setThreadPool: <a href="utils-internal-asyncjob.html#setThreadPool">Utils::Internal::AsyncJob</a></li>
+<li>setThreadPriority: <a href="utils-internal-asyncjob.html#setThreadPriority">Utils::Internal::AsyncJob</a></li>
+<li>setUnderlined: <a href="texteditor-internal-itemdata.html#setUnderlined">TextEditor::Internal::ItemData</a></li>
+<li>setUrl: <a href="qmlerror.html#setUrl">QmlError</a></li>
+<li>setUseAssembler: <a href="debugger-debugger-internal-location.html#setUseAssembler">Debugger::Debugger::Internal::Location</a></li>
+<li>setUseFallbackLocation: <a href="texteditor-highlightersettings.html#setUseFallbackLocation">TextEditor::HighlighterSettings</a></li>
+<li>setWillContinueLine: <a href="texteditor-internal-progressdata.html#setWillContinueLine">TextEditor::Internal::ProgressData</a></li>
+<li>setWindowVisible: <a href="core-internal-windowlist.html#setWindowVisible">Core::Internal::WindowList</a></li>
+<li>setWorkingDirectory: <a href="projectexplorer-customparser.html#setWorkingDirectory">ProjectExplorer::CustomParser</a> <a href="projectexplorer-internal-processstep.html#setWorkingDirectory">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>setupEngine: <a href="debugger-debugger-internal-debuggerengine.html#setupEngine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>shouldCheck: <a href="utils-internal-mimeproviderbase.html#shouldCheck">Utils::Internal::MimeProviderBase</a></li>
+<li>showError: <a href="projectexplorer-internal-customwizardfieldpage.html#showError">ProjectExplorer::Internal::CustomWizardFieldPage</a></li>
+<li>showEvent: <a href="projectexplorer-internal-sessionview.html#showEvent">ProjectExplorer::Internal::SessionView</a></li>
+<li>showStoppedByExceptionMessageBox: <a href="debugger-debugger-internal-debuggerengine.html#showStoppedByExceptionMessageBox">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>showStoppedBySignalMessageBox: <a href="debugger-debugger-internal-debuggerengine.html#showStoppedBySignalMessageBox">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>showTime: <a href="utils-internal-colortip.html#showTime">Utils::Internal::ColorTip</a> <a href="utils-internal-texttip.html#showTime">Utils::Internal::TextTip</a></li>
+<li>shutdownEngine: <a href="debugger-debugger-internal-debuggerengine.html#shutdownEngine">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>shutdownInferior: <a href="debugger-debugger-internal-debuggerengine.html#shutdownInferior">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>simpleDumpValue: <a href="symbolgroupnode.html#simpleDumpValue">SymbolGroupNode</a></li>
+<li>singleLineComment: <a href="texteditor-internal-highlightdefinition.html#singleLineComment">TextEditor::Internal::HighlightDefinition</a></li>
+<li>size: <a href="debugger-internal-disassemblerlines.html#size">Debugger::Internal::DisassemblerLines</a> <a href="symbolgroupnode.html#size">SymbolGroupNode</a> <a href="symbolgroupvalue.html#size">SymbolGroupValue</a> <a href="texteditor-internal-circularclipboard.html#size">TextEditor::Internal::CircularClipboard</a></li>
+<li>sizeHint: <a href="core-internal-badgelabel.html#sizeHint">Core::Internal::BadgeLabel</a> <a href="core-internal-openeditorstreewidget.html#sizeHint">Core::Internal::OpenEditorsTreeWidget</a></li>
+<li>sizeOf: <a href="symbolgroupvalue.html#sizeOf">SymbolGroupValue</a></li>
+<li>slotNext: <a href="core-internal-outputpanemanager.html#slotNext">Core::Internal::OutputPaneManager</a></li>
+<li>slotPrev: <a href="core-internal-outputpanemanager.html#slotPrev">Core::Internal::OutputPaneManager</a></li>
+<li>sortChildren: <a href="utils-typedtreeitem.html#sortChildren">Utils::TypedTreeItem</a></li>
+<li>sortChildrenAlphabetically: <a href="dumpsymbolgroupnodevisitor.html#sortChildrenAlphabetically">DumpSymbolGroupNodeVisitor</a> <a href="symbolgroupnodevisitor.html#sortChildrenAlphabetically">SymbolGroupNodeVisitor</a></li>
+<li>sourceContext: <a href="texteditor-internal-includerulesinstruction.html#sourceContext">TextEditor::Internal::IncludeRulesInstruction</a></li>
+<li>stackElementAt: <a href="debugger-internal-globalparsestate.html#stackElementAt">Debugger::Internal::GlobalParseState</a></li>
+<li>stackElementCount: <a href="debugger-internal-globalparsestate.html#stackElementCount">Debugger::Internal::GlobalParseState</a></li>
+<li>stackTop: <a href="debugger-internal-globalparsestate.html#stackTop">Debugger::Internal::GlobalParseState</a></li>
+<li>startAddress: <a href="debugger-internal-disassemblerlines.html#startAddress">Debugger::Internal::DisassemblerLines</a></li>
+<li>startDocument: <a href="texteditor-internal-highlightdefinitionhandler.html#startDocument">TextEditor::Internal::HighlightDefinitionHandler</a></li>
+<li>startDying: <a href="debugger-debugger-internal-debuggerengine.html#startDying">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>startElement: <a href="texteditor-internal-highlightdefinitionhandler.html#startElement">TextEditor::Internal::HighlightDefinitionHandler</a></li>
+<li>startRecordingOutput: <a href="extensioncontext.html#startRecordingOutput">ExtensionContext</a></li>
+<li>stateNotification: <a href="extensioncontext.html#stateNotification">ExtensionContext</a></li>
+<li>stdError: <a href="projectexplorer-customparser.html#stdError">ProjectExplorer::CustomParser</a></li>
+<li>stdOutput: <a href="projectexplorer-customparser.html#stdOutput">ProjectExplorer::CustomParser</a></li>
+<li>stopRecordingOutput: <a href="extensioncontext.html#stopRecordingOutput">ExtensionContext</a></li>
+<li>stringFromResultClass: <a href="debugger-internal-debuggerresponse.html#stringFromResultClass">Debugger::Internal::DebuggerResponse</a></li>
+<li>stripArrayType: <a href="symbolgroupvalue.html#stripArrayType">SymbolGroupValue</a></li>
+<li>stripClassPrefixes: <a href="symbolgroupvalue.html#stripClassPrefixes">SymbolGroupValue</a></li>
+<li>stripConst: <a href="symbolgroupvalue.html#stripConst">SymbolGroupValue</a></li>
+<li>stripModuleFromType: <a href="symbolgroupvalue.html#stripModuleFromType">SymbolGroupValue</a></li>
+<li>stripPointerType: <a href="symbolgroupvalue.html#stripPointerType">SymbolGroupValue</a></li>
+<li>style: <a href="texteditor-internal-itemdata.html#style">TextEditor::Internal::ItemData</a></li>
+<li>styleFromName: <a href="texteditor-constants.html#styleFromName">TextEditor::Constants</a></li>
+<li>subElements: <a href="symbolgroupnode.html#subElements">SymbolGroupNode</a></li>
+<li>substitutionAt: <a href="debugger-internal-globalparsestate.html#substitutionAt">Debugger::Internal::GlobalParseState</a></li>
+<li>substitutionCount: <a href="debugger-internal-globalparsestate.html#substitutionCount">Debugger::Internal::GlobalParseState</a></li>
+<li>swap: <a href="texteditor-internal-context.html#swap">TextEditor::Internal::Context</a></li>
+<li>switchToSession: <a href="projectexplorer-internal-sessionmodel.html#switchToSession">ProjectExplorer::Internal::SessionModel</a></li>
+<li>symbolGroup: <a href="extensioncontext.html#symbolGroup">ExtensionContext</a> <a href="symbolgroupnode.html#symbolGroup">SymbolGroupNode</a></li>
+<li>symbolGroupFixedValue: <a href="symbolgroupnode.html#symbolGroupFixedValue">SymbolGroupNode</a></li>
+<li>symbolGroupFrame: <a href="extensioncontext.html#symbolGroupFrame">ExtensionContext</a></li>
+<li>symbolGroupRawValue: <a href="symbolgroupnode.html#symbolGroupRawValue">SymbolGroupNode</a></li>
+<li>symbols: <a href="extensioncommandcontext.html#symbols">ExtensionCommandContext</a></li>
+<li>synchronize: <a href="watchessymbolgroup.html#synchronize">WatchesSymbolGroup</a></li>
+<li>systemObjects: <a href="extensioncommandcontext.html#systemObjects">ExtensionCommandContext</a></li>
+<li>templateParamAt:<a name="t"></a> <a href="debugger-internal-globalparsestate.html#templateParamAt">Debugger::Internal::GlobalParseState</a></li>
+<li>templateParamCount: <a href="debugger-internal-globalparsestate.html#templateParamCount">Debugger::Internal::GlobalParseState</a></li>
+<li>terminal: <a href="debugger-debugger-internal-debuggerengine.html#terminal">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>testFlags: <a href="abstractsymbolgroupnode.html#testFlags">AbstractSymbolGroupNode</a></li>
+<li>text: <a href="core-internal-badgelabel.html#text">Core::Internal::BadgeLabel</a></li>
+<li>textAt: <a href="texteditor-textdocumentmanipulator.html#textAt">TextEditor::TextDocumentManipulator</a></li>
+<li>textCursorAt: <a href="texteditor-textdocumentmanipulator.html#textCursorAt">TextEditor::TextDocumentManipulator</a></li>
+<li>threadId: <a href="extensioncommandcontext.html#threadId">ExtensionCommandContext</a> <a href="localssymbolgroup.html#threadId">LocalsSymbolGroup</a></li>
+<li>toAddress: <a href="debugger-internal-gdbmi.html#toAddress">Debugger::Internal::GdbMi</a></li>
+<li>toByteArray: <a href="debugger-internal-arraytypenode.html#toByteArray">Debugger::Internal::ArrayTypeNode</a> <a href="debugger-internal-barefunctiontypenode.html#toByteArray">Debugger::Internal::BareFunctionTypeNode</a> <a href="debugger-internal-baseunresolvednamenode.html#toByteArray">Debugger::Internal::BaseUnresolvedNameNode</a> <a href="debugger-internal-builtintypenode.html#toByteArray">Debugger::Internal::BuiltinTypeNode</a> <a href="debugger-internal-closuretypenamenode.html#toByteArray">Debugger::Internal::ClosureTypeNameNode</a> <a href="debugger-internal-ctordtornamenode.html#toByteArray">Debugger::Internal::CtorDtorNameNode</a> <a href="debugger-internal-cvqualifiersnode.html#toByteArray">Debugger::Internal::CvQualifiersNode</a> <a href="debugger-internal-decltypenode.html#toByteArray">Debugger::Internal::DeclTypeNode</a> <a href="debugger-internal-destructornamenode.html#toByteArray">Debugger::Internal::DestructorNameNode</a> <a href="debugger-internal-encodingnode.html#toByteArray">Debugger::Internal::EncodingNode</a> <a href="debugger-internal-exprprimarynode.html#toByteArray">Debugger::Internal::ExprPrimaryNode</a> <a href="debugger-internal-expressionnode.html#toByteArray">Debugger::Internal::ExpressionNode</a> <a href="debugger-internal-floatvaluenode.html#toByteArray">Debugger::Internal::FloatValueNode</a> <a href="debugger-internal-functionparamnode.html#toByteArray">Debugger::Internal::FunctionParamNode</a> <a href="debugger-internal-functiontypenode.html#toByteArray">Debugger::Internal::FunctionTypeNode</a> <a href="debugger-internal-initializernode.html#toByteArray">Debugger::Internal::InitializerNode</a> <a href="debugger-internal-lambdasignode.html#toByteArray">Debugger::Internal::LambdaSigNode</a> <a href="debugger-internal-localnamenode.html#toByteArray">Debugger::Internal::LocalNameNode</a> <a href="debugger-internal-namenode.html#toByteArray">Debugger::Internal::NameNode</a> <a href="debugger-internal-nestednamenode.html#toByteArray">Debugger::Internal::NestedNameNode</a> <a href="debugger-internal-nonnegativenumbernode.html#toByteArray">Debugger::Internal::NonNegativeNumberNode</a> <a href="debugger-internal-numbernode.html#toByteArray">Debugger::Internal::NumberNode</a> <a href="debugger-internal-nvoffsetnode.html#toByteArray">Debugger::Internal::NvOffsetNode</a> <a href="debugger-internal-operatornamenode.html#toByteArray">Debugger::Internal::OperatorNameNode</a> <a href="debugger-internal-parsetreenode.html#toByteArray">Debugger::Internal::ParseTreeNode</a> <a href="debugger-internal-pointertomembertypenode.html#toByteArray">Debugger::Internal::PointerToMemberTypeNode</a> <a href="debugger-internal-prefixnode.html#toByteArray">Debugger::Internal::PrefixNode</a> <a href="debugger-internal-simpleidnode.html#toByteArray">Debugger::Internal::SimpleIdNode</a> <a href="debugger-internal-sourcenamenode.html#toByteArray">Debugger::Internal::SourceNameNode</a> <a href="debugger-internal-specialnamenode.html#toByteArray">Debugger::Internal::SpecialNameNode</a> <a href="debugger-internal-substitutionnode.html#toByteArray">Debugger::Internal::SubstitutionNode</a> <a href="debugger-internal-templateargnode.html#toByteArray">Debugger::Internal::TemplateArgNode</a> <a href="debugger-internal-templateargsnode.html#toByteArray">Debugger::Internal::TemplateArgsNode</a> <a href="debugger-internal-templateparamnode.html#toByteArray">Debugger::Internal::TemplateParamNode</a> <a href="debugger-internal-typenode.html#toByteArray">Debugger::Internal::TypeNode</a> <a href="debugger-internal-unnamedtypenamenode.html#toByteArray">Debugger::Internal::UnnamedTypeNameNode</a> <a href="debugger-internal-unqualifiednamenode.html#toByteArray">Debugger::Internal::UnqualifiedNameNode</a> <a href="debugger-internal-unresolvednamenode.html#toByteArray">Debugger::Internal::UnresolvedNameNode</a> <a href="debugger-internal-unscopednamenode.html#toByteArray">Debugger::Internal::UnscopedNameNode</a> <a href="debugger-internal-voffsetnode.html#toByteArray">Debugger::Internal::VOffsetNode</a></li>
+<li>toInt: <a href="debugger-internal-gdbmi.html#toInt">Debugger::Internal::GdbMi</a></li>
+<li>toLastCollect: <a href="texteditor-internal-circularclipboard.html#toLastCollect">TextEditor::Internal::CircularClipboard</a></li>
+<li>toLongLong: <a href="debugger-internal-gdbmi.html#toLongLong">Debugger::Internal::GdbMi</a></li>
+<li>toMap: <a href="projectexplorer-internal-processstep.html#toMap">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>toProcessHandle: <a href="debugger-internal-gdbmi.html#toProcessHandle">Debugger::Internal::GdbMi</a></li>
+<li>toSettings: <a href="debugger-internal-globaldebuggeroptions.html#toSettings">Debugger::Internal::GlobalDebuggerOptions</a> <a href="projectexplorer-internal-expanddata.html#toSettings">ProjectExplorer::Internal::ExpandData</a> <a href="texteditor-highlightersettings.html#toSettings">TextEditor::HighlighterSettings</a> <a href="texteditor-snippetssettings.html#toSettings">TextEditor::SnippetsSettings</a></li>
+<li>toString: <a href="debugger-debugger-internal-stackframe.html#toString">Debugger::Debugger::Internal::StackFrame</a> <a href="debugger-internal-breakpointparameters.html#toString">Debugger::Internal::BreakpointParameters</a> <a href="debugger-internal-debuggerencoding.html#toString">Debugger::Internal::DebuggerEncoding</a> <a href="debugger-internal-debuggerresponse.html#toString">Debugger::Internal::DebuggerResponse</a> <a href="debugger-internal-disassemblerline.html#toString">Debugger::Internal::DisassemblerLine</a> <a href="debugger-internal-disassemblerlines.html#toString">Debugger::Internal::DisassemblerLines</a> <a href="debugger-internal-gdbmi.html#toString">Debugger::Internal::GdbMi</a> <a href="debugger-internal-winexception.html#toString">Debugger::Internal::WinException</a> <a href="qmlerror.html#toString">QmlError</a></li>
+<li>toToolTip: <a href="debugger-debugger-internal-stackframe.html#toToolTip">Debugger::Debugger::Internal::StackFrame</a></li>
+<li>toggleMaximized: <a href="core-internal-outputpanemanager.html#toggleMaximized">Core::Internal::OutputPaneManager</a></li>
+<li>trackRule: <a href="texteditor-internal-progressdata.html#trackRule">TextEditor::Internal::ProgressData</a></li>
+<li>type: <a href="debugger-internal-builtintypenode.html#type">Debugger::Internal::BuiltinTypeNode</a> <a href="debugger-internal-gdbmi.html#type">Debugger::Internal::GdbMi</a> <a href="debugger-internal-operatornamenode.html#type">Debugger::Internal::OperatorNameNode</a> <a href="debugger-internal-substitutionnode.html#type">Debugger::Internal::SubstitutionNode</a> <a href="debugger-internal-typenode.html#type">Debugger::Internal::TypeNode</a> <a href="symbolgroupnode.html#type">SymbolGroupNode</a> <a href="symbolgroupvalue.html#type">SymbolGroupValue</a></li>
+<li>typeCast: <a href="symbolgroup.html#typeCast">SymbolGroup</a> <a href="symbolgroupnode.html#typeCast">SymbolGroupNode</a> <a href="symbolgroupvalue.html#typeCast">SymbolGroupValue</a></li>
+<li>typeOfAncestor: <a href="symbolgroupvalue.html#typeOfAncestor">SymbolGroupValue</a></li>
+<li>unCommentSelection:<a name="u"></a> <a href="utils.html#unCommentSelection">Utils</a></li>
+<li>unTrackRule: <a href="texteditor-internal-progressdata.html#unTrackRule">TextEditor::Internal::ProgressData</a></li>
+<li>unequalTo: <a href="utils.html#unequalTo">Utils</a></li>
+<li>unhookCallbacks: <a href="extensioncontext.html#unhookCallbacks">ExtensionContext</a></li>
+<li>unregisterDocumentation: <a href="core-helpmanager.html#unregisterDocumentation">Core::HelpManager</a></li>
+<li>updateDynamicRules: <a href="texteditor-internal-context.html#updateDynamicRules">TextEditor::Internal::Context</a></li>
+<li>updateEditorHistory: <a href="core-internal-editorview.html#updateEditorHistory">Core::Internal::EditorView</a></li>
+<li>updateFromGdbOutput: <a href="debugger-internal-breakpointparameters.html#updateFromGdbOutput">Debugger::Internal::BreakpointParameters</a></li>
+<li>updateGeometry: <a href="core-internal-locatorpopup.html#updateGeometry">Core::Internal::LocatorPopup</a></li>
+<li>updateIcon: <a href="debugger-debugger-internal-locationmark.html#updateIcon">Debugger::Debugger::Internal::LocationMark</a></li>
+<li>updateLocalsView: <a href="debugger-debugger-internal-debuggerengine.html#updateLocalsView">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>updateLocalsWindow: <a href="debugger-debugger-internal-debuggerengine.html#updateLocalsWindow">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>updateLocation: <a href="debugger-internal-breakpointparameters.html#updateLocation">Debugger::Internal::BreakpointParameters</a></li>
+<li>updateLocationMarker: <a href="debugger-internal-sourceagent.html#updateLocationMarker">Debugger::Internal::SourceAgent</a></li>
+<li>updateState: <a href="debugger-debugger-internal-debuggerengine.html#updateState">Debugger::Debugger::Internal::DebuggerEngine</a></li>
+<li>url: <a href="qmlerror.html#url">QmlError</a></li>
+<li>useFallbackLocation: <a href="texteditor-highlightersettings.html#useFallbackLocation">TextEditor::HighlighterSettings</a></li>
+<li>validate:<a name="v"></a> <a href="projectexplorer-internal-customwizardvalidationrule.html#validate">ProjectExplorer::Internal::CustomWizardValidationRule</a></li>
+<li>validateData: <a href="projectexplorer-internal-fieldpagefactory.html#validateData">ProjectExplorer::Internal::FieldPageFactory</a> <a href="projectexplorer-internal-filepagefactory.html#validateData">ProjectExplorer::Internal::FilePageFactory</a> <a href="projectexplorer-internal-kitspagefactory.html#validateData">ProjectExplorer::Internal::KitsPageFactory</a> <a href="projectexplorer-internal-projectpagefactory.html#validateData">ProjectExplorer::Internal::ProjectPageFactory</a> <a href="projectexplorer-internal-summarypagefactory.html#validateData">ProjectExplorer::Internal::SummaryPageFactory</a></li>
+<li>validateRules: <a href="projectexplorer-internal-customwizardvalidationrule.html#validateRules">ProjectExplorer::Internal::CustomWizardValidationRule</a></li>
+<li>validateRunParameters: <a href="debugger-debugger-internal-cppdebuggerengine.html#validateRunParameters">Debugger::Debugger::Internal::CppDebuggerEngine</a></li>
+<li>value: <a href="symbolgroupvalue.html#value">SymbolGroupValue</a></li>
+<li>visibilityChanged: <a href="core-internal-searchresultwidget.html#visibilityChanged">Core::Internal::SearchResultWidget</a></li>
+<li>visit: <a href="debugfiltersymbolgroupnodevisitor.html#visit">DebugFilterSymbolGroupNodeVisitor</a> <a href="debugsymbolgroupnodevisitor.html#visit">DebugSymbolGroupNodeVisitor</a> <a href="dumpsymbolgroupnodevisitor.html#visit">DumpSymbolGroupNodeVisitor</a> <a href="symbolgroupnodevisitor.html#visit">SymbolGroupNodeVisitor</a></li>
+<li>wantContinue:<a name="w"></a> <a href="debugger-internal-debuggercommandsequence.html#wantContinue">Debugger::Internal::DebuggerCommandSequence</a></li>
+<li>watchesSymbolGroup: <a href="extensioncontext.html#watchesSymbolGroup-1">ExtensionContext</a></li>
+<li>wcharPointerData: <a href="symbolgroupvalue.html#wcharPointerData">SymbolGroupValue</a></li>
+<li>weight: <a href="utils-internal-mimeglobpattern.html#weight">Utils::Internal::MimeGlobPattern</a></li>
+<li>withExecutableSuffix: <a href="utils-osspecificaspects.html#withExecutableSuffix">Utils::OsSpecificAspects</a></li>
+<li>withNtfsPermissions: <a href="utils.html#withNtfsPermissions">Utils</a></li>
+<li>workingDirectory: <a href="projectexplorer-internal-processstep.html#workingDirectory">ProjectExplorer::Internal::ProcessStep</a></li>
+<li>writeMemory: <a href="symbolgroupvalue.html#writeMemory">SymbolGroupValue</a></li>
+<li>writeSettings: <a href="debugger-internal-registerpostmortemaction.html#writeSettings">Debugger::Internal::RegisterPostMortemAction</a></li>
+</ul>
+</div>
+<!-- @@@functions.html -->
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

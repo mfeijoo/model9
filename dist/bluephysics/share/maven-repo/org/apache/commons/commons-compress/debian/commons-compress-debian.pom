@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-compress</artifactId>
+	<version>debian</version>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-parent</artifactId>
+		<version>debian</version>
+	</parent>
+	
+	<name>Apache Commons Compress</name>
+	<!-- The description is not indented to make it look better in the release notes -->
+	<description>Apache Commons Compress software defines an API for working with
+compression and archive formats.  These include: bzip2, gzip, pack200,lzma, xz, Snappy, traditional Unix Compress, DEFLATE, DEFLATE64, LZ4,
+Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.
+	</description>
+	<properties>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<commons.componentid>compress</commons.componentid>
+		<commons.module.name>org.apache.commons.compress</commons.module.name>
+		<commons.jira.id>COMPRESS</commons.jira.id>
+		<commons.jira.pid>12310904</commons.jira.pid>
+		<!-- configuration bits for cutting a release candidate -->
+		<commons.release.version>${project.version}</commons.release.version>
+		<commons.rc.version>RC1</commons.rc.version>
+		<powermock.version>1.7.3</powermock.version>
+		<commons.pmd-plugin.version>3.8</commons.pmd-plugin.version>
+		<commons.manifestlocation>${project.build.outputDirectory}/META-INF</commons.manifestlocation>
+		<commons.manifestfile>${commons.manifestlocation}/MANIFEST.MF</commons.manifestfile>
+		<commons.osgi.import>org.tukaani.xz;resolution:=optional,
+      org.brotli.dec;resolution:=optional,com.github.luben.zstd;resolution:=optional,
+      javax.crypto.*;resolution:=optional,*</commons.osgi.import>
+		<!-- only show issues of the current version -->
+		<commons.changes.onlyCurrentVersion>true</commons.changes.onlyCurrentVersion>
+		<!-- generate report even if there are binary incompatible changes -->
+		<commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
+		<!-- 0.12.0 dies with a NullPointerException -->
+		<commons.japicmp.version>0.11.1</commons.japicmp.version>
+		<pax.exam.version>4.11.0</pax.exam.version>
+		<slf4j.version>1.7.21</slf4j.version>
+		
+			<debian.com.github.luben.zstd-jni.originalVersion>1.3.3-3</debian.com.github.luben.zstd-jni.originalVersion>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.javax.inject.javax.inject.originalVersion>1</debian.javax.inject.javax.inject.originalVersion>
+		
+			<debian.junit.junit.originalVersion>4.12</debian.junit.junit.originalVersion>
+		
+			<debian.org.apache.felix.org.apache.felix.framework.originalVersion>5.6.10</debian.org.apache.felix.org.apache.felix.framework.originalVersion>
+		
+			<debian.org.brotli.dec.originalVersion>0.1.2</debian.org.brotli.dec.originalVersion>
+		
+			<debian.org.ops4j.pax.exam.pax-exam-cm.originalVersion>4.11.0</debian.org.ops4j.pax.exam.pax-exam-cm.originalVersion>
+		
+			<debian.org.ops4j.pax.exam.pax-exam-container-native.originalVersion>4.11.0</debian.org.ops4j.pax.exam.pax-exam-container-native.originalVersion>
+		
+			<debian.org.ops4j.pax.exam.pax-exam-junit4.originalVersion>4.11.0</debian.org.ops4j.pax.exam.pax-exam-junit4.originalVersion>
+		
+			<debian.org.ops4j.pax.exam.pax-exam-link-mvn.originalVersion>4.11.0</debian.org.ops4j.pax.exam.pax-exam-link-mvn.originalVersion>
+		
+			<debian.org.osgi.org.osgi.core.originalVersion>6.0.0</debian.org.osgi.org.osgi.core.originalVersion>
+		
+			<debian.org.powermock.powermock-api-mockito.originalVersion>1.7.3</debian.org.powermock.powermock-api-mockito.originalVersion>
+		
+			<debian.org.powermock.powermock-module-junit4.originalVersion>1.7.3</debian.org.powermock.powermock-module-junit4.originalVersion>
+		
+			<debian.org.slf4j.slf4j-api.originalVersion>1.7.21</debian.org.slf4j.slf4j-api.originalVersion>
+		
+			<debian.org.tukaani.xz.originalVersion>1.8</debian.org.tukaani.xz.originalVersion>
+		
+			<debian.originalVersion>1.18</debian.originalVersion>
+		
+			<debian.package>libcommons-compress-java</debian.package>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.tukaani</groupId>
+			<artifactId>xz</artifactId>
+			<version>debian</version>
+			<optional>true</optional>
+		</dependency>
+		<!-- integration test verifiying OSGi bundle works -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>debian</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

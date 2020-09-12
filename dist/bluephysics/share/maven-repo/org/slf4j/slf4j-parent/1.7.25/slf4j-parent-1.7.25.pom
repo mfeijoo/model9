@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-parent</artifactId>
+	<version>1.7.25</version>
+	<packaging>pom</packaging>
+	<name>SLF4J</name>
+	<description>Top SLF4J project pom.xml file</description>
+	<properties>
+		<required.jdk.version>1.5</required.jdk.version>
+		<maven.compiler.source>${required.jdk.version}</maven.compiler.source>
+		<maven.compiler.target>${required.jdk.version}</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- used in integration testing -->
+		<slf4j.api.minimum.compatible.version>1.6.0</slf4j.api.minimum.compatible.version>
+		<cal10n.version>0.8.1</cal10n.version>
+		<log4j.version>1.2.17</log4j.version>
+		<logback.version>1.0.13</logback.version>
+		<junit.version>4.12</junit.version>
+		<maven-site-plugin.version>3.3</maven-site-plugin.version>
+		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.junit.junit.originalVersion>4.12</debian.junit.junit.originalVersion>
+		
+			<debian.originalVersion>1.7.25</debian.originalVersion>
+		
+			<debian.package>libslf4j-java</debian.package>
+	</properties>
+	<modules>
+		<module>slf4j-api</module>
+		<module>slf4j-simple</module>
+		<module>slf4j-nop</module>
+		<module>slf4j-jdk14</module>
+		<module>slf4j-log4j12</module>
+		<module>slf4j-jcl</module>
+		<module>slf4j-android</module>
+		<module>slf4j-ext</module>
+		<module>jcl-over-slf4j</module>
+		<module>log4j-over-slf4j</module>
+		<module>jul-to-slf4j</module>
+		<module>osgi-over-slf4j</module>
+		<module>integration</module>
+		<module>slf4j-site</module>
+		<module>slf4j-migrator</module>
+	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.x</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>debian</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-jdk14</artifactId>
+				<version>debian</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.x</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.cal10n</groupId>
+				<artifactId>cal10n-api</artifactId>
+				<version>debian</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

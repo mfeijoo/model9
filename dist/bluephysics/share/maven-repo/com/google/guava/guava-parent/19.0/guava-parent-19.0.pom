@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.google.guava</groupId>
+	<artifactId>guava-parent</artifactId>
+	<version>19.0</version>
+	<packaging>pom</packaging>
+	<name>Guava Maven Parent</name>
+	<url>https://github.com/google/guava</url>
+	<properties>
+		<gpg.skip>true</gpg.skip>
+		<!-- Override this with -Dtest.include="**/SomeTest.java" on the CLI -->
+		<test.include>**/*Test.java</test.include>
+		<truth.version>0.25</truth.version>
+		<animal.sniffer.version>1.14</animal.sniffer.version>
+		
+			<debian.mavenRules>s/com.google.code.google-collections/com.google.guava/ s/google-collect/guava/ s/jar/bundle/ s/.*/debian/ * *,
+		s/com.google.collections/com.google.guava/ s/google-collections/guava/ s/jar/bundle/ s/.*/debian/ * *,
+		com.google.guava guava-parent pom s/.*/debian/ * *,
+		com.google.guava guava s/jar/bundle/ s/.*/debian/ * *</debian.mavenRules>
+		
+			<debian.originalVersion>19.0</debian.originalVersion>
+		
+			<debian.package>libguava-java</debian.package>
+	</properties>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/google/guava/issues</url>
+	</issueManagement>
+	<inceptionYear>2010</inceptionYear>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:https://github.com/google/guava.git</connection>
+		<developerConnection>scm:git:git@github.com:google/guava.git</developerConnection>
+		<url>https://github.com/google/guava</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>kevinb9n</id>
+			<name>Kevin Bourrillion</name>
+			<email>kevinb@google.com</email>
+			<organization>Google</organization>
+			<organizationUrl>http://www.google.com</organizationUrl>
+			<roles>
+				<role>owner</role>
+				<role>developer</role>
+			</roles>
+			<timezone>-8</timezone>
+		</developer>
+	</developers>
+	<modules>
+		<module>guava</module>
+		<module>guava-gwt</module>
+		<module>guava-testlib</module>
+		<module>guava-tests</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jsr-305</groupId>
+				<artifactId>jsr305</artifactId>
+				<version>0.x</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.truth</groupId>
+				<artifactId>truth</artifactId>
+				<version>debian</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<!-- use the guava we're building. -->
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

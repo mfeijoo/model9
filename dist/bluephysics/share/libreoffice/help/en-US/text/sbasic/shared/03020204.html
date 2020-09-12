@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Put Statement</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+<a name="put"></a>
+<a name="bm_id3150360"></a>
+  <meta itemprop="keywords" content="Put statement">
+
+
+
+<h1 itemprop="articleSection" id="hd_id3150360">Put Statement</h1>
+<p id="par_id3154909" class="paragraph">Writes a record to a relative file or a sequence of bytes to a binary file.</p>
+
+<p id="par_id3156281" class="paragraph">See also: <a target="_top" href="en-US/text/sbasic/shared/03020201.html"><span class="literal">Get</span></a> statement</p>
+
+<h2 itemprop="articleSection" id="hd_id3125863">Syntax:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Put [#] FileNumber As Integer, [position], Variable</pre>
+<br>
+</div>
+
+<h2 itemprop="articleSection" id="hd_id3153190">Parameters:</h2>
+<p id="par_id3146120" class="paragraph"> <span class="emph">FileNumber:</span> Any integer expression that defines the file that you want to write to.</p>
+<p id="par_id3155411" class="paragraph"> <span class="emph">Position: </span>For relative files (random access files), the number of the record that you want to write.</p>
+<p id="par_id3148576" class="paragraph">For binary files (binary access), the position of the byte in the file where you want to start writing.</p>
+<p id="par_id3153729" class="paragraph"> <span class="emph">Variable:</span> Name of the variable that you want to write to the file.</p>
+<p id="par_id3146974" class="paragraph">Note for relative files: If the contents of this variable does not match the length of the record that is specified in the <span class="emph">Len</span> clause of the <span class="emph">Open</span> statement, the space between the end of the newly written record and the next record is padded with existing data from the file that you are writing to.</p>
+<p id="par_id3155855" class="paragraph">Note for binary files: The contents of the variables are written to the specified position, and the file pointer is inserted directly after the last byte. No space is left between the records.</p>
+
+<h2 itemprop="articleSection" id="hd_id3154491">Example:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Sub ExampleRandomAccess</pre>
+<br>
+<pre class="bascodepar">Dim iNumber As Integer</pre>
+<br>
+<pre class="bascodepar">Dim sText As Variant ' Must be a variant type</pre>
+<br>
+<pre class="bascodepar">Dim aFile As String</pre>
+<br>
+<pre class="bascodepar">    aFile = "c:\data.txt"</pre>
+<br>
+<pre class="bascodepar">    iNumber = Freefile</pre>
+<br>
+<pre class="bascodepar">    Open aFile For Random As #iNumber Len=32</pre>
+<br>
+<pre class="bascodepar">    Seek #iNumber,1 ' Position To start writing</pre>
+<br>
+<pre class="bascodepar">    Put #iNumber,, "This is the first line of text" ' Fill line with text</pre>
+<br>
+<pre class="bascodepar">    Put #iNumber,, "This is the second line of text"</pre>
+<br>
+<pre class="bascodepar">    Put #iNumber,, "This is the third line of text"</pre>
+<br>
+<pre class="bascodepar">    Seek #iNumber,2</pre>
+<br>
+<pre class="bascodepar">    Get #iNumber,,sText</pre>
+<br>
+<pre class="bascodepar">    Print sText</pre>
+<br>
+<pre class="bascodepar">    Close #iNumber</pre>
+<br>
+<pre class="bascodepar">    iNumber = Freefile</pre>
+<br>
+<pre class="bascodepar">    Open aFile For Random As #iNumber Len=32</pre>
+<br>
+<pre class="bascodepar">    Get #iNumber,2,sText</pre>
+<br>
+<pre class="bascodepar">    Put #iNumber,,"This is new text"</pre>
+<br>
+<pre class="bascodepar">    Get #iNumber,1,sText</pre>
+<br>
+<pre class="bascodepar">    Get #iNumber,2,sText</pre>
+<br>
+<pre class="bascodepar">    Put #iNumber,20,"This is the text in record 20"</pre>
+<br>
+<pre class="bascodepar">    Print Lof(#iNumber)</pre>
+<br>
+<pre class="bascodepar">    Close #iNumber</pre>
+<br>
+<pre class="bascodepar">End Sub</pre>
+<br>
+</div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03020204.xhp" target="_blank">/text/sbasic/shared/03020204.xhp</a></p>
+<p>Title is: Put Statement</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

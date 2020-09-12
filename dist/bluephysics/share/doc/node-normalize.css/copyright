@@ -1,0 +1,45 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: normalize.css
+Upstream-Contact: https://github.com/necolas/normalize.css/issues
+Source: https://necolas.github.io/normalize.css
+
+Files: *
+Copyright: 2011-2018 Nicolas Gallagher
+           2011-2018 Jonathan Neal
+License: Expat
+
+Files: test.html
+Copyright: 2011-2018 Nicolas Gallagher
+           2011-2018 Jonathan Neal
+License: Expat
+Comment: Include css part from
+ https://github.com/suitcss/components-test/blob/722a5e78dae85cae68790d18ea63741a352522c5/test.css
+ from same authors and same license
+ .
+ Include also uncopyrightable one pixel image. Regenerated using patches.
+
+Files: debian/*
+Copyright: 2017 Daniel Ring <dring@wolfishly.me>
+License: Expat
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+

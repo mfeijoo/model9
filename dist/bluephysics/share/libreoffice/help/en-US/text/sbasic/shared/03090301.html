@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>GoSub...Return Statement</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+<a name="gosubreturn"></a>
+<a name="bm_id3147242"></a>
+  <meta itemprop="keywords" content="GoSub...Return statement">
+
+
+
+<h1 itemprop="articleSection" id="hd_id3147242">GoSub...Return Statement</h1>
+<p id="par_id3145316" class="paragraph">Calls a subroutine that is indicated by a label from a subroutine or a function. The statements following the label are executed until the next Return statement. Afterwards, the program continues with the statement that follows the <span class="emph">GoSub </span>statement.</p>
+
+
+<h2 itemprop="articleSection" id="hd_id3145609">Syntax:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">see Parameters</pre>
+<br>
+</div>
+
+<h2 itemprop="articleSection" id="hd_id3147265">Parameters:</h2>
+<p id="par_id3148664" class="paragraph">Sub/Function</p>
+<p id="par_id3150400" class="paragraph">statement block</p>
+<p id="par_id3154140" class="paragraph"> Label</p>
+<p id="par_id3150869" class="paragraph">statement block</p>
+<p id="par_id3154909" class="paragraph">GoSub Label</p>
+<p id="par_id3153969" class="paragraph">Exit Sub/Function</p>
+<p id="par_id3154685" class="paragraph">Label:</p>
+<p id="par_id3145786" class="paragraph">statement block</p>
+<p id="par_id3159252" class="paragraph">Return</p>
+<p id="par_id3154321" class="paragraph">End Sub/Function</p>
+<p id="par_id3147318" class="paragraph">The <span class="emph">GoSub</span> statement calls a local subroutine indicated by a label from within a subroutine or a function. The name of the label must end with a colon (":").</p>
+<div class="warning">
+<div class="noteicon"><img src="media/icon-themes/help/warning.png" alt="Warning Icon 
+" title="Warning Icon 
+"></div>
+<div class="notetext"><p>If the program encounters a Return statement not preceded by <span class="emph">GoSub</span>, LibreOffice Basic returns an error message. Use <span class="emph">Exit Sub</span> or <span class="emph">Exit Function</span> to ensure that the program leaves a Sub or Function before reaching the next Return statement.</p></div>
+</div>
+<br>
+<p id="par_id3145799" class="paragraph">The following example demonstrates the use of <span class="emph">GoSub</span> and <span class="emph">Return</span>. By executing a program section twice, the program calculates the square root of two numbers that are entered by the user.</p>
+
+<h2 itemprop="articleSection" id="hd_id3156284">Example:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Sub ExampleGoSub</pre>
+<br>
+<pre class="bascodepar">Dim iInputa As Single</pre>
+<br>
+<pre class="bascodepar">Dim iInputb As Single</pre>
+<br>
+<pre class="bascodepar">Dim iInputc As Single</pre>
+<br>
+<pre class="bascodepar">    iInputa = Int(InputBox("Enter the first number: ","NumberInput"))</pre>
+<br>
+<pre class="bascodepar">    iInputb = Int(InputBox("Enter the second number: ","NumberInput"))</pre>
+<br>
+<pre class="bascodepar">    iInputc=iInputa</pre>
+<br>
+<pre class="bascodepar">    GoSub SquareRoot</pre>
+<br>
+<pre class="bascodepar">    Print "The square root of";iInputa;" is";iInputc</pre>
+<br>
+<pre class="bascodepar">    iInputc=iInputb</pre>
+<br>
+<pre class="bascodepar">    GoSub SquareRoot</pre>
+<br>
+<pre class="bascodepar">    Print "The square root of";iInputb;" is";iInputc</pre>
+<br>
+<pre class="bascodepar">    Exit Sub</pre>
+<br>
+<pre class="bascodepar">SquareRoot:</pre>
+<br>
+<pre class="bascodepar">    iInputc=sqr(iInputc)</pre>
+<br>
+<pre class="bascodepar">    Return</pre>
+<br>
+<pre class="bascodepar">End Sub</pre>
+<br>
+</div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03090301.xhp" target="_blank">/text/sbasic/shared/03090301.xhp</a></p>
+<p>Title is: GoSub...Return Statement</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

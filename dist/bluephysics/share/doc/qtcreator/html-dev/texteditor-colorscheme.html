@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ColorScheme Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >ColorScheme</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#static-public-members">Static Public Members</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">ColorScheme Class</h1>
+<span class="small-subtitle">(<a href="texteditor-colorscheme.html">TextEditor::ColorScheme</a>)<br/></span>
+<ul>
+<li><a href="texteditor-colorscheme-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#clear">clear</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#contains">contains</a></b>(TextEditor::TextStyle <i>category</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#displayName">displayName</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#equals">equals</a></b>(const TextEditor::ColorScheme &amp;<i>cs</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#formatFor">formatFor</a></b>(<i>TextEditor::TextStyle</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#formatFor-1">formatFor</a></b>(<i>TextEditor::TextStyle</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#isEmpty">isEmpty</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#load">load</a></b>(const int &amp;<i>fileName</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#save">save</a></b>(const int &amp;<i>fileName</i>, int *<i>parent</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#setDisplayName">setDisplayName</a></b>(const int &amp;<i>name</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#setFormatFor">setFormatFor</a></b>(TextEditor::TextStyle <i>category</i>, const int &amp;<i>format</i>)</td></tr>
+</table></div>
+<a name="static-public-members"></a>
+<h2 id="static-public-members">Static Public Members</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="texteditor-colorscheme.html#readNameOfScheme">readNameOfScheme</a></b>(<i>const int &amp;</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$clear[overload1]$$$clear -->
+<h3 class="fn" id="clear"><a name="clear"></a><span class="type">void</span> ColorScheme::<span class="name">clear</span>()</h3>
+<!-- @@@clear -->
+<!-- $$$contains[overload1]$$$containsTextEditor::TextStyle -->
+<h3 class="fn" id="contains"><a name="contains"></a><span class="type">bool</span> ColorScheme::<span class="name">contains</span>(<span class="type">TextEditor::TextStyle</span> <i>category</i>) const</h3>
+<!-- @@@contains -->
+<!-- $$$displayName[overload1]$$$displayName -->
+<h3 class="fn" id="displayName"><a name="displayName"></a><span class="type">int</span> ColorScheme::<span class="name">displayName</span>() const</h3>
+<p><b>See also </b><a href="texteditor-colorscheme.html#setDisplayName">setDisplayName</a>().</p>
+<!-- @@@displayName -->
+<!-- $$$equals[overload1]$$$equalsconstTextEditor::ColorScheme& -->
+<h3 class="fn" id="equals"><a name="equals"></a><span class="type">bool</span> ColorScheme::<span class="name">equals</span>(const <span class="type">TextEditor::ColorScheme</span> &amp;<i>cs</i>) const</h3>
+<!-- @@@equals -->
+<!-- $$$formatFor[overload1]$$$formatForTextEditor::TextStyle -->
+<h3 class="fn" id="formatFor"><a name="formatFor"></a><span class="type">int</span> &amp;ColorScheme::<span class="name">formatFor</span>(<i>TextEditor::TextStyle</i>)</h3>
+<p><b>See also </b><a href="texteditor-colorscheme.html#setFormatFor">setFormatFor</a>().</p>
+<!-- @@@formatFor -->
+<!-- $$$formatFor$$$formatForTextEditor::TextStyle -->
+<h3 class="fn" id="formatFor-1"><a name="formatFor-1"></a><span class="type">int</span> ColorScheme::<span class="name">formatFor</span>(<i>TextEditor::TextStyle</i>) const</h3>
+<!-- @@@formatFor -->
+<!-- $$$isEmpty[overload1]$$$isEmpty -->
+<h3 class="fn" id="isEmpty"><a name="isEmpty"></a><span class="type">bool</span> ColorScheme::<span class="name">isEmpty</span>() const</h3>
+<!-- @@@isEmpty -->
+<!-- $$$load[overload1]$$$loadconstint& -->
+<h3 class="fn" id="load"><a name="load"></a><span class="type">bool</span> ColorScheme::<span class="name">load</span>(const <span class="type">int</span> &amp;<i>fileName</i>)</h3>
+<!-- @@@load -->
+<!-- $$$readNameOfScheme[overload1]$$$readNameOfSchemeconstint& -->
+<h3 class="fn" id="readNameOfScheme"><a name="readNameOfScheme"></a><code>[static] </code><span class="type">int</span> ColorScheme::<span class="name">readNameOfScheme</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@readNameOfScheme -->
+<!-- $$$save[overload1]$$$saveconstint&int* -->
+<h3 class="fn" id="save"><a name="save"></a><span class="type">bool</span> ColorScheme::<span class="name">save</span>(const <span class="type">int</span> &amp;<i>fileName</i>, <span class="type">int</span> *<i>parent</i>) const</h3>
+<!-- @@@save -->
+<!-- $$$setDisplayName[overload1]$$$setDisplayNameconstint& -->
+<h3 class="fn" id="setDisplayName"><a name="setDisplayName"></a><span class="type">void</span> ColorScheme::<span class="name">setDisplayName</span>(const <span class="type">int</span> &amp;<i>name</i>)</h3>
+<p><b>See also </b><a href="texteditor-colorscheme.html#displayName">displayName</a>().</p>
+<!-- @@@setDisplayName -->
+<!-- $$$setFormatFor[overload1]$$$setFormatForTextEditor::TextStyleconstint& -->
+<h3 class="fn" id="setFormatFor"><a name="setFormatFor"></a><span class="type">void</span> ColorScheme::<span class="name">setFormatFor</span>(<span class="type">TextEditor::TextStyle</span> <i>category</i>, const <span class="type">int</span> &amp;<i>format</i>)</h3>
+<p><b>See also </b><a href="texteditor-colorscheme.html#formatFor">formatFor</a>().</p>
+<!-- @@@setFormatFor -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

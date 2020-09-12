@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>javax.inject</groupId>
+	<artifactId>javax.inject</artifactId>
+	<version>1</version>
+	<packaging>jar</packaging><properties>
+		
+			<debian.originalVersion>1</debian.originalVersion>
+		
+			<debian.package>libatinject-jsr330-api-java</debian.package>
+	</properties>
+	
+	<name>javax.inject</name>
+	<description>The javax.inject API</description>
+</project>

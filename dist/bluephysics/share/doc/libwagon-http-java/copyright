@@ -1,0 +1,30 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Maven Wagon
+Upstream-Contact: http://maven.apache.org/wagon/
+Source: http://svn.apache.org/repos/asf/maven/wagon/
+Files-Excluded: */src/*/ssl/keystore
+ */src/*/ssh-keys/id_rsa
+ */src/*/ssh-keys/id_rsa-passphrase
+ */src/*/ssh-keys/id_rsa.pub
+ */src/*/ssh-keys/id_rsa-passphrase.pub
+ wagon-tcks/wagon-tck-http/Test Plan.oo3/*
+ wagon-providers/wagon-scm/src/test/resources/test-repo-cvs/*
+ wagon-providers/wagon-scm/src/test/resources/test-repo-svn/*
+
+Files: *
+Copyright: 2002-2017, The Apache Software Foundation
+License: Apache-2.0
+
+Files: debian/*
+Copyright: 2011, Damien Raude-Morvan <drazzib@debian.org>
+           2013, Michael Gilbert <mgilbert@debian.org>
+           2013-2017, tony mancill <tmancill@debian.org>
+           2013-2017, Emmanuel Bourg <ebourg@apache.org>
+           2014, Matthias Klose <doko@debian.org>
+           2014, Eugene Zhukov <jevgeni.zh@gmail.com>
+           2016, Markus Koschany <apo@debian.org>
+License: Apache-2.0
+
+License: Apache-2.0
+ On Debian systems the full text of the Apache License can be found
+ in `/usr/share/common-licenses/Apache-2.0'.

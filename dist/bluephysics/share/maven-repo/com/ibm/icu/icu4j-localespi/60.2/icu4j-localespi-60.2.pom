@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* Â© 2017 and later: Unicode, Inc. and others.
+* License & terms of use: http://www.unicode.org/copyright.html#License
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.icu</groupId>
+	<artifactId>icu4j-localespi</artifactId>
+	<version>60.2</version>
+	<packaging>jar</packaging><properties>
+		
+			<debian.com.ibm.icu.icu4j.originalVersion>@POMVERSION@</debian.com.ibm.icu.icu4j.originalVersion>
+		
+			<debian.originalVersion>60.2</debian.originalVersion>
+		
+			<debian.package>libicu4j-java</debian.package>
+	</properties>
+	
+	<name>ICU4J Locale Service Provider</name>
+	<description>icu4j-localespi is a supplemental library for icu4j, implementing Java Locale SPI.</description>
+	<dependencies>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>debian</version>
+		</dependency>
+	</dependencies>
+</project>

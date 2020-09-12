@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.google.guava</groupId>
+	<artifactId>guava</artifactId>
+	<version>debian</version>
+	<packaging>bundle</packaging>
+	<parent>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava-parent</artifactId>
+		<version>debian</version>
+	</parent>
+	<properties>
+		
+			<debian.mavenRules>s/com.google.code.google-collections/com.google.guava/ s/google-collect/guava/ s/jar/bundle/ s/.*/debian/ * *,
+		s/com.google.collections/com.google.guava/ s/google-collections/guava/ s/jar/bundle/ s/.*/debian/ * *,
+		com.google.guava guava bundle s/.*/debian/ * *,
+		com.google.guava guava s/jar/bundle/ s/.*/debian/ * *</debian.mavenRules>
+		
+			<debian.org.codehaus.mojo.animal-sniffer-annotations.originalVersion>${animal.sniffer.version}</debian.org.codehaus.mojo.animal-sniffer-annotations.originalVersion>
+		
+			<debian.originalVersion>19.0</debian.originalVersion>
+		
+			<debian.package>libguava-java</debian.package>
+	</properties>
+	
+	<name>Guava: Google Core Libraries for Java</name>
+	<description>Guava is a suite of core and expanded libraries that include
+    utility classes, google's collections, io classes, and muchmuch more.
+
+    Guava has only one code dependency - javax.annotation,per the JSR-305 spec.</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.jsr-305</groupId>
+			<artifactId>jsr305</artifactId>
+			<optional>true</optional>
+			<!-- needed only for annotations -->
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>animal-sniffer-annotations</artifactId>
+			<version>debian</version>
+			<optional>true</optional>
+			<!-- needed only for annotations -->
+		</dependency>
+		<!-- TODO(cpovirk): does this comment belong on the <dependency> in <profiles>? -->
+		<!-- TODO(cpovirk): want this only for dependency plugin but seems not to work there? Maven runs without failure, but the resulting Javadoc is missing the hoped-for inherited text -->
+	</dependencies>
+</project>

@@ -1,0 +1,11 @@
+Pillow>=5.2.0
+appdirs>=1.4.3
+guizero>=0.5.2
+matplotlib>=2.2.2
+nudatus>=0.0.3
+pgzero>=1.2
+pycodestyle>=2.4.0
+pyflakes>=2.0.0
+pyserial>=3.4
+requests>=2.19.1
+semver>=2.0.1

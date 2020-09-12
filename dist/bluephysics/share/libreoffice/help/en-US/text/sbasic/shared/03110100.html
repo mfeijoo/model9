@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Comparison Operators</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+<a name="operatoren"></a>
+<a name="bm_id3150682"></a>
+  <meta itemprop="keywords" content="comparison operators,%PRODUCTNAME Basic">
+  <meta itemprop="keywords" content="operators,comparisons">
+
+
+
+<h1 itemprop="articleSection" id="hd_id3150682">Comparison Operators</h1>
+<p id="par_id3156042" class="paragraph">Comparison operators compare two expressions. The result is returned as a Boolean expression that determines if the comparison is True (-1) or False (0).</p>
+
+
+<h2 itemprop="articleSection" id="hd_id3147291">Syntax:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Result = Expression1 { = | &lt; | &gt; | &lt;= | &gt;= } Expression2</pre>
+<br>
+</div>
+
+<h2 itemprop="articleSection" id="hd_id3145316">Parameters:</h2>
+<p id="par_id3147573" class="paragraph"> <span class="emph">Result:</span> Boolean expression that specifies the result of the comparison (True, or False)</p>
+<p id="par_id3148686" class="paragraph"> <span class="emph">Expression1, Expression2:</span> Any numeric values or strings that you want to compare.</p>
+
+<h2 itemprop="articleSection" id="hd_id3147531">Comparison operators</h2>
+<p id="par_id3147265" class="paragraph">= : Equal to</p>
+<p id="par_id3154924" class="paragraph">&lt; : Less than</p>
+<p id="par_id3146795" class="paragraph">&gt; : Greater than</p>
+<p id="par_id3150541" class="paragraph">&lt;= : Less than or equal to</p>
+<p id="par_id3150400" class="paragraph">&gt;= : Greater than or equal to</p>
+<p id="par_id3148797" class="paragraph">&lt;&gt; : Not equal to</p>
+
+<h2 itemprop="articleSection" id="hd_id3154686">Example:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Sub ExampleUnequal</pre>
+<br>
+<pre class="bascodepar">Dim sFile As String</pre>
+<br>
+<pre class="bascodepar">Dim sRoot As String ' Root directory for file in and output</pre>
+<br>
+<pre class="bascodepar">    sRoot = "c:\"</pre>
+<br>
+<pre class="bascodepar">    sFile = Dir$( sRoot ,22)</pre>
+<br>
+<pre class="bascodepar">    If sFile &lt;&gt; "" Then</pre>
+<br>
+<pre class="bascodepar">        Do</pre>
+<br>
+<pre class="bascodepar">            MsgBox sFile</pre>
+<br>
+<pre class="bascodepar">            sFile = Dir$</pre>
+<br>
+<pre class="bascodepar">        Loop Until sFile = ""</pre>
+<br>
+<pre class="bascodepar">    End If</pre>
+<br>
+<pre class="bascodepar">End Sub</pre>
+<br>
+</div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03110100.xhp" target="_blank">/text/sbasic/shared/03110100.xhp</a></p>
+<p>Title is: Comparison Operators</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

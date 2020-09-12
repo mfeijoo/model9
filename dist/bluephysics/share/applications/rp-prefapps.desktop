@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Recommended Software
+Name[en_GB]=Recommended Software
+Name[it]=Software consigliato
+GenericName=Recommended Software
+GenericName[en_GB]=Recommended Software
+GenericName[it]=Software consigliato
+Comment=Install additional programs recommended for use on the Pi
+Comment[en_GB]=Install additional programs recommended for use on the Raspberry Pi
+Comment[it]=Installa programmi aggiuntivi consigliati per Raspberry Pi
+Icon=rpi
+Exec=env SUDO_ASKPASS=/usr/lib/rp-prefapps/pwdrpp.sh sudo -AE rp-prefapps
+NotShowIn=GNOME;XFCE;
+StartupNotify=true
+Categories=Settings;DesktopSettings;GTK;X-LXDE-Settings;

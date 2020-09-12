@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ItemData Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >ItemData</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">ItemData Class</h1>
+<span class="small-subtitle">(<a href="texteditor-internal-itemdata.html">TextEditor::Internal::ItemData</a>)<br/></span>
+<ul>
+<li><a href="texteditor-internal-itemdata-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#ItemData">ItemData</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#color">color</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isBold">isBold</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isBoldSpecified">isBoldSpecified</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isCustomized">isCustomized</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isItalic">isItalic</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isItalicSpecified">isItalicSpecified</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isStrikeOut">isStrikeOut</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isStrikeOutSpecified">isStrikeOutSpecified</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isUnderlined">isUnderlined</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#isUnderlinedSpecified">isUnderlinedSpecified</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#selectionColor">selectionColor</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setBold">setBold</a></b>(const int &amp;<i>bold</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setColor">setColor</a></b>(const int &amp;<i>color</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setItalic">setItalic</a></b>(const int &amp;<i>italic</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setSelectionColor">setSelectionColor</a></b>(const int &amp;<i>color</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setStrikeOut">setStrikeOut</a></b>(const int &amp;<i>strike</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setStyle">setStyle</a></b>(const int &amp;<i>style</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#setUnderlined">setUnderlined</a></b>(const int &amp;<i>underlined</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-itemdata.html#style">style</a></b>() const</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$ItemData[overload1]$$$ItemData -->
+<h3 class="fn" id="ItemData"><a name="ItemData"></a>ItemData::<span class="name">ItemData</span>()</h3>
+<p>Default constructs an instance of ItemData.</p><!-- @@@ItemData -->
+<!-- $$$color[overload1]$$$color -->
+<h3 class="fn" id="color"><a name="color"></a>const <span class="type">int</span> &amp;ItemData::<span class="name">color</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#setColor">setColor</a>().</p>
+<!-- @@@color -->
+<!-- $$$isBold[overload1]$$$isBold -->
+<h3 class="fn" id="isBold"><a name="isBold"></a><span class="type">bool</span> ItemData::<span class="name">isBold</span>() const</h3>
+<!-- @@@isBold -->
+<!-- $$$isBoldSpecified[overload1]$$$isBoldSpecified -->
+<h3 class="fn" id="isBoldSpecified"><a name="isBoldSpecified"></a><span class="type">bool</span> ItemData::<span class="name">isBoldSpecified</span>() const</h3>
+<!-- @@@isBoldSpecified -->
+<!-- $$$isCustomized[overload1]$$$isCustomized -->
+<h3 class="fn" id="isCustomized"><a name="isCustomized"></a><span class="type">bool</span> ItemData::<span class="name">isCustomized</span>() const</h3>
+<!-- @@@isCustomized -->
+<!-- $$$isItalic[overload1]$$$isItalic -->
+<h3 class="fn" id="isItalic"><a name="isItalic"></a><span class="type">bool</span> ItemData::<span class="name">isItalic</span>() const</h3>
+<!-- @@@isItalic -->
+<!-- $$$isItalicSpecified[overload1]$$$isItalicSpecified -->
+<h3 class="fn" id="isItalicSpecified"><a name="isItalicSpecified"></a><span class="type">bool</span> ItemData::<span class="name">isItalicSpecified</span>() const</h3>
+<!-- @@@isItalicSpecified -->
+<!-- $$$isStrikeOut[overload1]$$$isStrikeOut -->
+<h3 class="fn" id="isStrikeOut"><a name="isStrikeOut"></a><span class="type">bool</span> ItemData::<span class="name">isStrikeOut</span>() const</h3>
+<!-- @@@isStrikeOut -->
+<!-- $$$isStrikeOutSpecified[overload1]$$$isStrikeOutSpecified -->
+<h3 class="fn" id="isStrikeOutSpecified"><a name="isStrikeOutSpecified"></a><span class="type">bool</span> ItemData::<span class="name">isStrikeOutSpecified</span>() const</h3>
+<!-- @@@isStrikeOutSpecified -->
+<!-- $$$isUnderlined[overload1]$$$isUnderlined -->
+<h3 class="fn" id="isUnderlined"><a name="isUnderlined"></a><span class="type">bool</span> ItemData::<span class="name">isUnderlined</span>() const</h3>
+<!-- @@@isUnderlined -->
+<!-- $$$isUnderlinedSpecified[overload1]$$$isUnderlinedSpecified -->
+<h3 class="fn" id="isUnderlinedSpecified"><a name="isUnderlinedSpecified"></a><span class="type">bool</span> ItemData::<span class="name">isUnderlinedSpecified</span>() const</h3>
+<!-- @@@isUnderlinedSpecified -->
+<!-- $$$selectionColor[overload1]$$$selectionColor -->
+<h3 class="fn" id="selectionColor"><a name="selectionColor"></a>const <span class="type">int</span> &amp;ItemData::<span class="name">selectionColor</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#setSelectionColor">setSelectionColor</a>().</p>
+<!-- @@@selectionColor -->
+<!-- $$$setBold[overload1]$$$setBoldconstint& -->
+<h3 class="fn" id="setBold"><a name="setBold"></a><span class="type">void</span> ItemData::<span class="name">setBold</span>(const <span class="type">int</span> &amp;<i>bold</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#isBold">isBold</a>().</p>
+<!-- @@@setBold -->
+<!-- $$$setColor[overload1]$$$setColorconstint& -->
+<h3 class="fn" id="setColor"><a name="setColor"></a><span class="type">void</span> ItemData::<span class="name">setColor</span>(const <span class="type">int</span> &amp;<i>color</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#color">color</a>().</p>
+<!-- @@@setColor -->
+<!-- $$$setItalic[overload1]$$$setItalicconstint& -->
+<h3 class="fn" id="setItalic"><a name="setItalic"></a><span class="type">void</span> ItemData::<span class="name">setItalic</span>(const <span class="type">int</span> &amp;<i>italic</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#isItalic">isItalic</a>().</p>
+<!-- @@@setItalic -->
+<!-- $$$setSelectionColor[overload1]$$$setSelectionColorconstint& -->
+<h3 class="fn" id="setSelectionColor"><a name="setSelectionColor"></a><span class="type">void</span> ItemData::<span class="name">setSelectionColor</span>(const <span class="type">int</span> &amp;<i>color</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#selectionColor">selectionColor</a>().</p>
+<!-- @@@setSelectionColor -->
+<!-- $$$setStrikeOut[overload1]$$$setStrikeOutconstint& -->
+<h3 class="fn" id="setStrikeOut"><a name="setStrikeOut"></a><span class="type">void</span> ItemData::<span class="name">setStrikeOut</span>(const <span class="type">int</span> &amp;<i>strike</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#isStrikeOut">isStrikeOut</a>().</p>
+<!-- @@@setStrikeOut -->
+<!-- $$$setStyle[overload1]$$$setStyleconstint& -->
+<h3 class="fn" id="setStyle"><a name="setStyle"></a><span class="type">void</span> ItemData::<span class="name">setStyle</span>(const <span class="type">int</span> &amp;<i>style</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#style">style</a>().</p>
+<!-- @@@setStyle -->
+<!-- $$$setUnderlined[overload1]$$$setUnderlinedconstint& -->
+<h3 class="fn" id="setUnderlined"><a name="setUnderlined"></a><span class="type">void</span> ItemData::<span class="name">setUnderlined</span>(const <span class="type">int</span> &amp;<i>underlined</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#isUnderlined">isUnderlined</a>().</p>
+<!-- @@@setUnderlined -->
+<!-- $$$style[overload1]$$$style -->
+<h3 class="fn" id="style"><a name="style"></a>const <span class="type">int</span> &amp;ItemData::<span class="name">style</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-itemdata.html#setStyle">setStyle</a>().</p>
+<!-- @@@style -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

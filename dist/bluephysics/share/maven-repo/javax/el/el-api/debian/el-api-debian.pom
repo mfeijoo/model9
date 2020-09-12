@@ -1,0 +1,17 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>javax.el</groupId>
+  <artifactId>el-api</artifactId>
+  <version>debian</version>
+  <packaging>jar</packaging>
+  <properties>
+    <debian.package>libel-api-java</debian.package>
+  </properties>
+  <distributionManagement>
+    <relocation>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>debian</version>
+    </relocation>
+  </distributionManagement>
+</project>

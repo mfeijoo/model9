@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Special properties of a formatted field</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+<a name="bm_id3150774"></a><meta itemprop="keywords" content="formatted fields, properties">
+<meta itemprop="keywords" content="fields, formatted fields">
+<meta itemprop="keywords" content="controls, formatted fields">
+
+<h1 itemprop="articleSection" id="hd_id3150774">Special properties of a formatted field</h1>
+<p id="par_id3156410" class="paragraph">
+<span class="emph">Formatting</span>: You can set the <span class="emph">Formatting </span>property by clicking the <span class="emph">... </span>button in the <span class="emph">Formatting</span> line of the <span class="emph">Properties: Formatted Field</span> dialog. The <span class="emph">Number Format</span> dialog appears.</p>
+<p id="par_id3150443" class="paragraph">If the formatted field is connected to the text field of a database, the entries in this field will be treated as text. If the formatted field is connected to a field of the database that can be displayed as a number, the input is treated as numbers. The date and time are also handled internally as numbers.</p>
+<p id="par_id3150976" class="paragraph">
+<span class="emph">Min. value</span> and <span class="emph">Max. value</span>: You can enter the minimum and maximum numeric value for a formatted field. The min and max values determine the output of existing data (Example: Min. value is 5, the connected database field contains the integer value 3. The output is 5, but the value in the database is not modified) and the input of new data (Example: Max. value is 10 and you enter 20. The input is corrected and 10 is written in the database). If the fields are not filled in for <span class="emph">Min. value </span>and <span class="emph">Max. value</span>, no limits will be applied. For formatted fields that are connected to a database text field, these two values and the <span class="emph">Default value</span> do not apply.</p>
+<p id="par_id3153665" class="paragraph">
+<span class="emph">Default value</span>: This value is set for new records as the default value.</p>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/shared/02/01170002.xhp" target="_blank">/text/shared/02/01170002.xhp</a></p>
+<p>Title is: Special properties of a formatted field</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

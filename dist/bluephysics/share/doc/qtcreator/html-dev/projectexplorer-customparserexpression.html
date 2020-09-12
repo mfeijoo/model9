@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>CustomParserExpression Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >CustomParserExpression</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">CustomParserExpression Class</h1>
+<span class="small-subtitle">(<a href="projectexplorer-customparserexpression.html">ProjectExplorer::CustomParserExpression</a>)<br/></span>
+<ul>
+<li><a href="projectexplorer-customparserexpression-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#CustomParserChannel-enum">CustomParserChannel</a></b> { ParseNoChannel, ParseStdErrChannel, ParseStdOutChannel, ParseBothChannels }</td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> CustomParserExpression::CustomParserChannel </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#channel">channel</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#example">example</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#fileNameCap">fileNameCap</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#lineNumberCap">lineNumberCap</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#match">match</a></b>(<i>const int &amp;</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#messageCap">messageCap</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#pattern">pattern</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#setChannel">setChannel</a></b>(CustomParserExpression::CustomParserChannel <i>channel</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#setExample">setExample</a></b>(const int &amp;<i>example</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#setFileNameCap">setFileNameCap</a></b>(int <i>fileNameCap</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#setLineNumberCap">setLineNumberCap</a></b>(int <i>lineNumberCap</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#setMessageCap">setMessageCap</a></b>(int <i>messageCap</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#setPattern">setPattern</a></b>(const int &amp;<i>pattern</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-customparserexpression.html#operator-eq-eq">operator==</a></b>(const ProjectExplorer::CustomParserExpression &amp;<i>other</i>) const</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$CustomParserChannel$$$ParseNoChannel$$$ParseStdErrChannel$$$ParseStdOutChannel$$$ParseBothChannels -->
+<h3 class="fn" id="CustomParserChannel-enum"><a name="CustomParserChannel-enum"></a>enum CustomParserExpression::<span class="name">CustomParserChannel</span></h3>
+<!-- @@@CustomParserChannel -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$channel[overload1]$$$channel -->
+<h3 class="fn" id="channel"><a name="channel"></a><span class="type"><a href="projectexplorer-customparserexpression.html#CustomParserChannel-enum">CustomParserExpression::CustomParserChannel</a></span> CustomParserExpression::<span class="name">channel</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#setChannel">setChannel</a>().</p>
+<!-- @@@channel -->
+<!-- $$$example[overload1]$$$example -->
+<h3 class="fn" id="example"><a name="example"></a><span class="type">int</span> CustomParserExpression::<span class="name">example</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#setExample">setExample</a>().</p>
+<!-- @@@example -->
+<!-- $$$fileNameCap[overload1]$$$fileNameCap -->
+<h3 class="fn" id="fileNameCap"><a name="fileNameCap"></a><span class="type">int</span> CustomParserExpression::<span class="name">fileNameCap</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#setFileNameCap">setFileNameCap</a>().</p>
+<!-- @@@fileNameCap -->
+<!-- $$$lineNumberCap[overload1]$$$lineNumberCap -->
+<h3 class="fn" id="lineNumberCap"><a name="lineNumberCap"></a><span class="type">int</span> CustomParserExpression::<span class="name">lineNumberCap</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#setLineNumberCap">setLineNumberCap</a>().</p>
+<!-- @@@lineNumberCap -->
+<!-- $$$match[overload1]$$$matchconstint& -->
+<h3 class="fn" id="match"><a name="match"></a><span class="type">int</span> CustomParserExpression::<span class="name">match</span>(<i>const int &amp;</i>) const</h3>
+<!-- @@@match -->
+<!-- $$$messageCap[overload1]$$$messageCap -->
+<h3 class="fn" id="messageCap"><a name="messageCap"></a><span class="type">int</span> CustomParserExpression::<span class="name">messageCap</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#setMessageCap">setMessageCap</a>().</p>
+<!-- @@@messageCap -->
+<!-- $$$pattern[overload1]$$$pattern -->
+<h3 class="fn" id="pattern"><a name="pattern"></a><span class="type">int</span> CustomParserExpression::<span class="name">pattern</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#setPattern">setPattern</a>().</p>
+<!-- @@@pattern -->
+<!-- $$$setChannel[overload1]$$$setChannelCustomParserExpression::CustomParserChannel -->
+<h3 class="fn" id="setChannel"><a name="setChannel"></a><span class="type">void</span> CustomParserExpression::<span class="name">setChannel</span>(<span class="type"><a href="projectexplorer-customparserexpression.html#CustomParserChannel-enum">CustomParserExpression::CustomParserChannel</a></span> <i>channel</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#channel">channel</a>().</p>
+<!-- @@@setChannel -->
+<!-- $$$setExample[overload1]$$$setExampleconstint& -->
+<h3 class="fn" id="setExample"><a name="setExample"></a><span class="type">void</span> CustomParserExpression::<span class="name">setExample</span>(const <span class="type">int</span> &amp;<i>example</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#example">example</a>().</p>
+<!-- @@@setExample -->
+<!-- $$$setFileNameCap[overload1]$$$setFileNameCapint -->
+<h3 class="fn" id="setFileNameCap"><a name="setFileNameCap"></a><span class="type">void</span> CustomParserExpression::<span class="name">setFileNameCap</span>(<span class="type">int</span> <i>fileNameCap</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#fileNameCap">fileNameCap</a>().</p>
+<!-- @@@setFileNameCap -->
+<!-- $$$setLineNumberCap[overload1]$$$setLineNumberCapint -->
+<h3 class="fn" id="setLineNumberCap"><a name="setLineNumberCap"></a><span class="type">void</span> CustomParserExpression::<span class="name">setLineNumberCap</span>(<span class="type">int</span> <i>lineNumberCap</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#lineNumberCap">lineNumberCap</a>().</p>
+<!-- @@@setLineNumberCap -->
+<!-- $$$setMessageCap[overload1]$$$setMessageCapint -->
+<h3 class="fn" id="setMessageCap"><a name="setMessageCap"></a><span class="type">void</span> CustomParserExpression::<span class="name">setMessageCap</span>(<span class="type">int</span> <i>messageCap</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#messageCap">messageCap</a>().</p>
+<!-- @@@setMessageCap -->
+<!-- $$$setPattern[overload1]$$$setPatternconstint& -->
+<h3 class="fn" id="setPattern"><a name="setPattern"></a><span class="type">void</span> CustomParserExpression::<span class="name">setPattern</span>(const <span class="type">int</span> &amp;<i>pattern</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-customparserexpression.html#pattern">pattern</a>().</p>
+<!-- @@@setPattern -->
+<!-- $$$operator==[overload1]$$$operator==constProjectExplorer::CustomParserExpression& -->
+<h3 class="fn" id="operator-eq-eq"><a name="operator-eq-eq"></a><span class="type">bool</span> CustomParserExpression::<span class="name">operator==</span>(const <span class="type">ProjectExplorer::CustomParserExpression</span> &amp;<i>other</i>) const</h3>
+<!-- @@@operator== -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

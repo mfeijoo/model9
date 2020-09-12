@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Exit Statement</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+<a name="exit"></a>
+<a name="bm_id3152924"></a>
+  <meta itemprop="keywords" content="Exit statement">
+
+
+
+<h1 itemprop="articleSection" id="hd_id3152924">Exit Statement</h1>
+<p id="par_id3153394" class="paragraph">Exits a <span class="emph">Do...Loop</span>, <span class="emph">For...Next</span>, a function, or a subroutine.</p>
+
+
+<h2 itemprop="articleSection" id="hd_id3149763">Syntax:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">see Parameters</pre>
+<br>
+</div>
+
+<h2 itemprop="articleSection" id="hd_id3148943">Parameters:</h2>
+<p id="par_id3154760" class="paragraph"> <span class="emph">Exit Do</span> </p>
+<p id="par_id3147559" class="paragraph">Only valid within a <span class="emph">Do...Loop</span> statement to exit the loop. Program execution continues with the statement that follows the Loop statement. If <span class="emph">Do...Loop</span> statements are nested, the control is transferred to the loop in the next higher level.</p>
+<p id="par_id3150398" class="paragraph"> <span class="emph">Exit For</span> </p>
+<p id="par_id3148797" class="paragraph">Only valid within a <span class="emph">For...Next</span> loop to exit the loop. Program execution continues with the first statement that follows the <span class="emph">Next</span> statement. In nested statements, the control is transferred to the loop in the next higher level.</p>
+<p id="par_id3147229" class="paragraph"> <span class="emph">Exit Function</span> </p>
+<p id="par_id3154685" class="paragraph">Exits the <span class="emph">Function</span> procedure immediately. Program execution continues with the statement that follows the <span class="emph">Function</span> call.</p>
+<p id="par_id3155132" class="paragraph"> <span class="emph">Exit Sub</span> </p>
+<p id="par_id3149561" class="paragraph">Exits the subroutine immediately. Program execution continues with the statement that follows the <span class="emph">Sub</span> call.</p>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>The Exit statement does not define the end of a structure, and must not be confused with the End statement.</p></div>
+</div>
+<br>
+
+<h2 itemprop="articleSection" id="hd_id3147348">Example:</h2>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Sub ExampleExit</pre>
+<br>
+<pre class="bascodepar">Dim sReturn As String</pre>
+<br>
+<pre class="bascodepar">Dim sListArray(10) As String</pre>
+<br>
+<pre class="bascodepar">Dim siStep As Single</pre>
+<br>
+<pre class="bascodepar">    For siStep = 0 To 10 ' Fill array with test data</pre>
+<br>
+<pre class="bascodepar">        sListArray(siStep) = chr(siStep + 65)</pre>
+<br>
+<pre class="bascodepar">        MsgBox sListArray(siStep)</pre>
+<br>
+<pre class="bascodepar">    Next siStep</pre>
+<br>
+<pre class="bascodepar">    sReturn = LinSearch(sListArray(), "B")</pre>
+<br>
+<pre class="bascodepar">    Print sReturn</pre>
+<br>
+<pre class="bascodepar">End Sub</pre>
+<br>
+<pre class="bascodepar"> </pre>
+<br>
+<pre class="bascodepar">Function LinSearch( sList(), sItem As String ) As Integer</pre>
+<br>
+<pre class="bascodepar">Dim iCount As Integer</pre>
+<br>
+<pre class="bascodepar">' LinSearch searches a TextArray:sList() for a TextEntry:</pre>
+<br>
+<pre class="bascodepar">' Returns the index of the entry or 0 (Null)</pre>
+<br>
+<pre class="bascodepar">    For iCount=1 To Ubound( sList() )</pre>
+<br>
+<pre class="bascodepar">        If sList( iCount ) = sItem Then</pre>
+<br>
+<pre class="bascodepar">            Exit For ' sItem found</pre>
+<br>
+<pre class="bascodepar">        End If</pre>
+<br>
+<pre class="bascodepar">    Next iCount</pre>
+<br>
+<pre class="bascodepar">    If iCount = Ubound( sList() ) Then iCount = 0</pre>
+<br>
+<pre class="bascodepar">    LinSearch = iCount</pre>
+<br>
+<pre class="bascodepar">End Function</pre>
+<br>
+</div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03090412.xhp" target="_blank">/text/sbasic/shared/03090412.xhp</a></p>
+<p>Title is: Exit Statement</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

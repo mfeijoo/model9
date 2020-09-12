@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- debuggerplugin.cpp -->
+  <title>Debugger Namespace | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >Debugger Namespace</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#namespaces">Namespaces</a></li>
+<li class="level1"><a href="#types">Types</a></li>
+<li class="level1"><a href="#functions">Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">Debugger Namespace</h1>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">   <span class="preprocessor">#include &lt;Debugger&gt;</span>
+</td></tr></table></div><ul>
+</ul>
+<a name="namespaces"></a>
+<h2 id="namespaces">Namespaces</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="debugger-constants.html">Constants</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="debugger-core.html">Core</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger.html">Debugger</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal.html">Internal</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal.html">Internal</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> namespace </td><td class="memItemRight bottomAlign"><b><a href="debugger-utils.html">Utils</a></b></td></tr>
+</table></div>
+<a name="types"></a>
+<h2 id="types">Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#DebuggerCapabilities-enum">DebuggerCapabilities</a></b> { ReverseSteppingCapability, SnapshotCapability, AutoDerefPointersCapability, DisassemblerCapability, ..., BreakIndividualLocationsCapability }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#DebuggerCloseMode-enum">DebuggerCloseMode</a></b> { KillAtClose, KillAndExitMonitorAtClose, DetachAtClose }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#DebuggerEngineType-enum">DebuggerEngineType</a></b> { NoEngineType, GdbEngineType, CdbEngineType, PdbEngineType, LldbEngineType }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#DebuggerLanguage-enum">DebuggerLanguage</a></b> { NoLanguage, CppLanguage, QmlLanguage, AnyLanguage }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#DebuggerStartMode-enum">DebuggerStartMode</a></b> { NoStartMode, StartInternal, StartExternal, AttachExternal, ..., StartRemoteProcess }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#DebuggerState-enum">DebuggerState</a></b> { DebuggerNotReady, EngineSetupRequested, EngineSetupFailed, EngineSetupOk, ..., DebuggerFinished }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#LogChannel-enum">LogChannel</a></b> { LogInput, LogMiscInput, LogOutput, LogWarning, ..., ConsoleOutput }</td></tr>
+</table></div>
+<a name="functions"></a>
+<h2 id="functions">Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Debugger::Q_DECL_IMPORT </td><td class="memItemRight bottomAlign"><b><a href="debugger.html#operator-eq-eq">operator==</a></b>(const int &amp;<i>first</i>, const int &amp;<i>second</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$Debugger-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Debugger plugin namespace</p>
+</div>
+<!-- @@@Debugger -->
+<div class="nmspace">
+<h2>Namespaces</h2>
+<!-- $$$Constants -->
+<h3 class="fn" id=""><a name=""></a>namespace Debugger::<span class="name">Constants</span></h3>
+<!-- @@@Constants -->
+<!-- $$$Core -->
+<h3 class="fn" id=""><a name=""></a>namespace Debugger::<span class="name">Core</span></h3>
+<!-- @@@Core -->
+<!-- $$$Debugger -->
+<h3 class="fn" id=""><a name=""></a>namespace Debugger::<span class="name">Debugger</span></h3>
+<!-- @@@Debugger -->
+<!-- $$$Internal -->
+<h3 class="fn" id=""><a name=""></a>namespace Debugger::<span class="name">Internal</span></h3>
+<!-- @@@Internal -->
+<!-- $$$Internal -->
+<h3 class="fn" id=""><a name=""></a>namespace Debugger::<span class="name">Internal</span></h3>
+<p>Internal namespace of the Debugger plugin</p>
+<!-- @@@Internal -->
+<!-- $$$Utils -->
+<h3 class="fn" id=""><a name=""></a>namespace Debugger::<span class="name">Utils</span></h3>
+<!-- @@@Utils -->
+</div>
+<div class="types">
+<h2>Type Documentation</h2>
+<!-- $$$DebuggerCapabilities$$$ReverseSteppingCapability$$$SnapshotCapability$$$AutoDerefPointersCapability$$$DisassemblerCapability$$$RegisterCapability$$$ShowMemoryCapability$$$JumpToLineCapability$$$ReloadModuleCapability$$$ReloadModuleSymbolsCapability$$$BreakOnThrowAndCatchCapability$$$BreakConditionCapability$$$BreakModuleCapability$$$TracePointCapability$$$ReturnFromFunctionCapability$$$CreateFullBacktraceCapability$$$AddWatcherCapability$$$AddWatcherWhileRunningCapability$$$WatchWidgetsCapability$$$WatchpointByAddressCapability$$$WatchpointByExpressionCapability$$$ShowModuleSymbolsCapability$$$CatchCapability$$$OperateByInstructionCapability$$$RunToLineCapability$$$MemoryAddressCapability$$$ShowModuleSectionsCapability$$$WatchComplexExpressionsCapability$$$AdditionalQmlStackCapability$$$ResetInferiorCapability$$$BreakIndividualLocationsCapability -->
+<h3 class="fn" id="DebuggerCapabilities-enum"><a name="DebuggerCapabilities-enum"></a>enum Debugger::<span class="name">DebuggerCapabilities</span></h3>
+<!-- @@@DebuggerCapabilities -->
+<!-- $$$DebuggerCloseMode$$$KillAtClose$$$KillAndExitMonitorAtClose$$$DetachAtClose -->
+<h3 class="fn" id="DebuggerCloseMode-enum"><a name="DebuggerCloseMode-enum"></a>enum Debugger::<span class="name">DebuggerCloseMode</span></h3>
+<!-- @@@DebuggerCloseMode -->
+<!-- $$$DebuggerEngineType$$$NoEngineType$$$GdbEngineType$$$CdbEngineType$$$PdbEngineType$$$LldbEngineType -->
+<h3 class="fn" id="DebuggerEngineType-enum"><a name="DebuggerEngineType-enum"></a>enum Debugger::<span class="name">DebuggerEngineType</span></h3>
+<!-- @@@DebuggerEngineType -->
+<!-- $$$DebuggerLanguage$$$NoLanguage$$$CppLanguage$$$QmlLanguage$$$AnyLanguage -->
+<h3 class="fn" id="DebuggerLanguage-enum"><a name="DebuggerLanguage-enum"></a>enum Debugger::<span class="name">DebuggerLanguage</span></h3>
+<!-- @@@DebuggerLanguage -->
+<!-- $$$DebuggerStartMode$$$NoStartMode$$$StartInternal$$$StartExternal$$$AttachExternal$$$AttachCrashedExternal$$$AttachCore$$$AttachToRemoteServer$$$AttachToRemoteProcess$$$AttachToQmlServer$$$StartRemoteProcess -->
+<h3 class="fn" id="DebuggerStartMode-enum"><a name="DebuggerStartMode-enum"></a>enum Debugger::<span class="name">DebuggerStartMode</span></h3>
+<!-- @@@DebuggerStartMode -->
+<!-- $$$DebuggerState$$$DebuggerNotReady$$$EngineSetupRequested$$$EngineSetupFailed$$$EngineSetupOk$$$EngineRunRequested$$$EngineRunFailed$$$InferiorUnrunnable$$$InferiorRunRequested$$$InferiorRunOk$$$InferiorRunFailed$$$InferiorStopRequested$$$InferiorStopOk$$$InferiorStopFailed$$$InferiorShutdownRequested$$$InferiorShutdownFinished$$$EngineShutdownRequested$$$EngineShutdownFinished$$$DebuggerFinished -->
+<h3 class="fn" id="DebuggerState-enum"><a name="DebuggerState-enum"></a>enum Debugger::<span class="name">DebuggerState</span></h3>
+<!-- @@@DebuggerState -->
+<!-- $$$LogChannel$$$LogInput$$$LogMiscInput$$$LogOutput$$$LogWarning$$$LogError$$$LogStatus$$$LogTime$$$LogDebug$$$LogMisc$$$AppOutput$$$AppError$$$AppStuff$$$StatusBar$$$ConsoleOutput -->
+<h3 class="fn" id="LogChannel-enum"><a name="LogChannel-enum"></a>enum Debugger::<span class="name">LogChannel</span></h3>
+<!-- @@@LogChannel -->
+</div>
+<div class="func">
+<h2>Function Documentation</h2>
+<!-- $$$operator==[overload1]$$$operator==constint&constint& -->
+<h3 class="fn" id="operator-eq-eq"><a name="operator-eq-eq"></a><span class="type">Debugger::Q_DECL_IMPORT</span> Debugger::<span class="name">operator==</span>(const <span class="type">int</span> &amp;<i>first</i>, const <span class="type">int</span> &amp;<i>second</i>)</h3>
+<!-- @@@operator== -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

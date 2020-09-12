@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Support for VBA Macros</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+<a name="support_for_vba_macros"></a>
+<h1 itemprop="articleSection" id="hd_id051720170332046289">
+<a name="vbamacros"></a>Working with VBA Macros</h1>
+<p id="par_id05172017033242490" class="paragraph"><span class="avis">Visual Basic for Applications (VBA) is an implementation of Microsoft's Visual Basic which is built into all Microsoft Office applications. </span></p>
+
+<p id="par_id051720170332428854" class="paragraph">Support for VBA is not complete, but it covers a large portion of the common usage patterns. Most macros use a manageable subset of objects in the Excel API (such as the Range, Worksheet, Workbook, etc.) and the support include those objects, and the most commonly used method/properties of those objects.</p>
+
+<h2 itemprop="articleSection" id="hd_id051720170350145604">Loading Microsoft Office documents with executable VBA macros</h2>
+<p id="par_id051720170350147298" class="paragraph">Choose  <span id="swlnidm16" class="switchinline"><span hidden="true" id="MACidm17"><span class="emph">LibreOffice - Preferences</span></span><span hidden="true" id="defaultidm19"><span class="emph">Tools - Options</span></span><script type="text/javascript">
+                    setSystemSpan("swlnidm16");
+                </script></span><span class="emph"> - Load/Save - VBA Properties</span> and mark the <span class="emph">Executable code</span> checkbox. Then load or open your document.</p>
+<div class="embedded">
+<a name="executablecode"></a>
+
+
+<h3 id="hd_id0523200811475727">Executable code</h3>
+<p id="par_id0523200811475733" class="paragraph"><span class="avis">The VBA (Visual Basic for Applications) code will be loaded ready to be executed. If this checkbox is not checked, the VBA code will be commented out so it can be inspected, but will not run.</span></p>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>After loading the VBA code, LibreOffice inserts the statement <span class="literal">Option VBASupport 1</span> in every Basic module to enable a limited support for VBA statements, functions and objects. See <a target="_top" href="en-US/text/sbasic/shared/03103350.html">Option VBASupport Statement</a> for more information.</p></div>
+</div>
+<br>
+</div>
+
+<h2 itemprop="articleSection" id="hd_id051720170400536628">Running VBA Macros</h2>
+<p id="par_id051720170400539565" class="paragraph">Run VBA macros in the same way as LibreOffice Basic macros.</p>
+<div class="warning">
+<div class="noteicon"><img src="media/icon-themes/help/warning.png" alt="Warning Icon 
+" title="Warning Icon 
+"></div>
+<div class="notetext"><p>Since support for VBA is not complete, you may have to edit the VBA code and complete the missing support with LibreOffice Basic objects, statements and functions.</p></div>
+</div>
+<br>
+
+<h2 itemprop="articleSection" id="hd_id051720170400533411">Editing VBA Macros</h2>
+<p id="par_id051720170400532486" class="paragraph">VBA macros can be edited in the LibreOffice Basic IDE.</p>
+
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+<p id="par_id051720171119254111" class="paragraph"><a target="_top" href="en-US/text/shared/optionen/01130100.html">VBA Properties</a></p>
+<p id="par_id051720170407401872" class="paragraph"><a target="_top" href="en-US/text/sbasic/shared/01030000.html">LibreOffice Basic IDE</a></p>
+</div>
+</div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/vbasupport.xhp" target="_blank">/text/sbasic/shared/vbasupport.xhp</a></p>
+<p>Title is: Support for VBA Macros</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

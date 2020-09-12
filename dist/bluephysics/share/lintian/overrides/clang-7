@@ -1,0 +1,2 @@
+# Does not link otherwise
+clang-7: embedded-library usr/lib/llvm-7/bin/clang: libjsoncpp

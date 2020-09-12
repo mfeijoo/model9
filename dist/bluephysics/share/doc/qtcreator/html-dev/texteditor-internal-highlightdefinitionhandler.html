@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>HighlightDefinitionHandler Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >HighlightDefinitionHandler</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HighlightDefinitionHandler Class</h1>
+<span class="small-subtitle">(<a href="texteditor-internal-highlightdefinitionhandler.html">TextEditor::Internal::HighlightDefinitionHandler</a>)<br/></span>
+<ul>
+<li><a href="texteditor-internal-highlightdefinitionhandler-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#HighlightDefinitionHandler">HighlightDefinitionHandler</a></b>(const int &amp;<i>definition</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#dtor.HighlightDefinitionHandler">~HighlightDefinitionHandler</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#characters">characters</a></b>(const int &amp;<i>ch</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#endDocument">endDocument</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#endElement">endElement</a></b>(const int &amp;<i>namespaceURI</i>, const int &amp;<i>localName</i>, const int &amp;<i>qName</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#startDocument">startDocument</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-highlightdefinitionhandler.html#startElement">startElement</a></b>(const int &amp;<i>namespaceURI</i>, const int &amp;<i>localName</i>, const int &amp;<i>qName</i>, const int &amp;<i>atts</i>) override</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HighlightDefinitionHandler[overload1]$$$HighlightDefinitionHandlerconstint& -->
+<h3 class="fn" id="HighlightDefinitionHandler"><a name="HighlightDefinitionHandler"></a>HighlightDefinitionHandler::<span class="name">HighlightDefinitionHandler</span>(const <span class="type">int</span> &amp;<i>definition</i>)</h3>
+<p>Default constructs an instance of HighlightDefinitionHandler.</p><!-- @@@HighlightDefinitionHandler -->
+<!-- $$$~HighlightDefinitionHandler[overload1]$$$~HighlightDefinitionHandler -->
+<h3 class="fn" id="dtor.HighlightDefinitionHandler"><a name="dtor.HighlightDefinitionHandler"></a>HighlightDefinitionHandler::<span class="name">~HighlightDefinitionHandler</span>()</h3>
+<p>Destroys the instance of HighlightDefinitionHandler.</p><!-- @@@~HighlightDefinitionHandler -->
+<!-- $$$characters[overload1]$$$charactersconstint& -->
+<h3 class="fn" id="characters"><a name="characters"></a><span class="type">bool</span> HighlightDefinitionHandler::<span class="name">characters</span>(const <span class="type">int</span> &amp;<i>ch</i>)</h3>
+<!-- @@@characters -->
+<!-- $$$endDocument[overload1]$$$endDocument -->
+<h3 class="fn" id="endDocument"><a name="endDocument"></a><span class="type">bool</span> HighlightDefinitionHandler::<span class="name">endDocument</span>()</h3>
+<!-- @@@endDocument -->
+<!-- $$$endElement[overload1]$$$endElementconstint&constint&constint& -->
+<h3 class="fn" id="endElement"><a name="endElement"></a><span class="type">bool</span> HighlightDefinitionHandler::<span class="name">endElement</span>(const <span class="type">int</span> &amp;<i>namespaceURI</i>, const <span class="type">int</span> &amp;<i>localName</i>, const <span class="type">int</span> &amp;<i>qName</i>)</h3>
+<!-- @@@endElement -->
+<!-- $$$startDocument[overload1]$$$startDocument -->
+<h3 class="fn" id="startDocument"><a name="startDocument"></a><span class="type">bool</span> HighlightDefinitionHandler::<span class="name">startDocument</span>()</h3>
+<!-- @@@startDocument -->
+<!-- $$$startElement[overload1]$$$startElementconstint&constint&constint&constint& -->
+<h3 class="fn" id="startElement"><a name="startElement"></a><span class="type">bool</span> HighlightDefinitionHandler::<span class="name">startElement</span>(const <span class="type">int</span> &amp;<i>namespaceURI</i>, const <span class="type">int</span> &amp;<i>localName</i>, const <span class="type">int</span> &amp;<i>qName</i>, const <span class="type">int</span> &amp;<i>atts</i>)</h3>
+<!-- @@@startElement -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

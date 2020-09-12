@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>DebuggerEngine Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >DebuggerEngine</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#static-protected-members">Static Protected Members</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">DebuggerEngine Class</h1>
+<span class="small-subtitle">(<a href="debugger-debugger-internal-debuggerengine.html">Debugger::Debugger::Internal::DebuggerEngine</a>)<br/></span>
+<ul>
+<li><a href="debugger-debugger-internal-debuggerengine-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#debuggerName">debuggerName</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#formatStartParameters">formatStartParameters</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleAbort">handleAbort</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleAddToWatchWindow">handleAddToWatchWindow</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecContinue">handleExecContinue</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecDetach">handleExecDetach</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecInterrupt">handleExecInterrupt</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecJumpToLine">handleExecJumpToLine</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecReturn">handleExecReturn</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecRunToLine">handleExecRunToLine</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecRunToSelectedFunction">handleExecRunToSelectedFunction</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecStepIn">handleExecStepIn</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecStepOut">handleExecStepOut</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleExecStepOver">handleExecStepOver</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleFrameDown">handleFrameDown</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleFrameUp">handleFrameUp</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleReset">handleReset</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#handleUserStop">handleUserStop</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Debugger::Debugger::Internal::WatchTreeView *</td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#inspectorView">inspectorView</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#isModulesWindowVisible">isModulesWindowVisible</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#isRegistersWindowVisible">isRegistersWindowVisible</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointChangeFailed">notifyBreakpointChangeFailed</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointChangeOk">notifyBreakpointChangeOk</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointChangeProceeding">notifyBreakpointChangeProceeding</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointInsertFailed">notifyBreakpointInsertFailed</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointInsertOk">notifyBreakpointInsertOk</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointInsertProceeding">notifyBreakpointInsertProceeding</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointNeedsReinsertion">notifyBreakpointNeedsReinsertion</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointPending">notifyBreakpointPending</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointRemoveFailed">notifyBreakpointRemoveFailed</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointRemoveOk">notifyBreakpointRemoveOk</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyBreakpointRemoveProceeding">notifyBreakpointRemoveProceeding</a></b>(const int &amp;<i>bp</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#openMemoryEditor">openMemoryEditor</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#raiseWatchersWindow">raiseWatchersWindow</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#updateLocalsWindow">updateLocalsWindow</a></b>(bool <i>showReturn</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#updateState">updateState</a></b>(bool <i>alsoUpdateCompanion</i>)</td></tr>
+</table></div>
+<a name="protected-functions"></a>
+<h2 id="protected-functions">Protected Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#checkState">checkState</a></b>(Debugger::DebuggerState <i>state</i>, const char *<i>file</i>, int <i>line</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Debugger::Debugger::Internal::DebuggerEngine *</td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#companionEngine">companionEngine</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#continueInferior">continueInferior</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#detachDebugger">detachDebugger</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#device">device</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#doUpdateLocals">doUpdateLocals</a></b>(const Debugger::Debugger::Internal::UpdateParameters &amp;<i>params</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeJumpToLine">executeJumpToLine</a></b>(<i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeReturn">executeReturn</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeRunToFunction">executeRunToFunction</a></b>(<i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeRunToLine">executeRunToLine</a></b>(<i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeStepIn">executeStepIn</a></b>(<i>bool</i> = false)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeStepOut">executeStepOut</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#executeStepOver">executeStepOver</a></b>(<i>bool</i> = false)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#frameDown">frameDown</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#frameUp">frameUp</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#interruptInferior">interruptInferior</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#isNativeMixedActive">isNativeMixedActive</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#isNativeMixedActiveFrame">isNativeMixedActiveFrame</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#isNativeMixedEnabled">isNativeMixedEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyDebuggerProcessFinished">notifyDebuggerProcessFinished</a></b>(int <i>exitCode</i>, int <i>exitStatus</i>, const int &amp;<i>backendName</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineIll">notifyEngineIll</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunAndInferiorRunOk">notifyEngineRunAndInferiorRunOk</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunAndInferiorStopOk">notifyEngineRunAndInferiorStopOk</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunFailed">notifyEngineRunFailed</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineRunOkAndInferiorUnrunnable">notifyEngineRunOkAndInferiorUnrunnable</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineSetupFailed">notifyEngineSetupFailed</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineSetupOk">notifyEngineSetupOk</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineShutdownFinished">notifyEngineShutdownFinished</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyEngineSpontaneousShutdown">notifyEngineSpontaneousShutdown</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorExited">notifyInferiorExited</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorIll">notifyInferiorIll</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorRunFailed">notifyInferiorRunFailed</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorRunOk">notifyInferiorRunOk</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorRunRequested">notifyInferiorRunRequested</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorShutdownFinished">notifyInferiorShutdownFinished</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorSpontaneousStop">notifyInferiorSpontaneousStop</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorStopFailed">notifyInferiorStopFailed</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#notifyInferiorStopOk">notifyInferiorStopOk</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#requestInterruptInferior">requestInterruptInferior</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#resetInferior">resetInferior</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#runEngine">runEngine</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#setDebuggerName">setDebuggerName</a></b>(const int &amp;<i>name</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#setState">setState</a></b>(Debugger::DebuggerState <i>state</i>, bool <i>forced</i> = false)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#setupEngine">setupEngine</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#showStoppedByExceptionMessageBox">showStoppedByExceptionMessageBox</a></b>(const int &amp;<i>description</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#showStoppedBySignalMessageBox">showStoppedBySignalMessageBox</a></b>(const int <i>meaning</i>, int <i>name</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#shutdownEngine">shutdownEngine</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#shutdownInferior">shutdownInferior</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#startDying">startDying</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Debugger::Debugger::Internal::TerminalRunner *</td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#terminal">terminal</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#updateLocalsView">updateLocalsView</a></b>(const int &amp;<i>all</i>)</td></tr>
+</table></div>
+<a name="static-protected-members"></a>
+<h2 id="static-protected-members">Static Protected Members</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#msgInterrupted">msgInterrupted</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#msgStopped">msgStopped</a></b>(<i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#msgStoppedByException">msgStoppedByException</a></b>(<i>const int &amp;</i>, <i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-debugger-internal-debuggerengine.html#msgStoppedBySignal">msgStoppedBySignal</a></b>(<i>const int &amp;</i>, <i>const int &amp;</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$checkState[overload1]$$$checkStateDebugger::DebuggerStateconstchar*int -->
+<h3 class="fn" id="checkState"><a name="checkState"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">checkState</span>(<span class="type">Debugger::DebuggerState</span> <i>state</i>, const <span class="type">char</span> *<i>file</i>, <span class="type">int</span> <i>line</i>)</h3>
+<!-- @@@checkState -->
+<!-- $$$companionEngine[overload1]$$$companionEngine -->
+<h3 class="fn" id="companionEngine"><a name="companionEngine"></a><code>[protected] </code><span class="type">Debugger::Debugger::Internal::DebuggerEngine</span> *DebuggerEngine::<span class="name">companionEngine</span>() const</h3>
+<!-- @@@companionEngine -->
+<!-- $$$continueInferior[overload1]$$$continueInferior -->
+<h3 class="fn" id="continueInferior"><a name="continueInferior"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">continueInferior</span>()</h3>
+<!-- @@@continueInferior -->
+<!-- $$$debuggerName[overload1]$$$debuggerName -->
+<h3 class="fn" id="debuggerName"><a name="debuggerName"></a><span class="type">int</span> DebuggerEngine::<span class="name">debuggerName</span>() const</h3>
+<p><b>See also </b><a href="debugger-debugger-internal-debuggerengine.html#setDebuggerName">setDebuggerName</a>().</p>
+<!-- @@@debuggerName -->
+<!-- $$$detachDebugger[overload1]$$$detachDebugger -->
+<h3 class="fn" id="detachDebugger"><a name="detachDebugger"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">detachDebugger</span>()</h3>
+<!-- @@@detachDebugger -->
+<!-- $$$device[overload1]$$$device -->
+<h3 class="fn" id="device"><a name="device"></a><code>[protected] </code><span class="type">int</span> DebuggerEngine::<span class="name">device</span>() const</h3>
+<!-- @@@device -->
+<!-- $$$doUpdateLocals[overload1]$$$doUpdateLocalsconstDebugger::Debugger::Internal::UpdateParameters& -->
+<h3 class="fn" id="doUpdateLocals"><a name="doUpdateLocals"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">doUpdateLocals</span>(const <span class="type">Debugger::Debugger::Internal::UpdateParameters</span> &amp;<i>params</i>)</h3>
+<!-- @@@doUpdateLocals -->
+<!-- $$$executeJumpToLine[overload1]$$$executeJumpToLineconstint& -->
+<h3 class="fn" id="executeJumpToLine"><a name="executeJumpToLine"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeJumpToLine</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@executeJumpToLine -->
+<!-- $$$executeReturn[overload1]$$$executeReturn -->
+<h3 class="fn" id="executeReturn"><a name="executeReturn"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeReturn</span>()</h3>
+<!-- @@@executeReturn -->
+<!-- $$$executeRunToFunction[overload1]$$$executeRunToFunctionconstint& -->
+<h3 class="fn" id="executeRunToFunction"><a name="executeRunToFunction"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeRunToFunction</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@executeRunToFunction -->
+<!-- $$$executeRunToLine[overload1]$$$executeRunToLineconstint& -->
+<h3 class="fn" id="executeRunToLine"><a name="executeRunToLine"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeRunToLine</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@executeRunToLine -->
+<!-- $$$executeStepIn[overload1]$$$executeStepInbool -->
+<h3 class="fn" id="executeStepIn"><a name="executeStepIn"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeStepIn</span>(<i>bool</i> = false)</h3>
+<!-- @@@executeStepIn -->
+<!-- $$$executeStepOut[overload1]$$$executeStepOut -->
+<h3 class="fn" id="executeStepOut"><a name="executeStepOut"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeStepOut</span>()</h3>
+<!-- @@@executeStepOut -->
+<!-- $$$executeStepOver[overload1]$$$executeStepOverbool -->
+<h3 class="fn" id="executeStepOver"><a name="executeStepOver"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">executeStepOver</span>(<i>bool</i> = false)</h3>
+<!-- @@@executeStepOver -->
+<!-- $$$formatStartParameters[overload1]$$$formatStartParameters -->
+<h3 class="fn" id="formatStartParameters"><a name="formatStartParameters"></a><span class="type">int</span> DebuggerEngine::<span class="name">formatStartParameters</span>() const</h3>
+<!-- @@@formatStartParameters -->
+<!-- $$$frameDown[overload1]$$$frameDown -->
+<h3 class="fn" id="frameDown"><a name="frameDown"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">frameDown</span>()</h3>
+<!-- @@@frameDown -->
+<!-- $$$frameUp[overload1]$$$frameUp -->
+<h3 class="fn" id="frameUp"><a name="frameUp"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">frameUp</span>()</h3>
+<!-- @@@frameUp -->
+<!-- $$$handleAbort[overload1]$$$handleAbort -->
+<h3 class="fn" id="handleAbort"><a name="handleAbort"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleAbort</span>()</h3>
+<!-- @@@handleAbort -->
+<!-- $$$handleAddToWatchWindow[overload1]$$$handleAddToWatchWindow -->
+<h3 class="fn" id="handleAddToWatchWindow"><a name="handleAddToWatchWindow"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleAddToWatchWindow</span>()</h3>
+<!-- @@@handleAddToWatchWindow -->
+<!-- $$$handleExecContinue[overload1]$$$handleExecContinue -->
+<h3 class="fn" id="handleExecContinue"><a name="handleExecContinue"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecContinue</span>()</h3>
+<!-- @@@handleExecContinue -->
+<!-- $$$handleExecDetach[overload1]$$$handleExecDetach -->
+<h3 class="fn" id="handleExecDetach"><a name="handleExecDetach"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecDetach</span>()</h3>
+<!-- @@@handleExecDetach -->
+<!-- $$$handleExecInterrupt[overload1]$$$handleExecInterrupt -->
+<h3 class="fn" id="handleExecInterrupt"><a name="handleExecInterrupt"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecInterrupt</span>()</h3>
+<!-- @@@handleExecInterrupt -->
+<!-- $$$handleExecJumpToLine[overload1]$$$handleExecJumpToLine -->
+<h3 class="fn" id="handleExecJumpToLine"><a name="handleExecJumpToLine"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecJumpToLine</span>()</h3>
+<!-- @@@handleExecJumpToLine -->
+<!-- $$$handleExecReturn[overload1]$$$handleExecReturn -->
+<h3 class="fn" id="handleExecReturn"><a name="handleExecReturn"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecReturn</span>()</h3>
+<!-- @@@handleExecReturn -->
+<!-- $$$handleExecRunToLine[overload1]$$$handleExecRunToLine -->
+<h3 class="fn" id="handleExecRunToLine"><a name="handleExecRunToLine"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecRunToLine</span>()</h3>
+<!-- @@@handleExecRunToLine -->
+<!-- $$$handleExecRunToSelectedFunction[overload1]$$$handleExecRunToSelectedFunction -->
+<h3 class="fn" id="handleExecRunToSelectedFunction"><a name="handleExecRunToSelectedFunction"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecRunToSelectedFunction</span>()</h3>
+<!-- @@@handleExecRunToSelectedFunction -->
+<!-- $$$handleExecStepIn[overload1]$$$handleExecStepIn -->
+<h3 class="fn" id="handleExecStepIn"><a name="handleExecStepIn"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecStepIn</span>()</h3>
+<!-- @@@handleExecStepIn -->
+<!-- $$$handleExecStepOut[overload1]$$$handleExecStepOut -->
+<h3 class="fn" id="handleExecStepOut"><a name="handleExecStepOut"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecStepOut</span>()</h3>
+<!-- @@@handleExecStepOut -->
+<!-- $$$handleExecStepOver[overload1]$$$handleExecStepOver -->
+<h3 class="fn" id="handleExecStepOver"><a name="handleExecStepOver"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleExecStepOver</span>()</h3>
+<!-- @@@handleExecStepOver -->
+<!-- $$$handleFrameDown[overload1]$$$handleFrameDown -->
+<h3 class="fn" id="handleFrameDown"><a name="handleFrameDown"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleFrameDown</span>()</h3>
+<!-- @@@handleFrameDown -->
+<!-- $$$handleFrameUp[overload1]$$$handleFrameUp -->
+<h3 class="fn" id="handleFrameUp"><a name="handleFrameUp"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleFrameUp</span>()</h3>
+<!-- @@@handleFrameUp -->
+<!-- $$$handleReset[overload1]$$$handleReset -->
+<h3 class="fn" id="handleReset"><a name="handleReset"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleReset</span>()</h3>
+<!-- @@@handleReset -->
+<!-- $$$handleUserStop[overload1]$$$handleUserStop -->
+<h3 class="fn" id="handleUserStop"><a name="handleUserStop"></a><span class="type">void</span> DebuggerEngine::<span class="name">handleUserStop</span>()</h3>
+<!-- @@@handleUserStop -->
+<!-- $$$inspectorView[overload1]$$$inspectorView -->
+<h3 class="fn" id="inspectorView"><a name="inspectorView"></a><span class="type">Debugger::Debugger::Internal::WatchTreeView</span> *DebuggerEngine::<span class="name">inspectorView</span>()</h3>
+<!-- @@@inspectorView -->
+<!-- $$$interruptInferior[overload1]$$$interruptInferior -->
+<h3 class="fn" id="interruptInferior"><a name="interruptInferior"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">interruptInferior</span>()</h3>
+<!-- @@@interruptInferior -->
+<!-- $$$isModulesWindowVisible[overload1]$$$isModulesWindowVisible -->
+<h3 class="fn" id="isModulesWindowVisible"><a name="isModulesWindowVisible"></a><span class="type">bool</span> DebuggerEngine::<span class="name">isModulesWindowVisible</span>() const</h3>
+<!-- @@@isModulesWindowVisible -->
+<!-- $$$isNativeMixedActive[overload1]$$$isNativeMixedActive -->
+<h3 class="fn" id="isNativeMixedActive"><a name="isNativeMixedActive"></a><code>[protected] </code><span class="type">bool</span> DebuggerEngine::<span class="name">isNativeMixedActive</span>() const</h3>
+<!-- @@@isNativeMixedActive -->
+<!-- $$$isNativeMixedActiveFrame[overload1]$$$isNativeMixedActiveFrame -->
+<h3 class="fn" id="isNativeMixedActiveFrame"><a name="isNativeMixedActiveFrame"></a><code>[protected] </code><span class="type">bool</span> DebuggerEngine::<span class="name">isNativeMixedActiveFrame</span>() const</h3>
+<!-- @@@isNativeMixedActiveFrame -->
+<!-- $$$isNativeMixedEnabled[overload1]$$$isNativeMixedEnabled -->
+<h3 class="fn" id="isNativeMixedEnabled"><a name="isNativeMixedEnabled"></a><code>[protected] </code><span class="type">bool</span> DebuggerEngine::<span class="name">isNativeMixedEnabled</span>() const</h3>
+<!-- @@@isNativeMixedEnabled -->
+<!-- $$$isRegistersWindowVisible[overload1]$$$isRegistersWindowVisible -->
+<h3 class="fn" id="isRegistersWindowVisible"><a name="isRegistersWindowVisible"></a><span class="type">bool</span> DebuggerEngine::<span class="name">isRegistersWindowVisible</span>() const</h3>
+<!-- @@@isRegistersWindowVisible -->
+<!-- $$$msgInterrupted[overload1]$$$msgInterrupted -->
+<h3 class="fn" id="msgInterrupted"><a name="msgInterrupted"></a><code>[static protected] </code><span class="type">int</span> DebuggerEngine::<span class="name">msgInterrupted</span>()</h3>
+<!-- @@@msgInterrupted -->
+<!-- $$$msgStopped[overload1]$$$msgStoppedconstint& -->
+<h3 class="fn" id="msgStopped"><a name="msgStopped"></a><code>[static protected] </code><span class="type">int</span> DebuggerEngine::<span class="name">msgStopped</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@msgStopped -->
+<!-- $$$msgStoppedByException[overload1]$$$msgStoppedByExceptionconstint&constint& -->
+<h3 class="fn" id="msgStoppedByException"><a name="msgStoppedByException"></a><code>[static protected] </code><span class="type">int</span> DebuggerEngine::<span class="name">msgStoppedByException</span>(<i>const int &amp;</i>, <i>const int &amp;</i>)</h3>
+<!-- @@@msgStoppedByException -->
+<!-- $$$msgStoppedBySignal[overload1]$$$msgStoppedBySignalconstint&constint& -->
+<h3 class="fn" id="msgStoppedBySignal"><a name="msgStoppedBySignal"></a><code>[static protected] </code><span class="type">int</span> DebuggerEngine::<span class="name">msgStoppedBySignal</span>(<i>const int &amp;</i>, <i>const int &amp;</i>)</h3>
+<!-- @@@msgStoppedBySignal -->
+<!-- $$$notifyBreakpointChangeFailed[overload1]$$$notifyBreakpointChangeFailedconstint& -->
+<h3 class="fn" id="notifyBreakpointChangeFailed"><a name="notifyBreakpointChangeFailed"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointChangeFailed</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointChangeFailed -->
+<!-- $$$notifyBreakpointChangeOk[overload1]$$$notifyBreakpointChangeOkconstint& -->
+<h3 class="fn" id="notifyBreakpointChangeOk"><a name="notifyBreakpointChangeOk"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointChangeOk</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointChangeOk -->
+<!-- $$$notifyBreakpointChangeProceeding[overload1]$$$notifyBreakpointChangeProceedingconstint& -->
+<h3 class="fn" id="notifyBreakpointChangeProceeding"><a name="notifyBreakpointChangeProceeding"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointChangeProceeding</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointChangeProceeding -->
+<!-- $$$notifyBreakpointInsertFailed[overload1]$$$notifyBreakpointInsertFailedconstint& -->
+<h3 class="fn" id="notifyBreakpointInsertFailed"><a name="notifyBreakpointInsertFailed"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointInsertFailed</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointInsertFailed -->
+<!-- $$$notifyBreakpointInsertOk[overload1]$$$notifyBreakpointInsertOkconstint& -->
+<h3 class="fn" id="notifyBreakpointInsertOk"><a name="notifyBreakpointInsertOk"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointInsertOk</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointInsertOk -->
+<!-- $$$notifyBreakpointInsertProceeding[overload1]$$$notifyBreakpointInsertProceedingconstint& -->
+<h3 class="fn" id="notifyBreakpointInsertProceeding"><a name="notifyBreakpointInsertProceeding"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointInsertProceeding</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointInsertProceeding -->
+<!-- $$$notifyBreakpointNeedsReinsertion[overload1]$$$notifyBreakpointNeedsReinsertionconstint& -->
+<h3 class="fn" id="notifyBreakpointNeedsReinsertion"><a name="notifyBreakpointNeedsReinsertion"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointNeedsReinsertion</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointNeedsReinsertion -->
+<!-- $$$notifyBreakpointPending[overload1]$$$notifyBreakpointPendingconstint& -->
+<h3 class="fn" id="notifyBreakpointPending"><a name="notifyBreakpointPending"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointPending</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointPending -->
+<!-- $$$notifyBreakpointRemoveFailed[overload1]$$$notifyBreakpointRemoveFailedconstint& -->
+<h3 class="fn" id="notifyBreakpointRemoveFailed"><a name="notifyBreakpointRemoveFailed"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointRemoveFailed</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointRemoveFailed -->
+<!-- $$$notifyBreakpointRemoveOk[overload1]$$$notifyBreakpointRemoveOkconstint& -->
+<h3 class="fn" id="notifyBreakpointRemoveOk"><a name="notifyBreakpointRemoveOk"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointRemoveOk</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointRemoveOk -->
+<!-- $$$notifyBreakpointRemoveProceeding[overload1]$$$notifyBreakpointRemoveProceedingconstint& -->
+<h3 class="fn" id="notifyBreakpointRemoveProceeding"><a name="notifyBreakpointRemoveProceeding"></a><span class="type">void</span> DebuggerEngine::<span class="name">notifyBreakpointRemoveProceeding</span>(const <span class="type">int</span> &amp;<i>bp</i>)</h3>
+<!-- @@@notifyBreakpointRemoveProceeding -->
+<!-- $$$notifyDebuggerProcessFinished[overload1]$$$notifyDebuggerProcessFinishedintintconstint& -->
+<h3 class="fn" id="notifyDebuggerProcessFinished"><a name="notifyDebuggerProcessFinished"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyDebuggerProcessFinished</span>(<span class="type">int</span> <i>exitCode</i>, <span class="type">int</span> <i>exitStatus</i>, const <span class="type">int</span> &amp;<i>backendName</i>)</h3>
+<!-- @@@notifyDebuggerProcessFinished -->
+<!-- $$$notifyEngineIll[overload1]$$$notifyEngineIll -->
+<h3 class="fn" id="notifyEngineIll"><a name="notifyEngineIll"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineIll</span>()</h3>
+<!-- @@@notifyEngineIll -->
+<!-- $$$notifyEngineRunAndInferiorRunOk[overload1]$$$notifyEngineRunAndInferiorRunOk -->
+<h3 class="fn" id="notifyEngineRunAndInferiorRunOk"><a name="notifyEngineRunAndInferiorRunOk"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineRunAndInferiorRunOk</span>()</h3>
+<!-- @@@notifyEngineRunAndInferiorRunOk -->
+<!-- $$$notifyEngineRunAndInferiorStopOk[overload1]$$$notifyEngineRunAndInferiorStopOk -->
+<h3 class="fn" id="notifyEngineRunAndInferiorStopOk"><a name="notifyEngineRunAndInferiorStopOk"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineRunAndInferiorStopOk</span>()</h3>
+<!-- @@@notifyEngineRunAndInferiorStopOk -->
+<!-- $$$notifyEngineRunFailed[overload1]$$$notifyEngineRunFailed -->
+<h3 class="fn" id="notifyEngineRunFailed"><a name="notifyEngineRunFailed"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineRunFailed</span>()</h3>
+<!-- @@@notifyEngineRunFailed -->
+<!-- $$$notifyEngineRunOkAndInferiorUnrunnable[overload1]$$$notifyEngineRunOkAndInferiorUnrunnable -->
+<h3 class="fn" id="notifyEngineRunOkAndInferiorUnrunnable"><a name="notifyEngineRunOkAndInferiorUnrunnable"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineRunOkAndInferiorUnrunnable</span>()</h3>
+<!-- @@@notifyEngineRunOkAndInferiorUnrunnable -->
+<!-- $$$notifyEngineSetupFailed[overload1]$$$notifyEngineSetupFailed -->
+<h3 class="fn" id="notifyEngineSetupFailed"><a name="notifyEngineSetupFailed"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineSetupFailed</span>()</h3>
+<!-- @@@notifyEngineSetupFailed -->
+<!-- $$$notifyEngineSetupOk[overload1]$$$notifyEngineSetupOk -->
+<h3 class="fn" id="notifyEngineSetupOk"><a name="notifyEngineSetupOk"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineSetupOk</span>()</h3>
+<!-- @@@notifyEngineSetupOk -->
+<!-- $$$notifyEngineShutdownFinished[overload1]$$$notifyEngineShutdownFinished -->
+<h3 class="fn" id="notifyEngineShutdownFinished"><a name="notifyEngineShutdownFinished"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineShutdownFinished</span>()</h3>
+<!-- @@@notifyEngineShutdownFinished -->
+<!-- $$$notifyEngineSpontaneousShutdown[overload1]$$$notifyEngineSpontaneousShutdown -->
+<h3 class="fn" id="notifyEngineSpontaneousShutdown"><a name="notifyEngineSpontaneousShutdown"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyEngineSpontaneousShutdown</span>()</h3>
+<!-- @@@notifyEngineSpontaneousShutdown -->
+<!-- $$$notifyInferiorExited[overload1]$$$notifyInferiorExited -->
+<h3 class="fn" id="notifyInferiorExited"><a name="notifyInferiorExited"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorExited</span>()</h3>
+<!-- @@@notifyInferiorExited -->
+<!-- $$$notifyInferiorIll[overload1]$$$notifyInferiorIll -->
+<h3 class="fn" id="notifyInferiorIll"><a name="notifyInferiorIll"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorIll</span>()</h3>
+<!-- @@@notifyInferiorIll -->
+<!-- $$$notifyInferiorRunFailed[overload1]$$$notifyInferiorRunFailed -->
+<h3 class="fn" id="notifyInferiorRunFailed"><a name="notifyInferiorRunFailed"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorRunFailed</span>()</h3>
+<!-- @@@notifyInferiorRunFailed -->
+<!-- $$$notifyInferiorRunOk[overload1]$$$notifyInferiorRunOk -->
+<h3 class="fn" id="notifyInferiorRunOk"><a name="notifyInferiorRunOk"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorRunOk</span>()</h3>
+<!-- @@@notifyInferiorRunOk -->
+<!-- $$$notifyInferiorRunRequested[overload1]$$$notifyInferiorRunRequested -->
+<h3 class="fn" id="notifyInferiorRunRequested"><a name="notifyInferiorRunRequested"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorRunRequested</span>()</h3>
+<!-- @@@notifyInferiorRunRequested -->
+<!-- $$$notifyInferiorShutdownFinished[overload1]$$$notifyInferiorShutdownFinished -->
+<h3 class="fn" id="notifyInferiorShutdownFinished"><a name="notifyInferiorShutdownFinished"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorShutdownFinished</span>()</h3>
+<!-- @@@notifyInferiorShutdownFinished -->
+<!-- $$$notifyInferiorSpontaneousStop[overload1]$$$notifyInferiorSpontaneousStop -->
+<h3 class="fn" id="notifyInferiorSpontaneousStop"><a name="notifyInferiorSpontaneousStop"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorSpontaneousStop</span>()</h3>
+<!-- @@@notifyInferiorSpontaneousStop -->
+<!-- $$$notifyInferiorStopFailed[overload1]$$$notifyInferiorStopFailed -->
+<h3 class="fn" id="notifyInferiorStopFailed"><a name="notifyInferiorStopFailed"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorStopFailed</span>()</h3>
+<!-- @@@notifyInferiorStopFailed -->
+<!-- $$$notifyInferiorStopOk[overload1]$$$notifyInferiorStopOk -->
+<h3 class="fn" id="notifyInferiorStopOk"><a name="notifyInferiorStopOk"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">notifyInferiorStopOk</span>()</h3>
+<!-- @@@notifyInferiorStopOk -->
+<!-- $$$openMemoryEditor[overload1]$$$openMemoryEditor -->
+<h3 class="fn" id="openMemoryEditor"><a name="openMemoryEditor"></a><span class="type">void</span> DebuggerEngine::<span class="name">openMemoryEditor</span>()</h3>
+<!-- @@@openMemoryEditor -->
+<!-- $$$raiseWatchersWindow[overload1]$$$raiseWatchersWindow -->
+<h3 class="fn" id="raiseWatchersWindow"><a name="raiseWatchersWindow"></a><span class="type">void</span> DebuggerEngine::<span class="name">raiseWatchersWindow</span>()</h3>
+<!-- @@@raiseWatchersWindow -->
+<!-- $$$requestInterruptInferior[overload1]$$$requestInterruptInferior -->
+<h3 class="fn" id="requestInterruptInferior"><a name="requestInterruptInferior"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">requestInterruptInferior</span>()</h3>
+<!-- @@@requestInterruptInferior -->
+<!-- $$$resetInferior[overload1]$$$resetInferior -->
+<h3 class="fn" id="resetInferior"><a name="resetInferior"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">resetInferior</span>()</h3>
+<!-- @@@resetInferior -->
+<!-- $$$runEngine[overload1]$$$runEngine -->
+<h3 class="fn" id="runEngine"><a name="runEngine"></a><code>[pure virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">runEngine</span>()</h3>
+<!-- @@@runEngine -->
+<!-- $$$setDebuggerName[overload1]$$$setDebuggerNameconstint& -->
+<h3 class="fn" id="setDebuggerName"><a name="setDebuggerName"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">setDebuggerName</span>(const <span class="type">int</span> &amp;<i>name</i>)</h3>
+<p><b>See also </b><a href="debugger-debugger-internal-debuggerengine.html#debuggerName">debuggerName</a>().</p>
+<!-- @@@setDebuggerName -->
+<!-- $$$setState[overload1]$$$setStateDebugger::DebuggerStatebool -->
+<h3 class="fn" id="setState"><a name="setState"></a><code>[virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">setState</span>(<span class="type">Debugger::DebuggerState</span> <i>state</i>, <span class="type">bool</span> <i>forced</i> = false)</h3>
+<!-- @@@setState -->
+<!-- $$$setupEngine[overload1]$$$setupEngine -->
+<h3 class="fn" id="setupEngine"><a name="setupEngine"></a><code>[pure virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">setupEngine</span>()</h3>
+<!-- @@@setupEngine -->
+<!-- $$$showStoppedByExceptionMessageBox[overload1]$$$showStoppedByExceptionMessageBoxconstint& -->
+<h3 class="fn" id="showStoppedByExceptionMessageBox"><a name="showStoppedByExceptionMessageBox"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">showStoppedByExceptionMessageBox</span>(const <span class="type">int</span> &amp;<i>description</i>)</h3>
+<!-- @@@showStoppedByExceptionMessageBox -->
+<!-- $$$showStoppedBySignalMessageBox[overload1]$$$showStoppedBySignalMessageBoxconstintint -->
+<h3 class="fn" id="showStoppedBySignalMessageBox"><a name="showStoppedBySignalMessageBox"></a><code>[protected] </code><span class="type">bool</span> DebuggerEngine::<span class="name">showStoppedBySignalMessageBox</span>(const <span class="type">int</span> <i>meaning</i>, <span class="type">int</span> <i>name</i>)</h3>
+<!-- @@@showStoppedBySignalMessageBox -->
+<!-- $$$shutdownEngine[overload1]$$$shutdownEngine -->
+<h3 class="fn" id="shutdownEngine"><a name="shutdownEngine"></a><code>[pure virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">shutdownEngine</span>()</h3>
+<!-- @@@shutdownEngine -->
+<!-- $$$shutdownInferior[overload1]$$$shutdownInferior -->
+<h3 class="fn" id="shutdownInferior"><a name="shutdownInferior"></a><code>[pure virtual protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">shutdownInferior</span>()</h3>
+<!-- @@@shutdownInferior -->
+<!-- $$$startDying[overload1]$$$startDying -->
+<h3 class="fn" id="startDying"><a name="startDying"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">startDying</span>() const</h3>
+<!-- @@@startDying -->
+<!-- $$$terminal[overload1]$$$terminal -->
+<h3 class="fn" id="terminal"><a name="terminal"></a><code>[protected] </code><span class="type">Debugger::Debugger::Internal::TerminalRunner</span> *DebuggerEngine::<span class="name">terminal</span>() const</h3>
+<!-- @@@terminal -->
+<!-- $$$updateLocalsView[overload1]$$$updateLocalsViewconstint& -->
+<h3 class="fn" id="updateLocalsView"><a name="updateLocalsView"></a><code>[protected] </code><span class="type">void</span> DebuggerEngine::<span class="name">updateLocalsView</span>(const <span class="type">int</span> &amp;<i>all</i>)</h3>
+<!-- @@@updateLocalsView -->
+<!-- $$$updateLocalsWindow[overload1]$$$updateLocalsWindowbool -->
+<h3 class="fn" id="updateLocalsWindow"><a name="updateLocalsWindow"></a><span class="type">void</span> DebuggerEngine::<span class="name">updateLocalsWindow</span>(<span class="type">bool</span> <i>showReturn</i>)</h3>
+<!-- @@@updateLocalsWindow -->
+<!-- $$$updateState[overload1]$$$updateStatebool -->
+<h3 class="fn" id="updateState"><a name="updateState"></a><span class="type">void</span> DebuggerEngine::<span class="name">updateState</span>(<span class="type">bool</span> <i>alsoUpdateCompanion</i>)</h3>
+<!-- @@@updateState -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

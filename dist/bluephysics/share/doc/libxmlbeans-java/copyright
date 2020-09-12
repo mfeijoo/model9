@@ -1,0 +1,27 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Apache XMLBeans
+Source: http://www.apache.org/dist/xmlbeans/source/
+Files-Excluded: external/lib/junit*
+                external/lib/oldxbean.jar
+                samples/vxsdb/external/*
+                test/lib/*.jar
+                test/tools/lib/*.jar
+                test/tools/lib/ant-ext/*.jar
+
+Files: *
+Copyright: 2000-2003, BEA Systems
+           2003-2012, The Apache Software Foundation
+License: Apache-2.0
+
+Files: debian/*
+Copyright: 2009, Thierry Carrez <thierry.carrez@ubuntu.com>
+           2010-2011, Damien Raude-Morvan <drazzib@debian.org>
+           2010, Torsten Werner <twerner@debian.org>
+           2013-2018, Emmanuel Bourg <ebourg@apache.org>
+           2016-2018, Eugene Zhukov <eugene@debian.org>
+           2017, Markus Koschany <apo@debian.org>
+License: Apache-2.0
+
+License: Apache-2.0
+ On Debian systems, the full text of the Apache-2.0 license
+ can be found in the file '/usr/share/common-licenses/Apache-2.0'

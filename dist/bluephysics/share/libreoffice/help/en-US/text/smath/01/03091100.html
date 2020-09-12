@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Brackets and Grouping</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+<a name="bm_id3147341"></a><meta itemprop="keywords" content="brackets and grouping in $[officename] Math">
+<meta itemprop="keywords" content="grouping and brackets in $[officename] Math">
+
+<h1 itemprop="articleSection" id="hd_id3147341">Brackets and Grouping</h1>
+<p id="par_id3150342" class="paragraph">Note: the quotation marks in the examples are used to emphasize text and do not belong to the content of the formulas and commands.</p>
+<div class="warning">
+<div class="noteicon"><img src="media/icon-themes/help/warning.png" alt="Warning Icon 
+" title="Warning Icon 
+"></div>
+<div class="notetext"><p>When typing example formulas into the <span class="emph">Commands</span> window, note that spaces are often required for correct structure.</p></div>
+</div>
+<br>
+<p id="par_id3149054" class="paragraph">Braces "{}" are used to group expressions together to form one new expression. For example, "sqrt {x * y}" is the square root of the entire product x*y, while "sqrt x * y" is the square root of x multiplied by y. Braces do not require an extra space.</p>
+<p id="par_id3151392" class="paragraph">Set brackets were previously inserted in the Elements pane or directly in the Commands window as "left lbrace &lt;?&gt; right rbrace". Now, a left and a right set bracket can also be inserted using "lbrace" and "rbrace", with or without wildcards.</p>
+<p id="par_id3147403" class="paragraph">There are a total of eight (8) different types of brackets available. The "ceil" and "floor" brackets are often used for rounding up or down the argument to the next integer: "lceil -3.7 rceil = -3" or "lfloor -3.7 rfloor = -4".</p>
+<p id="par_id3146320" class="paragraph">Operator brackets, also known as Bra-kets (angle brackets with a vertical line in between), are common in Physics notation: "langle a mline b rangle" or "langle a mline b mline c over d mline e rangle". The height and positioning of the vertical lines always corresponds exactly to the enclosing brackets.</p>
+<p id="par_id3157870" class="paragraph">All brackets may only be used in pairs. The brackets have some common characteristics:</p>
+<p id="par_id3155761" class="paragraph">All types of brackets have the same grouping function as described for "{}" brackets.</p>
+<p id="par_id3145590" class="paragraph">All types of brackets, including those that are visible, permit empty group definition. The enclosed expression may therefore be empty.</p>
+<p id="par_id3154562" class="paragraph">Brackets do not adjust their size to the enclosed expression. For example, if you want "( a over b )" with a bracket size adjusted to a and b you must insert "left" and "right". Entering "left(a over b right)" produces appropriate sizing. If, however, the brackets themselves are part of the expression whose size is changed, they are included the size change: "size 3(a over b)" and "size 12(a over b)". The sizing of the bracket-to-expression ratio does not change in any way.</p>
+<p id="par_id3153002" class="paragraph">Since "left" and "right" ensure unique assignment of the brackets, every single bracket can be used as an argument for these two commands, even placing right brackets on the left side, or left brackets on the right. Instead of a bracket you can use the "none" qualifier, which means that there is no bracket shown and that there is no space reserved for a bracket. Using this, you can create the following expressions:</p>
+<ul>
+<li>
+<p id="par_id3150014" class="code">left lbrace x right none</p>
+</li>
+<li>
+<p id="par_id3149877" class="code">left [ x right )</p>
+</li>
+<li>
+<p id="par_id3145241" class="code">left ] x right [</p>
+</li>
+<li>
+<p id="par_id3156060" class="code">left rangle x right lfloor</p>
+</li>
+</ul>
+<p id="par_id3150935" class="paragraph">The same rules apply to "left" and "right" as to the other brackets: they also work as group builders and may enclose empty expressions.</p>
+<p id="par_id3149030" class="paragraph">The combination of mismatched brackets, single brackets and repositioned left and right brackets occurs often in mathematical formulas. The following is a formula that will create an error when typed:</p>
+<ul>
+<li>
+<p id="par_id3155989" class="code">[2, 3) - right open interval</p>
+</li>
+</ul>
+<p id="par_id3147169" class="paragraph">Using "left" and "right" makes the above expression valid in LibreOffice Math: "left [2, 3 right )". However, the brackets do not have any fixed size because they adjust to the argument. Setting a single bracket is a bit cumbersome. Therefore, there you can display single brackets with a fixed size by placing a "\" (backslash) in front of normal brackets. These brackets then act like any other symbol and no longer have the special functionality of brackets; that is they do not work as group builders and their orientation corresponds to that of other symbols. See "size *2 \langle x \rangle" and "size *2 langle x rangle".</p>
+<p id="par_id3153720" class="paragraph">The complete overview is as follows</p>
+<ul>
+<li>
+<p id="par_id3149715" class="code">\{ or \lbrace, \} or \rbrace</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3150756" class="code">\(, \)</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3145207" class="code">\[, \]</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3153153" class="code">\langle, \rangle</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3150263" class="code">\lceil, \rceil</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3147252" class="code">\lfloor, \rfloor</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3154690" class="code">\lline, \rline</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3145414" class="code">\ldline, \rdline</p>
+</li>
+</ul>
+<p id="par_id3147514" class="paragraph">In this way, intervals like the one above can be built in <span class="emph">LibreOffice Math</span> without any problems: \[2", "3\) or "\]2", "3\[ (Attention: These quotation marks are part of the entry.)</p>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>Please note that the quotation marks must be entered and can be obtained with <span class="emph">Shift+2</span> and not with typographical quotation marks. Generally, punctuation marks (like the comma in this case) are set as text. Although it is also possible to type "\[2,~3\)" the above option is preferable. In the previous example, "fixed size" always describes a bracket size dependent on the font size used.</p></div>
+</div>
+<br>
+<p id="par_id3153674" class="paragraph">Nesting groups within each other is relatively problem-free. In the formula hat "{a + b}" the "hat" is displayed simply over the center of "{a + b}". Also, "color red lceil a rceil" and "grave hat langle x * y rangle" work as expected. The result of the latter can be compared to "grave {hat langle x * y rangle}". These attributes do not compete, but rather can be combined.</p>
+<p id="par_id3147526" class="paragraph">This differs slightly for competing or mutually influencing attributes. This is often the case with font attributes. For example, which color does the b have in "color yellow color red (a + color green b)", or which size does it have in "size *4 (a + size /2 b)"? Given a base size of 12, does it have the size 48, 6 or even 24 (which could be seen as a combination)? The following are basic resolution rules, which will be followed consistently in the future. In general, the rules apply to all group operations. This only has a visible effect on the font attributes, like "bold", "ital", "phantom", "size", "color" and "font":</p>
+<ul>
+<li>
+<p id="par_id3152952" class="listitem">Group operations in sequence are treated as if every single operation is enclosed by braces. They are nested, and in every level there can be no more than one operation. Here is an example of a formula with many group operations: "size 12 color red font sans size -5 (a + size 8 b)" like "{size 12{color red{font sans{size -5 (a + {size 8 b})}}}}".</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3158441" class="listitem">This example formula is then interpreted from left to right. The operations only affect its corresponding group (or expression). Operations further to the right "replace" or "combine themselves with" their predecessors.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p id="par_id3150994" class="listitem">A group operation does not have any effect on higher-level operations but rather affects only lower-level groups and expressions, including their brackets and super-/subscripts. For example, "a + size *2 (b * size -8 c_1)^2"</p>
+</li>
+</ul>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>"color ..." and "font ..." as well as "size n" (n is a decimal) replace any preceding operations of the same type</p></div>
+</div>
+<br>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>for "size +n", "size -n", "size *n", and "size /n" the effects of the operations are combined,</p></div>
+</div>
+<br>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>"size *2 size -5 a" would be double the starting size minus 5</p></div>
+</div>
+<br>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>"font sans ( a + font serif b)"</p></div>
+</div>
+<br>
+<div class="note">
+<div class="noteicon"><img src="media/icon-themes/help/note.png" alt="Note Icon 
+" title="Note Icon 
+"></div>
+<div class="notetext"><p>"size *2 ( a + size /2 b )"</p></div>
+</div>
+<br><div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>To change the size of a formula, use "size +" or -,*,/. Do not use "size n". These can easily be used in any context. This enables you to copy to other areas by using Copy and Paste, and the result remains the same. Furthermore, such expressions survive a change of base size in the menu better than when using "size n". If you use only "size *" and "size /" (for example, "size *1.24 a or size /0.86 a") the proportions remain intact.</p></div>
+</div>
+<br>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>Examples (with a base size of 12 and 50% for indexes):</p></div>
+</div>
+<br>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>Exactly identical proportions with "size 18 a_n" and "size *1.5 a_n".</p></div>
+</div>
+<br>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>This differs in different contexts: "x^{size 18 a_n}" and "x^{size *1.5 a_n}"</p></div>
+</div>
+<br>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>Examples with size +n for a comparison. They look identical:</p></div>
+</div>
+<br>
+<p id="par_id3158001" class="codeintip">a_{size 8 n}</p>
+<p id="par_id3147332" class="codeintip">a_{size +2 n}</p>
+<p id="par_id3155143" class="codeintip">a_{size *1.333 n}</p>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>The following examples, however, do not look identical:</p></div>
+</div>
+<br>
+<p id="par_id3147073" class="codeintip">x^{a_{size 8 n}}</p>
+<p id="par_id3147086" class="codeintip">x^{a_{size +2 n}}</p>
+<p id="par_id3154386" class="codeintip">x^{a_{size *1.333 n}}</p>
+<div class="tip">
+<div class="noteicon"><img src="media/icon-themes/help/tip.png" alt="Tip Icon 
+" title="Tip Icon 
+"></div>
+<div class="notetext"><p>Note that all n here have different sizes. The size 1.333 results from 8/6, the desired size divided by the default index size 6. (Index size 50% with a base size of 12)</p></div>
+</div>
+<br>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/smath/01/03091100.xhp" target="_blank">/text/smath/01/03091100.xhp</a></p>
+<p>Title is: Brackets and Grouping</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

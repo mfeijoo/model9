@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sun.xml.fastinfoset</groupId>
+	<artifactId>fastinfoset-project</artifactId>
+	<version>debian</version>
+	<packaging>pom</packaging>
+	<name>fastinfoset-project</name>
+	<description>Open Source implementation of the Fast Infoset Standard for Binary XML (http://www.itu.int/ITU-T/asn1/).</description>
+	<modules>
+		<module>fastinfoset</module>
+		<module>roundtrip-tests</module>
+		<module>utilities</module>
+		<module>samples</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-plugin-tools-api</artifactId>
+				<version>debian</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.x</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit-version>4.7</junit-version>
+		<maven-plugin.version>1.0.0</maven-plugin.version>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.javax.xml.bind.jsr173_api.originalVersion>1.0</debian.javax.xml.bind.jsr173_api.originalVersion>
+		
+			<debian.junit.junit.originalVersion>4.7</debian.junit.junit.originalVersion>
+		
+			<debian.originalVersion>1.2.12</debian.originalVersion>
+		
+			<debian.package>libfastinfoset-java</debian.package>
+	</properties>
+</project>

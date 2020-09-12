@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>MimeXMLProvider Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >MimeXMLProvider</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#reimplemented-public-functions">Reimplemented Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">MimeXMLProvider Class</h1>
+<span class="small-subtitle">(<a href="utils-internal-mimexmlprovider.html">Utils::Internal::MimeXMLProvider</a>)<br/></span>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="utils-internal-mimeproviderbase.html">Utils::Internal::MimeProviderBase</a></td></tr></table></div><ul>
+<li><a href="utils-internal-mimexmlprovider-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#MimeXMLProvider">MimeXMLProvider</a></b>(Utils::Internal::MimeDatabasePrivate *<i>db</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#addAlias">addAlias</a></b>(const int &amp;<i>alias</i>, const int &amp;<i>name</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#addData">addData</a></b>(const int &amp;<i>id</i>, const int &amp;<i>data</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#addGlobPattern">addGlobPattern</a></b>(const int &amp;<i>glob</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#addMagicMatcher">addMagicMatcher</a></b>(const Utils::Internal::MimeMagicRuleMatcher &amp;<i>matcher</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#addMimeType">addMimeType</a></b>(const int &amp;<i>mt</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#addParent">addParent</a></b>(const int &amp;<i>child</i>, const int &amp;<i>parent</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#allMimeTypes">allMimeTypes</a></b>() override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#findByFileName">findByFileName</a></b>(<i>const int &amp;</i>, <i>int *</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#findByMagic">findByMagic</a></b>(<i>const int &amp;</i>, <i>int *</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#listAliases">listAliases</a></b>(<i>const int &amp;</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#load">load</a></b>(const int &amp;<i>fileName</i>, int *<i>errorMessage</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#mimeTypeForName">mimeTypeForName</a></b>(<i>const int &amp;</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#parents">parents</a></b>(<i>const int &amp;</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#resolveAlias">resolveAlias</a></b>(<i>const int &amp;</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#setGlobPatternsForMimeType">setGlobPatternsForMimeType</a></b>(const int &amp;<i>mimeType</i>, const int &amp;<i>patterns</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#setMagicRulesForMimeType">setMagicRulesForMimeType</a></b>(const int &amp;<i>mimeType</i>, <i>const int</i>) override</td></tr>
+</table></div>
+<a name="reimplemented-public-functions"></a>
+<h2 id="reimplemented-public-functions">Reimplemented Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimexmlprovider.html#isValid">isValid</a></b>() override</td></tr>
+</table></div>
+<ul>
+<li class="fn">13 public functions inherited from <a href="utils-internal-mimeproviderbase.html#public-functions">Utils::Internal::MimeProviderBase</a></li>
+</ul>
+<h3>Additional Inherited Members</h3>
+<ul>
+<li class="fn">1 protected function inherited from <a href="utils-internal-mimeproviderbase.html#protected-functions">Utils::Internal::MimeProviderBase</a></li>
+</ul>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$MimeXMLProvider[overload1]$$$MimeXMLProviderUtils::Internal::MimeDatabasePrivate* -->
+<h3 class="fn" id="MimeXMLProvider"><a name="MimeXMLProvider"></a>MimeXMLProvider::<span class="name">MimeXMLProvider</span>(<span class="type">Utils::Internal::MimeDatabasePrivate</span> *<i>db</i>)</h3>
+<p>Default constructs an instance of MimeXMLProvider.</p><!-- @@@MimeXMLProvider -->
+<!-- $$$addAlias[overload1]$$$addAliasconstint&constint& -->
+<h3 class="fn" id="addAlias"><a name="addAlias"></a><span class="type">void</span> MimeXMLProvider::<span class="name">addAlias</span>(const <span class="type">int</span> &amp;<i>alias</i>, const <span class="type">int</span> &amp;<i>name</i>)</h3>
+<!-- @@@addAlias -->
+<!-- $$$addData[overload1]$$$addDataconstint&constint& -->
+<h3 class="fn" id="addData"><a name="addData"></a><span class="type">void</span> MimeXMLProvider::<span class="name">addData</span>(const <span class="type">int</span> &amp;<i>id</i>, const <span class="type">int</span> &amp;<i>data</i>)</h3>
+<!-- @@@addData -->
+<!-- $$$addGlobPattern[overload1]$$$addGlobPatternconstint& -->
+<h3 class="fn" id="addGlobPattern"><a name="addGlobPattern"></a><span class="type">void</span> MimeXMLProvider::<span class="name">addGlobPattern</span>(const <span class="type">int</span> &amp;<i>glob</i>)</h3>
+<!-- @@@addGlobPattern -->
+<!-- $$$addMagicMatcher[overload1]$$$addMagicMatcherconstUtils::Internal::MimeMagicRuleMatcher& -->
+<h3 class="fn" id="addMagicMatcher"><a name="addMagicMatcher"></a><span class="type">void</span> MimeXMLProvider::<span class="name">addMagicMatcher</span>(const <span class="type">Utils::Internal::MimeMagicRuleMatcher</span> &amp;<i>matcher</i>)</h3>
+<!-- @@@addMagicMatcher -->
+<!-- $$$addMimeType[overload1]$$$addMimeTypeconstint& -->
+<h3 class="fn" id="addMimeType"><a name="addMimeType"></a><span class="type">void</span> MimeXMLProvider::<span class="name">addMimeType</span>(const <span class="type">int</span> &amp;<i>mt</i>)</h3>
+<!-- @@@addMimeType -->
+<!-- $$$addParent[overload1]$$$addParentconstint&constint& -->
+<h3 class="fn" id="addParent"><a name="addParent"></a><span class="type">void</span> MimeXMLProvider::<span class="name">addParent</span>(const <span class="type">int</span> &amp;<i>child</i>, const <span class="type">int</span> &amp;<i>parent</i>)</h3>
+<!-- @@@addParent -->
+<!-- $$$allMimeTypes[overload1]$$$allMimeTypes -->
+<h3 class="fn" id="allMimeTypes"><a name="allMimeTypes"></a><span class="type">int</span> MimeXMLProvider::<span class="name">allMimeTypes</span>()</h3>
+<!-- @@@allMimeTypes -->
+<!-- $$$findByFileName[overload1]$$$findByFileNameconstint&int* -->
+<h3 class="fn" id="findByFileName"><a name="findByFileName"></a><span class="type">int</span> MimeXMLProvider::<span class="name">findByFileName</span>(<i>const int &amp;</i>, <i>int *</i>)</h3>
+<!-- @@@findByFileName -->
+<!-- $$$findByMagic[overload1]$$$findByMagicconstint&int* -->
+<h3 class="fn" id="findByMagic"><a name="findByMagic"></a><span class="type">int</span> MimeXMLProvider::<span class="name">findByMagic</span>(<i>const int &amp;</i>, <i>int *</i>)</h3>
+<!-- @@@findByMagic -->
+<!-- $$$isValid[overload1]$$$isValid -->
+<h3 class="fn" id="isValid"><a name="isValid"></a><code>[override virtual] </code><span class="type">bool</span> MimeXMLProvider::<span class="name">isValid</span>()</h3>
+<!-- @@@isValid -->
+<!-- $$$listAliases[overload1]$$$listAliasesconstint& -->
+<h3 class="fn" id="listAliases"><a name="listAliases"></a><span class="type">int</span> MimeXMLProvider::<span class="name">listAliases</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@listAliases -->
+<!-- $$$load[overload1]$$$loadconstint&int* -->
+<h3 class="fn" id="load"><a name="load"></a><span class="type">bool</span> MimeXMLProvider::<span class="name">load</span>(const <span class="type">int</span> &amp;<i>fileName</i>, <span class="type">int</span> *<i>errorMessage</i>)</h3>
+<!-- @@@load -->
+<!-- $$$mimeTypeForName[overload1]$$$mimeTypeForNameconstint& -->
+<h3 class="fn" id="mimeTypeForName"><a name="mimeTypeForName"></a><span class="type">int</span> MimeXMLProvider::<span class="name">mimeTypeForName</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@mimeTypeForName -->
+<!-- $$$parents[overload1]$$$parentsconstint& -->
+<h3 class="fn" id="parents"><a name="parents"></a><span class="type">int</span> MimeXMLProvider::<span class="name">parents</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@parents -->
+<!-- $$$resolveAlias[overload1]$$$resolveAliasconstint& -->
+<h3 class="fn" id="resolveAlias"><a name="resolveAlias"></a><span class="type">int</span> MimeXMLProvider::<span class="name">resolveAlias</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@resolveAlias -->
+<!-- $$$setGlobPatternsForMimeType[overload1]$$$setGlobPatternsForMimeTypeconstint&constint& -->
+<h3 class="fn" id="setGlobPatternsForMimeType"><a name="setGlobPatternsForMimeType"></a><span class="type">void</span> MimeXMLProvider::<span class="name">setGlobPatternsForMimeType</span>(const <span class="type">int</span> &amp;<i>mimeType</i>, const <span class="type">int</span> &amp;<i>patterns</i>)</h3>
+<!-- @@@setGlobPatternsForMimeType -->
+<!-- $$$setMagicRulesForMimeType[overload1]$$$setMagicRulesForMimeTypeconstint&constint -->
+<h3 class="fn" id="setMagicRulesForMimeType"><a name="setMagicRulesForMimeType"></a><span class="type">void</span> MimeXMLProvider::<span class="name">setMagicRulesForMimeType</span>(const <span class="type">int</span> &amp;<i>mimeType</i>, <i>const int</i>)</h3>
+<!-- @@@setMagicRulesForMimeType -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

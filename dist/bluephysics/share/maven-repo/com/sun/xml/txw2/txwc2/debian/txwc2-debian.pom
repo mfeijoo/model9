@@ -1,0 +1,17 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sun.xml.txw2</groupId>
+  <artifactId>txwc2</artifactId>
+  <version>debian</version>
+  <packaging>jar</packaging>
+  <properties>
+    <debian.package>libtxw2-java</debian.package>
+  </properties>
+  <distributionManagement>
+    <relocation>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>txwc2</artifactId>
+      <version>debian</version>
+    </relocation>
+  </distributionManagement>
+</project>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ProcessStep Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >ProcessStep</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">ProcessStep Class</h1>
+<span class="small-subtitle">(<a href="projectexplorer-internal-processstep.html">ProjectExplorer::Internal::ProcessStep</a>)<br/></span>
+<ul>
+<li><a href="projectexplorer-internal-processstep-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#ProcessStep">ProcessStep</a></b>(ProjectExplorer::BuildStepList *<i>bsl</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#arguments">arguments</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#command">command</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> ProjectExplorer::BuildStepConfigWidget *</td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#createConfigWidget">createConfigWidget</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#immutable">immutable</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#init">init</a></b>(int &amp;<i>earlierSteps</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#run">run</a></b>(<i>int &amp;</i>) override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#setArguments">setArguments</a></b>(const int &amp;<i>arguments</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#setCommand">setCommand</a></b>(const int &amp;<i>command</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#setWorkingDirectory">setWorkingDirectory</a></b>(const int &amp;<i>workingDirectory</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#toMap">toMap</a></b>() const override</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="projectexplorer-internal-processstep.html#workingDirectory">workingDirectory</a></b>() const</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$ProcessStep[overload1]$$$ProcessStepProjectExplorer::BuildStepList* -->
+<h3 class="fn" id="ProcessStep"><a name="ProcessStep"></a>ProcessStep::<span class="name">ProcessStep</span>(<span class="type">ProjectExplorer::BuildStepList</span> *<i>bsl</i>)</h3>
+<p>Default constructs an instance of ProcessStep.</p><!-- @@@ProcessStep -->
+<!-- $$$arguments[overload1]$$$arguments -->
+<h3 class="fn" id="arguments"><a name="arguments"></a><span class="type">int</span> ProcessStep::<span class="name">arguments</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-internal-processstep.html#setArguments">setArguments</a>().</p>
+<!-- @@@arguments -->
+<!-- $$$command[overload1]$$$command -->
+<h3 class="fn" id="command"><a name="command"></a><span class="type">int</span> ProcessStep::<span class="name">command</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-internal-processstep.html#setCommand">setCommand</a>().</p>
+<!-- @@@command -->
+<!-- $$$createConfigWidget[overload1]$$$createConfigWidget -->
+<h3 class="fn" id="createConfigWidget"><a name="createConfigWidget"></a><span class="type">ProjectExplorer::BuildStepConfigWidget</span> *ProcessStep::<span class="name">createConfigWidget</span>()</h3>
+<!-- @@@createConfigWidget -->
+<!-- $$$immutable[overload1]$$$immutable -->
+<h3 class="fn" id="immutable"><a name="immutable"></a><span class="type">bool</span> ProcessStep::<span class="name">immutable</span>() const</h3>
+<!-- @@@immutable -->
+<!-- $$$init[overload1]$$$initint& -->
+<h3 class="fn" id="init"><a name="init"></a><span class="type">bool</span> ProcessStep::<span class="name">init</span>(<span class="type">int</span> &amp;<i>earlierSteps</i>)</h3>
+<!-- @@@init -->
+<!-- $$$run[overload1]$$$runint& -->
+<h3 class="fn" id="run"><a name="run"></a><span class="type">void</span> ProcessStep::<span class="name">run</span>(<i>int &amp;</i>)</h3>
+<!-- @@@run -->
+<!-- $$$setArguments[overload1]$$$setArgumentsconstint& -->
+<h3 class="fn" id="setArguments"><a name="setArguments"></a><span class="type">void</span> ProcessStep::<span class="name">setArguments</span>(const <span class="type">int</span> &amp;<i>arguments</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-internal-processstep.html#arguments">arguments</a>().</p>
+<!-- @@@setArguments -->
+<!-- $$$setCommand[overload1]$$$setCommandconstint& -->
+<h3 class="fn" id="setCommand"><a name="setCommand"></a><span class="type">void</span> ProcessStep::<span class="name">setCommand</span>(const <span class="type">int</span> &amp;<i>command</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-internal-processstep.html#command">command</a>().</p>
+<!-- @@@setCommand -->
+<!-- $$$setWorkingDirectory[overload1]$$$setWorkingDirectoryconstint& -->
+<h3 class="fn" id="setWorkingDirectory"><a name="setWorkingDirectory"></a><span class="type">void</span> ProcessStep::<span class="name">setWorkingDirectory</span>(const <span class="type">int</span> &amp;<i>workingDirectory</i>)</h3>
+<p><b>See also </b><a href="projectexplorer-internal-processstep.html#workingDirectory">workingDirectory</a>().</p>
+<!-- @@@setWorkingDirectory -->
+<!-- $$$toMap[overload1]$$$toMap -->
+<h3 class="fn" id="toMap"><a name="toMap"></a><span class="type">int</span> ProcessStep::<span class="name">toMap</span>() const</h3>
+<!-- @@@toMap -->
+<!-- $$$workingDirectory[overload1]$$$workingDirectory -->
+<h3 class="fn" id="workingDirectory"><a name="workingDirectory"></a><span class="type">int</span> ProcessStep::<span class="name">workingDirectory</span>() const</h3>
+<p><b>See also </b><a href="projectexplorer-internal-processstep.html#setWorkingDirectory">setWorkingDirectory</a>().</p>
+<!-- @@@workingDirectory -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

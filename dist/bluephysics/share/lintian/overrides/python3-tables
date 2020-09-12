@@ -1,0 +1,7 @@
+# scripts for entry points of support tools
+python3-tables: application-in-library-section python usr/bin/pt2to3 usr/bin/ptdump usr/bin/ptrepack usr/bin/pttree
+python3-tables: library-package-name-for-application usr/bin/pt2to3 usr/bin/ptdump usr/bin/ptrepack usr/bin/pttree
+
+# the python-tables-data package only contains common data
+python3-tables: python-package-depends-on-package-from-other-python-variant Depends: python-tables-data
+

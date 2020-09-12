@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>InStrRev Function [VBA]</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="help2.js"></script><script type="text/javascript" src="fuse.js"></script><script type="text/javascript" src="paginathing.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="en-US/text/shared/main0108.html"><div class="symbol"></div>
+<p>LibreOffice 6.1 Help</p></a></div></header><div class="modules">
+<input id="modules" name="modules" type="checkbox"><label for="modules">Module</label><nav><a href="en-US/text/swriter/main0000.html?DbPAR=WRITER"><div class="writer-icon"></div>Writer</a><a href="en-US/text/scalc/main0000.html?DbPAR=CALC"><div class="calc-icon"></div>Calc</a><a href="en-US/text/simpress/main0000.html?DbPAR=IMPRESS"><div class="impress-icon"></div>Impress</a><a href="en-US/text/sdraw/main0000.html?DbPAR=DRAW"><div class="draw-icon"></div>Draw</a><a href="en-US/text/shared/explorer/database/main.html?DbPAR=BASE"><div class="base-icon"></div>Base</a><a href="en-US/text/smath/main0000.html?DbPAR=MATH"><div class="math-icon"></div>Math</a><a href="en-US/text/schart/main0000.html?DbPAR=CHART"><div class="chart-icon"></div>Chart</a><a href="en-US/text/sbasic/shared/main0601.html?DbPAR=BASIC"><div class="basic-icon"></div>Basic</a></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contents</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+<a name="instrrev"></a>
+<a name="bm_id3155934"></a>
+  <meta itemprop="keywords" content="InStrRev function">
+
+
+
+<h1 itemprop="articleSection" id="hd_id3155934">InStrRev Function [VBA]</h1>
+<p id="par_id3153990" class="paragraph">Returns the position of a string within another string, starting from the right side of the string. </p>
+
+<div class="embedded">
+<a name="vbasupport"></a>
+<div class="warning">
+<div class="noteicon"><img src="media/icon-themes/help/warning.png" alt="Warning Icon 
+" title="Warning Icon 
+"></div>
+<div class="notetext"><p>This function or constant is enabled with the statement <span class="literal">Option VBASupport 1</span> placed before the executable program code in a module.</p></div>
+</div>
+<br>
+</div>
+<p id="par_id3147303" class="paragraph">The InStrRev function returns the position at which the match was found, from the right. If the string was not found, the function returns 0.</p>
+<div class="embedded">
+<a name="functsyntax"></a>
+<h2 itemprop="articleSection" id="hd_id061420171139089682">
+<a name="functsyntax"></a>Syntax:</h2>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">InStrRev (Text1 As String, Text2 As String [,Start As Long] [, Compare As Integer])</pre>
+<br>
+</div>
+<div class="embedded">
+<a name="functvalue"></a>
+<h2 itemprop="articleSection" id="hd_id061420171139087480">
+<a name="functvalue"></a>Return value:</h2>
+</div>
+<p id="par_id3149763" class="paragraph">Long</p>
+<div class="embedded">
+<a name="functparameters"></a>
+<h2 itemprop="articleSection" id="hd_id061420171139084157">
+<a name="functparameters"></a>Parameters:</h2>
+</div>
+<p id="par_id3145609" class="paragraph"> <span class="emph">Text1:</span> The string expression that you want to search.</p>
+<p id="par_id3147559" class="paragraph"> <span class="emph">Text2:</span> The string expression that you want to search for.</p>
+<p id="par_id3153126" class="paragraph"> <span class="emph">Start: </span>Optional numeric expression that marks the position <span class="emph">from the left </span>in a string where the search for the specified substring starts. If you omit this parameter, the search starts at the last character of the string. The maximum allowed value is 65535.</p>
+<p id="par_id3154758" class="paragraph"> <span class="emph">Compare:</span> Optional numeric expression that defines the type of comparison. The value of this parameter can be </p>
+<p id="par_id051920170326028042" class="paragraph">1: The default value of 1 specifies a text comparison that is not case-sensitive.</p>
+<p id="par_id051920170326027721" class="paragraph">0: The value of 0 specifies a binary comparison that is case-sensitive.</p>
+<p id="par_id3153361" class="paragraph">To avoid a run-time error, do not set the Compare parameter if the first return parameter is omitted.</p>
+<div class="embedded">
+<a name="errorcode"></a>
+
+<h2 itemprop="articleSection" id="hd_id3152869">
+<a name="errorcode"></a>Error codes:</h2>
+</div>
+<div class="embedded"><p class="embedded"><a name="err5"></a>5 Invalid procedure call</p></div>
+<div class="embedded">
+<a name="functexample"></a>
+<h2 itemprop="articleSection" id="hd_id061420171139088233">
+<a name="functexample"></a>Example:</h2>
+</div>
+<div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet">
+<pre class="bascodepar">Sub ExamplePosition</pre>
+<br>
+<pre class="bascodepar">Dim sInput As String</pre>
+<br>
+<pre class="bascodepar">Dim iPos As Integer</pre>
+<br>
+<pre class="bascodepar"> sInput = "The book is on the table"</pre>
+<br>
+<pre class="bascodepar"> iPos = InStrRev(sInput,"the",10,1) ' Returns 1, search is case-insensitive</pre>
+<br>
+<pre class="bascodepar"> Print iPos </pre>
+<br>
+<pre class="bascodepar"> iPos = InStrRev(sInput,"the",10,0) ' Returns 0, search is case-sensitive</pre>
+<br>
+<pre class="bascodepar"> Print iPos</pre>
+<br>
+<pre class="bascodepar">End Sub</pre>
+<br>
+</div>
+
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+<p id="par_id051920170316395065" class="paragraph"><a target="_top" href="en-US/text/sbasic/shared/03120401.html">InStr</a></p>
+</div>
+</div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03120411.xhp" target="_blank">/text/sbasic/shared/03120411.xhp</a></p>
+<p>Title is: InStrRev Function [VBA]</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+</div></footer>
+</div>
+<script type="text/javascript" src="en-US/bookmarks.js"></script><script type="text/javascript" src="en-US/contents.js"></script><script type="text/javascript" src="help.js"></script><script type="text/javascript">
+                
+                var module = getParameterByName("DbPAR");
+                var system = getSystem();
+                fixURL(module,system);
+                var dbg = getParameterByName("Debug");
+                if (dbg == null){dbg=0}
+                document.getElementById("DEBUG").style.display = (dbg == 0) ? "none":"block";
+                document.getElementById("bm_module").innerHTML ="Module is: "+module;
+                document.getElementById("bm_system").innerHTML ="System is: "+system;
+                
+            </script>
+</body>
+</html>

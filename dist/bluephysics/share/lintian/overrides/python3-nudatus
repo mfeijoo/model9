@@ -1,0 +1,3 @@
+# Nudatas is a library with a helper CLI application
+python3-nudatus: library-package-name-for-application usr/bin/nudatus
+python3-nudatus: application-in-library-section python usr/bin/nudatus

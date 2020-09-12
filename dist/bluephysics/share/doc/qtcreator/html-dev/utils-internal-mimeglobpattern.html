@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>MimeGlobPattern Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >MimeGlobPattern</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">MimeGlobPattern Class</h1>
+<span class="small-subtitle">(<a href="utils-internal-mimeglobpattern.html">Utils::Internal::MimeGlobPattern</a>)<br/></span>
+<ul>
+<li><a href="utils-internal-mimeglobpattern-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#MimeGlobPattern">MimeGlobPattern</a></b>(const int &amp;<i>thePattern</i>, const int &amp;<i>theMimeType</i>, unsigned int <i>theWeight</i> = DefaultWeight, int <i>s</i> = ...)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#dtor.MimeGlobPattern">~MimeGlobPattern</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#isCaseSensitive">isCaseSensitive</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#matchFileName">matchFileName</a></b>(const int &amp;<i>filename</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#mimeType">mimeType</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#pattern">pattern</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> unsigned int </td><td class="memItemRight bottomAlign"><b><a href="utils-internal-mimeglobpattern.html#weight">weight</a></b>() const</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$MimeGlobPattern[overload1]$$$MimeGlobPatternconstint&constint&unsignedintint -->
+<h3 class="fn" id="MimeGlobPattern"><a name="MimeGlobPattern"></a>MimeGlobPattern::<span class="name">MimeGlobPattern</span>(const <span class="type">int</span> &amp;<i>thePattern</i>, const <span class="type">int</span> &amp;<i>theMimeType</i>, <span class="type">unsigned</span> <span class="type">int</span> <i>theWeight</i> = DefaultWeight, <span class="type">int</span> <i>s</i> = ...)</h3>
+<p>Default constructs an instance of MimeGlobPattern.</p><!-- @@@MimeGlobPattern -->
+<!-- $$$~MimeGlobPattern[overload1]$$$~MimeGlobPattern -->
+<h3 class="fn" id="dtor.MimeGlobPattern"><a name="dtor.MimeGlobPattern"></a>MimeGlobPattern::<span class="name">~MimeGlobPattern</span>()</h3>
+<p>Destroys the instance of MimeGlobPattern.</p><!-- @@@~MimeGlobPattern -->
+<!-- $$$isCaseSensitive[overload1]$$$isCaseSensitive -->
+<h3 class="fn" id="isCaseSensitive"><a name="isCaseSensitive"></a><span class="type">bool</span> MimeGlobPattern::<span class="name">isCaseSensitive</span>() const</h3>
+<!-- @@@isCaseSensitive -->
+<!-- $$$matchFileName[overload1]$$$matchFileNameconstint& -->
+<h3 class="fn" id="matchFileName"><a name="matchFileName"></a><span class="type">bool</span> MimeGlobPattern::<span class="name">matchFileName</span>(const <span class="type">int</span> &amp;<i>filename</i>) const</h3>
+<!-- @@@matchFileName -->
+<!-- $$$mimeType[overload1]$$$mimeType -->
+<h3 class="fn" id="mimeType"><a name="mimeType"></a>const <span class="type">int</span> &amp;MimeGlobPattern::<span class="name">mimeType</span>() const</h3>
+<!-- @@@mimeType -->
+<!-- $$$pattern[overload1]$$$pattern -->
+<h3 class="fn" id="pattern"><a name="pattern"></a>const <span class="type">int</span> &amp;MimeGlobPattern::<span class="name">pattern</span>() const</h3>
+<!-- @@@pattern -->
+<!-- $$$weight[overload1]$$$weight -->
+<h3 class="fn" id="weight"><a name="weight"></a><span class="type">unsigned</span> <span class="type">int</span> MimeGlobPattern::<span class="name">weight</span>() const</h3>
+<!-- @@@weight -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>GdbMi Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >GdbMi</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#static-public-members">Static Public Members</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">GdbMi Class</h1>
+<span class="small-subtitle">(<a href="debugger-internal-gdbmi.html">Debugger::Internal::GdbMi</a>)<br/></span>
+<ul>
+<li><a href="debugger-internal-gdbmi-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#Type-enum">Type</a></b> { Invalid, Const, Tuple, List }</td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#GdbMi">GdbMi</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#addChild">addChild</a></b>(const Debugger::Internal::GdbMi &amp;<i>child</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#begin">begin</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const Debugger::Internal::GdbMi &amp;</td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#childAt">childAt</a></b>(int <i>index</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#childCount">childCount</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#data">data</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#end">end</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#fromString">fromString</a></b>(const int &amp;<i>str</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#fromStringMultiple">fromStringMultiple</a></b>(const int &amp;<i>str</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#hasName">hasName</a></b>(const int &amp;<i>name</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#isList">isList</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#isValid">isValid</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#name">name</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#parseList">parseList</a></b>(const int *&amp;<i>from</i>, const int *<i>to</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#parseResultOrValue">parseResultOrValue</a></b>(const int *&amp;<i>from</i>, const int *<i>to</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#parseTuple">parseTuple</a></b>(const int *&amp;<i>from</i>, const int *<i>to</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#parseTuple_helper">parseTuple_helper</a></b>(const int *&amp;<i>from</i>, const int *<i>to</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#parseValue">parseValue</a></b>(const int *&amp;<i>from</i>, const int *<i>to</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#toAddress">toAddress</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#toInt">toInt</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#toLongLong">toLongLong</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Utils::ProcessHandle </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#toProcessHandle">toProcessHandle</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#toString">toString</a></b>(<i>bool</i>, <i>int</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Debugger::Internal::GdbMi::Type </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#type">type</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const Debugger::Internal::GdbMi &amp;</td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#operator-5b-5d">operator[]</a></b>(const char *<i>name</i>) const</td></tr>
+</table></div>
+<a name="static-public-members"></a>
+<h2 id="static-public-members">Static Public Members</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#escapeCString">escapeCString</a></b>(<i>const int &amp;</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="debugger-internal-gdbmi.html#parseCString">parseCString</a></b>(<i>const int *&amp;</i>, <i>const int *</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$Type$$$Invalid$$$Const$$$Tuple$$$List -->
+<h3 class="fn" id="Type-enum"><a name="Type-enum"></a>enum GdbMi::<span class="name">Type</span></h3>
+<!-- @@@Type -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$GdbMi[overload1]$$$GdbMi -->
+<h3 class="fn" id="GdbMi"><a name="GdbMi"></a>GdbMi::<span class="name">GdbMi</span>()</h3>
+<p>Default constructs an instance of GdbMi.</p><!-- @@@GdbMi -->
+<!-- $$$addChild[overload1]$$$addChildconstDebugger::Internal::GdbMi& -->
+<h3 class="fn" id="addChild"><a name="addChild"></a><span class="type">void</span> GdbMi::<span class="name">addChild</span>(const <span class="type">Debugger::Internal::GdbMi</span> &amp;<i>child</i>)</h3>
+<!-- @@@addChild -->
+<!-- $$$begin[overload1]$$$begin -->
+<h3 class="fn" id="begin"><a name="begin"></a><span class="type">int</span> GdbMi::<span class="name">begin</span>() const</h3>
+<!-- @@@begin -->
+<!-- $$$childAt[overload1]$$$childAtint -->
+<h3 class="fn" id="childAt"><a name="childAt"></a>const <span class="type">Debugger::Internal::GdbMi</span> &amp;GdbMi::<span class="name">childAt</span>(<span class="type">int</span> <i>index</i>) const</h3>
+<!-- @@@childAt -->
+<!-- $$$childCount[overload1]$$$childCount -->
+<h3 class="fn" id="childCount"><a name="childCount"></a><span class="type">int</span> GdbMi::<span class="name">childCount</span>() const</h3>
+<!-- @@@childCount -->
+<!-- $$$data[overload1]$$$data -->
+<h3 class="fn" id="data"><a name="data"></a>const <span class="type">int</span> &amp;GdbMi::<span class="name">data</span>() const</h3>
+<!-- @@@data -->
+<!-- $$$end[overload1]$$$end -->
+<h3 class="fn" id="end"><a name="end"></a><span class="type">int</span> GdbMi::<span class="name">end</span>() const</h3>
+<!-- @@@end -->
+<!-- $$$escapeCString[overload1]$$$escapeCStringconstint& -->
+<h3 class="fn" id="escapeCString"><a name="escapeCString"></a><code>[static] </code><span class="type">int</span> GdbMi::<span class="name">escapeCString</span>(<i>const int &amp;</i>)</h3>
+<!-- @@@escapeCString -->
+<!-- $$$fromString[overload1]$$$fromStringconstint& -->
+<h3 class="fn" id="fromString"><a name="fromString"></a><span class="type">void</span> GdbMi::<span class="name">fromString</span>(const <span class="type">int</span> &amp;<i>str</i>)</h3>
+<!-- @@@fromString -->
+<!-- $$$fromStringMultiple[overload1]$$$fromStringMultipleconstint& -->
+<h3 class="fn" id="fromStringMultiple"><a name="fromStringMultiple"></a><span class="type">void</span> GdbMi::<span class="name">fromStringMultiple</span>(const <span class="type">int</span> &amp;<i>str</i>)</h3>
+<!-- @@@fromStringMultiple -->
+<!-- $$$hasName[overload1]$$$hasNameconstint& -->
+<h3 class="fn" id="hasName"><a name="hasName"></a><span class="type">bool</span> GdbMi::<span class="name">hasName</span>(const <span class="type">int</span> &amp;<i>name</i>) const</h3>
+<!-- @@@hasName -->
+<!-- $$$isList[overload1]$$$isList -->
+<h3 class="fn" id="isList"><a name="isList"></a><span class="type">bool</span> GdbMi::<span class="name">isList</span>() const</h3>
+<!-- @@@isList -->
+<!-- $$$isValid[overload1]$$$isValid -->
+<h3 class="fn" id="isValid"><a name="isValid"></a><span class="type">bool</span> GdbMi::<span class="name">isValid</span>() const</h3>
+<!-- @@@isValid -->
+<!-- $$$name[overload1]$$$name -->
+<h3 class="fn" id="name"><a name="name"></a>const <span class="type">int</span> &amp;GdbMi::<span class="name">name</span>() const</h3>
+<!-- @@@name -->
+<!-- $$$parseCString[overload1]$$$parseCStringconstint*&constint* -->
+<h3 class="fn" id="parseCString"><a name="parseCString"></a><code>[static] </code><span class="type">int</span> GdbMi::<span class="name">parseCString</span>(<i>const int *&amp;</i>, <i>const int *</i>)</h3>
+<!-- @@@parseCString -->
+<!-- $$$parseList[overload1]$$$parseListconstint*&constint* -->
+<h3 class="fn" id="parseList"><a name="parseList"></a><span class="type">void</span> GdbMi::<span class="name">parseList</span>(const <span class="type">int</span> *&amp;<i>from</i>, const <span class="type">int</span> *<i>to</i>)</h3>
+<!-- @@@parseList -->
+<!-- $$$parseResultOrValue[overload1]$$$parseResultOrValueconstint*&constint* -->
+<h3 class="fn" id="parseResultOrValue"><a name="parseResultOrValue"></a><span class="type">void</span> GdbMi::<span class="name">parseResultOrValue</span>(const <span class="type">int</span> *&amp;<i>from</i>, const <span class="type">int</span> *<i>to</i>)</h3>
+<!-- @@@parseResultOrValue -->
+<!-- $$$parseTuple[overload1]$$$parseTupleconstint*&constint* -->
+<h3 class="fn" id="parseTuple"><a name="parseTuple"></a><span class="type">void</span> GdbMi::<span class="name">parseTuple</span>(const <span class="type">int</span> *&amp;<i>from</i>, const <span class="type">int</span> *<i>to</i>)</h3>
+<!-- @@@parseTuple -->
+<!-- $$$parseTuple_helper[overload1]$$$parseTuple_helperconstint*&constint* -->
+<h3 class="fn" id="parseTuple_helper"><a name="parseTuple_helper"></a><span class="type">void</span> GdbMi::<span class="name">parseTuple_helper</span>(const <span class="type">int</span> *&amp;<i>from</i>, const <span class="type">int</span> *<i>to</i>)</h3>
+<!-- @@@parseTuple_helper -->
+<!-- $$$parseValue[overload1]$$$parseValueconstint*&constint* -->
+<h3 class="fn" id="parseValue"><a name="parseValue"></a><span class="type">void</span> GdbMi::<span class="name">parseValue</span>(const <span class="type">int</span> *&amp;<i>from</i>, const <span class="type">int</span> *<i>to</i>)</h3>
+<!-- @@@parseValue -->
+<!-- $$$toAddress[overload1]$$$toAddress -->
+<h3 class="fn" id="toAddress"><a name="toAddress"></a><span class="type">int</span> GdbMi::<span class="name">toAddress</span>() const</h3>
+<!-- @@@toAddress -->
+<!-- $$$toInt[overload1]$$$toInt -->
+<h3 class="fn" id="toInt"><a name="toInt"></a><span class="type">int</span> GdbMi::<span class="name">toInt</span>() const</h3>
+<!-- @@@toInt -->
+<!-- $$$toLongLong[overload1]$$$toLongLong -->
+<h3 class="fn" id="toLongLong"><a name="toLongLong"></a><span class="type">int</span> GdbMi::<span class="name">toLongLong</span>() const</h3>
+<!-- @@@toLongLong -->
+<!-- $$$toProcessHandle[overload1]$$$toProcessHandle -->
+<h3 class="fn" id="toProcessHandle"><a name="toProcessHandle"></a><span class="type">Utils::ProcessHandle</span> GdbMi::<span class="name">toProcessHandle</span>() const</h3>
+<!-- @@@toProcessHandle -->
+<!-- $$$toString[overload1]$$$toStringboolint -->
+<h3 class="fn" id="toString"><a name="toString"></a><span class="type">int</span> GdbMi::<span class="name">toString</span>(<i>bool</i>, <i>int</i>) const</h3>
+<!-- @@@toString -->
+<!-- $$$type[overload1]$$$type -->
+<h3 class="fn" id="type"><a name="type"></a><span class="type">Debugger::Internal::GdbMi::Type</span> GdbMi::<span class="name">type</span>() const</h3>
+<!-- @@@type -->
+<!-- $$$operator[][overload1]$$$operator[]constchar* -->
+<h3 class="fn" id="operator-5b-5d"><a name="operator-5b-5d"></a>const <span class="type">Debugger::Internal::GdbMi</span> &amp;GdbMi::<span class="name">operator[]</span>(const <span class="type">char</span> *<i>name</i>) const</h3>
+<!-- @@@operator[] -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

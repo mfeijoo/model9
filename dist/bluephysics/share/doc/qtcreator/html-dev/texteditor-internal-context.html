@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Context Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >Context</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">Context Class</h1>
+<span class="small-subtitle">(<a href="texteditor-internal-context.html">TextEditor::Internal::Context</a>)<br/></span>
+<ul>
+<li><a href="texteditor-internal-context-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#Context">Context</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#Context-1">Context</a></b>(const TextEditor::Internal::Context &amp;<i>context</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#dtor.Context">~Context</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#addIncludeRulesInstruction">addIncludeRulesInstruction</a></b>(const TextEditor::Internal::IncludeRulesInstruction &amp;<i>instruction</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#addRule">addRule</a></b>(const int &amp;<i>rule</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#addRule-1">addRule</a></b>(const int &amp;<i>rule</i>, int <i>index</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#clearIncludeRulesInstructions">clearIncludeRulesInstructions</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#configureId">configureId</a></b>(const int <i>unique</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#definition">definition</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#fallthroughContext">fallthroughContext</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#id">id</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#includeRulesInstructions">includeRulesInstructions</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#isDynamic">isDynamic</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#isFallthrough">isFallthrough</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#itemData">itemData</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#lineBeginContext">lineBeginContext</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#lineEmptyContext">lineEmptyContext</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#lineEndContext">lineEndContext</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#name">name</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setDefinition">setDefinition</a></b>(const int &amp;<i>definition</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setDynamic">setDynamic</a></b>(const int &amp;<i>dynamic</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setFallthrough">setFallthrough</a></b>(const int &amp;<i>fallthrough</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setFallthroughContext">setFallthroughContext</a></b>(const int &amp;<i>context</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setItemData">setItemData</a></b>(const int &amp;<i>itemData</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setLineBeginContext">setLineBeginContext</a></b>(const int &amp;<i>context</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setLineEmptyContext">setLineEmptyContext</a></b>(const int &amp;<i>context</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setLineEndContext">setLineEndContext</a></b>(const int &amp;<i>context</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#setName">setName</a></b>(const int &amp;<i>name</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#swap">swap</a></b>(TextEditor::Internal::Context &amp;<i>context</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#updateDynamicRules">updateDynamicRules</a></b>(const int &amp;<i>captures</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const TextEditor::Internal::Context &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-internal-context.html#operator-eq">operator=</a></b>(TextEditor::Internal::Context <i>copy</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$Context[overload1]$$$Context -->
+<h3 class="fn" id="Context"><a name="Context"></a>Context::<span class="name">Context</span>()</h3>
+<p>Default constructs an instance of Context.</p><!-- @@@Context -->
+<!-- $$$Context$$$ContextconstTextEditor::Internal::Context& -->
+<h3 class="fn" id="Context-1"><a name="Context-1"></a>Context::<span class="name">Context</span>(const <span class="type">TextEditor::Internal::Context</span> &amp;<i>context</i>)</h3>
+<p>Default constructs an instance of Context.</p><!-- @@@Context -->
+<!-- $$$~Context[overload1]$$$~Context -->
+<h3 class="fn" id="dtor.Context"><a name="dtor.Context"></a>Context::<span class="name">~Context</span>()</h3>
+<p>Destroys the instance of Context.</p><!-- @@@~Context -->
+<!-- $$$addIncludeRulesInstruction[overload1]$$$addIncludeRulesInstructionconstTextEditor::Internal::IncludeRulesInstruction& -->
+<h3 class="fn" id="addIncludeRulesInstruction"><a name="addIncludeRulesInstruction"></a><span class="type">void</span> Context::<span class="name">addIncludeRulesInstruction</span>(const <span class="type">TextEditor::Internal::IncludeRulesInstruction</span> &amp;<i>instruction</i>)</h3>
+<!-- @@@addIncludeRulesInstruction -->
+<!-- $$$addRule[overload1]$$$addRuleconstint& -->
+<h3 class="fn" id="addRule"><a name="addRule"></a><span class="type">void</span> Context::<span class="name">addRule</span>(const <span class="type">int</span> &amp;<i>rule</i>)</h3>
+<!-- @@@addRule -->
+<!-- $$$addRule$$$addRuleconstint&int -->
+<h3 class="fn" id="addRule-1"><a name="addRule-1"></a><span class="type">void</span> Context::<span class="name">addRule</span>(const <span class="type">int</span> &amp;<i>rule</i>, <span class="type">int</span> <i>index</i>)</h3>
+<!-- @@@addRule -->
+<!-- $$$clearIncludeRulesInstructions[overload1]$$$clearIncludeRulesInstructions -->
+<h3 class="fn" id="clearIncludeRulesInstructions"><a name="clearIncludeRulesInstructions"></a><span class="type">void</span> Context::<span class="name">clearIncludeRulesInstructions</span>()</h3>
+<!-- @@@clearIncludeRulesInstructions -->
+<!-- $$$configureId[overload1]$$$configureIdconstint -->
+<h3 class="fn" id="configureId"><a name="configureId"></a><span class="type">void</span> Context::<span class="name">configureId</span>(const <span class="type">int</span> <i>unique</i>)</h3>
+<!-- @@@configureId -->
+<!-- $$$definition[overload1]$$$definition -->
+<h3 class="fn" id="definition"><a name="definition"></a>const <span class="type">int</span> &amp;Context::<span class="name">definition</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setDefinition">setDefinition</a>().</p>
+<!-- @@@definition -->
+<!-- $$$fallthroughContext[overload1]$$$fallthroughContext -->
+<h3 class="fn" id="fallthroughContext"><a name="fallthroughContext"></a>const <span class="type">int</span> &amp;Context::<span class="name">fallthroughContext</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setFallthroughContext">setFallthroughContext</a>().</p>
+<!-- @@@fallthroughContext -->
+<!-- $$$id[overload1]$$$id -->
+<h3 class="fn" id="id"><a name="id"></a>const <span class="type">int</span> &amp;Context::<span class="name">id</span>() const</h3>
+<!-- @@@id -->
+<!-- $$$includeRulesInstructions[overload1]$$$includeRulesInstructions -->
+<h3 class="fn" id="includeRulesInstructions"><a name="includeRulesInstructions"></a>const <span class="type">int</span> &amp;Context::<span class="name">includeRulesInstructions</span>() const</h3>
+<!-- @@@includeRulesInstructions -->
+<!-- $$$isDynamic[overload1]$$$isDynamic -->
+<h3 class="fn" id="isDynamic"><a name="isDynamic"></a><span class="type">bool</span> Context::<span class="name">isDynamic</span>() const</h3>
+<!-- @@@isDynamic -->
+<!-- $$$isFallthrough[overload1]$$$isFallthrough -->
+<h3 class="fn" id="isFallthrough"><a name="isFallthrough"></a><span class="type">bool</span> Context::<span class="name">isFallthrough</span>() const</h3>
+<!-- @@@isFallthrough -->
+<!-- $$$itemData[overload1]$$$itemData -->
+<h3 class="fn" id="itemData"><a name="itemData"></a>const <span class="type">int</span> &amp;Context::<span class="name">itemData</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setItemData">setItemData</a>().</p>
+<!-- @@@itemData -->
+<!-- $$$lineBeginContext[overload1]$$$lineBeginContext -->
+<h3 class="fn" id="lineBeginContext"><a name="lineBeginContext"></a>const <span class="type">int</span> &amp;Context::<span class="name">lineBeginContext</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setLineBeginContext">setLineBeginContext</a>().</p>
+<!-- @@@lineBeginContext -->
+<!-- $$$lineEmptyContext[overload1]$$$lineEmptyContext -->
+<h3 class="fn" id="lineEmptyContext"><a name="lineEmptyContext"></a>const <span class="type">int</span> &amp;Context::<span class="name">lineEmptyContext</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setLineEmptyContext">setLineEmptyContext</a>().</p>
+<!-- @@@lineEmptyContext -->
+<!-- $$$lineEndContext[overload1]$$$lineEndContext -->
+<h3 class="fn" id="lineEndContext"><a name="lineEndContext"></a>const <span class="type">int</span> &amp;Context::<span class="name">lineEndContext</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setLineEndContext">setLineEndContext</a>().</p>
+<!-- @@@lineEndContext -->
+<!-- $$$name[overload1]$$$name -->
+<h3 class="fn" id="name"><a name="name"></a>const <span class="type">int</span> &amp;Context::<span class="name">name</span>() const</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#setName">setName</a>().</p>
+<!-- @@@name -->
+<!-- $$$setDefinition[overload1]$$$setDefinitionconstint& -->
+<h3 class="fn" id="setDefinition"><a name="setDefinition"></a><span class="type">void</span> Context::<span class="name">setDefinition</span>(const <span class="type">int</span> &amp;<i>definition</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#definition">definition</a>().</p>
+<!-- @@@setDefinition -->
+<!-- $$$setDynamic[overload1]$$$setDynamicconstint& -->
+<h3 class="fn" id="setDynamic"><a name="setDynamic"></a><span class="type">void</span> Context::<span class="name">setDynamic</span>(const <span class="type">int</span> &amp;<i>dynamic</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#isDynamic">isDynamic</a>().</p>
+<!-- @@@setDynamic -->
+<!-- $$$setFallthrough[overload1]$$$setFallthroughconstint& -->
+<h3 class="fn" id="setFallthrough"><a name="setFallthrough"></a><span class="type">void</span> Context::<span class="name">setFallthrough</span>(const <span class="type">int</span> &amp;<i>fallthrough</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#isFallthrough">isFallthrough</a>().</p>
+<!-- @@@setFallthrough -->
+<!-- $$$setFallthroughContext[overload1]$$$setFallthroughContextconstint& -->
+<h3 class="fn" id="setFallthroughContext"><a name="setFallthroughContext"></a><span class="type">void</span> Context::<span class="name">setFallthroughContext</span>(const <span class="type">int</span> &amp;<i>context</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#fallthroughContext">fallthroughContext</a>().</p>
+<!-- @@@setFallthroughContext -->
+<!-- $$$setItemData[overload1]$$$setItemDataconstint& -->
+<h3 class="fn" id="setItemData"><a name="setItemData"></a><span class="type">void</span> Context::<span class="name">setItemData</span>(const <span class="type">int</span> &amp;<i>itemData</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#itemData">itemData</a>().</p>
+<!-- @@@setItemData -->
+<!-- $$$setLineBeginContext[overload1]$$$setLineBeginContextconstint& -->
+<h3 class="fn" id="setLineBeginContext"><a name="setLineBeginContext"></a><span class="type">void</span> Context::<span class="name">setLineBeginContext</span>(const <span class="type">int</span> &amp;<i>context</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#lineBeginContext">lineBeginContext</a>().</p>
+<!-- @@@setLineBeginContext -->
+<!-- $$$setLineEmptyContext[overload1]$$$setLineEmptyContextconstint& -->
+<h3 class="fn" id="setLineEmptyContext"><a name="setLineEmptyContext"></a><span class="type">void</span> Context::<span class="name">setLineEmptyContext</span>(const <span class="type">int</span> &amp;<i>context</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#lineEmptyContext">lineEmptyContext</a>().</p>
+<!-- @@@setLineEmptyContext -->
+<!-- $$$setLineEndContext[overload1]$$$setLineEndContextconstint& -->
+<h3 class="fn" id="setLineEndContext"><a name="setLineEndContext"></a><span class="type">void</span> Context::<span class="name">setLineEndContext</span>(const <span class="type">int</span> &amp;<i>context</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#lineEndContext">lineEndContext</a>().</p>
+<!-- @@@setLineEndContext -->
+<!-- $$$setName[overload1]$$$setNameconstint& -->
+<h3 class="fn" id="setName"><a name="setName"></a><span class="type">void</span> Context::<span class="name">setName</span>(const <span class="type">int</span> &amp;<i>name</i>)</h3>
+<p><b>See also </b><a href="texteditor-internal-context.html#name">name</a>().</p>
+<!-- @@@setName -->
+<!-- $$$swap[overload1]$$$swapTextEditor::Internal::Context& -->
+<h3 class="fn" id="swap"><a name="swap"></a><span class="type">void</span> Context::<span class="name">swap</span>(<span class="type">TextEditor::Internal::Context</span> &amp;<i>context</i>)</h3>
+<!-- @@@swap -->
+<!-- $$$updateDynamicRules[overload1]$$$updateDynamicRulesconstint& -->
+<h3 class="fn" id="updateDynamicRules"><a name="updateDynamicRules"></a><span class="type">void</span> Context::<span class="name">updateDynamicRules</span>(const <span class="type">int</span> &amp;<i>captures</i>) const</h3>
+<!-- @@@updateDynamicRules -->
+<!-- $$$operator=[overload1]$$$operator=TextEditor::Internal::Context -->
+<h3 class="fn" id="operator-eq"><a name="operator-eq"></a>const <span class="type">TextEditor::Internal::Context</span> &amp;Context::<span class="name">operator=</span>(<span class="type">TextEditor::Internal::Context</span> <i>copy</i>)</h3>
+<!-- @@@operator= -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>

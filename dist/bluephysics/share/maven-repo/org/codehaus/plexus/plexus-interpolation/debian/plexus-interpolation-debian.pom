@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.codehaus.plexus</groupId>
+	<artifactId>plexus-interpolation</artifactId>
+	<version>debian</version>
+	<packaging>bundle</packaging><properties>
+		
+			<debian.hasPackageVersion/>
+		
+			<debian.junit.junit.originalVersion>4.12</debian.junit.junit.originalVersion>
+		
+			<debian.mavenRules>org.apache.maven.plugins maven-release-plugin * * * *,
+		org.apache.maven.plugins maven-scm-publish-plugin * * * *</debian.mavenRules>
+		
+			<debian.originalVersion>1.25</debian.originalVersion>
+		
+			<debian.package>libplexus-interpolation-java</debian.package>
+	</properties>
+	
+	<name>Plexus Interpolation API</name>
+	<dependencies>
+	</dependencies>
+</project>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>HighlighterSettings Class | Extending Qt Creator Manual</title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+    // loading style sheet breaks anchors that were jumped to before
+    // so force jumping to anchor again
+    setTimeout(function() {
+        var anchor = location.hash;
+        // need to jump to different anchor first (e.g. none)
+        location.hash = "#";
+        setTimeout(function() {
+            location.hash = anchor;
+        }, 0);
+    }, 0);
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<td ><a href="extending-index.html">Extending Qt Creator Manual</a></td><td >HighlighterSettings</td></tr></table><table class="buildversion"><tr>
+<td id="buildversion" width="100%" align="right">Extending Qt Creator Manual 4.8.2</td>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">HighlighterSettings Class</h1>
+<span class="small-subtitle">(<a href="texteditor-highlightersettings.html">TextEditor::HighlighterSettings</a>)<br/></span>
+<ul>
+<li><a href="texteditor-highlightersettings-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#HighlighterSettings">HighlighterSettings</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#definitionFilesPath">definitionFilesPath</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#equals">equals</a></b>(const TextEditor::HighlighterSettings &amp;<i>highlighterSettings</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp;</td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#fallbackDefinitionFilesPath">fallbackDefinitionFilesPath</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#fromSettings">fromSettings</a></b>(const int &amp;<i>category</i>, int *<i>s</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> int </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#ignoredFilesPatterns">ignoredFilesPatterns</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#isIgnoredFilePattern">isIgnoredFilePattern</a></b>(const int &amp;<i>fileName</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#setDefinitionFilesPath">setDefinitionFilesPath</a></b>(const int &amp;<i>path</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#setFallbackDefinitionFilesPath">setFallbackDefinitionFilesPath</a></b>(const int &amp;<i>path</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#setIgnoredFilesPatterns">setIgnoredFilesPatterns</a></b>(const int &amp;<i>patterns</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#setUseFallbackLocation">setUseFallbackLocation</a></b>(const bool <i>use</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#toSettings">toSettings</a></b>(const int &amp;<i>category</i>, int *<i>s</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="texteditor-highlightersettings.html#useFallbackLocation">useFallbackLocation</a></b>() const</td></tr>
+</table></div>
+<a name="details"></a>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$HighlighterSettings[overload1]$$$HighlighterSettings -->
+<h3 class="fn" id="HighlighterSettings"><a name="HighlighterSettings"></a>HighlighterSettings::<span class="name">HighlighterSettings</span>()</h3>
+<p>Default constructs an instance of HighlighterSettings.</p><!-- @@@HighlighterSettings -->
+<!-- $$$definitionFilesPath[overload1]$$$definitionFilesPath -->
+<h3 class="fn" id="definitionFilesPath"><a name="definitionFilesPath"></a>const <span class="type">int</span> &amp;HighlighterSettings::<span class="name">definitionFilesPath</span>() const</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#setDefinitionFilesPath">setDefinitionFilesPath</a>().</p>
+<!-- @@@definitionFilesPath -->
+<!-- $$$equals[overload1]$$$equalsconstTextEditor::HighlighterSettings& -->
+<h3 class="fn" id="equals"><a name="equals"></a><span class="type">bool</span> HighlighterSettings::<span class="name">equals</span>(const <span class="type">TextEditor::HighlighterSettings</span> &amp;<i>highlighterSettings</i>) const</h3>
+<!-- @@@equals -->
+<!-- $$$fallbackDefinitionFilesPath[overload1]$$$fallbackDefinitionFilesPath -->
+<h3 class="fn" id="fallbackDefinitionFilesPath"><a name="fallbackDefinitionFilesPath"></a>const <span class="type">int</span> &amp;HighlighterSettings::<span class="name">fallbackDefinitionFilesPath</span>() const</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#setFallbackDefinitionFilesPath">setFallbackDefinitionFilesPath</a>().</p>
+<!-- @@@fallbackDefinitionFilesPath -->
+<!-- $$$fromSettings[overload1]$$$fromSettingsconstint&int* -->
+<h3 class="fn" id="fromSettings"><a name="fromSettings"></a><span class="type">void</span> HighlighterSettings::<span class="name">fromSettings</span>(const <span class="type">int</span> &amp;<i>category</i>, <span class="type">int</span> *<i>s</i>)</h3>
+<!-- @@@fromSettings -->
+<!-- $$$ignoredFilesPatterns[overload1]$$$ignoredFilesPatterns -->
+<h3 class="fn" id="ignoredFilesPatterns"><a name="ignoredFilesPatterns"></a><span class="type">int</span> HighlighterSettings::<span class="name">ignoredFilesPatterns</span>() const</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#setIgnoredFilesPatterns">setIgnoredFilesPatterns</a>().</p>
+<!-- @@@ignoredFilesPatterns -->
+<!-- $$$isIgnoredFilePattern[overload1]$$$isIgnoredFilePatternconstint& -->
+<h3 class="fn" id="isIgnoredFilePattern"><a name="isIgnoredFilePattern"></a><span class="type">bool</span> HighlighterSettings::<span class="name">isIgnoredFilePattern</span>(const <span class="type">int</span> &amp;<i>fileName</i>) const</h3>
+<!-- @@@isIgnoredFilePattern -->
+<!-- $$$setDefinitionFilesPath[overload1]$$$setDefinitionFilesPathconstint& -->
+<h3 class="fn" id="setDefinitionFilesPath"><a name="setDefinitionFilesPath"></a><span class="type">void</span> HighlighterSettings::<span class="name">setDefinitionFilesPath</span>(const <span class="type">int</span> &amp;<i>path</i>)</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#definitionFilesPath">definitionFilesPath</a>().</p>
+<!-- @@@setDefinitionFilesPath -->
+<!-- $$$setFallbackDefinitionFilesPath[overload1]$$$setFallbackDefinitionFilesPathconstint& -->
+<h3 class="fn" id="setFallbackDefinitionFilesPath"><a name="setFallbackDefinitionFilesPath"></a><span class="type">void</span> HighlighterSettings::<span class="name">setFallbackDefinitionFilesPath</span>(const <span class="type">int</span> &amp;<i>path</i>)</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#fallbackDefinitionFilesPath">fallbackDefinitionFilesPath</a>().</p>
+<!-- @@@setFallbackDefinitionFilesPath -->
+<!-- $$$setIgnoredFilesPatterns[overload1]$$$setIgnoredFilesPatternsconstint& -->
+<h3 class="fn" id="setIgnoredFilesPatterns"><a name="setIgnoredFilesPatterns"></a><span class="type">void</span> HighlighterSettings::<span class="name">setIgnoredFilesPatterns</span>(const <span class="type">int</span> &amp;<i>patterns</i>)</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#ignoredFilesPatterns">ignoredFilesPatterns</a>().</p>
+<!-- @@@setIgnoredFilesPatterns -->
+<!-- $$$setUseFallbackLocation[overload1]$$$setUseFallbackLocationconstbool -->
+<h3 class="fn" id="setUseFallbackLocation"><a name="setUseFallbackLocation"></a><span class="type">void</span> HighlighterSettings::<span class="name">setUseFallbackLocation</span>(const <span class="type">bool</span> <i>use</i>)</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#useFallbackLocation">useFallbackLocation</a>().</p>
+<!-- @@@setUseFallbackLocation -->
+<!-- $$$toSettings[overload1]$$$toSettingsconstint&int* -->
+<h3 class="fn" id="toSettings"><a name="toSettings"></a><span class="type">void</span> HighlighterSettings::<span class="name">toSettings</span>(const <span class="type">int</span> &amp;<i>category</i>, <span class="type">int</span> *<i>s</i>) const</h3>
+<!-- @@@toSettings -->
+<!-- $$$useFallbackLocation[overload1]$$$useFallbackLocation -->
+<h3 class="fn" id="useFallbackLocation"><a name="useFallbackLocation"></a><span class="type">bool</span> HighlighterSettings::<span class="name">useFallbackLocation</span>() const</h3>
+<p><b>See also </b><a href="texteditor-highlightersettings.html#setUseFallbackLocation">setUseFallbackLocation</a>().</p>
+<!-- @@@useFallbackLocation -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2018 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br/>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br/>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>
