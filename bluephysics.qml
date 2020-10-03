@@ -5,6 +5,7 @@ import QtCharts 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
 import QtQuick.VirtualKeyboard 2.1
+import QtQuick.Dialogs 1.3
 
 
 ApplicationWindow {
@@ -51,71 +52,236 @@ ApplicationWindow {
             fillMode: Image.PreserveAspectFit
         }
 
-        ToolButton {
-            id: metadatabutton
-            objectName: 'metadatabutton'
-            width: 125
-            height: 125
-            hoverEnabled: true
+        Row {
             anchors.top: image.bottom
-            anchors.topMargin: 80
             anchors.horizontalCenter: parent.horizontalCenter
-            icon.source: "iconspd/settings.png"
-            icon.color: 'transparent'
-            icon.height: 100
-            icon.width: 100
-            text: "Metadata"
-            font.pointSize: 12
-            display: AbstractButton.TextUnderIcon
+            spacing: 20
 
-            onClicked: {
-                mainmenu.visible = false
-                metadataview.visible = true
+            ToolButton {
+                id: metadatabutton
+                objectName: 'metadatabutton'
+                width: 125
+                height: 125
+                hoverEnabled: true
+                icon.source: "iconspd/settings.png"
+                icon.color: 'transparent'
+                icon.height: 100
+                icon.width: 100
+                text: "Metadata"
+                font.pointSize: 12
+                display: AbstractButton.TextUnderIcon
+
+                onClicked: {
+                    mainmenu.visible = false
+                    metadataview.visible = true
+                }
+
             }
 
-        }
+            ToolButton {
+                id: measurebutton
+                width: 125
+                height: 125
+                hoverEnabled: true
+                text: "Measure"
+                font.pointSize: 12
+                icon.source: "iconspd/measure.png"
+                icon.height: 100
+                display: AbstractButton.TextUnderIcon
+                icon.width: 100
+                icon.color: 'transparent'
 
-        ToolButton {
-            id: measurebutton
-            width: 125
-            height: 125
-            hoverEnabled: true
-            text: "Measure"
-            font.pointSize: 12
-            anchors.right: metadatabutton.left
-            anchors.rightMargin: 80
-            icon.source: "iconspd/measure.png"
-            icon.height: 100
-            anchors.top: image.bottom
-            anchors.topMargin: 80
-            display: AbstractButton.TextUnderIcon
-            icon.width: 100
-            icon.color: 'transparent'
+                onClicked: {
+                    measureview.visible = true
+                    mainmenu.visible = false
+                }
+            }
 
-            onClicked: {
-                measureview.visible = true
-                mainmenu.visible = false
+            ToolButton {
+                id: analyzebutton
+                width: 125
+                height: 125
+                hoverEnabled: true
+                text: "Analyze"
+                font.pointSize: 12
+                icon.source: "iconspd/analyze.png"
+                icon.height: 100
+                display: AbstractButton.TextUnderIcon
+                icon.width: 100
+                icon.color: 'transparent'
+
+                onClicked: {
+                    analyzeview.visible = true
+                    mainmenu.visible = false
+                }
+            }
+
+            ToolButton {
+                id: turnoffbutton
+                width: 125
+                height: 125
+                text: "Turn Off"
+                hoverEnabled: true
+                icon.source: "iconspd/turnoff.png"
+                icon.height: 100
+                font.pointSize: 12
+                display: AbstractButton.TextUnderIcon
+                icon.width: 100
+                icon.color: "#00000000"
+
+                onClicked: Qt.quit()
             }
         }
 
-        ToolButton {
-            id: turnoffbutton
-            width: 125
-            height: 125
-            text: "Turn Off"
-            anchors.left: metadatabutton.right
-            hoverEnabled: true
-            anchors.leftMargin: 80
-            icon.source: "iconspd/turnoff.png"
-            icon.height: 100
-            anchors.top: image.bottom
-            font.pointSize: 12
-            anchors.topMargin: 80
-            display: AbstractButton.TextUnderIcon
-            icon.width: 100
-            icon.color: "#00000000"
 
-            onClicked: Qt.quit()
+    }
+
+    Item {
+        id: analyzeview
+        visible: false
+        anchors.fill: parent
+
+        FileDialog {
+            id: filedialog
+            folder: "rawdata"
+            visible: false
+            nameFilters: ["*.csv"]
+            title: "Chose a file to analyze"
+            onRejected: visible = false
+            onAccepted: {
+                console.log("You chose: " + fileUrl)
+            }
+        }
+
+        Rectangle {
+            id: analyzerectangle
+            x: 1136
+            width: 150
+            color: "transparent"
+            z: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+
+            ToolButton {
+                id: analyzebacktomainmenubutton
+                width: 125
+                height: 100
+                anchors.top: parent.top
+                anchors.topMargin: 6
+                hoverEnabled: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                icon.source: "iconspd/home.png"
+                icon.height: 90
+                font.pointSize: 12
+                display: AbstractButton.IconOnly
+                icon.width: 90
+                icon.color: "#00000000"
+
+                onClicked: {
+                    analyzeview.visible = false
+                    mainmenu.visible = true
+                }
+            }
+
+            Button {
+                id: loadfilebutton
+                width: 125
+                height: 50
+                anchors.top: analyzebacktomainmenubutton.bottom
+                anchors.topMargin: 6
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Load File"
+                onClicked: filedialog.visible = true
+            }
+
+            GroupBox {
+                id: analyzegroupboxplot1
+                title: 'Plot1'
+                anchors.top: loadfilebutton.bottom
+                anchors.topMargin: 12
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                anchors.left: parent.left
+                height: 350
+
+                ButtonGroup {
+                    id: analyzeresultsgroup
+                    exclusive: true
+                }
+
+
+                GridLayout {
+                    rows: 6
+                    columns: 2
+                    anchors.fill: parent
+
+                    Repeater {
+                        model: 8
+                        ToolButton {
+                            text: 'ch' + index
+                            checkable: true
+                            hoverEnabled: true
+                            checked: true
+
+                            onClicked: {
+                                //chartviewchs.series('ch' + index).visible = checked
+                                //legendlist.itemAt(index).visible = checked
+                                //intlist.itemAt(index).visible = checked
+                            }
+                        }
+
+                    }
+                    ToolButton {
+                        id: analyzechargebt
+                        text: 'Chr'
+                        enabled: false
+                        checkable: true
+                        checked: true
+                        ButtonGroup.group: resultsgroup
+
+                    }
+                    ToolButton {
+                        id: analyzechargedosebt
+                        text: '~dose'
+                        enabled: false
+                        checkable: true
+                        checked: false
+                        ButtonGroup.group: resultsgroup
+
+                    }
+                    ToolButton {
+                        id: analyzedosebt
+                        text: 'Dose'
+                        enabled: false
+                        checkable: true
+                        checked: false
+                        ButtonGroup.group: resultsgroup
+
+                    }
+                }
+            }
+
+
+            GroupBox {
+                id: analyzegroupboxplot2iew
+                title: 'Plot2'
+                anchors.top: analyzegroupboxplot1.bottom
+                anchors.topMargin: 12
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                height: 100
+
+                ComboBox {
+                    id: analyzeplot2combobox
+                    anchors.fill: parent
+                    model: ['None', 'Temp', '5V', 'PS', '-12V', 'Vref']
+                }
+            }
         }
     }
 
@@ -1180,7 +1346,7 @@ ApplicationWindow {
             title: 'PS Coef.'
             anchors.top: comments.bottom
             anchors.topMargin: 12
-            anchors.left: integrallimts.right
+            anchors.left: integrallimits.right
             anchors.leftMargin: 12
             anchors.bottom: sensorsinfo.bottom
             anchors.right: metadatatoolbar.left
