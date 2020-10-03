@@ -13,7 +13,7 @@ ApplicationWindow {
     objectName: 'mainapplication'
     width: Screen.width
     height: Screen.height
-    title: " Blue Physics v9.1 file: " + filename.text + '.csv'
+    title: " Blue Physics v9.2 file: " + filename.text + '.csv'
     visible: true
 
     Material.theme: Material.Dark
@@ -1973,6 +1973,7 @@ ApplicationWindow {
                 property var finishtimes: []
                 property int lineserieshovered: -1
                 hoverEnabled: true
+                property bool activezoom: false
 
                 onPressAndHold: {
                     if (mouse.button & Qt.RightButton){
@@ -2085,6 +2086,7 @@ ApplicationWindow {
                     if (xstart) {
                         var r = Qt.rect(xstart, ystart, Math.abs(xfinish - xstart), Math.abs(yfinish - ystart))
                         chartviewchs.zoomIn(r)
+                        ma.activezoom = true
                         xstart = false
                         zoomarea.visible = false
                     }
@@ -2093,6 +2095,7 @@ ApplicationWindow {
                 onClicked: {
                     if (mouse.button & Qt.RightButton) {
                         chartviewchs.zoomReset()
+                        ma.activezoom = false
                     }
                 }
             }
@@ -2277,7 +2280,7 @@ ApplicationWindow {
 
         onSignaldatain: {
             time = lista[0]
-            if (time > 60) {
+            if (time > 60 & ma.activezoom === false) {
                 axisXtemp.max = time
                 //axisXtemp.min = time - 60
                 axisXch.max = time
@@ -2312,8 +2315,8 @@ ApplicationWindow {
                 axisYch.max = ch0 + 0.005
             }
             else {
-                if (ch0 > axisYch.max) {axisYch.max = ch0 + 0.005}
-                if (ch0 < axisYch.min) {axisYch.min = ch0 - 0.005}
+                if (ch0 > axisYch.max & ma.activezoom === false) {axisYch.max = ch0 + 0.005}
+                if (ch0 < axisYch.min & ma.activezoom === false) {axisYch.min = ch0 - 0.005}
             }
 
            //var ch1 = -lista[3]  * 20.48 / 65535 + 10.24
@@ -2323,8 +2326,8 @@ ApplicationWindow {
                 axisYch.max = ch1 + 0.005
             }
             else {
-                if (ch1 > axisYch.max) {axisYch.max = ch1 + 0.005}
-                if (ch1 < axisYch.min) {axisYch.min = ch1 - 0.005}
+                if (ch1 > axisYch.max & ma.activezoom === false) {axisYch.max = ch1 + 0.005}
+                if (ch1 < axisYch.min & ma.activezoom === false) {axisYch.min = ch1 - 0.005}
             }
 
             //var ch2 = -lista[4]  * 20.48 / 65535 + 10.24
@@ -2334,8 +2337,8 @@ ApplicationWindow {
                 axisYch.max = ch2 + 0.005
             }
             else {
-                if (ch2 > axisYch.max) {axisYch.max = ch2 + 0.005}
-                if (ch2 < axisYch.min) {axisYch.min = ch2 - 0.005}
+                if (ch2 > axisYch.max & ma.activezoom === false) {axisYch.max = ch2 + 0.005}
+                if (ch2 < axisYch.min & ma.activezoom === false) {axisYch.min = ch2 - 0.005}
             }
 
             //var ch3 = -lista[5]  * 20.48 / 65535 + 10.24
@@ -2345,8 +2348,8 @@ ApplicationWindow {
                 axisYch.max = ch3 + 0.005
             }
             else {
-                if (ch3 > axisYch.max) {axisYch.max = ch3 + 0.005}
-                if (ch3 < axisYch.min) {axisYch.min = ch3 - 0.005}
+                if (ch3 > axisYch.max & ma.activezoom === false) {axisYch.max = ch3 + 0.005}
+                if (ch3 < axisYch.min & ma.activezoom === false) {axisYch.min = ch3 - 0.005}
             }
 
             //var ch4 = -lista[6]  * 20.48 / 65535 + 10.24
@@ -2356,8 +2359,8 @@ ApplicationWindow {
                 axisYch.max = ch4 + 0.005
             }
             else {
-                if (ch4 > axisYch.max) {axisYch.max = ch4 + 0.005}
-                if (ch4 < axisYch.min) {axisYch.min = ch4 - 0.005}
+                if (ch4 > axisYch.max & ma.activezoom === false) {axisYch.max = ch4 + 0.005}
+                if (ch4 < axisYch.min & ma.activezoom === false) {axisYch.min = ch4 - 0.005}
             }
 
             //var ch5 = -lista[7]  * 20.48 / 65535 + 10.24
@@ -2367,8 +2370,8 @@ ApplicationWindow {
                 axisYch.max = ch5 + 0.005
             }
             else {
-                if (ch5 > axisYch.max) {axisYch.max = ch5 + 0.005}
-                if (ch5 < axisYch.min) {axisYch.min = ch5 - 0.005}
+                if (ch5 > axisYch.max & ma.activezoom === false) {axisYch.max = ch5 + 0.005}
+                if (ch5 < axisYch.min & ma.activezoom === false) {axisYch.min = ch5 - 0.005}
             }
 
             //var ch6 = -lista[8]  * 20.48 / 65535 + 10.24
@@ -2378,8 +2381,8 @@ ApplicationWindow {
                 axisYch.max = ch6 + 0.005
             }
             else {
-                if (ch6 > axisYch.max) {axisYch.max = ch6 + 0.005}
-                if (ch6 < axisYch.min) {axisYch.min = ch6 - 0.005}
+                if (ch6 > axisYch.max & ma.activezoom === false) {axisYch.max = ch6 + 0.005}
+                if (ch6 < axisYch.min & ma.activezoom === false) {axisYch.min = ch6 - 0.005}
             }
 
 
@@ -2391,8 +2394,8 @@ ApplicationWindow {
                 axisYch.first = false
             }
             else {
-                if (ch7 > axisYch.max) {axisYch.max = ch7 + 0.005}
-                if (ch7 < axisYch.min) {axisYch.min = ch7 - 0.005}
+                if (ch7 > axisYch.max & ma.activezoom === false) {axisYch.max = ch7 + 0.005}
+                if (ch7 < axisYch.min & ma.activezoom === false) {axisYch.min = ch7 - 0.005}
             }
 
 
