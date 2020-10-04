@@ -142,7 +142,7 @@ def from_dic_to_gui():
     z3.setProperty('value', int(float(dmetadata['Z3'])*100))
     commentstext.setProperty('text', dmetadata['Comments'])
     #limitsspinbox.setProperty('value', int(dmetadata['Limits Integral']))
-    pscoef.setProperty('value', int(float(dmetadata['PS Coeficient'])*1000))
+    pscoef.setProperty('realValue', float(dmetadata['PS Coeficient']))
     socatport1.setProperty('currentIndex', int(dmetadata['Socatport1']))
     socatport2.setProperty('currentIndex', int(dmetadata['Socatport2']))
     if dmetadata['Emulatorswitch'] == 'True':
@@ -218,7 +218,8 @@ def goodbye():
         #print ('%s,%s\n' %(key, dmetadata[key]))
     metadatafile.close()
 
-
+def analyze():
+    print ('File chosen: %s' %(analyzefile.property('fileUrl')))
 
 #########################################################################
 #                     CLASSES                                           #
@@ -763,7 +764,7 @@ commentstext = engine.rootObjects()[0].findChild(QObject, 'commentstext')
 socatport1 = engine.rootObjects()[0].findChild(QObject, 'socatport1')
 socatport2 = engine.rootObjects()[0].findChild(QObject, 'socatport2')
 emulatorswitch = engine.rootObjects()[0].findChild(QObject, 'emulatorswitch')
-#limitsspinbox = engine.rootObjects()[0].findChild(QObject, 'limitsspinbox')
+analyzefile = engine.rootObjects()[0].findChild(QObject, 'analyzefile')
 pscoef = engine.rootObjects()[0].findChild(QObject, 'pscoef')
 #print (emulatorswitch.property('text'))
 
@@ -800,6 +801,8 @@ regulateb.clicked.connect(regulateps.start)
 subtractdcb.clicked.connect(mysubtractdc.start)
 
 sendtocontrollerbt.clicked.connect(qmlsendtocontroller)
+
+analyzefile.accepted.connect(analyze)
 
 #########################################################################
 #            THINGS TO DO AT START                                      #

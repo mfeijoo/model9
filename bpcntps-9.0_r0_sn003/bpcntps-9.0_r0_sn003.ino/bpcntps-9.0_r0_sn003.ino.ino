@@ -20,7 +20,7 @@ Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
 #define CSpotpin 10
 #define coeftempin A0
 #define ledpin 13
-#define PSFC 16.341
+#define PSFC 16.2788
 #define testpin 12
 
 Adafruit_DotStar led(dsnumpixels, dsdatapin, dsclockpin, DOTSTAR_BRG);

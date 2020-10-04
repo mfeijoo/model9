@@ -141,8 +141,10 @@ ApplicationWindow {
         visible: false
         anchors.fill: parent
 
+
         FileDialog {
             id: filedialog
+            objectName: 'analyzefile'
             folder: "rawdata"
             visible: false
             nameFilters: ["*.csv"]
@@ -1334,16 +1336,16 @@ ApplicationWindow {
             SpinBox{
                 id: pscoef
                 objectName: 'pscoef'
-                from: 15000
-                value: 16341
-                to: 18000
+                from: 150000
+                value: 162788
+                to: 180000
                 stepSize: 1
                 editable: true
                 anchors.fill: parent
                 font.pointSize: 10
 
-                property int decimals: 3
-                property real realValue: value / 1000
+                property int decimals: 4
+                property real realValue: value / 10000
 
                 validator: DoubleValidator {
                     bottom: Math.min(pscoef.from, pscoef.to)
@@ -1351,10 +1353,10 @@ ApplicationWindow {
                 }
 
                 textFromValue: function(value, locale) {
-                    return Number(value / 1000).toLocaleString(locale, 'f', pscoef.decimals)
+                    return Number(value / 10000).toLocaleString(locale, 'f', pscoef.decimals)
                 }
                 valueFromText: function(text, locale) {
-                    return Number.fromLocaleString(locale, text) * 1000
+                    return Number.fromLocaleString(locale, text) * 10000
                 }
             }
 
