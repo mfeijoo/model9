@@ -1,4 +1,4 @@
-Date Time,03 Oct 2020 13:47:06
+Date Time,03 Oct 2020 14:54:21
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
@@ -10,19 +10,19 @@ Dark Current Ch4,11327
 Dark Current Ch5,15103
 Dark Current Ch6,10303
 Dark Current Ch7,10495
-Pair 0 Ch Sensor,ch1
-Pair 0 Ch Cherenkov,ch0
+Pair 0 Ch Sensor,ch0
+Pair 0 Ch Cherenkov,ch1
 Pair 1 Ch Sensor,ch2
 Pair 1 Ch Cherenkov,ch3
 Pair 2 Ch Sensor,ch4
 Pair 2 Ch Cherenkov,ch5
 Pair 3 Ch Sensor,ch6
 Pair 3 Ch Cherenkov,ch7
-ACR0,0.8158
+ACR0,1.0
 ACR1,1.0
 ACR2,1.0
 ACR3,1.0
-Calib0,0.4937
+Calib0,1.0
 Calib1,1.0
 Calib2,1.0
 Calib3,1.0
@@ -44,5 +44,4 @@ Socatport1,3
 Socatport2,4
 Emulatorswitch,True
 Comments,hola
-Limits Integral,2
 PS Coeficient,16.341

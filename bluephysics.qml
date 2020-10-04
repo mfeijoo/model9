@@ -1320,33 +1320,12 @@ ApplicationWindow {
             }
         }
 
-        GroupBox {
-            title: 'Int. Lim. Coef.'
-            anchors.top: comments.bottom
-            anchors.topMargin: 12
-            anchors.left: sensorsinfo.right
-            anchors.leftMargin: 12
-            anchors.bottom: sensorsinfo.bottom
-            width: 200
-            id: integrallimits
-
-            SpinBox{
-                id: limitsspinbox
-                anchors.fill: parent
-                objectName: 'limitsspinbox'
-                from: 0
-                to: 10
-                value: 2
-                editable: true
-            }
-
-        }
 
         GroupBox {
             title: 'PS Coef.'
             anchors.top: comments.bottom
             anchors.topMargin: 12
-            anchors.left: integrallimits.right
+            anchors.left: sensorsinfo.right
             anchors.leftMargin: 12
             anchors.bottom: sensorsinfo.bottom
             anchors.right: metadatatoolbar.left
