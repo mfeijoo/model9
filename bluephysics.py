@@ -240,8 +240,8 @@ class CH():
         #Calculate start and end of radiation
         #self.df['measdiff'] = self.df.meas.diff()
         try:
-            self.ts = starttimes.values[0]
-            self.tf = finishtimes.values[-1]
+            self.ts = starttimes[0]
+            self.tf = finishtimes[-1]
         except IndexError:
             self.ts = self.time[0]
             self.tf = self.time[-1]
@@ -621,18 +621,16 @@ class StopThread(QThread):
 
         #lets find the start and stop of all beams
         dff = pd.DataFrame({'time':dchs[mch].time, mch:dchs[mch].meas})
-        dff['chdiff'] = dff[mch].diff()
-        lv = 2
-        print (lv, type(lv))
-        dffchanges =  dff.loc[dff.chdiff.abs() > (lv * 1000), :].copy()
-        dffchanges['timediff'] = dffchanges.time.diff()
-        dffchanges.fillna(1, inplace=True)
-        dfftimes =  dffchanges[dffchanges.timediff > 0.5].copy()
-        #print (dfftimes.head())
-        starttimes = dfftimes.loc[dfftimes.chdiff < 0, 'time']
-        #print (starttimes)
-        finishtimes = dfftimes.loc[dfftimes.chdiff > 0, 'time']
-        #print (finishtimes)
+        dff['mchI'] = (-(dff[mch] * 20.48/65535) + 10.24) * 1.8 / (int(dmetadata['Integration Time']) * 1e-3)
+        dff['chdiff'] = dff.mchI.diff()
+        dfstarts = dff.loc[(dff.chdiff > 10), ['chdiff', 'time']]
+        dfstarts['timediff'] = dfstarts.time.diff()
+        dfstarts.fillna(2, inplace=True)
+        starttimes = dfstarts.loc[dfstarts.timediff > 1, 'time'].tolist()
+        dffinish = dff.loc[(dff.chdiff < -10), ['chdiff', 'time']]
+        dffinish['timediff'] = dffinish.time.diff()
+        dffinish.fillna(2, inplace=True)
+        finishtimes = dffinish.loc[dffinish.timediff > 1, 'time'].tolist()
 
         #Calculate the integrals in each region
         #and update the information in the dqmlchs objects
