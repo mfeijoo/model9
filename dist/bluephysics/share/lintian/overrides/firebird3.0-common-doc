@@ -1,8 +1,0 @@
-# The sole purpose of this package is indeed to only hold changelogs
-# and copyright. All other firebird3.0 binary packages have their doc directory
-# symlinked to -common-doc
-firebird3.0-common-doc: empty-binary-package
-
-# Heh, providing an override no longer qualifies this as an empty package so we
-# have another warning to override
-firebird3.0-common-doc: unused-override

@@ -1,3 +1,0 @@
-# Upstream also ship those JAR without any .class
-libsisu-ioc-java binary: codeless-jar */sisu-osgi-registry*.jar
-libsisu-ioc-java binary: codeless-jar */sisu-spi-registry*.jar

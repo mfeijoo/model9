@@ -1,4 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.PackageKit
-Exec=/usr/bin/pi-gpk-dbus-service
-

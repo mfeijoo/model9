@@ -1,3 +1,0 @@
-package llvm-7-runtime
-interpreter /usr/bin/lli-7
-magic BC

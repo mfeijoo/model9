@@ -1,3 +1,0 @@
-# uflash is a library that provides a convenience flashing script
-library-package-name-for-application usr/bin/uflash
-application-in-library-section python usr/bin/uflash

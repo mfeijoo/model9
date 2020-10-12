@@ -1,4 +1,0 @@
-# empty
-
-# silence lintian stupidity
-binutils-arm-linux-gnueabihf binary: spelling-error-in-binary usr/bin/as mmnemonic mnemonic

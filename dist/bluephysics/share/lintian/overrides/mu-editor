@@ -1,2 +1,0 @@
-# mu-editor is sectioned in python rather than editors
-mu-editor: application-in-library-section python usr/bin/mu-editor
