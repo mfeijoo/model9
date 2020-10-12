@@ -13,7 +13,7 @@ ApplicationWindow {
     objectName: 'mainapplication'
     width: Screen.width
     height: Screen.height
-    title: " Blue Physics v9.2 file: " + filename.text + '.csv'
+    title: "Blue Physics v9.2 file: " + filename.text + '.csv'
     visible: true
 
     Material.theme: Material.Dark
@@ -170,6 +170,8 @@ ApplicationWindow {
             title: "Chose a file to analyze"
             onRejected: visible = false
             onAccepted: {
+                var path = filedialog.fileUrl.toString()
+                mainwindow.title = "Blue Physics v9.2 analyzing " + path
                 analyzechargebt.enabled = true
                 analyzechargedosebt.enabled = true
                 analyzedosebt.enabled = true
@@ -240,6 +242,7 @@ ApplicationWindow {
                 onClicked: {
                     analyzeview.visible = false
                     mainmenu.visible = true
+                    mainwindow.title = "Blue Physics v9.2 file: " + filename.text + '.csv'
                 }
             }
 
