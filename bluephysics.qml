@@ -20,6 +20,8 @@ ApplicationWindow {
     Material.accent: Material.LightBlue
 
     property var lqmlchs: [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
+    property var lqmlanalyzechs: [qmlchanalyze0, qmlchanalyze1, qmlchanalyze2, qmlchanalyze3, qmlchanalyze4, qmlchanalyze5, qmlchanalyze6, qmlchanalyze7]
+    property var colors: ['red', 'lightblue', 'lightgreen', 'yellow', 'cyan', 'fuchsia', 'orange', 'lightgrey']
     property var pair0chsen
     property var pair0chche
     property var pair1chsen
@@ -36,6 +38,22 @@ ApplicationWindow {
     property var pair1dose
     property var pair2dose
     property var pair3dose
+    property var analyzepair0chsen
+    property var analyzepair0chche
+    property var analyzepair1chsen
+    property var analyzepair1chche
+    property var analyzepair2chsen
+    property var analyzepair2chche
+    property var analyzepair3chsen
+    property var analyzepair3chche
+    property var analyzepair0chargedose
+    property var analyzepair1chargedose
+    property var analyzepair2chargedose
+    property var analyzepair3chargedose
+    property var analyzepair0dose
+    property var analyzepair1dose
+    property var analyzepair2dose
+    property var analyzepair3dose
 
     Item {
         id: mainmenu
@@ -55,7 +73,27 @@ ApplicationWindow {
         Row {
             anchors.top: image.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 20
+            spacing: 40
+
+
+            ToolButton {
+                id: measurebutton
+                width: 125
+                height: 125
+                hoverEnabled: true
+                text: "Measure"
+                font.pointSize: 12
+                icon.source: "iconspd/measure.png"
+                icon.height: 100
+                display: AbstractButton.TextUnderIcon
+                icon.width: 100
+                icon.color: 'transparent'
+
+                onClicked: {
+                    measureview.visible = true
+                    mainmenu.visible = false
+                }
+            }
 
             ToolButton {
                 id: metadatabutton
@@ -76,25 +114,6 @@ ApplicationWindow {
                     metadataview.visible = true
                 }
 
-            }
-
-            ToolButton {
-                id: measurebutton
-                width: 125
-                height: 125
-                hoverEnabled: true
-                text: "Measure"
-                font.pointSize: 12
-                icon.source: "iconspd/measure.png"
-                icon.height: 100
-                display: AbstractButton.TextUnderIcon
-                icon.width: 100
-                icon.color: 'transparent'
-
-                onClicked: {
-                    measureview.visible = true
-                    mainmenu.visible = false
-                }
             }
 
             ToolButton {
@@ -151,7 +170,42 @@ ApplicationWindow {
             title: "Chose a file to analyze"
             onRejected: visible = false
             onAccepted: {
-                console.log("You chose: " + fileUrl)
+                analyzechargebt.enabled = true
+                analyzechargedosebt.enabled = true
+                analyzedosebt.enabled = true
+                analyzechartviewchs.removeAllSeries()
+                for (var i = 0; i < 8; i++){
+                    var serienow = analyzechartviewchs.createSeries(ChartView.SeriesTypeLine, 'ch' + i + 'analyzels', analyzeaxisXch, analyzeaxisYch)
+                    serienow.color = colors[i]
+                    serienow.useOpenGL = true
+                }
+
+                for (var j = 0; j < 8; j++){
+                    if (lqmlanalyzechs[j].name === pair0chsensor.currentText){
+                        analyzepair0chsen = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair0chcherenkov.currentText){
+                        analyzepair0chche = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair1chsensor.currentText){
+                        analyzepair1chsen = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair1chcherenkov.currentText){
+                        analyzepair1chche = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair2chsensor.currentText){
+                        analyzepair2chsen = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair2chcherenkov.currentText){
+                        analyzepair2chche = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair3chsensor.currentText){
+                        analyzepair3chsen = lqmlanalyzechs[j]
+                    }
+                    if (lqmlanalyzechs[j].name === pair3chcherenkov.currentText){
+                        analyzepair3chche = lqmlanalyzechs[j]
+                    }
+                }
             }
         }
 
@@ -230,8 +284,8 @@ ApplicationWindow {
                             checked: true
 
                             onClicked: {
-                                //chartviewchs.series('ch' + index).visible = checked
-                                //legendlist.itemAt(index).visible = checked
+                                analyzechartviewchs.series('ch' + index).visible = checked
+                                analyzelegendlist.itemAt(index).visible = checked
                                 //intlist.itemAt(index).visible = checked
                             }
                         }
@@ -243,8 +297,12 @@ ApplicationWindow {
                         enabled: false
                         checkable: true
                         checked: true
-                        ButtonGroup.group: resultsgroup
-
+                        ButtonGroup.group: analyzeresultsgroup
+                        onClicked: {
+                             for(var i = 0; i < 8; i++){
+                             analyzelistmodelfullintegrals.setProperty(i, 'mytext', 'ch' + i + ' ' + Math.round(lqmlanalyzechs[i].integral * 100)/100)
+                             }
+                        }
                     }
                     ToolButton {
                         id: analyzechargedosebt
@@ -252,7 +310,18 @@ ApplicationWindow {
                         enabled: false
                         checkable: true
                         checked: false
-                        ButtonGroup.group: resultsgroup
+                        ButtonGroup.group: analyzeresultsgroup
+                        onClicked: {
+                            analyzelistmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.integral - analyzepair0chche.integral * acr0.realValue) *100)/100)
+                            analyzelistmodelfullintegrals.setProperty(1, 'mytext', '')
+                            analyzelistmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.integral - analyzepair1chche.integral * acr1.realValue) *100)/100)
+                            analyzelistmodelfullintegrals.setProperty(3, 'mytext', '')
+                            analyzelistmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.integral - analyzepair2chche.integral * acr2.realValue) *100)/100)
+                            analyzelistmodelfullintegrals.setProperty(5, 'mytext', '')
+                            analyzelistmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.integral - analyzepair3chche.integral * acr3.realValue) *100)/100)
+                            analyzelistmodelfullintegrals.setProperty(7, 'mytext', '')
+
+                        }
 
                     }
                     ToolButton {
@@ -261,7 +330,17 @@ ApplicationWindow {
                         enabled: false
                         checkable: true
                         checked: false
-                        ButtonGroup.group: resultsgroup
+                        ButtonGroup.group: analyzeresultsgroup
+                        onClicked:{
+                            analyzelistmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.integral - analyzepair0chche.integral * acr0.realValue) * calib0.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(1, 'mytext', '')
+                            analyzelistmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.integral - analyzepair1chche.integral * acr1.realValue) * calib1.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(3, 'mytext', '')
+                            analyzelistmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.integral - analyzepair2chche.integral * acr2.realValue) * calib2.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(5, 'mytext', '')
+                            analyzelistmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.integral - analyzepair3chche.integral * acr3.realValue) * calib3.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(7, 'mytext', '')
+                        }
 
                     }
                 }
@@ -269,7 +348,7 @@ ApplicationWindow {
 
 
             GroupBox {
-                id: analyzegroupboxplot2iew
+                id: analyzegroupboxplot2view
                 title: 'Plot2'
                 anchors.top: analyzegroupboxplot1.bottom
                 anchors.topMargin: 12
@@ -285,7 +364,513 @@ ApplicationWindow {
                 }
             }
         }
+
+        ChartView {
+            id: analyzechartviewchs
+            anchors.top: parent.top
+            anchors.bottom: analyzechartviewpowersholder.top
+            anchors.left: parent.left
+            anchors.right: analyzerectangle.left
+            antialiasing: false
+            theme: ChartView.ChartThemeDark
+            legend.visible: false
+
+            ListModel {
+               id: analyzelistmodelfullintegrals
+               ListElement {
+                   mycolor: 'red'
+                   fullintegral: 0
+                   chargedose: 0
+                   dose: 0
+                   mytext: 'ch0'
+                }
+                ListElement {
+                    mycolor: 'lightblue'
+                    fullintegral: 0
+                    chargedose: 0
+                    dose: 0
+                    mytext: 'ch1'
+                }
+                ListElement {
+                    mycolor: 'lightgreen'
+                    fullintegral: 0
+                    chargedose: 0
+                    dose: 0
+                    mytext: 'ch2'
+                }
+                ListElement {
+                    mycolor: 'yellow'
+                    fullintegral: 0
+                    chargedose: 0
+                    dose: 0
+                    mytext: 'ch3'
+                }
+                ListElement {
+                     mycolor: 'cyan'
+                     fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch4'
+                }
+                ListElement {
+                     mycolor: 'fuchsia'
+                     fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch5'
+                }
+                ListElement {
+                     mycolor: 'orange'
+                     fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch6'
+                }
+                ListElement {
+                     mycolor: 'lightgrey'
+                     fullintegral: 0
+                     chargedose: 0
+                     dose: 0
+                     mytext: 'ch7'
+                }
+              }
+
+            ListModel {
+               id: analyzeintegralsmodel
+               ListElement {
+                   mycolor: 'red'
+                   intvalue: 0
+                   mytext: 'ch0'
+               }
+               ListElement {
+                   mycolor: 'lightblue'
+                   intvalue: 0
+                   mytext: 'ch1'
+               }
+               ListElement {
+                    mycolor: 'lightgreen'
+                    intvalue: 0
+                    mytext: 'ch2'
+               }
+               ListElement {
+                    mycolor: 'yellow'
+                    intvalue: 0
+                    mytext: 'ch3'
+               }
+               ListElement {
+                    mycolor: 'cyan'
+                    intvalue: 0
+                    mytext: 'ch4'
+               }
+               ListElement {
+                    mycolor: 'fuchsia'
+                    intvalue: 0
+                    mytext: 'ch5'
+               }
+               ListElement {
+                    mycolor: 'orange'
+                    intvalue: 0
+                    mytext: 'ch6'
+               }
+               ListElement {
+                    mycolor: 'lightgrey'
+                    intvalue: 0
+                    mytext: 'ch7'
+               }
+             }
+
+            Item {
+                id: analyzemylegend
+                anchors.left: analyzecoordinatestext.right
+                anchors.leftMargin: 400
+                //anchors.horizontalCenter: mainwindow.horizontalCenter
+                //anchors.top: parent.top
+                anchors.topMargin: 10
+                Row {
+                    spacing: 5
+                    Repeater {
+                        id: analyzelegendlist
+                        model: analyzelistmodelfullintegrals
+
+                        Item {
+                            width: 100
+                            height: 20
+                            visible: true
+                            Row {
+                                spacing: 3
+                                Rectangle {
+                                   width: 10
+                                    height: 10
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    color: mycolor
+                                    border.width: 1
+                                }
+
+                                Text {
+                                    text: mytext
+                                    color: 'lightgrey'
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                        }
+                    }
+
+                    Text {
+                        id: analyzeunitsfullintegrals
+                        text: (analyzechargebt.checked | analyzechargedosebt.checked) ? '(nC)' : '(cGy)'
+                        color: 'lightgrey'
+                    }
+                }
+            }
+
+            ValueAxis {
+                id: analyzeaxisXch
+                min: 0
+                max: 60
+                titleText: 'Time (s)'
+            }
+
+            ValueAxis {
+                id: analyzeaxisYch
+                property bool first: true
+                min: 0
+                max: 60
+                //titleText: 'Voltage (V)'
+                titleText: 'Currrent (nA)'
+            }
+
+
+
+
+
+            Rectangle {
+                id: analyzezoomarea
+                color: 'transparent'
+                border.color: 'red'
+                border.width: 1
+                visible: false
+            }
+
+            Text {
+                id: analyzecoordinatestext
+                width: 10
+                height: 5
+                anchors.top: parent.top
+                anchors.topMargin: 10
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                color: 'white'
+                text: 'x:  y: '
+            }
+
+            MouseArea {
+                id: analyzema
+                anchors.fill: parent
+                acceptedButtons: { Qt.RightButton | Qt.LeftButton }
+                property real analyzexstart
+                property real analyzeystart
+                property var analyzestarttimes: []
+                property var analyzefinishtimes: []
+                property int analyzelineserieshovered: -1
+                hoverEnabled: true
+                property bool activezoom: false
+
+                onPressAndHold: {
+                    if (mouse.button & Qt.RightButton){
+                        analyzexstart = mouseX
+                        analyzeystart = mouseY
+                    }
+                }
+
+                Item {
+                    id: analyzeintbeamsitem
+                    visible: false
+                    Column {
+                        spacing: 3
+                        Repeater {
+                            id: analyzeintlist
+                            model: analyzeintegralsmodel
+
+                            Item {
+                                width: 40
+                                height: 20
+                                visible: true
+                                Row {
+                                    spacing: 3
+                                    Rectangle {
+                                       width: 10
+                                        height: 10
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        color: mycolor
+                                        border.width: 1
+                                    }
+
+                                    Text {
+                                        text: mytext
+                                        color: 'lightgrey'
+                                        anchors.verticalCenter: parent.verticalCenter
+                                    }
+                                }
+                            }
+                        }
+
+                        Text {
+                            id: analyzeintegralsunits
+                            text: (analyzechargebt.checked | analyzechargedosebt.checked) ? '(nC)' : '(cGy)'
+                            color: 'lightgrey'
+
+                        }
+                    }
+                }
+
+                onPositionChanged: {
+                    var analyzep = Qt.point(mouseX, mouseY)
+                    var analyzecp = analyzechartviewchs.mapToValue(analyzep, analyzechartviewchs.series('ch0analyzels'))
+                    var analyzevaluex = analyzecp.x.toFixed(2)
+                    var analyzevaluey = analyzecp.y.toFixed(2)
+
+                    if (analyzestarttimes.length > 0 & analyzefinishtimes.length === analyzestarttimes.length){
+                        for (var i = 0; i < analyzestarttimes.length; i++) {
+
+                            if ( analyzevaluex > analyzestarttimes[i] & analyzevaluex < analyzefinishtimes[i]){
+                                analyzeintbeamsitem.visible = true
+                                analyzeintbeamsitem.x = mouseX
+                                analyzeintbeamsitem.y = mouseY
+                                if (analyzechargebt.checked){
+                                    for (var j = 0; j < 8; j++){
+                                       //console.log('ch' + j + ' object name at ' + i + ' is ' + typeof (Math.round(lqmlchs[j].listaint[i]*100)/100))
+                                      analyzeintegralsmodel.setProperty(j, 'mytext', 'ch' + j + ' ' + Math.round(lqmlanalyzechs[j].listaint[i] * 100)/100)
+                                    }
+                                }
+                                if (analyzechargedosebt.checked){
+                                    //console.log ('ch0 integrals: ' + analyzepair0chsen.listaint)
+                                    analyzeintegralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.listaint[i] - analyzepair0chche.listaint[i] * acr0.realValue)* 100)/100)
+                                    analyzeintegralsmodel.setProperty(1, 'mytext', '')
+                                    analyzeintegralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.listaint[i] - analyzepair1chche.listaint[i] * acr1.realValue)* 100)/100)
+                                    analyzeintegralsmodel.setProperty(3, 'mytext', '')
+                                    analyzeintegralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.listaint[i] - analyzepair2chche.listaint[i] * acr2.realValue)* 100)/100)
+                                    analyzeintegralsmodel.setProperty(5, 'mytext', '')
+                                    analyzeintegralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.listaint[i] - analyzepair3chche.listaint[i] * acr3.realValue)* 100)/100)
+                                    analyzeintegralsmodel.setProperty(7, 'mytext', '')
+                                }
+                                if (analyzedosebt.checked){
+                                    analyzeintegralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.listaint[i] - analyzepair0chche.listaint[i] * acr0.realValue) * calib0.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(1, 'mytext', '')
+                                    analyzeintegralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.listaint[i] - analyzepair1chche.listaint[i] * acr1.realValue) * calib1.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(3, 'mytext', '')
+                                    analyzeintegralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.listaint[i] - analyzepair2chche.listaint[i] * acr2.realValue) * calib2.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(5, 'mytext', '')
+                                    analyzeintegralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.listaint[i] - analyzepair3chche.listaint[i] * acr3.realValue) * calib3.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(7, 'mytext', '')
+                                }
+
+
+                            }
+                        }
+
+                    }
+                    analyzecoordinatestext.text = 'x: ' + analyzevaluex + '  y: ' + analyzevaluey
+
+                    if (analyzexstart) {
+                        analyzezoomarea.visible = true
+                        analyzezoomarea.x = analyzexstart
+                        analyzezoomarea.y = analyzeystart
+                        analyzezoomarea.width = Math.abs(mouseX - analyzexstart)
+                        analyzezoomarea.height = Math.abs(mouseY - analyzeystart)
+                    }
+
+                }
+
+                onReleased: {
+                    var analyzexfinish = mouseX
+                    var analyzeyfinish = mouseY
+                    if (analyzexstart) {
+                        var r = Qt.rect(analyzexstart, analyzeystart, Math.abs(analyzexfinish - analyzexstart), Math.abs(analyzeyfinish - analyzeystart))
+                        analyzechartviewchs.zoomIn(r)
+                        analyzema.activezoom = true
+                        analyzexstart = false
+                        analyzezoomarea.visible = false
+                    }
+                }
+
+                onClicked: {
+                    if (mouse.button & Qt.RightButton) {
+                        analyzechartviewchs.zoomReset()
+                        analyzema.activezoom = false
+                    }
+                }
+            }
+        }
+
+        Item {
+            id: analyzechartviewpowersholder
+            y: analyzeplot2combobox.currentIndex == 0 ? parent.height : parent.height / 2
+            height: parent.height / 2
+            anchors.right: analyzerectangle.left
+            anchors.left: parent.left
+
+            ChartView {
+                id: analyzechartviewtemp
+                anchors.fill: parent
+                antialiasing: false
+                theme: ChartView.ChartThemeDark
+                visible: analyzeplot2combobox.currentIndex == 1
+
+                ValueAxis {
+                    id: analyzeaxisXtemp
+                    min: 0
+                    max: 60
+                    titleText: 'Time (s)'
+                }
+
+                ValueAxis {
+                    id: analyzeaxisYtemp
+                    property bool first: true
+                    titleText:"Temp. (C)"
+                    min: 22
+                    max: 30
+                }
+
+                LineSeries {
+                    id: analyzelinetemp
+                    name: 'Temp.'
+                    color: 'red'
+                    axisX: analyzeaxisXtemp
+                    axisY: analyzeaxisYtemp
+                    useOpenGL: true
+                }
+            }
+
+            ChartView {
+                id: analyzechartview5V
+                anchors.fill: parent
+                antialiasing: false
+                theme: ChartView.ChartThemeDark
+                visible: analyzeplot2combobox.currentIndex == 2
+
+                ValueAxis {
+                    id: analyzeaxisX5V
+                    min: 0
+                    max: 60
+                    titleText: 'Time (s)'
+                }
+
+                ValueAxis {
+                    id: analyzeaxisY5V
+                    property bool first: true
+                    titleText:"Voltage (V)"
+                    min: 4
+                    max: 6
+                }
+
+                LineSeries {
+                    id: analyzeline5V
+                    name: '5V'
+                    color: 'blue'
+                    axisX: analyzeaxisX5V
+                    axisY: analyzeaxisY5V
+                    useOpenGL: true
+                }
+            }
+
+            ChartView {
+                id: analyzechartviewPS
+                anchors.fill: parent
+                antialiasing: false
+                theme: ChartView.ChartThemeDark
+                visible: analyzeplot2combobox.currentIndex == 3
+
+                ValueAxis {
+                    id: analyzeaxisXPS
+                    min: 0
+                    max: 60
+                    titleText: 'Time (s)'
+                }
+
+                ValueAxis {
+                    id: analyzeaxisYPS
+                    property bool first: true
+                    titleText:"Voltage (V)"
+                    min: 56
+                    max: 58
+                }
+
+                LineSeries {
+                    id: analyzelinePS
+                    name: 'PS'
+                    color: 'lightgreen'
+                    axisX: analyzeaxisXPS
+                    axisY: analyzeaxisYPS
+                    useOpenGL: true
+                }
+            }
+
+            ChartView {
+                id: analyzechartviewminus12V
+                anchors.fill: parent
+                antialiasing: false
+                theme: ChartView.ChartThemeDark
+                visible: analyzeplot2combobox.currentIndex == 4
+
+                ValueAxis {
+                    id: analyzeaxisXminus12V
+                    min: 0
+                    max: 60
+                    titleText: 'Time (s)'
+                }
+
+                ValueAxis {
+                    id: analyzeaxisYminus12V
+                    property bool first: true
+                    titleText:"Voltage (V)"
+                    min: -12
+                    max: -11
+                }
+
+                LineSeries {
+                    id: analyzelineminus12V
+                    name: '-12V'
+                    color: 'yellow'
+                    axisX: analyzeaxisXminus12V
+                    axisY: analyzeaxisYminus12V
+                    useOpenGL: true
+                }
+            }
+
+            ChartView {
+                id: analyzechartviewvref
+                anchors.fill: parent
+                antialiasing: false
+                theme: ChartView.ChartThemeDark
+                visible: analyzeplot2combobox.currentIndex == 5
+
+                ValueAxis {
+                    id: analyzeaxisXvref
+                    min: 0
+                    max: 60
+                    titleText: 'Time (s)'
+                }
+
+                ValueAxis {
+                    id: analyzeaxisYvref
+                    property bool first: true
+                    titleText:"Voltage (V)"
+                    min: 0
+                    max: 3
+                }
+
+                LineSeries {
+                    id: analyzelinevref
+                    name: 'Vref'
+                    color: 'orange'
+                    axisX: analyzeaxisXvref
+                    axisY: analyzeaxisYvref
+                    useOpenGL: true
+                }
+            }
+        }
     }
+
 
     Item {
         id: metadataview
@@ -1607,7 +2192,7 @@ ApplicationWindow {
                     startbutton.enabled = true
                     startbutton.checked = false
                     stopbutton.enabled = false
-                    console.log('pair 0 ch sensor: ' + qmlch1.integral)
+                    //console.log('pair 0 ch sensor: ' + qmlch1.integral)
 
                     for (var i = 0; i < 8; i++){
                         if (lqmlchs[i].name === pair0chsensor.currentText){
@@ -2452,8 +3037,8 @@ ApplicationWindow {
     Connections {
         target: limitslines
         onSignallimitsin: {
-            console.log('start times 0: ' + starttimes[0])
-            console.log('finish times 0: ' + finishtimes[0])
+            //console.log('start times 0: ' + starttimes[0])
+            //console.log('finish times 0: ' + finishtimes[0])
             //var lqmlchs = [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
 
             for (var i = 0; i < starttimes.length; i++){
@@ -2483,6 +3068,68 @@ ApplicationWindow {
             for (var k = 0; k < 8; k++){
                 lqmlchs[k].update_serie(chartviewchs.series('ch' + k))
             }
+
+        }
+    }
+
+    Connections {
+        target: analyzelimitslines
+        onSignallimitsin: {
+            //console.log('starttimes 0: ' + starttimes[0])
+            //console.log('finishtimes length: ' + finishtimes[finishtimes.length - 1])
+            //console.log('integrals ch0: ' + lqmlanalyzechs[0].listaint)
+            console.log('maximum temp: ' + analyzetemp.maxplot)
+
+            analyzeaxisXch.max = finishtimes[finishtimes.length - 1] + 5
+            analyzeaxisYch.min = qmlchanalyze0.minplot
+            analyzeaxisYch.max = qmlchanalyze0.maxplot
+            analyzeaxisX5V.max = finishtimes[finishtimes.length - 1] + 5
+            analyzeaxisY5V.max = analyze5v.maxplot
+            analyzeaxisY5V.min = analyze5v.minplot
+            analyzeaxisXPS.max = finishtimes[finishtimes.length - 1] + 5
+            analyzeaxisYPS.max = analyzePS.maxplot
+            analyzeaxisYPS.min = analyzePS.minplot
+            analyzeaxisXminus12V.max = finishtimes[finishtimes.length - 1] + 5
+            analyzeaxisYminus12V.max = analyzeminus12v.maxplot
+            analyzeaxisYminus12V.min =  analyzeminus12v.minplot
+            analyzeaxisXvref.max = finishtimes[finishtimes.length - 1] + 5
+            analyzeaxisYvref.max = analyzevref.maxplot
+            analyzeaxisYvref.min = analyzevref.minplot
+            analyzeaxisXtemp.max = finishtimes[finishtimes.length - 1] + 5
+            analyzeaxisYtemp.max = analyzetemp.maxplot
+            analyzeaxisYtemp.min = analyzetemp.minplot
+
+            for (var i = 0; i < starttimes.length; i++){
+                var starlimit = analyzechartviewchs.createSeries(ChartView.SeriesTypeLine, 'start' + i, analyzeaxisXch, analyzeaxisYch)
+                starlimit.color = 'lightgreen'
+                starlimit.style = Qt.DashLine
+                starlimit.append (starttimes[i] - 1, analyzeaxisYch.min)
+                starlimit.append (starttimes[i] - 1, analyzeaxisYch.max)
+            }
+
+            for (var j = 0; j < finishtimes.length; j++){
+                var finishlimit = analyzechartviewchs.createSeries(ChartView.SeriesTypeLine, 'finish' + j, analyzeaxisXch, analyzeaxisYch)
+                finishlimit.color = 'lightsalmon'
+                finishlimit.style = Qt.DashLine
+                finishlimit.append (finishtimes[j] + 1, analyzeaxisYch.min)
+                finishlimit.append (finishtimes[j] + 1, analyzeaxisYch.max)
+            }
+
+            analyzema.analyzestarttimes = starttimes
+            analyzema.analyzefinishtimes = finishtimes
+            for (var x = 0; x < 8; x++){
+                analyzelistmodelfullintegrals.setProperty(x, 'mytext', 'ch' + x + ' ' + Math.round(lqmlanalyzechs[x].integral * 100)/100 )
+            }
+
+            for (var k = 0; k < 8; k++){
+                lqmlanalyzechs[k].update_serie(analyzechartviewchs.series('ch' + k +'analyzels'))
+            }
+
+            analyzetemp.update_serie(analyzelinetemp)
+            analyzePS.update_serie(analyzelinePS)
+            analyze5v.update_serie(analyzeline5V)
+            analyzeminus12v.update_serie(analyzelineminus12V)
+            analyzevref.update_serie(analyzelinevref)
 
         }
     }

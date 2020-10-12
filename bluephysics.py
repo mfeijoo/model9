@@ -219,7 +219,94 @@ def goodbye():
     metadatafile.close()
 
 def analyze():
-    print ('File chosen: %s' %(analyzefile.property('fileUrl')))
+    filepath = analyzefile.property('fileUrl').path()
+    file = open(filepath)
+    lines = file.readlines()
+    file.close()
+    for n, line in enumerate(lines):
+        if line.startswith('time,'):
+            linenumber = n
+    newcolumns = ['ch%sI' %i for i in range(8)]
+    newpowercolumns = ['PSv', '-12Vv', '5Vv', 'refVv']
+    zerocolumns = ['ch%sz' %i for i in range(8)]
+    df = pd.read_csv(filepath, skiprows=linenumber)
+    df = df.reindex(columns=df.columns.tolist() + newcolumns + newpowercolumns)
+    df[newcolumns]=(df.iloc[:,2:10]*(-20.48)/65535 + 10.24) * 6 #1.8e-9 / 300e-3 * 1e9
+    df['PSv'] = df.PS *  0.1875 / 1000 * float(dmetadata['PS Coeficient'])
+    df['-12Vv'] = df['-12V'] *  0.1875 * -2.6470 / 1000
+    df['5Vv'] = df['5V']  * 0.1875 / 1000
+    df['refVv'] = df['refV'] * 0.0625 / 1000
+    maximos = df[newcolumns].max()
+    mch = maximos[maximos == maximos.max()].index.tolist()[0]
+    #lets find the start and stop of all beams
+    df['chdiff'] = df[mch].diff()
+    dfstarts = df.loc[(df.chdiff > 10), ['chdiff', 'time']]
+    dfstarts['timediff'] = dfstarts.time.diff()
+    dfstarts.fillna(2, inplace=True)
+    starttimes = dfstarts.loc[dfstarts.timediff > 1, 'time'].tolist()
+    dffinish = df.loc[(df.chdiff < -10), ['chdiff', 'time']]
+    dffinish['timediff'] = dffinish.time.diff()
+    dffinish.fillna(2, inplace=True)
+    finishtimes = dffinish.loc[dffinish.timediff > 1, 'time'].tolist()
+
+    #Calculate the integrals in each region
+
+    dicintegrals = {}
+    listatemps = []
+    ldfpartials = []
+    for (nu, (st, ft)) in enumerate(zip(starttimes, finishtimes)):
+        dfn = df.loc[(df.time > st - 3)&(df.time < ft + 3), :].copy()
+        dfn[zerocolumns] = dfn.loc[(dfn.time > st -1)&(dfn.time<ft+1), newcolumns].apply(lambda s: s - dfn.loc[(dfn.time > st-3)&(dfn.time<st-1)|(dfn.time>ft+1)&(dfn.time<ft+3), s.name].mean())
+        dfn.dropna(inplace=True)
+        ldfpartials.append(dfn)
+        intsbeam = dfn[zerocolumns].sum() * 300e-3
+        dicintegrals[nu] = intsbeam
+        listatemps.append(dfn.temp.mean())
+    dft = pd.concat(ldfpartials)
+    dfintegralst = pd.DataFrame(dicintegrals)
+    dfintegrals = dfintegralst.T
+    dfintegrals['temp'] = listatemps
+    dfintegrals['time'] = starttimes
+    #print (dfintegrals.round(2))
+
+    #updated ojbects to send to qml
+    for key, ch in dchs.items():
+        dqmlanalyzechs[key].listatimes = dft.time.tolist()
+        #dqmlchs[key].listavzeros = ch.dftoplot.measVz.tolist()
+        dqmlanalyzechs[key].listavzeros = dft['%sz' %key].tolist()
+        dqmlanalyzechs[key]._listaint = dfintegrals['%sz' %key].tolist()
+        dqmlanalyzechs[key]._integral = dft['%sz' %key].sum() * 300e-3
+        dqmlanalyzechs[key]._maxplot = df[mch].max()
+        dqmlanalyzechs[key]._min = 0
+        #print(dft.loc[:,zerocolumns].head())
+
+    analyzetemp.listatimes = df.time.tolist()
+    analyzetemp.listavzeros = df.temp.tolist()
+    analyzetemp._maxplot = df.temp.max()
+    analyzetemp._minplot = df.temp.min()
+    analyzePS.listatimes = df.time.tolist()
+    analyzePS.listavzeros = df.PSv.tolist()
+    analyzePS._maxplot = df.PSv.max()
+    analyzePS._minplot = df.PSv.min()
+    analyzevref.listatimes = df.time.tolist()
+    analyzevref.listavzeros = df.refVv.tolist()
+    analyzevref._maxplot = df.refVv.max()
+    analyzevref._minplot = df.refVv.min()
+    analyze5v.listatimes = df.time.tolist()
+    analyze5v.listavzeros = df['5Vv'].tolist()
+    analyze5v._maxplot = df['5Vv'].max()
+    analyze5v._minplot = df['5Vv'].min()
+    analyzeminus12v.listatimes = df.time.tolist()
+    analyzeminus12v.listavzeros = df['-12Vv'].tolist()
+    analyzeminus12v._maxplot = df['-12Vv'].max()
+    analyzeminus12v._minplot = df['-12Vv'].min()
+
+
+    #send information to qml
+    myanalyzelimitslines.signallimitsin.emit(starttimes, finishtimes)
+
+
+
 
 #########################################################################
 #                     CLASSES                                           #
@@ -270,6 +357,8 @@ class CH():
 class CHQml(QObject):
 
     integralChanged = pyqtSignal(float)
+    maxplotChanged = pyqtSignal(float)
+    minplotChanged = pyqtSignal(float)
     listaintChanged = pyqtSignal(list)
     nameChanged = pyqtSignal(str)
 
@@ -281,6 +370,8 @@ class CHQml(QObject):
         self._listaint = []
         self.listatimes = []
         self.listavzeros = []
+        self._maxplot = 60.4
+        self._minplot = 0
 
     @pyqtProperty(str, notify=nameChanged)
     def name(self):
@@ -289,6 +380,14 @@ class CHQml(QObject):
     @pyqtProperty(float, notify=integralChanged)
     def integral(self):
         return self._integral
+
+    @pyqtProperty(float, notify=maxplotChanged)
+    def maxplot(self):
+        return self._maxplot
+
+    @pyqtProperty(float, notify=minplotChanged)
+    def minplot(self):
+        return self._minplot
 
     @integral.setter
     def integral(self, i):
@@ -653,9 +752,10 @@ class StopThread(QThread):
 #            CREATE PYTHON OBJECTS                                      #
 #########################################################################
 
-#Create a qml object to update qml with teh list of measurements
+#Create a qml object to update qml with the list of measurements
 listain = Listain()
 mylimitslines = LimitsLines()
+myanalyzelimitslines = LimitsLines()
 regulateps = RegulatePSThread()
 mysubtractdc = SubtractDcThread()
 mystopthread = StopThread()
@@ -664,6 +764,12 @@ number_of_ch = 8
 dchs = {'ch%s' %i : CH(i) for i in range(number_of_ch)}
 #create python objects to be ready to push to qml for each channel
 dqmlchs = {'ch%s' %i : CHQml('ch%s' %i) for i in range(number_of_ch)}
+dqmlanalyzechs = {'ch%s' %i : CHQml('ch%s' %i) for i in range(number_of_ch)}
+analyzetemp = CHQml('analyzetemp')
+analyzePS = CHQml('analyzePS')
+analyze5v = CHQml('analyze5v')
+analyzevref = CHQml('analyzevref')
+analyzeminus12v = CHQml('analyzeminus12v')
 #Create the emulator thread
 #Dont comment, leave it alsways created
 emulator = EmulatorThread()
@@ -697,9 +803,20 @@ engine.rootContext().setContextProperty('listain', listain)
 
 engine.rootContext().setContextProperty('limitslines', mylimitslines)
 
+engine.rootContext().setContextProperty('analyzelimitslines', myanalyzelimitslines)
+
 #push the qmlchs objects to qml file
 for i, qmlch in enumerate(dqmlchs.values()):
     engine.rootContext().setContextProperty('qmlch%s' %i, qmlch)
+
+for i, qmlanalyzech in enumerate(dqmlanalyzechs.values()):
+    engine.rootContext().setContextProperty('qmlchanalyze%s' %i, qmlanalyzech)
+
+engine.rootContext().setContextProperty('analyzetemp', analyzetemp)
+engine.rootContext().setContextProperty('analyzePS', analyzePS)
+engine.rootContext().setContextProperty('analyze5v', analyze5v)
+engine.rootContext().setContextProperty('analyzeminus12v', analyzeminus12v)
+engine.rootContext().setContextProperty('analyzevref', analyzevref)
 
 
 #########################################################################
