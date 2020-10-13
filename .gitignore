@@ -2,3 +2,5 @@ rawdata/*
 !rawdata/emulator*
 *ipynb*
 .~*
+/dist
+/build

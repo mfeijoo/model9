@@ -177,7 +177,7 @@ ApplicationWindow {
                 analyzedosebt.enabled = true
                 analyzechartviewchs.removeAllSeries()
                 for (var i = 0; i < 8; i++){
-                    var serienow = analyzechartviewchs.createSeries(ChartView.SeriesTypeLine, 'ch' + i + 'analyzels', analyzeaxisXch, analyzeaxisYch)
+                    var serienow = analyzechartviewchs.createSeries(ChartView.SeriesTypeLine, 'ch' + i, analyzeaxisXch, analyzeaxisYch)
                     serienow.color = colors[i]
                     serienow.useOpenGL = true
                 }
@@ -289,7 +289,7 @@ ApplicationWindow {
                             onClicked: {
                                 analyzechartviewchs.series('ch' + index).visible = checked
                                 analyzelegendlist.itemAt(index).visible = checked
-                                //intlist.itemAt(index).visible = checked
+                                analyzeintlist.itemAt(index).visible = checked
                             }
                         }
 
@@ -628,7 +628,7 @@ ApplicationWindow {
 
                 onPositionChanged: {
                     var analyzep = Qt.point(mouseX, mouseY)
-                    var analyzecp = analyzechartviewchs.mapToValue(analyzep, analyzechartviewchs.series('ch0analyzels'))
+                    var analyzecp = analyzechartviewchs.mapToValue(analyzep, analyzechartviewchs.series('ch0'))
                     var analyzevaluex = analyzecp.x.toFixed(2)
                     var analyzevaluey = analyzecp.y.toFixed(2)
 
@@ -3125,7 +3125,7 @@ ApplicationWindow {
             }
 
             for (var k = 0; k < 8; k++){
-                lqmlanalyzechs[k].update_serie(analyzechartviewchs.series('ch' + k +'analyzels'))
+                lqmlanalyzechs[k].update_serie(analyzechartviewchs.series('ch' + k))
             }
 
             analyzetemp.update_serie(analyzelinetemp)

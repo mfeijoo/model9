@@ -1,5 +1,5 @@
-Date Time,11 Oct 2020 22:17:23
-File Name,jirafilla1-12
+Date Time,13 Oct 2020 08:48:49
+File Name,jirafilla1-13
 Integration Time,300
 Operational Mode,Integration Mode
 Dark Current Ch0,18559
@@ -42,6 +42,6 @@ Power Supply,56.56
 PS Pot,270
 Socatport1,2
 Socatport2,3
-Emulatorswitch,False
+Emulatorswitch,True
 Comments,hola
 PS Coeficient,16.2788
