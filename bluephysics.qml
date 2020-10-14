@@ -1057,837 +1057,844 @@ ApplicationWindow {
             anchors.left: savefilegroupbox.right
             anchors.leftMargin: 12
             anchors.bottom: controllergroupbox.bottom
-            width: 1020
+            width: 800
 
-            GridLayout {
-                anchors.top: parent.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                columns: 8
+            ScrollView {
+                anchors.fill: parent
+                clip: true
 
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("Pair")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
+                GridLayout {
+                    anchors.top: parent.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    columns: 8
+
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("Pair")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
+
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("Ch. Sensor")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("Ch. Sensor")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("Ch. Cherenk.")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("Ch. Cherenk.")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("ACR")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("ACR")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("Calib. (cGy/nC)")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("Calib. (cGy/nC)")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("X (cm)")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("X (cm)")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("Y (cm)")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("Y (cm)")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("Z (cm)")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
 
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("Z (cm)")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
                     }
-
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("0")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("0")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
+                        }
                     }
-                }
-                ComboBox {
-                    id: pair0chsensor
-                    objectName: 'pair0chsensor'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                }
-                ComboBox {
-                    id: pair0chcherenkov
-                    objectName: 'pair0chcherenkov'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 1
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: acr0
-                        objectName: 'acr0'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 4
-                        property real realValue: value / 10000
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(acr0.from, acr0.to)
-                            top: Math.max(acr0.from, acr0.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', acr0.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: calib0
-                        objectName: 'calib0'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 4
-                        property real realValue: value / 10000
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(calib0.from, calib0.to)
-                            top: Math.max(calib0.from, calib0.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', calib0.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: x0
-                        objectName: 'x0'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(x0.from, x0.to)
-                            top: Math.max(x0.from, x0.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', x0.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: y0
-                        objectName: 'y0'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(y0.from, y0.to)
-                            top: Math.max(y0.from, y0.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', y0.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: z0
-                        objectName: 'z0'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(z0.from, z0.to)
-                            top: Math.max(z0.from, z0.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', z0.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("1")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
+                    ComboBox {
+                        id: pair0chsensor
+                        objectName: 'pair0chsensor'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
                     }
-                }
-                ComboBox {
-                    id: pair1chsensor
-                    objectName: 'pair1chsensor'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 2
-                }
-                ComboBox {
-                    id: pair1chcherenkov
-                    objectName: 'pair1chcherenkov'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 3
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: acr1
-                        objectName: 'acr1'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 4
-                        property real realValue: value / 10000
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(acr1.from, acr1.to)
-                            top: Math.max(acr1.from, acr1.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', acr1.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: calib1
-                        objectName: 'calib1'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 4
-                        property real realValue: value / 10000
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(calib1.from, calib1.to)
-                            top: Math.max(calib1.from, calib1.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', calib1.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: x1
-                        objectName: 'x1'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(x1.from, x1.to)
-                            top: Math.max(x1.from, x1.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', x1.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: y1
-                        objectName: 'y1'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(y1.from, y1.to)
-                            top: Math.max(y1.from, y1.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', y1.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: z1
-                        objectName: 'z1'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(z1.from, z1.to)
-                            top: Math.max(z1.from, z1.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', z1.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("2")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
+                    ComboBox {
+                        id: pair0chcherenkov
+                        objectName: 'pair0chcherenkov'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 1
                     }
-                }
-                ComboBox {
-                    id: pair2chsensor
-                    objectName: 'pair2chsensor'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 4
-                }
-                ComboBox {
-                    id: pair2chcherenkov
-                    objectName: 'pair2chcherenkov'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 5
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: acr2
-                        objectName: 'acr2'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: acr0
+                            objectName: 'acr0'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
 
-                        property int decimals: 4
-                        property real realValue: value / 10000
+                            property int decimals: 4
+                            property real realValue: value / 10000
 
-                        validator: DoubleValidator {
-                            bottom: Math.min(acr2.from, acr2.to)
-                            top: Math.max(acr2.from, acr2.to)
-                        }
+                            validator: DoubleValidator {
+                                bottom: Math.min(acr0.from, acr0.to)
+                                top: Math.max(acr0.from, acr0.to)
+                            }
 
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', acr2.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: calib2
-                        objectName: 'calib2'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 4
-                        property real realValue: value / 10000
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(calib2.from, calib2.to)
-                            top: Math.max(calib2.from, calib2.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', calib2.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: x2
-                        objectName: 'x2'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(x2.from, x2.to)
-                            top: Math.max(x2.from, x2.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', x2.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: y2
-                        objectName: 'y2'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(y2.from, y2.to)
-                            top: Math.max(y2.from, y2.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', y2.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: z2
-                        objectName: 'z2'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
-
-                        property int decimals: 2
-                        property real realValue: value / 100
-
-                        validator: DoubleValidator {
-                            bottom: Math.min(z2.from, z2.to)
-                            top: Math.max(z2.from, z2.to)
-                        }
-
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', z2.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    border.color: 'lightgrey'
-                    Text {
-                        text: qsTr("3")
-                        color: 'lightgrey'
-                        anchors.centerIn: parent
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', acr0.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
                     }
-                }
-                ComboBox {
-                    id: pair3chsensor
-                    objectName: 'pair3chsensor'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 6
-                }
-                ComboBox {
-                    id: pair3chcherenkov
-                    objectName: 'pair3chcherenkov'
-                    width: 120
-                    height: 40
-                    model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
-                    currentIndex: 7
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: acr3
-                        objectName: 'acr3'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: calib0
+                            objectName: 'calib0'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
 
-                        property int decimals: 4
-                        property real realValue: value / 10000
+                            property int decimals: 4
+                            property real realValue: value / 10000
 
-                        validator: DoubleValidator {
-                            bottom: Math.min(acr3.from, acr3.to)
-                            top: Math.max(acr3.from, acr3.to)
-                        }
+                            validator: DoubleValidator {
+                                bottom: Math.min(calib0.from, calib0.to)
+                                top: Math.max(calib0.from, calib0.to)
+                            }
 
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', acr3.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: calib3
-                        objectName: 'calib3'
-                        from: 0
-                        value: 10000
-                        to: 20000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', calib0.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: x0
+                            objectName: 'x0'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
 
-                        property int decimals: 4
-                        property real realValue: value / 10000
+                            property int decimals: 2
+                            property real realValue: value / 100
 
-                        validator: DoubleValidator {
-                            bottom: Math.min(calib3.from, calib3.to)
-                            top: Math.max(calib3.from, calib3.to)
-                        }
+                            validator: DoubleValidator {
+                                bottom: Math.min(x0.from, x0.to)
+                                top: Math.max(x0.from, x0.to)
+                            }
 
-                        textFromValue: function(value, locale) {
-                            return Number(value / 10000).toLocaleString(locale, 'f', calib3.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 10000
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: x3
-                        objectName: 'x3'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', x0.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: y0
+                            objectName: 'y0'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
 
-                        property int decimals: 2
-                        property real realValue: value / 100
+                            property int decimals: 2
+                            property real realValue: value / 100
 
-                        validator: DoubleValidator {
-                            bottom: Math.min(x3.from, x3.to)
-                            top: Math.max(x3.from, x3.to)
-                        }
+                            validator: DoubleValidator {
+                                bottom: Math.min(y0.from, y0.to)
+                                top: Math.max(y0.from, y0.to)
+                            }
 
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', x3.decimals)
-                        }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: y3
-                        objectName: 'y3'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', y0.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: z0
+                            objectName: 'z0'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
 
-                        property int decimals: 2
-                        property real realValue: value / 100
+                            property int decimals: 2
+                            property real realValue: value / 100
 
-                        validator: DoubleValidator {
-                            bottom: Math.min(y3.from, y3.to)
-                            top: Math.max(y3.from, y3.to)
-                        }
+                            validator: DoubleValidator {
+                                bottom: Math.min(z0.from, z0.to)
+                                top: Math.max(z0.from, z0.to)
+                            }
 
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', y3.decimals)
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', z0.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("1")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
                         }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
-                        }
-                     }
-                }
-                Rectangle {
-                    width: 120
-                    height: 40
-                    color: 'transparent'
-                    SpinBox {
-                        id: z3
-                        objectName: 'z3'
-                        from: -2000
-                        value: 0
-                        to: 2000
-                        stepSize: 1
-                        editable: true
-                        anchors.fill: parent
-                        font.pointSize: 10
+                    }
+                    ComboBox {
+                        id: pair1chsensor
+                        objectName: 'pair1chsensor'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 2
+                    }
+                    ComboBox {
+                        id: pair1chcherenkov
+                        objectName: 'pair1chcherenkov'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 3
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: acr1
+                            objectName: 'acr1'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
 
-                        property int decimals: 2
-                        property real realValue: value / 100
+                            property int decimals: 4
+                            property real realValue: value / 10000
 
-                        validator: DoubleValidator {
-                            bottom: Math.min(z3.from, z3.to)
-                            top: Math.max(z3.from, z3.to)
-                        }
+                            validator: DoubleValidator {
+                                bottom: Math.min(acr1.from, acr1.to)
+                                top: Math.max(acr1.from, acr1.to)
+                            }
 
-                        textFromValue: function(value, locale) {
-                            return Number(value / 100).toLocaleString(locale, 'f', z3.decimals)
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', acr1.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: calib1
+                            objectName: 'calib1'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 4
+                            property real realValue: value / 10000
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(calib1.from, calib1.to)
+                                top: Math.max(calib1.from, calib1.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', calib1.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: x1
+                            objectName: 'x1'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(x1.from, x1.to)
+                                top: Math.max(x1.from, x1.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', x1.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: y1
+                            objectName: 'y1'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(y1.from, y1.to)
+                                top: Math.max(y1.from, y1.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', y1.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: z1
+                            objectName: 'z1'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(z1.from, z1.to)
+                                top: Math.max(z1.from, z1.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', z1.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("2")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
                         }
-                        valueFromText: function(text, locale) {
-                            return Number.fromLocaleString(locale, text) * 100
+                    }
+                    ComboBox {
+                        id: pair2chsensor
+                        objectName: 'pair2chsensor'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 4
+                    }
+                    ComboBox {
+                        id: pair2chcherenkov
+                        objectName: 'pair2chcherenkov'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 5
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: acr2
+                            objectName: 'acr2'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 4
+                            property real realValue: value / 10000
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(acr2.from, acr2.to)
+                                top: Math.max(acr2.from, acr2.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', acr2.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: calib2
+                            objectName: 'calib2'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 4
+                            property real realValue: value / 10000
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(calib2.from, calib2.to)
+                                top: Math.max(calib2.from, calib2.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', calib2.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: x2
+                            objectName: 'x2'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(x2.from, x2.to)
+                                top: Math.max(x2.from, x2.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', x2.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: y2
+                            objectName: 'y2'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(y2.from, y2.to)
+                                top: Math.max(y2.from, y2.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', y2.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: z2
+                            objectName: 'z2'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(z2.from, z2.to)
+                                top: Math.max(z2.from, z2.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', z2.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        border.color: 'lightgrey'
+                        Text {
+                            text: qsTr("3")
+                            color: 'lightgrey'
+                            anchors.centerIn: parent
                         }
-                     }
+                    }
+                    ComboBox {
+                        id: pair3chsensor
+                        objectName: 'pair3chsensor'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 6
+                    }
+                    ComboBox {
+                        id: pair3chcherenkov
+                        objectName: 'pair3chcherenkov'
+                        width: 120
+                        height: 40
+                        model: ['ch0', 'ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'ch6', 'ch7']
+                        currentIndex: 7
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: acr3
+                            objectName: 'acr3'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 4
+                            property real realValue: value / 10000
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(acr3.from, acr3.to)
+                                top: Math.max(acr3.from, acr3.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', acr3.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: calib3
+                            objectName: 'calib3'
+                            from: 0
+                            value: 10000
+                            to: 20000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 4
+                            property real realValue: value / 10000
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(calib3.from, calib3.to)
+                                top: Math.max(calib3.from, calib3.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 10000).toLocaleString(locale, 'f', calib3.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 10000
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: x3
+                            objectName: 'x3'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(x3.from, x3.to)
+                                top: Math.max(x3.from, x3.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', x3.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: y3
+                            objectName: 'y3'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(y3.from, y3.to)
+                                top: Math.max(y3.from, y3.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', y3.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
+                    Rectangle {
+                        width: 120
+                        height: 40
+                        color: 'transparent'
+                        SpinBox {
+                            id: z3
+                            objectName: 'z3'
+                            from: -2000
+                            value: 0
+                            to: 2000
+                            stepSize: 1
+                            editable: true
+                            anchors.fill: parent
+                            font.pointSize: 10
+
+                            property int decimals: 2
+                            property real realValue: value / 100
+
+                            validator: DoubleValidator {
+                                bottom: Math.min(z3.from, z3.to)
+                                top: Math.max(z3.from, z3.to)
+                            }
+
+                            textFromValue: function(value, locale) {
+                                return Number(value / 100).toLocaleString(locale, 'f', z3.decimals)
+                            }
+                            valueFromText: function(text, locale) {
+                                return Number.fromLocaleString(locale, text) * 100
+                            }
+                         }
+                    }
                 }
             }
+
+
 
         }
 
