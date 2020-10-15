@@ -13,7 +13,7 @@ ApplicationWindow {
     objectName: 'mainapplication'
     width: Screen.width
     height: Screen.height
-    title: "Blue Physics v9.2 file: " + filename.text + '.csv'
+    title: "Blue Physics v9.2.2 file: " + filename.text + '.csv'
     visible: true
 
     Material.theme: Material.Dark
@@ -132,6 +132,7 @@ ApplicationWindow {
                 onClicked: {
                     analyzeview.visible = true
                     mainmenu.visible = false
+                    mainwindow.title = "Blue Physics v9.2.2 analyzing " + filedialog.filename
                 }
             }
 
@@ -165,13 +166,15 @@ ApplicationWindow {
             id: filedialog
             objectName: 'analyzefile'
             folder: "rawdata"
+            property string filename: ''
             visible: false
             nameFilters: ["*.csv"]
             title: "Chose a file to analyze"
             onRejected: visible = false
             onAccepted: {
                 var path = filedialog.fileUrl.toString()
-                mainwindow.title = "Blue Physics v9.2 analyzing " + path
+                filedialog.filename = path.slice(path.lastIndexOf("/")+1)
+                mainwindow.title = "Blue Physics v9.2.2 analyzing " + filedialog.filename
                 analyzechargebt.enabled = true
                 analyzechargedosebt.enabled = true
                 analyzedosebt.enabled = true
@@ -242,7 +245,7 @@ ApplicationWindow {
                 onClicked: {
                     analyzeview.visible = false
                     mainmenu.visible = true
-                    mainwindow.title = "Blue Physics v9.2 file: " + filename.text + '.csv'
+                    mainwindow.title = "Blue Physics v9.2.2 file: " + filename.text + '.csv'
                 }
             }
 
