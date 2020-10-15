@@ -1057,7 +1057,7 @@ ApplicationWindow {
             anchors.left: savefilegroupbox.right
             anchors.leftMargin: 12
             anchors.bottom: controllergroupbox.bottom
-            width: 800
+            width: Screen.width - 450 - 350
 
             ScrollView {
                 anchors.fill: parent
