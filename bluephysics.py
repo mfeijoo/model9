@@ -200,6 +200,9 @@ def qmlstart():
     #Start the measurements thread
     measure.start()
 
+    #Start autosave thread
+    myautosave.start()
+
 def qmlsendtocontroller():
     device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
     serc = serial.Serial(device, 115200, timeout=1)
@@ -232,7 +235,7 @@ def analyze():
     df = pd.read_csv(filepath, skiprows=linenumber)
     df = df.reindex(columns=df.columns.tolist() + newcolumns + newpowercolumns)
     df[newcolumns]=(df.iloc[:,2:10]*(-20.48)/65535 + 10.24) * 6 #1.8e-9 / 300e-3 * 1e9
-    df['PSv'] = df.PS *  0.1875 / 1000 * float(dmetadata['PS Coeficient'])
+    df['PSv'] = df.PS *  0.1875 / 1000 * float(dmetadata['PS Coefficient'])
     df['-12Vv'] = df['-12V'] *  0.1875 * -2.6470 / 1000
     df['5Vv'] = df['5V']  * 0.1875 / 1000
     df['refVv'] = df['refV'] * 0.0625 / 1000
@@ -305,7 +308,9 @@ def analyze():
     #send information to qml
     myanalyzelimitslines.signallimitsin.emit(starttimes, finishtimes)
 
-
+def functiontostop():
+    mystopthread.start()
+    myautosave.stopping()
 
 
 #########################################################################
@@ -431,6 +436,56 @@ class LimitsLines(QObject):
     @pyqtSlot(list, list)
     def limitsin(self, starttimes, finishtimes):
         self.signallimitsin.emit(starttimes, finishtimes)
+
+
+class AutoSave(QThread):
+
+    def __init__(self):
+        QThread.__init__(self)
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        self.stop = False
+        starttime = time.time()
+
+        while True:
+            if self.stop:
+                break
+            if (time.time() - starttime) > (60 * 5):
+                #After 5 minutes
+                #dump all the data in a .cvs file
+                #Open the file to dump all the data
+                fileautosave = open ('./rawdata/autosave.csv', 'w')
+
+                #Put in the header of the file the metadata information
+                for key in metadatakeylist:
+                    fileautosave.write('%s,%s\n' %(key,dmetadata[key]))
+
+                fileautosave.write('time,temp,%s,PS,-12V,5V,refV\n' %','.join([ch for ch in sorted(dchs)]))
+                #print ('timemeas: %s' %timemeas)
+                #print ('temperatures: %s' %dchs['ch0'].temp)
+                for i in range(len(timemeas)):
+                    line1 = '%s,%.4f' %(timemeas[i], dchs['ch0'].temp[i])
+                    line2 = ','.join(['%s' %dchs[ch].meas[i] for ch in sorted(dchs)])
+                    line3 = '%s,%s,%s,%s' %(PSmeas[i], minus12Vmeas[i], v5Vmeas[i], vrefVmeas[i])
+                    fileautosave.write('%s,%s,%s\n' %(line1, line2, line3))
+
+                #Once all the data has been dumped
+                #close the file
+                fileautosave.close()
+
+                #restart the timmer
+                starttime = time.time()
+
+    def stopping(self):
+        self.stop = True
+        self.wait()
+        self.quit()
+        print ('autosave stopped')
+
+
 
 class EmulatorThread(QThread):
     
@@ -759,6 +814,7 @@ myanalyzelimitslines = LimitsLines()
 regulateps = RegulatePSThread()
 mysubtractdc = SubtractDcThread()
 mystopthread = StopThread()
+myautosave = AutoSave()
 #create the channels based in the number of channels
 number_of_ch = 8
 dchs = {'ch%s' %i : CH(i) for i in range(number_of_ch)}
@@ -909,7 +965,7 @@ startb.clicked.connect(qmlstart)
 
 #Connect the signal click from the stop button in qml
 #to the python funcition called qmlstop
-stopb.clicked.connect(mystopthread.start)
+stopb.clicked.connect(functiontostop)
 
 metadatabacktohome.clicked.connect(from_gui_to_dic)
 
