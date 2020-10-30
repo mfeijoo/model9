@@ -90,7 +90,7 @@ def from_gui_to_dic():
     dmetadata['Z3'] = str(z3.property('realValue'))
     dmetadata['Comments'] = commentstext.property('text').replace(',', '')
     #dmetadata['Limits Integral'] = str(limitsspinbox.property('value'))
-    dmetadata['PS Coeficient'] = str(pscoef.property('realValue'))
+    dmetadata['PS Coefficient'] = str(pscoeff.property('value'))
     dmetadata['Socatport1'] = socatport1.property('currentText')
     dmetadata['Socatport2'] = socatport2.property('currentText')
     if emulatorswitch.property('checked'):
@@ -142,7 +142,7 @@ def from_dic_to_gui():
     z3.setProperty('value', int(float(dmetadata['Z3'])*100))
     commentstext.setProperty('text', dmetadata['Comments'])
     #limitsspinbox.setProperty('value', int(dmetadata['Limits Integral']))
-    pscoef.setProperty('realValue', float(dmetadata['PS Coeficient']))
+    pscoeff.setProperty('value', int(dmetadata['PS Coefficient']))
     socatport1.setProperty('currentIndex', int(dmetadata['Socatport1']))
     socatport2.setProperty('currentIndex', int(dmetadata['Socatport2']))
     if dmetadata['Emulatorswitch'] == 'True':
@@ -882,7 +882,7 @@ socatport1 = engine.rootObjects()[0].findChild(QObject, 'socatport1')
 socatport2 = engine.rootObjects()[0].findChild(QObject, 'socatport2')
 emulatorswitch = engine.rootObjects()[0].findChild(QObject, 'emulatorswitch')
 analyzefile = engine.rootObjects()[0].findChild(QObject, 'analyzefile')
-pscoef = engine.rootObjects()[0].findChild(QObject, 'pscoef')
+pscoeff = engine.rootObjects()[0].findChild(QObject, 'pscoeff')
 #print (emulatorswitch.property('text'))
 
 

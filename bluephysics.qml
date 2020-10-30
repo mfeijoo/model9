@@ -1932,8 +1932,8 @@ ApplicationWindow {
             anchors.rightMargin: 12
 
             SpinBox{
-                id: pscoef
-                objectName: 'pscoef'
+                id: pscoeff
+                objectName: 'pscoeff'
                 from: 150000
                 value: 162788
                 to: 180000
@@ -1946,12 +1946,12 @@ ApplicationWindow {
                 property real realValue: value / 10000
 
                 validator: DoubleValidator {
-                    bottom: Math.min(pscoef.from, pscoef.to)
-                    top: Math.max(pscoef.from, pscoef.to)
+                    bottom: Math.min(pscoeff.from, pscoeff.to)
+                    top: Math.max(pscoeff.from, pscoeff.to)
                 }
 
                 textFromValue: function(value, locale) {
-                    return Number(value / 10000).toLocaleString(locale, 'f', pscoef.decimals)
+                    return Number(value / 10000).toLocaleString(locale, 'f', pscoeff.decimals)
                 }
                 valueFromText: function(text, locale) {
                     return Number.fromLocaleString(locale, text) * 10000
@@ -2991,7 +2991,7 @@ ApplicationWindow {
             }
 
 
-            var ps = lista[11] * 0.1875 * pscoef.realValue / 1000
+            var ps = lista[11] * 0.1875 * pscoeff.realValue / 1000
             if (axisYPS.first == true) {
                 axisYPS.min = ps - 0.005
                 axisYPS.max = ps + 0.005

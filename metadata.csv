@@ -1,15 +1,15 @@
-Date Time,19 Oct 2020 11:03:48
-File Name,jirafilla1-15
+Date Time,29 Oct 2020 22:21:43
+File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
-Dark Current Ch0,18559
-Dark Current Ch1,15879
-Dark Current Ch2,14719
-Dark Current Ch3,19359
-Dark Current Ch4,16255
-Dark Current Ch5,13215
-Dark Current Ch6,13811
-Dark Current Ch7,13823
+Dark Current Ch0,19263
+Dark Current Ch1,16513
+Dark Current Ch2,15423
+Dark Current Ch3,19967
+Dark Current Ch4,16767
+Dark Current Ch5,13759
+Dark Current Ch6,14335
+Dark Current Ch7,14591
 Pair 0 Ch Sensor,ch0
 Pair 0 Ch Cherenkov,ch1
 Pair 1 Ch Sensor,ch2
@@ -39,9 +39,9 @@ X3,0.0
 Y3,0.0
 Z3,0.0
 Power Supply,56.56
-PS Pot,270
+PS Pot,272
 Socatport1,1
 Socatport2,2
-Emulatorswitch,True
+Emulatorswitch,False
 Comments,hola
-PS Coeficient,16.2787
+PS Coefficient,162788
