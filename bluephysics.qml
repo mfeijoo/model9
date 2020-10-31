@@ -55,6 +55,22 @@ ApplicationWindow {
     property var analyzepair2dose
     property var analyzepair3dose
 
+    Dialog {
+        id: nodevicedialog
+        objectName: 'nodevicedialog'
+        Text {
+            text: 'Device not connected'
+        }
+        title: 'Comm. Error'
+        onAccepted: {
+            regulatebutton.checked = false
+            regulatebutton.text = 'Regulate'
+            startbutton.checked = false
+            subtractdc.checked = false
+            subtractdc.text = 'SUBTRACT'
+        }
+    }
+
     Item {
         id: mainmenu
         anchors.fill: parent

@@ -204,14 +204,18 @@ def qmlstart():
     myautosave.start()
 
 def qmlsendtocontroller():
-    device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-    serc = serial.Serial(device, 115200, timeout=1)
-    inttime = integrationtimespinbox.property('value')
-    intpulse = integrationpulseswitch.property('text')
-    texttosend = 'c%s,%s' %(inttime, intpulse[0])
-    serc.write(texttosend.encode())
-    serc.close()
-    sendtocontrollerbt.setProperty('enabled', False)
+    try:
+        device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+        serc = serial.Serial(device, 115200, timeout=1)
+        inttime = integrationtimespinbox.property('value')
+        intpulse = integrationpulseswitch.property('text')
+        texttosend = 'c%s,%s' %(inttime, intpulse[0])
+        serc.write(texttosend.encode())
+        serc.close()
+        sendtocontrollerbt.setProperty('enabled', False)
+    except IndexError:
+        nodevicedialog.setProperty('visible', True)
+        from_dic_to_gui()
 
 def goodbye():
     print ('bye')
@@ -531,58 +535,63 @@ class RegulatePSThread(QThread):
     def run(self):
         self.stop = False
 
-        #comment next 6 if emulator
-        if not emulatorswitch.property('checked'):
-            device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-            self.serreg = serial.Serial(device, 115200, timeout=2)
-            psset = psspinbox.property('realValue')
-            self.serreg.write(('r%.2f,' %psset).encode())
-            print (('r%.2f,' %psset).encode())
-            line = self.serreg.readline().decode().strip().split(',')
 
-
-        regulateprogressbar.setProperty('value', 0)
-
-
-        #emulator 13 no emulator 5
-        if emulatorswitch.property('checked'):
-            linevalue = 13
-        else:
-            linevalue = 5
-        for i in range(linevalue):
-            #comment next 2 if emulator
+        try:
+            #comment next 6 if emulator
             if not emulatorswitch.property('checked'):
+                device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+                self.serreg = serial.Serial(device, 115200, timeout=2)
+                psset = psspinbox.property('realValue')
+                self.serreg.write(('r%.2f,' %psset).encode())
+                print (('r%.2f,' %psset).encode())
                 line = self.serreg.readline().decode().strip().split(',')
-                print (line)
-            if len(line) == 6:
-                value = float(line[-1])
-                regulateprogressbar.setProperty('value', value)
-            #comment if not emulator
+
+
+            regulateprogressbar.setProperty('value', 0)
+
+
+            #emulator 13 no emulator 5
             if emulatorswitch.property('checked'):
-                time.sleep(0.5)
+                linevalue = 13
+            else:
+                linevalue = 5
+            for i in range(linevalue):
+                #comment next 2 if emulator
+                if not emulatorswitch.property('checked'):
+                    line = self.serreg.readline().decode().strip().split(',')
+                    print (line)
+                if len(line) == 6:
+                    value = float(line[-1])
+                    regulateprogressbar.setProperty('value', value)
+                #comment if not emulator
+                if emulatorswitch.property('checked'):
+                    time.sleep(0.5)
 
-        #comment the whole while loop if emulator
-        if not emulatorswitch.property('checked'):
-            listapots = []
-            while (len(line) == 6):
+            #comment the whole while loop if emulator
+            if not emulatorswitch.property('checked'):
+                listapots = []
+                while (len(line) == 6):
 
-                if self.stop:
-                    break
+                    if self.stop:
+                        break
 
-                line = self.serreg.readline().decode().strip().split(',')
-                value = float(line[-1])
-                regulateprogressbar.setProperty('value', value)
-                listapots.append(line[3])
-                #print (line)
+                    line = self.serreg.readline().decode().strip().split(',')
+                    value = float(line[-1])
+                    regulateprogressbar.setProperty('value', value)
+                    listapots.append(line[3])
+                    #print (line)
 
-        #print ('Regulating PS is done')
-        #print ('lista pots: ', listapots)
-        #regulateprogressbar.setProperty('value', 13)
-        regulateb.setProperty('checked', False)
-        #comment if emulator
-        if not emulatorswitch.property('checked'):
-            self.serreg.close()
-            dmetadata['PS Pot'] = listapots[-2]
+            #print ('Regulating PS is done')
+            #print ('lista pots: ', listapots)
+            #regulateprogressbar.setProperty('value', 13)
+            regulateb.setProperty('checked', False)
+            #comment if emulator
+            if not emulatorswitch.property('checked'):
+                self.serreg.close()
+                dmetadata['PS Pot'] = listapots[-2]
+
+        except IndexError:
+            nodevicedialog.setProperty('visible', True)
 
 
     def stopping(self):
@@ -605,48 +614,53 @@ class SubtractDcThread(QThread):
         self.wait()
 
     def run(self):
-        #comment next 3 if emulator
-        if not emulatorswitch.property('checked'):
-            device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-            self.ser = serial.Serial(device, 115200, timeout=1)
-            self.ser.write('s'.encode())
-        #uncoment if emulator
-        if emulatorswitch.property('checked'):
-            value = 0
-        for i in range(3):
-            #comment next 2 if emulator
+
+        try:
+            #comment next 3 if emulator
             if not emulatorswitch.property('checked'):
-                line = self.ser.readline().decode().strip().split(',')
-                value = int(line[0])
-
-            #print (line)
-
-            #change this part for not emulator
-            sdcprogressbar.setProperty('value', value)
+                device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+                self.ser = serial.Serial(device, 115200, timeout=1)
+                self.ser.write('s'.encode())
+            #uncoment if emulator
             if emulatorswitch.property('checked'):
-                value = value + 1
-                time.sleep(0.5)
+                value = 0
+            for i in range(3):
+                #comment next 2 if emulator
+                if not emulatorswitch.property('checked'):
+                    line = self.ser.readline().decode().strip().split(',')
+                    value = int(line[0])
 
-        #comment the whole while loop if emulator
-        if not emulatorswitch.property('checked'):
-            dclines = []
-            while len(line) == 9:
-                line = self.ser.readline().decode().strip().split(',')
-                sdcprogressbar.setProperty('value', int(line[0]))
-                dclines.append([line[0], line[4]])
+                #print (line)
 
-        sdcprogressbar.setProperty('value', 8)
-        subtractdcb.setProperty('checked', False)
-        #comment if emulator
-        if not emulatorswitch.property('checked'):
-            self.ser.close()
-            #Record all the values of darkcurrent for all channels and put in metadata
-            dfdc = pd.DataFrame(dclines, columns=['ch', 'dcvalue'])
-            dfdc.drop(dfdc.index[-1], inplace=True)
-            listadcvalues = dfdc.groupby('ch').apply(lambda x: x.iloc[-1,-1]).tolist()
-            print (listadcvalues)
-            for i, value in enumerate(listadcvalues):
-                dmetadata['Dark Current Ch%s' %i] = value
+                #change this part for not emulator
+                sdcprogressbar.setProperty('value', value)
+                if emulatorswitch.property('checked'):
+                    value = value + 1
+                    time.sleep(0.5)
+
+            #comment the whole while loop if emulator
+            if not emulatorswitch.property('checked'):
+                dclines = []
+                while len(line) == 9:
+                    line = self.ser.readline().decode().strip().split(',')
+                    sdcprogressbar.setProperty('value', int(line[0]))
+                    dclines.append([line[0], line[4]])
+
+            sdcprogressbar.setProperty('value', 8)
+            subtractdcb.setProperty('checked', False)
+            #comment if emulator
+            if not emulatorswitch.property('checked'):
+                self.ser.close()
+                #Record all the values of darkcurrent for all channels and put in metadata
+                dfdc = pd.DataFrame(dclines, columns=['ch', 'dcvalue'])
+                dfdc.drop(dfdc.index[-1], inplace=True)
+                listadcvalues = dfdc.groupby('ch').apply(lambda x: x.iloc[-1,-1]).tolist()
+                print (listadcvalues)
+                for i, value in enumerate(listadcvalues):
+                    dmetadata['Dark Current Ch%s' %i] = value
+
+        except IndexError:
+            nodevicedialog.setProperty('visible', True)
 
 
 
@@ -672,40 +686,47 @@ class MeasureThread(QThread):
 
     def run(self):
         self.stop = False
-        #emulator
-        if emulatorswitch.property('checked'):
-            self.ser = serial.Serial ('/dev/pts/%s' %socatport2.property('currentText'), 115200, timeout=1)
-        else:
-            device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
-            self.ser = serial.Serial (device, 115200, timeout=1)
-        #readings to discard garbge
+        try:
+            #emulator
+            if emulatorswitch.property('checked'):
+                self.ser = serial.Serial ('/dev/pts/%s' %socatport2.property('currentText'), 115200, timeout=1)
+            else:
+                device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
+                self.ser = serial.Serial (device, 115200, timeout=1)
+            #readings to discard garbge
 
-        reading0 = self.ser.readline().decode().strip().split(',')
+            reading0 = self.ser.readline().decode().strip().split(',')
 
-        #next reading to check starting time
-        #comment if emulator
-        if not emulatorswitch.property('checked'):
-            reading1 = self.ser.readline().decode().strip().split(',')
-            tstart = int(reading1[0])
-        
-        while True:
-            
-            if self.stop:
-                break
+            #next reading to check starting time
+            #comment if emulator
+            if not emulatorswitch.property('checked'):
+                reading1 = self.ser.readline().decode().strip().split(',')
+                tstart = int(reading1[0])
+
+        except IndexError:
+            nodevicedialog.setProperty('visible', True)
+            self.stop = True
+
+            while True:
+
+                if self.stop:
+                    break
 
 
-            try:
-                reading = self.ser.readline().decode().strip().split(',')
-                #print (reading)
-                #comment if not emulator
-                if emulatorswitch.property('checked'):
-                    listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
-                else:
-                    listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
-                #print (listatosend)
-                self.info.emit(listatosend)
-            except:
-                pass
+                try:
+                    reading = self.ser.readline().decode().strip().split(',')
+                    #print (reading)
+                    #comment if not emulator
+                    if emulatorswitch.property('checked'):
+                        listatosend = [float(reading[0])] + [int(i) for i in reading[1:]]
+                    else:
+                        listatosend = [(int(reading[0]) - tstart)/1000]+[float(reading[1])]+[int(i) for i  in reading[2:]]
+                    #print (listatosend)
+                    self.info.emit(listatosend)
+                except:
+                    pass
+
+
 
 
 
@@ -939,6 +960,7 @@ socatport2 = engine.rootObjects()[0].findChild(QObject, 'socatport2')
 emulatorswitch = engine.rootObjects()[0].findChild(QObject, 'emulatorswitch')
 analyzefile = engine.rootObjects()[0].findChild(QObject, 'analyzefile')
 pscoeff = engine.rootObjects()[0].findChild(QObject, 'pscoeff')
+nodevicedialog = engine.rootObjects()[0].findChild(QObject, 'nodevicedialog')
 #print (emulatorswitch.property('text'))
 
 
