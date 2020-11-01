@@ -97,6 +97,7 @@ def from_gui_to_dic():
         dmetadata['Emulatorswitch'] = 'True'
     else:
         dmetadata['Emulatorswitch'] = 'False'
+    dmetadata['Units'] = gycgybutton.property('text')
 
 
 
@@ -120,14 +121,14 @@ def from_dic_to_gui():
     pair2chcherenkov.setProperty('currentIndex', int(dmetadata['Pair 2 Ch Cherenkov'][-1]))
     pair3chsensor.setProperty('currentIndex', int(dmetadata['Pair 3 Ch Sensor'][-1]))
     pair3chcherenkov.setProperty('currentIndex', int(dmetadata['Pair 3 Ch Cherenkov'][-1]))
-    acr0.setProperty('value', int(float(dmetadata['ACR0'])*10000))
-    acr1.setProperty('value', int(float(dmetadata['ACR1'])*10000))
-    acr2.setProperty('value', int(float(dmetadata['ACR2'])*10000))
-    acr3.setProperty('value', int(float(dmetadata['ACR3'])*10000))
-    calib0.setProperty('value', int(float(dmetadata['Calib0'])*10000))
-    calib1.setProperty('value', int(float(dmetadata['Calib1'])*10000))
-    calib2.setProperty('value', int(float(dmetadata['Calib2'])*10000))
-    calib3.setProperty('value', int(float(dmetadata['Calib3'])*10000))
+    acr0.setProperty('value', int(float(dmetadata['ACR0'])*10000000))
+    acr1.setProperty('value', int(float(dmetadata['ACR1'])*10000000))
+    acr2.setProperty('value', int(float(dmetadata['ACR2'])*10000000))
+    acr3.setProperty('value', int(float(dmetadata['ACR3'])*10000000))
+    calib0.setProperty('value', int(float(dmetadata['Calib0'])*10000000))
+    calib1.setProperty('value', int(float(dmetadata['Calib1'])*10000000))
+    calib2.setProperty('value', int(float(dmetadata['Calib2'])*10000000))
+    calib3.setProperty('value', int(float(dmetadata['Calib3'])*10000000))
     x0.setProperty('value', int(float(dmetadata['X0'])*100))
     y0.setProperty('value', int(float(dmetadata['Y0'])*100))
     z0.setProperty('value', int(float(dmetadata['Z0'])*100))
@@ -149,6 +150,12 @@ def from_dic_to_gui():
         emulatorswitch.setProperty('checked', True)
     else:
         emulatorswitch.setProperty('checked', False)
+    if dmetadata['Units'] == 'cGy':
+        gycgybutton.setProperty('checked', True)
+        gycgybutton.setProperty('text', 'cGy')
+    else:
+        gycgybutton.setProperty('checked', False)
+        gycgybutton.setProperty('text', 'Gy')
 
 
 #This is the function to be excuted when clicking
@@ -505,15 +512,19 @@ class EmulatorThread(QThread):
         self.lines =  file.readlines()
         file.close()
 
-        self.ser2 = serial.Serial ('/dev/pts/%s' %socatport1.property('currentText'), 115200, timeout=1)
-        for line in self.lines:
-            self.ser2.write(line.encode())
-            #print(line)
-            if self.stop:
-                break
-            time.sleep(0.320)
-        
-        self.ser2.close()
+        try:
+            self.ser2 = serial.Serial ('/dev/pts/%s' %socatport1.property('currentText'), 115200, timeout=1)
+        except serial.serialutil.SerialException:
+            nosocatdialog.setProperty('visible', True)
+        else:
+            for line in self.lines:
+                self.ser2.write(line.encode())
+                #print(line)
+                if self.stop:
+                    break
+                time.sleep(0.320)
+
+            self.ser2.close()
         
     def stopping(self):
         self.stop = True
@@ -693,6 +704,18 @@ class MeasureThread(QThread):
             else:
                 device = list(serial.tools.list_ports.grep('Adafruit ItsyBitsy M4'))[0].device
                 self.ser = serial.Serial (device, 115200, timeout=1)
+
+        except IndexError:
+            nodevicedialog.setProperty('visible', True)
+
+        except serial.serialutil.SerialException:
+            nosocatdialog.setProperty('visible', True)
+
+        except Exception as e:
+            print (e)
+
+        else:
+
             #readings to discard garbge
 
             reading0 = self.ser.readline().decode().strip().split(',')
@@ -703,9 +726,6 @@ class MeasureThread(QThread):
                 reading1 = self.ser.readline().decode().strip().split(',')
                 tstart = int(reading1[0])
 
-        except IndexError:
-            nodevicedialog.setProperty('visible', True)
-            self.stop = True
 
             while True:
 
@@ -725,11 +745,6 @@ class MeasureThread(QThread):
                     self.info.emit(listatosend)
                 except:
                     pass
-
-
-
-
-
 
     def stopping(self):
         self.stop = True
@@ -961,6 +976,8 @@ emulatorswitch = engine.rootObjects()[0].findChild(QObject, 'emulatorswitch')
 analyzefile = engine.rootObjects()[0].findChild(QObject, 'analyzefile')
 pscoeff = engine.rootObjects()[0].findChild(QObject, 'pscoeff')
 nodevicedialog = engine.rootObjects()[0].findChild(QObject, 'nodevicedialog')
+nosocatdialog = engine.rootObjects()[0].findChild(QObject, 'nosocatdialog')
+gycgybutton = engine.rootObjects()[0].findChild(QObject, 'gycgybutton')
 #print (emulatorswitch.property('text'))
 
 
@@ -970,6 +987,7 @@ nodevicedialog = engine.rootObjects()[0].findChild(QObject, 'nodevicedialog')
 #########################################################################
 
 metadatabutton.clicked.connect(from_dic_to_gui)
+#gycgybutton.clicked.connect(from_gui_to_dic)
 mystopthread.signallimitslists.connect(mylimitslines.limitsin)
 
 #info is the signal created with every measurements

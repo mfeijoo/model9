@@ -1,4 +1,4 @@
-Date Time,30 Oct 2020 22:05:45
+Date Time,01 Nov 2020 10:24:01
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
@@ -18,12 +18,12 @@ Pair 2 Ch Sensor,ch4
 Pair 2 Ch Cherenkov,ch5
 Pair 3 Ch Sensor,ch6
 Pair 3 Ch Cherenkov,ch7
-ACR0,1.0
-ACR1,1.0
+ACR0,1.7562
+ACR1,0.5
 ACR2,1.0
 ACR3,1.0
-Calib0,1.0
-Calib1,1.0
+Calib0,0.1046067
+Calib1,0.5
 Calib2,1.0
 Calib3,1.0
 X0,0.0
@@ -40,8 +40,9 @@ Y3,0.0
 Z3,0.0
 Power Supply,56.56
 PS Pot,272
-Socatport1,1
-Socatport2,2
-Emulatorswitch,False
+Socatport1,2
+Socatport2,3
+Emulatorswitch,True
 Comments,hola
 PS Coefficient,162788
+Units,cGy

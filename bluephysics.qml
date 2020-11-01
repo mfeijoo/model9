@@ -18,6 +18,7 @@ ApplicationWindow {
 
     Material.theme: Material.Dark
     Material.accent: Material.LightBlue
+    font.capitalization: Font.MixedCase
 
     property var lqmlchs: [qmlch0, qmlch1, qmlch2, qmlch3, qmlch4, qmlch5, qmlch6, qmlch7]
     property var lqmlanalyzechs: [qmlchanalyze0, qmlchanalyze1, qmlchanalyze2, qmlchanalyze3, qmlchanalyze4, qmlchanalyze5, qmlchanalyze6, qmlchanalyze7]
@@ -56,18 +57,32 @@ ApplicationWindow {
     property var analyzepair3dose
 
     Dialog {
+        id: nosocatdialog
+        objectName: 'nosocatdialog'
+        Text {
+            text: 'Socat not running'
+        }
+        title: 'Emulator Error'
+        onAccepted: {
+            startbutton.checked = false
+            stopbutton.enabled = false
+        }
+    }
+
+    Dialog {
         id: nodevicedialog
         objectName: 'nodevicedialog'
         Text {
             text: 'Device not connected'
         }
-        title: 'Comm. Error'
+        title: 'Device Error'
         onAccepted: {
             regulatebutton.checked = false
             regulatebutton.text = 'Regulate'
             startbutton.checked = false
             subtractdc.checked = false
-            subtractdc.text = 'SUBTRACT'
+            subtractdc.text = 'Subtract'
+            stopbutton.enabled = false
         }
     }
 
@@ -354,16 +369,37 @@ ApplicationWindow {
                         checked: false
                         ButtonGroup.group: analyzeresultsgroup
                         onClicked:{
-                            analyzelistmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.integral - analyzepair0chche.integral * acr0.realValue) * calib0.realValue * 100)/100)
+                            var factor = analyzegycgybutton.checked ? 1 : 0.01
+                            analyzelistmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.integral - analyzepair0chche.integral * acr0.realValue) * calib0.realValue * factor * 100)/100)
                             analyzelistmodelfullintegrals.setProperty(1, 'mytext', '')
-                            analyzelistmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.integral - analyzepair1chche.integral * acr1.realValue) * calib1.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.integral - analyzepair1chche.integral * acr1.realValue) * calib1.realValue * factor * 100)/100)
                             analyzelistmodelfullintegrals.setProperty(3, 'mytext', '')
-                            analyzelistmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.integral - analyzepair2chche.integral * acr2.realValue) * calib2.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.integral - analyzepair2chche.integral * acr2.realValue) * calib2.realValue * factor * 100)/100)
                             analyzelistmodelfullintegrals.setProperty(5, 'mytext', '')
-                            analyzelistmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.integral - analyzepair3chche.integral * acr3.realValue) * calib3.realValue * 100)/100)
+                            analyzelistmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.integral - analyzepair3chche.integral * acr3.realValue) * calib3.realValue * factor * 100)/100)
                             analyzelistmodelfullintegrals.setProperty(7, 'mytext', '')
                         }
 
+                    }
+                    ToolButton {
+                        id: analyzegycgybutton
+                        objectName: 'gycgybutton'
+                        checkable: true
+                        checked: true
+                        text: checked ? qsTr("cGy") : qsTr("Gy")
+                        onClicked: {
+                            if (analyzedosebt.checked) {
+                                var factor = analyzegycgybutton.checked ? 1 : 0.01
+                                analyzelistmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.integral - analyzepair0chche.integral * acr0.realValue) * calib0.realValue * factor * 100)/100)
+                                analyzelistmodelfullintegrals.setProperty(1, 'mytext', '')
+                                analyzelistmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.integral - analyzepair1chche.integral * acr1.realValue) * calib1.realValue * factor * 100)/100)
+                                analyzelistmodelfullintegrals.setProperty(3, 'mytext', '')
+                                analyzelistmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.integral - analyzepair2chche.integral * acr2.realValue) * calib2.realValue * factor * 100)/100)
+                                analyzelistmodelfullintegrals.setProperty(5, 'mytext', '')
+                                analyzelistmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.integral - analyzepair3chche.integral * acr3.realValue) * calib3.realValue * factor * 100)/100)
+                                analyzelistmodelfullintegrals.setProperty(7, 'mytext', '')
+                            }
+                        }
                     }
                 }
             }
@@ -539,7 +575,7 @@ ApplicationWindow {
 
                     Text {
                         id: analyzeunitsfullintegrals
-                        text: (analyzechargebt.checked | analyzechargedosebt.checked) ? '(nC)' : '(cGy)'
+                        text: (analyzechargebt.checked | analyzechargedosebt.checked) ? '(nC)' : (analyzegycgybutton.checked ? '(cGy)' : '(Gy)')
                         color: 'lightgrey'
                     }
                 }
@@ -638,7 +674,7 @@ ApplicationWindow {
 
                         Text {
                             id: analyzeintegralsunits
-                            text: (analyzechargebt.checked | analyzechargedosebt.checked) ? '(nC)' : '(cGy)'
+                            text: (analyzechargebt.checked | analyzechargedosebt.checked) ? '(nC)' : (gycgybutton.checked ? '(cGy)' : '(Gy)')
                             color: 'lightgrey'
 
                         }
@@ -676,13 +712,14 @@ ApplicationWindow {
                                     analyzeintegralsmodel.setProperty(7, 'mytext', '')
                                 }
                                 if (analyzedosebt.checked){
-                                    analyzeintegralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.listaint[i] - analyzepair0chche.listaint[i] * acr0.realValue) * calib0.realValue * 100)/100)
+                                    var factor = analyzegycgybutton.checked ? 1 : 0.01
+                                    analyzeintegralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((analyzepair0chsen.listaint[i] - analyzepair0chche.listaint[i] * acr0.realValue) * calib0.realValue * factor * 100)/100)
                                     analyzeintegralsmodel.setProperty(1, 'mytext', '')
-                                    analyzeintegralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.listaint[i] - analyzepair1chche.listaint[i] * acr1.realValue) * calib1.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((analyzepair1chsen.listaint[i] - analyzepair1chche.listaint[i] * acr1.realValue) * calib1.realValue * factor * 100)/100)
                                     analyzeintegralsmodel.setProperty(3, 'mytext', '')
-                                    analyzeintegralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.listaint[i] - analyzepair2chche.listaint[i] * acr2.realValue) * calib2.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((analyzepair2chsen.listaint[i] - analyzepair2chche.listaint[i] * acr2.realValue) * calib2.realValue * factor * 100)/100)
                                     analyzeintegralsmodel.setProperty(5, 'mytext', '')
-                                    analyzeintegralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.listaint[i] - analyzepair3chche.listaint[i] * acr3.realValue) * calib3.realValue * 100)/100)
+                                    analyzeintegralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((analyzepair3chsen.listaint[i] - analyzepair3chche.listaint[i] * acr3.realValue) * calib3.realValue * factor * 100)/100)
                                     analyzeintegralsmodel.setProperty(7, 'mytext', '')
                                 }
 
@@ -1124,7 +1161,7 @@ ApplicationWindow {
 
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         border.color: 'lightgrey'
@@ -1136,7 +1173,7 @@ ApplicationWindow {
 
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         border.color: 'lightgrey'
@@ -1210,64 +1247,66 @@ ApplicationWindow {
                         currentIndex: 1
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: acr0
                             objectName: 'acr0'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 20000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
 
                             validator: DoubleValidator {
-                                bottom: Math.min(acr0.from, acr0.to)
-                                top: Math.max(acr0.from, acr0.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', acr0.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: calib0
                             objectName: 'calib0'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 10000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
+
 
                             validator: DoubleValidator {
-                                bottom: Math.min(calib0.from, calib0.to)
-                                top: Math.max(calib0.from, calib0.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', calib0.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
+
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
@@ -1392,64 +1431,66 @@ ApplicationWindow {
                         currentIndex: 3
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: acr1
                             objectName: 'acr1'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 20000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
 
                             validator: DoubleValidator {
-                                bottom: Math.min(acr1.from, acr1.to)
-                                top: Math.max(acr1.from, acr1.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', acr1.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: calib1
                             objectName: 'calib1'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 10000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
+
 
                             validator: DoubleValidator {
-                                bottom: Math.min(calib1.from, calib1.to)
-                                top: Math.max(calib1.from, calib1.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', calib1.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
+
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
@@ -1574,64 +1615,66 @@ ApplicationWindow {
                         currentIndex: 5
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: acr2
                             objectName: 'acr2'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 20000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
 
                             validator: DoubleValidator {
-                                bottom: Math.min(acr2.from, acr2.to)
-                                top: Math.max(acr2.from, acr2.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', acr2.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: calib2
                             objectName: 'calib2'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 10000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
+
 
                             validator: DoubleValidator {
-                                bottom: Math.min(calib2.from, calib2.to)
-                                top: Math.max(calib2.from, calib2.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', calib2.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
+
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
@@ -1756,64 +1799,66 @@ ApplicationWindow {
                         currentIndex: 7
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: acr3
                             objectName: 'acr3'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 20000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
 
                             validator: DoubleValidator {
-                                bottom: Math.min(acr3.from, acr3.to)
-                                top: Math.max(acr3.from, acr3.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', acr3.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
                     Rectangle {
-                        width: 120
+                        width: 150
                         height: 40
                         color: 'transparent'
                         SpinBox {
                             id: calib3
                             objectName: 'calib3'
                             from: 0
-                            value: 10000
-                            to: 20000
+                            value: 10000000
+                            to: 10000000
                             stepSize: 1
                             editable: true
                             anchors.fill: parent
                             font.pointSize: 10
 
-                            property int decimals: 4
-                            property real realValue: value / 10000
+                            property int decimals: 7
+                            property real realValue: value / 10000000
+
 
                             validator: DoubleValidator {
-                                bottom: Math.min(calib3.from, calib3.to)
-                                top: Math.max(calib3.from, calib3.to)
+                                bottom: Math.min(this.from, this.to)
+                                top: Math.max(this.from, this.to)
                             }
 
                             textFromValue: function(value, locale) {
-                                return Number(value / 10000).toLocaleString(locale, 'f', calib3.decimals)
+                                return Number(value / 10000000).toLocaleString(locale, 'f', decimals)
                             }
+
                             valueFromText: function(text, locale) {
-                                return Number.fromLocaleString(locale, text) * 10000
+                                return Number.fromLocaleString(locale, text) * 10000000
                             }
                          }
                     }
@@ -2084,7 +2129,7 @@ ApplicationWindow {
                     text: regulatebutton.checked ? 'Regulating' : 'Regulate'
                     hoverEnabled: true
                     checkable: true
-                    enabled: startbutton.checked ? false : true
+                    enabled: (startbutton.checked | emulatorswitch.checked) ? false : true
 
                 }
 
@@ -2120,7 +2165,7 @@ ApplicationWindow {
                     text: subtractdc.checked ? 'Subtracting' : 'Subtract'
                     height: 25
                     checkable: true
-                    enabled: (startbutton.checked | regulatebutton.checked) ? false : true
+                    enabled: (startbutton.checked | regulatebutton.checked | emulatorswitch.checked) ? false : true
 
                 }
 
@@ -2333,14 +2378,35 @@ ApplicationWindow {
                         checked: false
                         ButtonGroup.group: resultsgroup
                         onClicked: {
-                            listmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.integral - pair0chche.integral * acr0.realValue) * calib0.realValue * 100)/100)
+                            var factor = gycgybutton.checked ? 1 : 0.01
+                            listmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.integral - pair0chche.integral * acr0.realValue) * calib0.realValue * factor * 100)/100)
                             listmodelfullintegrals.setProperty(1, 'mytext', '')
-                            listmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.integral - pair1chche.integral * acr1.realValue) * calib1.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.integral - pair1chche.integral * acr1.realValue) * calib1.realValue * factor * 100)/100)
                             listmodelfullintegrals.setProperty(3, 'mytext', '')
-                            listmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.integral - pair2chche.integral * acr2.realValue) * calib2.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.integral - pair2chche.integral * acr2.realValue) * calib2.realValue * factor * 100)/100)
                             listmodelfullintegrals.setProperty(5, 'mytext', '')
-                            listmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.integral - pair3chche.integral * acr3.realValue) * calib3.realValue * 100)/100)
+                            listmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.integral - pair3chche.integral * acr3.realValue) * calib3.realValue * factor * 100)/100)
                             listmodelfullintegrals.setProperty(7, 'mytext', '')
+                        }
+                    }
+                    ToolButton {
+                        id: gycgybutton
+                        objectName: 'gycgybutton'
+                        checkable: true
+                        checked: true
+                        text: checked ? qsTr("cGy") : qsTr("Gy")
+                        onClicked: {
+                            if (dosebt.checked) {
+                                var factor = gycgybutton.checked ? 1 : 0.01
+                                listmodelfullintegrals.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.integral - pair0chche.integral * acr0.realValue) * calib0.realValue * factor * 100)/100)
+                                listmodelfullintegrals.setProperty(1, 'mytext', '')
+                                listmodelfullintegrals.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.integral - pair1chche.integral * acr1.realValue) * calib1.realValue * factor * 100)/100)
+                                listmodelfullintegrals.setProperty(3, 'mytext', '')
+                                listmodelfullintegrals.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.integral - pair2chche.integral * acr2.realValue) * calib2.realValue * factor * 100)/100)
+                                listmodelfullintegrals.setProperty(5, 'mytext', '')
+                                listmodelfullintegrals.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.integral - pair3chche.integral * acr3.realValue) * calib3.realValue * factor * 100)/100)
+                                listmodelfullintegrals.setProperty(7, 'mytext', '')
+                            }
                         }
                     }
                 }
@@ -2517,7 +2583,7 @@ ApplicationWindow {
 
                     Text {
                         id: unitsfullintegrals
-                        text: (chargebt.checked | chargedosebt.checked) ? '(nC)' : '(cGy)'
+                        text: (chargebt.checked | chargedosebt.checked) ? '(nC)' : (gycgybutton.checked ? '(cGy)' : '(Gy)')
                         color: 'lightgrey'
                     }
                 }
@@ -2611,7 +2677,7 @@ ApplicationWindow {
 
                         Text {
                             id: integralsunits
-                            text: (chargebt.checked | chargedosebt.checked) ? '(nC)' : '(cGy)'
+                            text: (chargebt.checked | chargedosebt.checked) ? '(nC)' : (gycgybutton.checked ? '(cGy)' : '(Gy)')
                             color: 'lightgrey'
 
                         }
@@ -2648,13 +2714,14 @@ ApplicationWindow {
                                     integralsmodel.setProperty(7, 'mytext', '')
                                 }
                                 if (dosebt.checked){
-                                    integralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.listaint[i] - pair0chche.listaint[i] * acr0.realValue) * calib0.realValue * 100)/100)
+                                    var factor = gycgybutton.checked ? 1 : 0.01
+                                    integralsmodel.setProperty(0, 'mytext', 'S0 ' + Math.round((pair0chsen.listaint[i] - pair0chche.listaint[i] * acr0.realValue) * calib0.realValue * factor * 100)/100)
                                     integralsmodel.setProperty(1, 'mytext', '')
-                                    integralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.listaint[i] - pair1chche.listaint[i] * acr1.realValue) * calib1.realValue * 100)/100)
+                                    integralsmodel.setProperty(2, 'mytext', 'S1 ' + Math.round((pair1chsen.listaint[i] - pair1chche.listaint[i] * acr1.realValue) * calib1.realValue * factor * 100)/100)
                                     integralsmodel.setProperty(3, 'mytext', '')
-                                    integralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.listaint[i] - pair2chche.listaint[i] * acr2.realValue) * calib2.realValue * 100)/100)
+                                    integralsmodel.setProperty(4, 'mytext', 'S2 ' + Math.round((pair2chsen.listaint[i] - pair2chche.listaint[i] * acr2.realValue) * calib2.realValue * factor * 100)/100)
                                     integralsmodel.setProperty(5, 'mytext', '')
-                                    integralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.listaint[i] - pair3chche.listaint[i] * acr3.realValue) * calib3.realValue * 100)/100)
+                                    integralsmodel.setProperty(6, 'mytext', 'S3 ' + Math.round((pair3chsen.listaint[i] - pair3chche.listaint[i] * acr3.realValue) * calib3.realValue * factor * 100)/100)
                                     integralsmodel.setProperty(7, 'mytext', '')
                                 }
 
