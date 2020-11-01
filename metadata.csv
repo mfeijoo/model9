@@ -1,4 +1,4 @@
-Date Time,01 Nov 2020 10:24:01
+Date Time,01 Nov 2020 14:35:24
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
@@ -42,7 +42,7 @@ Power Supply,56.56
 PS Pot,272
 Socatport1,2
 Socatport2,3
-Emulatorswitch,True
+Emulatorswitch,False
 Comments,hola
 PS Coefficient,162788
 Units,cGy

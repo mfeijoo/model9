@@ -246,7 +246,7 @@ def analyze():
     df = pd.read_csv(filepath, skiprows=linenumber)
     df = df.reindex(columns=df.columns.tolist() + newcolumns + newpowercolumns)
     df[newcolumns]=(df.iloc[:,2:10]*(-20.48)/65535 + 10.24) * 6 #1.8e-9 / 300e-3 * 1e9
-    df['PSv'] = df.PS *  0.1875 / 1000 * float(dmetadata['PS Coefficient'])
+    df['PSv'] = df.PS *  0.1875 / 1000 * int(dmetadata['PS Coefficient']) / 10000
     df['-12Vv'] = df['-12V'] *  0.1875 * -2.6470 / 1000
     df['5Vv'] = df['5V']  * 0.1875 / 1000
     df['refVv'] = df['refV'] * 0.0625 / 1000

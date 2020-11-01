@@ -383,7 +383,7 @@ ApplicationWindow {
                     }
                     ToolButton {
                         id: analyzegycgybutton
-                        objectName: 'gycgybutton'
+                        objectName: 'analyzegycgybutton'
                         checkable: true
                         checked: true
                         text: checked ? qsTr("cGy") : qsTr("Gy")
