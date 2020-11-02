@@ -57,6 +57,15 @@ ApplicationWindow {
     property var analyzepair3dose
 
     Dialog {
+        id: saturationdialog
+        Text {
+            id: saturationdialogtext
+            text: 'Ch Saturated'
+        }
+        title: 'Saturation'
+    }
+
+    Dialog {
         id: nosocatdialog
         objectName: 'nosocatdialog'
         Text {
@@ -3012,6 +3021,11 @@ ApplicationWindow {
 
             //var ch0 = -lista[2]  * 20.48 / 65535 + 10.24
             var ch0 = (-lista[2]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch0 > 61) {
+                saturationdialogtext.text = 'ch0 Saturated'
+                saturationdialog.open()
+            }
+
             if (axisYch.first == true) {
                 axisYch.min = ch0 - 0.005
                 axisYch.max = ch0 + 0.005
@@ -3023,6 +3037,10 @@ ApplicationWindow {
 
            //var ch1 = -lista[3]  * 20.48 / 65535 + 10.24
             var ch1 = (-lista[3]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch1 > 61) {
+                saturationdialogtext.text = 'ch1 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch1 - 0.005
                 axisYch.max = ch1 + 0.005
@@ -3034,6 +3052,10 @@ ApplicationWindow {
 
             //var ch2 = -lista[4]  * 20.48 / 65535 + 10.24
             var ch2 = (-lista[4]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch2 > 61) {
+                saturationdialogtext.text = 'ch2 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch2 - 0.005
                 axisYch.max = ch2 + 0.005
@@ -3045,6 +3067,10 @@ ApplicationWindow {
 
             //var ch3 = -lista[5]  * 20.48 / 65535 + 10.24
             var ch3 = (-lista[5]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch3 > 61) {
+                saturationdialogtext.text = 'ch3 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch3 - 0.005
                 axisYch.max = ch3 + 0.005
@@ -3056,6 +3082,10 @@ ApplicationWindow {
 
             //var ch4 = -lista[6]  * 20.48 / 65535 + 10.24
             var ch4 = (-lista[6]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch4 > 61) {
+                saturationdialogtext.text = 'ch4 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch4 - 0.005
                 axisYch.max = ch4 + 0.005
@@ -3067,6 +3097,10 @@ ApplicationWindow {
 
             //var ch5 = -lista[7]  * 20.48 / 65535 + 10.24
             var ch5 = (-lista[7]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch5 > 61) {
+                saturationdialogtext.text = 'ch5 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch5 - 0.005
                 axisYch.max = ch5 + 0.005
@@ -3078,6 +3112,10 @@ ApplicationWindow {
 
             //var ch6 = -lista[8]  * 20.48 / 65535 + 10.24
             var ch6 = (-lista[8]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch6 > 61) {
+                saturationdialogtext.text = 'ch6 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch6 - 0.005
                 axisYch.max = ch6 + 0.005
@@ -3090,6 +3128,10 @@ ApplicationWindow {
 
             //var ch7 = -lista[9]  * 20.48 / 65535 + 10.24
             var ch7 = (-lista[9]  * 20.48 / 65535 + 10.24) * 1.8 / 300e-3
+            if (ch7 > 61) {
+                saturationdialogtext.text = 'ch7 Saturated'
+                saturationdialog.open()
+            }
             if (axisYch.first == true) {
                 axisYch.min = ch7 - 0.005
                 axisYch.max = ch7 + 0.005
