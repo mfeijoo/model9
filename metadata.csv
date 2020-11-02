@@ -1,15 +1,15 @@
-Date Time,01 Nov 2020 14:35:24
+Date Time,01 Nov 2020 19:44:31
 File Name,default
 Integration Time,300
 Operational Mode,Integration Mode
 Dark Current Ch0,19263
-Dark Current Ch1,16513
-Dark Current Ch2,15423
-Dark Current Ch3,19967
-Dark Current Ch4,16767
-Dark Current Ch5,13759
-Dark Current Ch6,14335
-Dark Current Ch7,14591
+Dark Current Ch1,16427
+Dark Current Ch2,15359
+Dark Current Ch3,19839
+Dark Current Ch4,16591
+Dark Current Ch5,13567
+Dark Current Ch6,14269
+Dark Current Ch7,14207
 Pair 0 Ch Sensor,ch0
 Pair 0 Ch Cherenkov,ch1
 Pair 1 Ch Sensor,ch2
@@ -39,7 +39,7 @@ X3,0.0
 Y3,0.0
 Z3,0.0
 Power Supply,56.56
-PS Pot,272
+PS Pot,270
 Socatport1,2
 Socatport2,3
 Emulatorswitch,False

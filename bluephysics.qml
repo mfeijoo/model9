@@ -746,6 +746,16 @@ ApplicationWindow {
                     if (analyzexstart) {
                         var r = Qt.rect(analyzexstart, analyzeystart, Math.abs(analyzexfinish - analyzexstart), Math.abs(analyzeyfinish - analyzeystart))
                         analyzechartviewchs.zoomIn(r)
+                        analyzeaxisXtemp.min = analyzeaxisXch.min
+                        analyzeaxisXtemp.max = analyzeaxisXch.max
+                        analyzeaxisXPS.min = analyzeaxisXch.min
+                        analyzeaxisXPS.max = analyzeaxisXch.max
+                        analyzeaxisXminus12V.min = analyzeaxisXch.min
+                        analyzeaxisXminus12V.max = analyzeaxisXch.max
+                        analyzeaxisX5V.min = analyzeaxisXch.min
+                        analyzeaxisX5V.max = analyzeaxisXch.max
+                        analyzeaxisXvref.min = analyzeaxisXch.min
+                        analyzeaxisXvref.max = analyzeaxisXch.max
                         analyzema.activezoom = true
                         analyzexstart = false
                         analyzezoomarea.visible = false
@@ -755,6 +765,16 @@ ApplicationWindow {
                 onClicked: {
                     if (mouse.button & Qt.RightButton) {
                         analyzechartviewchs.zoomReset()
+                        analyzeaxisXtemp.min = analyzeaxisXch.min
+                        analyzeaxisXtemp.max = analyzeaxisXch.max
+                        analyzeaxisXPS.min = analyzeaxisXch.min
+                        analyzeaxisXPS.max = analyzeaxisXch.max
+                        analyzeaxisXminus12V.min = analyzeaxisXch.min
+                        analyzeaxisXminus12V.max = analyzeaxisXch.max
+                        analyzeaxisX5V.min = analyzeaxisXch.min
+                        analyzeaxisX5V.max = analyzeaxisXch.max
+                        analyzeaxisXvref.min = analyzeaxisXch.min
+                        analyzeaxisXvref.max = analyzeaxisXch.max
                         analyzema.activezoom = false
                     }
                 }
@@ -2748,6 +2768,16 @@ ApplicationWindow {
                     if (xstart) {
                         var r = Qt.rect(xstart, ystart, Math.abs(xfinish - xstart), Math.abs(yfinish - ystart))
                         chartviewchs.zoomIn(r)
+                        axisXtemp.min = axisXch.min
+                        axisXtemp.max = axisXch.max
+                        axisXPS.min = axisXch.min
+                        axisXPS.max = axisXch.max
+                        axisXminus12V.min = axisXch.min
+                        axisXminus12V.max = axisXch.max
+                        axisX5V.min = axisXch.min
+                        axisX5V.max = axisXch.max
+                        axisXvref.min = axisXch.min
+                        axisXvref.max = axisXch.max
                         ma.activezoom = true
                         xstart = false
                         zoomarea.visible = false
@@ -2757,6 +2787,16 @@ ApplicationWindow {
                 onClicked: {
                     if (mouse.button & Qt.RightButton) {
                         chartviewchs.zoomReset()
+                        axisXtemp.min = axisXch.min
+                        axisXtemp.max = axisXch.max
+                        axisXPS.min = axisXch.min
+                        axisXPS.max = axisXch.max
+                        axisXminus12V.min = axisXch.min
+                        axisXminus12V.max = axisXch.max
+                        axisX5V.min = axisXch.min
+                        axisX5V.max = axisXch.max
+                        axisXvref.min = axisXch.min
+                        axisXvref.max = axisXch.max
                         ma.activezoom = false
                     }
                 }
