@@ -2266,6 +2266,7 @@ ApplicationWindow {
 
                     ma.starttimes = []
                     ma.finishtimes = []
+                    startbutton.enabled = false
                     stopbutton.enabled = true
                     chargebt.checked = true
                     chargebt.enabled = false
