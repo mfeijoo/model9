@@ -59,6 +59,7 @@ def from_gui_to_dic():
     if sendtocontrollerbt.property('enabled') == False:
         dmetadata['Integration Time'] = str(integrationtimespinbox.property('value'))
         dmetadata['Operational Mode'] = integrationpulseswitch.property('text')
+        dmetadata['Fan Speed'] = str(fanspeedspinbox.property('value'))
     dmetadata['File Name'] = filenamefromqml.property('text')
     dmetadata['Pair 0 Ch Sensor'] = 'ch%s' % pair0chsensor.property('currentIndex')
     dmetadata['Pair 0 Ch Cherenkov'] = 'ch%s' % pair0chcherenkov.property('currentIndex')
@@ -108,6 +109,7 @@ def from_dic_to_gui():
     filenamefromqml.setProperty('text', dmetadata['File Name'])
     psspinbox.setProperty('value', float(dmetadata['Power Supply']) * 100)
     integrationtimespinbox.setProperty('value', int(dmetadata['Integration Time']))
+    fanspeedspinbox.setProperty('value', int(dmetadata['Fan Speed']))
     sendtocontrollerbt.setProperty('enabled', False)
     if dmetadata['Operational Mode'] == 'Pulse Mode':
         integrationpulseswitch.setProperty('checked', False)
@@ -217,12 +219,17 @@ def qmlsendtocontroller():
         inttime = integrationtimespinbox.property('value')
         intpulse = integrationpulseswitch.property('text')
         texttosend = 'c%s,%s' %(inttime, intpulse[0])
+        fanspeed = fanspeedspinbox.property('value')
+        texttosendfan = 'f%s,' %(fanspeed)
         serc.write(texttosend.encode())
+        serc.write(texttosendfan.encode())
         serc.close()
         sendtocontrollerbt.setProperty('enabled', False)
+
     except IndexError:
         nodevicedialog.setProperty('visible', True)
         from_dic_to_gui()
+
 
 def goodbye():
     print ('bye')
@@ -979,6 +986,7 @@ nodevicedialog = engine.rootObjects()[0].findChild(QObject, 'nodevicedialog')
 nosocatdialog = engine.rootObjects()[0].findChild(QObject, 'nosocatdialog')
 gycgybutton = engine.rootObjects()[0].findChild(QObject, 'gycgybutton')
 #print (emulatorswitch.property('text'))
+fanspeedspinbox = engine.rootObjects()[0].findChild(QObject, 'fanspeedspinbox')
 
 
 

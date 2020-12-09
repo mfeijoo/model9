@@ -1063,7 +1063,7 @@ ApplicationWindow {
             anchors.leftMargin: 12
             anchors.top: parent.top
             anchors.topMargin: 12
-            width: 300
+            width: 400
             height: 100
             Row {
                 anchors.verticalCenter: parent.verticalCenter
@@ -1071,7 +1071,7 @@ ApplicationWindow {
                 TextInput {
                     id: filename
                     objectName: 'filename'
-                    width: 200
+                    width: 300
                     text: 'default'
                     color: 'lightgrey'
 
@@ -1087,7 +1087,7 @@ ApplicationWindow {
             anchors.leftMargin: 12
             anchors.top: savefilegroupbox.bottom
             anchors.topMargin: 12
-            width: 300
+            width: 400
             height: 250
 
 
@@ -1096,7 +1096,7 @@ ApplicationWindow {
                 title: 'Integration Time (ms)'
                 anchors.top: parent.top
                 anchors.left: parent.left
-                anchors.right: parent.right
+                width: 182
                 height: 100
 
 
@@ -1111,6 +1111,27 @@ ApplicationWindow {
                      onValueModified: sendtocontroller.enabled = true
                   }
                 }
+
+            GroupBox {
+                id: fanspeed
+                title: 'Fan Speed'
+                anchors.top: parent.top
+                anchors.left: integrationtimegroupbox.right
+                anchors.leftMargin: 12
+                anchors.right: parent.right
+                height: 100
+
+                SpinBox {
+                    id: fanspeedspinbox
+                    objectName: 'fanspeedspinbox'
+                    anchors.fill: parent
+                    from: 0
+                    to: 19999
+                    value: 14999
+                    editable: true
+                    onValueModified: sendtocontroller.enabled = true
+                }
+            }
 
                 Switch {
                      id: integrationpulseswitch
@@ -1139,7 +1160,7 @@ ApplicationWindow {
             title: qsTr("Sensors Information")
             anchors.top: parent.top
             anchors.topMargin: 12
-            anchors.left: savefilegroupbox.right
+            anchors.left: controllergroupbox.right
             anchors.leftMargin: 12
             anchors.bottom: controllergroupbox.bottom
             width: Screen.width - 450 - 350
