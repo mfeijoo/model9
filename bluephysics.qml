@@ -2020,7 +2020,7 @@ ApplicationWindow {
             anchors.leftMargin: 12
             anchors.right: metadatatoolbar.left
             anchors.rightMargin: 12
-            height: 250
+            height: 150
             title: 'Comments'
             TextEdit {
                 id: commentstext
@@ -2031,10 +2031,34 @@ ApplicationWindow {
             }
         }
 
+        GroupBox {
+            id: intlim
+            title: 'int. lim.'
+            anchors.top: comments.bottom
+            anchors.topMargin: 12
+            anchors.left:sensorsinfo.right
+            anchors.leftMargin: 12
+            anchors.right: metadatatoolbar.left
+            anchors.rightMargin: 12
+            height: 100
+
+            SpinBox {
+                id: intlimcoeff
+                objectName: 'intlimcoeff'
+                anchors.fill: parent
+                font.pointSize: 10
+                from: 1
+                to: 15
+                value: 3
+                stepSize: 1
+                editable: true
+            }
+        }
+
 
         GroupBox {
             title: 'PS Coef.'
-            anchors.top: comments.bottom
+            anchors.top: intlim.bottom
             anchors.topMargin: 12
             anchors.left: sensorsinfo.right
             anchors.leftMargin: 12

@@ -90,6 +90,7 @@ def from_gui_to_dic():
     dmetadata['Y3'] = str(y3.property('realValue'))
     dmetadata['Z3'] = str(z3.property('realValue'))
     dmetadata['Comments'] = commentstext.property('text').replace(',', '')
+    dmetadata['Intlimcoeff'] = str(intlimcoeff.property('value'))
     #dmetadata['Limits Integral'] = str(limitsspinbox.property('value'))
     dmetadata['PS Coefficient'] = str(pscoeff.property('value'))
     dmetadata['Socatport1'] = socatport1.property('currentText')
@@ -144,6 +145,7 @@ def from_dic_to_gui():
     y3.setProperty('value', int(float(dmetadata['Y3'])*100))
     z3.setProperty('value', int(float(dmetadata['Z3'])*100))
     commentstext.setProperty('text', dmetadata['Comments'])
+    intlimcoeff.setProperty('value', int(dmetadata['Intlimcoeff']))
     #limitsspinbox.setProperty('value', int(dmetadata['Limits Integral']))
     pscoeff.setProperty('value', int(dmetadata['PS Coefficient']))
     socatport1.setProperty('currentIndex', int(dmetadata['Socatport1']))
@@ -261,17 +263,16 @@ def analyze():
     mch = maximos[maximos == maximos.max()].index.tolist()[0]
     #lets find the start and stop of all beams
     df['chdiff'] = df[mch].diff()
-    dfstarts = df.loc[(df.chdiff > 10), ['chdiff', 'time']]
+    dfstarts = df.loc[(df.chdiff > intlimcoeff.property('value')), ['chdiff', 'time']]
     dfstarts['timediff'] = dfstarts.time.diff()
     dfstarts.fillna(2, inplace=True)
     starttimes = dfstarts.loc[dfstarts.timediff > 1, 'time'].tolist()
-    dffinish = df.loc[(df.chdiff < -10), ['chdiff', 'time']]
+    dffinish = df.loc[(df.chdiff < -intlimcoeff.property('value')), ['chdiff', 'time']]
     dffinish['timediff'] = dffinish.time.diff()
     dffinish.fillna(2, inplace=True)
     finishtimes = dffinish.loc[dffinish.timediff > 1, 'time'].tolist()
 
     #Calculate the integrals in each region
-
     dicintegrals = {}
     listatemps = []
     ldfpartials = []
@@ -821,11 +822,11 @@ class StopThread(QThread):
         dff = pd.DataFrame({'time':dchs[mch].time, mch:dchs[mch].meas})
         dff['mchI'] = (-(dff[mch] * 20.48/65535) + 10.24) * 1.8 / (int(dmetadata['Integration Time']) * 1e-3)
         dff['chdiff'] = dff.mchI.diff()
-        dfstarts = dff.loc[(dff.chdiff > 10), ['chdiff', 'time']]
+        dfstarts = dff.loc[(dff.chdiff > intlimcoeff.property('value')), ['chdiff', 'time']]
         dfstarts['timediff'] = dfstarts.time.diff()
         dfstarts.fillna(2, inplace=True)
         starttimes = dfstarts.loc[dfstarts.timediff > 1, 'time'].tolist()
-        dffinish = dff.loc[(dff.chdiff < -10), ['chdiff', 'time']]
+        dffinish = dff.loc[(dff.chdiff < -intlimcoeff.property('value')), ['chdiff', 'time']]
         dffinish['timediff'] = dffinish.time.diff()
         dffinish.fillna(2, inplace=True)
         finishtimes = dffinish.loc[dffinish.timediff > 1, 'time'].tolist()
@@ -987,6 +988,7 @@ nosocatdialog = engine.rootObjects()[0].findChild(QObject, 'nosocatdialog')
 gycgybutton = engine.rootObjects()[0].findChild(QObject, 'gycgybutton')
 #print (emulatorswitch.property('text'))
 fanspeedspinbox = engine.rootObjects()[0].findChild(QObject, 'fanspeedspinbox')
+intlimcoeff = engine.rootObjects()[0].findChild(QObject, 'intlimcoeff')
 
 
 
